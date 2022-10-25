@@ -10,7 +10,7 @@ const options = {
 const { startHttpServer } = initHttp(options);
 
 /**
- * Mikrokit includes automatic validation depending on types so requires pre-compilation.
+ * Mikrokit includes automatic validation depending on types and requires pre-compilation.
  * So everything is precompiled inside the @mikrokit/compiled-app.
   routes = {
       '/': (): HelloReply => ({hello: 'world'}),

@@ -98,12 +98,12 @@ function compareResults(markdown) {
     ...tableStyle,
     head: [
       "",
-      "Version",
-      "Router",
-      "Requests/s",
-      "Latency (ms)",
-      "Throughput/Mb",
-      "Validation",
+      "Vers",
+      "Rout",
+      "Req (R/s)",
+      "Laten (ms)",
+      "Output (Mb/s)",
+      "Vali Dation",
       "Description",
     ],
   });
