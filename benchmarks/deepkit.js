@@ -1,6 +1,6 @@
 "use strict";
 
-const { initHttp, addRoutes, routes } = require("@mikrokit/compiled-app");
+const { initDeepkitApp, setRoutes } = require("@mikrokit/compiled-app");
 
 // ###### Original app in typescript, check @mikrokit/compiled-app src. full validation and serialization out of the box
 
@@ -19,8 +19,10 @@ const { initHttp, addRoutes, routes } = require("@mikrokit/compiled-app");
 // export type HelloReply = {hello: string};
 // type SayHello = {hello: string};
 
+// export const mikrokitSayHelloRoute: Route = (): SayHello => ({hello: 'world'});
+
 // export const routes: Routes = {
-//   '/': (): SayHello => ({hello: 'world'}),
+//   '/': mikrokitSayHelloRoute,
 //   updateUser: (context, user: User): User => {
 //       return {
 //           ...user,
@@ -31,15 +33,8 @@ const { initHttp, addRoutes, routes } = require("@mikrokit/compiled-app");
 
 // ###### exported app just to be able to use in js instead ts
 
-const { startHttpServer } = initHttp({});
+const { deepkitServer } = initDeepkitApp();
 
-/**
- * Mikrokit includes automatic validation depending on types and requires pre-compilation.
- * So everything is precompiled inside the @mikrokit/compiled-app.
-  routes = {
-      '/': (): HelloReply => ({hello: 'world'}),
-  };  
- * */
-addRoutes(routes);
+setRoutes();
 
-startHttpServer({ port: 3000 });
+deepkitServer.listen(3000);

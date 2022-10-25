@@ -1,10 +1,7 @@
 const start = process.hrtime();
 
 const { initHttp, routes } = require("@mikrokit/compiled-app");
-const { startHttpServer, MkRouter } = initHttp({
-  enableValidation: true,
-  enableSerialization: true,
-});
+const { startHttpServer, MkRouter } = initHttp({});
 
 const totalRoutes = process.env.routes || 0;
 const defaultRoute = routes["/"]; // this handler contains type information.
@@ -16,13 +13,13 @@ const loadingTime = process.hrtime(start);
 
 MkRouter.addRoutes(routerRoutes);
 
-startHttpServer()
+startHttpServer({ port: 3000 })
   .then((server) => {
     const listenTime = process.hrtime(start);
     const path = require("path");
     require("fs").writeFileSync(
       path.join(__dirname, `${totalRoutes}-${path.basename(__filename)}.txt`),
-      `${loadingTime} | ${listenTime}| ${MkRouter.getComplexity()} |\n`,
+      `${loadingTime} | ${listenTime} | ${MkRouter.getComplexity()} |\n`,
       { encoding: "utf-8", flag: "a" }
     );
     server.close();

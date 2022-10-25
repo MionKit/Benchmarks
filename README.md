@@ -51,23 +51,62 @@ npm run compare-t
 
 **For cold start times metrics please check [here!](METRICS.md)**
 
-Cold start times are also indicative of how the [serverless version](https://github.com/MikroKit/MikroKit/tree/master/packages/serverless) could perform in cold start times, as both `@mikrokit/http` an `@mikrokit/serverless` are just a wrapper around `@mikrokit/router` which contains all the logic.
+Cold start times are also indicative of how the [serverless version](https://github.com/MikroKit/MikroKit/tree/master/packages/serverless) could perform in this regard, as both `@mikrokit/http` an `@mikrokit/serverless` are just a wrapper around `@mikrokit/router` which contains all the logic.
+
+## What's tested
+
+Wwe are not just testing a simple "hello world" echo, we are testing something more typical of api requests.
+
+The test consist of an `updateUser` request where the fields must be validated, the `lastUpdate` field is a date that must be transformed to a JS Date (deserialized), and the same user must be sent back with the an updated `lastUpdate`.
+
+```ts
+export interface User {
+  id: number;
+  name: string;
+  surname: string;
+  lastUpdate: Date;
+}
+
+// ### Mikrokit ###
+// the received user by the route is already validated and deserialized
+// user.lastUpdate is already a js date instead and string (result of JSON.parse)
+export const routes: Routes = {
+  updateUser: (context, user: User): User => {
+    return {
+      ...user,
+      lastUpdate: new Date(),
+    };
+  },
+};
+
+// ### Express ###
+// A plugin must be used to parse the json body
+// validation must be done manually and user.lastUpdate must be deserialized manually into a date
+// in this example the complexity would be in the isUser and deserializeUser functions (check src code fo that)
+app.post("/updateUser", function (req, res) {
+  const rawUser = req.body?.updateUser;
+  if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
+  const user = deserializeUser(rawUser);
+  res.json({
+    ...user,
+    lastUpdate: new Date(),
+  });
+});
+```
 
 ### Benchmarks
 
-* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v16.18.0`
-* __Run:__ Tue Oct 25 2022 01:57:25 GMT+0200 (Central European Summer Time)
-* __Method:__ `autocannon -c 200 -d 120 -p 20 localhost:3000` (two rounds; one to warm-up, one to measure)
+- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
+- **Node:** `v16.18.0`
+- **Run:** Wed Oct 26 2022 01:50:07 GMT+0200 (Central European Summer Time)
+- **Method:** `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-|                    | Vers      | Rout  | Req (R/s)   | Laten (ms) | Output (Mb/s) | Vali Dation | Description                                                                                                            |
-| :--                | --:       | --:   | :-:         | --:        | --:           | :-:         | :--                                                                                                                    |
-| http-bare          | 10.13.0   | ✗     | 51867.8     | 76.60      | 9.25          | ✗           | Super basic and completely useless bare http server, should be the theoretical upper limit in performance.             |
-| mikrokit-http-bare | 0.1.0     | ✗     | 49349.3     | 80.55      | 9.93          | ✗           | Just the http part of @mikrokit/http, completely useless, just as a reference for performance of the http server part. |
-| fastify-schemaless | 4.9.2     | ✓     | 49112.5     | 80.96      | 8.81          | -           | Fastify without a schema, uses native JSON.stringify instead fast-json-stringify.                                      |
-| fastify            | 4.9.2     | ✓     | 47114.4     | 84.40      | 8.45          | -           | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.               |
-| restify            | 8.6.1     | ✓     | 37282.3     | 106.76     | 6.72          | ✗           | Requires third party tools.                                                                                            |
-| **mikrokit**       | **0.1.0** | **✓** | **35254.7** | **112.94** | **7.30**      | **✓**       | **Automatic validation out of the box using @deepkit/types.**                                                          |
-| hapi               | 20.2.2    | ✓     | 32258.9     | 123.45     | 5.75          | ✗           | Manual validation using joi, or third party tools.                                                                     |
-| trpc-router        | 9.27.4    | ✓     | 28117.1     | 141.70     | 6.22          | ✗           | Manual validation using zod, or third party tools                                                                      |
-| express            | 4.18.2    | ✓     | 9458.2      | 421.83     | 1.69          | ✗           | needs third party tools, or third party tools                                                                          |
+|              |      Vers |  Rout |  Req (R/s)  | Laten (ms) | Output (Mb/s) | Vali Dation | Description                                                                                                |
+| :----------- | --------: | ----: | :---------: | ---------: | ------------: | :---------: | :--------------------------------------------------------------------------------------------------------- |
+| http-bare    |   10.13.0 |     ✗ |   19307.9   |      51.27 |          4.95 |      ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
+| fastify      |     4.9.2 |     ✓ |   16481.4   |      60.14 |          4.24 |      -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
+| **mikrokit** | **0.1.0** | **✓** | **12933.8** |  **76.76** |      **3.60** |    **✓**    | **Automatic validation out of the box using @deepkit/types.**                                              |
+| restify      |     8.6.1 |     ✓ |   12550.0   |      79.12 |          3.24 |      ✗      | Requires third party tools.                                                                                |
+| hapi         |    20.2.2 |     ✓ |   8008.9    |     124.19 |          2.05 |      ✗      | Manual validation using joi, or third party tools.                                                         |
+| express      |    4.18.2 |     ✓ |   4622.7    |     215.37 |          1.19 |      ✗      | needs third party tools, or third party tools                                                              |
+| deepkit      |     0.1.0 |     ✓ |   1944.0    |     512.20 |          0.50 |      ✓      | Automatic validation out of the box. The ones that made mikrokit possible 👍.                              |

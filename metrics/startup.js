@@ -22,14 +22,11 @@ const measureStartupListen = runSample(() => {
 const measureStartupValidate = runSample(async () => {
   for (let n = 1; n <= 10000; n *= 10) {
     await new Promise((resolve) => {
-      new Worker(
-        path.join(__dirname, "./startup-routes-validate-serialize.js"),
-        {
-          env: {
-            routes: n,
-          },
-        }
-      ).on("exit", resolve);
+      new Worker(path.join(__dirname, "./startup-b-deepkit-routes.js"), {
+        env: {
+          routes: n,
+        },
+      }).on("exit", resolve);
     });
   }
 });
@@ -37,18 +34,15 @@ const measureStartupValidate = runSample(async () => {
 const measureStartupNoValidate = runSample(async () => {
   for (let n = 1; n <= 10000; n *= 10) {
     await new Promise((resolve) => {
-      new Worker(
-        path.join(__dirname, "./startup-routes-no-validate-serialize.js"),
-        {
-          env: {
-            routes: n,
-          },
-        }
-      ).on("exit", resolve);
+      new Worker(path.join(__dirname, "./startup-a-mikrokit-routes.js"), {
+        env: {
+          routes: n,
+        },
+      }).on("exit", resolve);
     });
   }
 });
 
 measureStartupListen()
-  .then(measureStartupValidate)
-  .then(measureStartupNoValidate);
+  .then(measureStartupNoValidate)
+  .then(measureStartupValidate);

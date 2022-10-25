@@ -1,14 +1,74 @@
-'use strict'
+"use strict";
 
-const express = require('express')
+const express = require("express");
 
-const app = express()
+// ##### user type
+// interface User {
+//   id: number;
+//   name: string;
+//   surname: string;
+//   lastUpdate: Date;
+// }
 
-app.disable('etag')
-app.disable('x-powered-by')
+// ##### validation / deserialization ############
+const hasUnknownKeys = (knownKeys, input) => {
+  if (typeof input !== "object") return true;
+  const unknownKeys = Object.keys(input);
+  return unknownKeys.some((ukn) => !knownKeys.includes(ukn));
+};
 
-app.get('/', function (req, res) {
-  res.json({ hello: 'world' })
-})
+// before serialize
+const isUser = (input) => {
+  if (typeof input !== "object") return false;
+  if (hasUnknownKeys(["id", "name", "surname", "lastUpdate"], input))
+    return false;
+  return (
+    typeof input?.id === "number" &&
+    typeof input?.name === "string" &&
+    typeof input?.surname === "string" &&
+    typeof input?.lastUpdate === "string"
+  );
+};
 
-app.listen(3000)
+const deserializeUser = (jsonParseResult) => {
+  if (typeof jsonParseResult?.lastUpdate === "string")
+    return {
+      ...jsonParseResult,
+      lastUpdate: new Date(jsonParseResult.lastUpdate),
+    };
+  return jsonParseResult;
+};
+
+const app = express();
+
+// ##### MIDDLEWARE ############
+app.use(express.json());
+app.use((err, req, res, next) => {
+  if (err.message.includes("app error"))
+    res.status(400).json({ error: err.message });
+  else res.status(500).send("Something broke!");
+});
+
+app.disable("etag");
+app.disable("x-powered-by");
+
+// ##### ROUTES ############
+app.post("/", function (req, res) {
+  res.json({ "/": { hello: "world" } });
+});
+
+app.post("/updateUser", function (req, res) {
+  const rawUser = req.body?.["/updateUser"];
+  if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
+  const user = deserializeUser(rawUser);
+  res.json({
+    "/updateUser": {
+      ...user,
+      name: "lorem",
+      surname: "ipsum",
+      lastUpdate: new Date(),
+    },
+  });
+});
+
+app.listen(3000);
