@@ -7,6 +7,7 @@
     "start": "node benchmark.js",
     "compare": "node benchmark.js compare --",
     "compare-t": "node benchmark.js compare -t",
+    "compare:summary": "node benchmark.js compare -t",
     "test": "standard | snazzy",
     "standard": "standard | snazzy",
     "metrics:run": "node metrics/startup.js",

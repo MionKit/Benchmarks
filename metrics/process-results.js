@@ -43,17 +43,15 @@ for (const r of results) {
   };
   lines.forEach((x) => {
     const [startup, listen, complexity] = x.split("|");
+    temp.complexity = complexity || "NA";
     temp.startup += readableHRTimeMs(
       startup.split(",").map((x) => parseInt(x))
     );
     temp.listen += readableHRTimeMs(listen.split(",").map((x) => parseInt(x)));
-    temp.complexity += parseInt(complexity);
   });
   md += `\n| ${r.replace(".txt", "")} | ${(temp.startup / lines.length).toFixed(
     2
-  )} | ${(temp.listen / lines.length).toFixed(0)} |  ${Math.floor(
-    temp.complexity / lines.length
-  )}|`;
+  )} | ${(temp.listen / lines.length).toFixed(0)} |  ${temp.complexity}|`;
 }
 
 if (process.argv.length >= 3 && process.argv[2] === "-u") {

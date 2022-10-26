@@ -43,6 +43,19 @@ const measureStartupNoValidate = runSample(async () => {
   }
 });
 
+const measureFastifySchema = runSample(async () => {
+  for (let n = 1; n <= 10000; n *= 10) {
+    await new Promise((resolve) => {
+      new Worker(path.join(__dirname, "./startup-c-fastify-routes.js"), {
+        env: {
+          routes: n,
+        },
+      }).on("exit", resolve);
+    });
+  }
+});
+
 measureStartupListen()
   .then(measureStartupNoValidate)
-  .then(measureStartupValidate);
+  .then(measureStartupValidate)
+  .then(measureFastifySchema);

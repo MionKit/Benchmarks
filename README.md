@@ -21,22 +21,6 @@
 
 📚 [Full Mikrokit framework documentation here!](https://github.com/MikroKit/MikroKit)
 
-### Linking @mikrokit/compiled-app
-
-At the moment it is required to link @mikrokit/compiled-app package in your local machine as packages are not yet published to npm and build artifacts are not uploaded to the repo. So you also need to download the main Mikrokit framework repo and build the project.
-
-```
-# install all packages
-npm i
-
-# link mikrokit compiled app. run bellow command in the directory of your local @mikrokit/compiled-app
-npm link
-
-# in the root of this project
-npm link @mikrokit/compiled-app
-
-```
-
 ### Running & displaying the benchmarks
 
 ```sh
@@ -49,7 +33,7 @@ npm run compare-t
 
 ### Cold start times
 
-**For cold start times metrics please check [here!](METRICS.md)**
+**For cold start times please check [METRICS.md](METRICS.md)**
 
 Cold start times are also indicative of how the [serverless version](https://github.com/MikroKit/MikroKit/tree/master/packages/serverless) could perform in this regard, as both `@mikrokit/http` an `@mikrokit/serverless` are just a wrapper around `@mikrokit/router` which contains all the logic.
 
@@ -98,15 +82,15 @@ app.post("/updateUser", function (req, res) {
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v16.18.0`
-- **Run:** Wed Oct 26 2022 02:07:39 GMT+0200 (Central European Summer Time)
+- **Run:** Wed Oct 26 2022 23:11:27 GMT+0200 (Central European Summer Time)
 - **Method:** `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-|              |      Vers |  Rout |  Req (R/s)  | Laten (ms) | Output (Mb/s) | Vali Dation | Description                                                                                                |
-| :----------- | --------: | ----: | :---------: | ---------: | ------------: | :---------: | :--------------------------------------------------------------------------------------------------------- |
-| http-bare    |   10.13.0 |     ✗ |   19307.9   |      51.27 |          4.95 |      ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
-| fastify      |     4.9.2 |     ✓ |   16481.4   |      60.14 |          4.24 |      -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
-| **mikrokit** | **0.1.0** | **✓** | **12933.8** |  **76.76** |      **3.60** |    **✓**    | **Automatic validation out of the box using @deepkit/types.**                                              |
-| restify      |     8.6.1 |     ✓ |   12550.0   |      79.12 |          3.24 |      ✗      | Requires third party tools.                                                                                |
-| hapi         |    20.2.2 |     ✓ |   8008.9    |     124.19 |          2.05 |      ✗      | Manual validation using joi, or third party tools.                                                         |
-| express      |    4.18.2 |     ✓ |   4622.7    |     215.37 |          1.19 |      ✗      | needs third party tools, or third party tools                                                              |
-| deepkit      |     0.1.0 |     ✓ |   1944.0    |     512.20 |          0.50 |      ✓      | Automatic validation out of the box. The ones that made mikrokit possible 👍.                              |
+|              |           Vers |  Rout |  Req (R/s)  | Laten (ms) | Output (Mb/s) | Vali Dation | Description                                                                                                                                                      |
+| :----------- | -------------: | ----: | :---------: | ---------: | ------------: | :---------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| http-bare    |        10.13.0 |     ✗ |   19109.9   |      51.80 |          4.90 |      ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance.                                                       |
+| fastify      |          4.9.2 |     ✓ |   16584.7   |      59.76 |          4.27 |      -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.                                                         |
+| **mikrokit** |      **0.1.0** | **✓** | **13273.2** |  **74.80** |      **3.70** |    **✓**    | **Automatic validation out of the box using @deepkit/types.**                                                                                                    |
+| restify      |          8.6.1 |     ✓ |   12314.0   |      80.64 |          3.18 |      ✗      | Requires third party tools.                                                                                                                                      |
+| hapi         |         20.2.2 |     ✓ |   8015.3    |     124.11 |          2.06 |      ✗      | Manual validation using joi, or third party tools.                                                                                                               |
+| express      |         4.18.2 |     ✓ |   4624.8    |     215.27 |          1.19 |      ✗      | needs third party tools, or third party tools                                                                                                                    |
+| deepkit      | 1.0.1-alpha.75 |     ✓ |   2124.2    |     468.55 |          0.54 |      ✓      | Automatic validation out of the box (The ones that made @deepkit/types👍). They have a RPC over webSockets that's way more performant than the http tested here. |
