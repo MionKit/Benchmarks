@@ -55,9 +55,9 @@ Cold start times are also indicative of how the [serverless version](https://git
 
 ## What's tested
 
-Wwe are not just testing a simple "hello world" echo, we are testing something more typical of api requests.
+We are not just testing a simple "hello world", we are testing a more realistic scenario of api requests.
 
-The test consist of an `updateUser` request where the fields must be validated, the `lastUpdate` field is a date that must be transformed to a JS Date (deserialized), and the same user must be sent back with the an updated `lastUpdate`.
+The test consist of an `updateUser` request where the fields of the user must be validated, the `lastUpdate` field is a date that must be transformed into a JS Date (deserialized), and the same user must be returned back with an updated `lastUpdate` to the time of the request.
 
 ```ts
 export interface User {
@@ -98,7 +98,7 @@ app.post("/updateUser", function (req, res) {
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v16.18.0`
-- **Run:** Wed Oct 26 2022 01:50:07 GMT+0200 (Central European Summer Time)
+- **Run:** Wed Oct 26 2022 02:07:39 GMT+0200 (Central European Summer Time)
 - **Method:** `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 |              |      Vers |  Rout |  Req (R/s)  | Laten (ms) | Output (Mb/s) | Vali Dation | Description                                                                                                |
