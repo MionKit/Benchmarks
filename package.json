@@ -1,13 +1,14 @@
 {
   "name": "fastify-benchmarks",
   "version": "1.0.0",
+  "private": true,
   "description": "Benchmarks for Fastify, a fast and low-overhead web framework.",
   "main": "index.js",
   "scripts": {
     "start": "node benchmark.js",
     "compare": "node benchmark.js compare --",
     "compare-t": "node benchmark.js compare -t",
-    "compare:summary": "node benchmark.js compare -t",
+    "compare:summary": "node benchmark.js compare -u",
     "test": "standard | snazzy",
     "standard": "standard | snazzy",
     "metrics:run": "node metrics/startup.js",
@@ -23,6 +24,9 @@
       "name": "Stefan Aichholzer",
       "email": "theaichholzer@gmail.com",
       "url": "https://github.com/aichholzer"
+    },
+    {
+      "name": "Ma Jerez"
     }
   ],
   "license": "MIT",
