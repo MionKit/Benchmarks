@@ -124,7 +124,7 @@ function compareResults(markdown) {
     throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A";
 
   for (const result of results) {
-    const beBold = result.server === "mikrokit";
+    const beBold = result.server === "mion";
     const { hasRouter, version, description, validation } =
       info(result.server) || {};
     const {

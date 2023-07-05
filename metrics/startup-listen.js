@@ -1,6 +1,6 @@
 const start = process.hrtime();
 
-const { initHttp, addRoutes, routes } = require("@mikrokit/compiled-app");
+const { initHttp, addRoutes, routes } = require("@MionKit/compiled-app");
 const { startHttpServer } = initHttp({});
 
 const loadingTime = process.hrtime(start);
