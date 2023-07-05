@@ -1,6 +1,6 @@
 const start = process.hrtime();
 
-const { initHttp, routes } = require("@mikrokit/compiled-app");
+const { initHttp, routes } = require("@MionKit/compiled-app");
 const { startHttpServer, MkRouter } = initHttp({});
 
 const totalRoutes = process.env.routes || 0;

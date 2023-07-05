@@ -1,8 +1,8 @@
 "use strict";
 
-const { initDeepkitApp, setRoutes } = require("@mikrokit/compiled-app");
+const { initDeepkitApp, setRoutes } = require("@MionKit/compiled-app");
 
-// ###### Original app in typescript, check @mikrokit/compiled-app src. full validation and serialization out of the box
+// ###### Original app in typescript, check @MionKit/compiled-app src. full validation and serialization out of the box
 
 // export interface User {
 //   id: number;
@@ -19,10 +19,10 @@ const { initDeepkitApp, setRoutes } = require("@mikrokit/compiled-app");
 // export type HelloReply = {hello: string};
 // type SayHello = {hello: string};
 
-// export const mikrokitSayHelloRoute: Route = (): SayHello => ({hello: 'world'});
+// export const mionSayHelloRoute: Route = (): SayHello => ({hello: 'world'});
 
 // export const routes: Routes = {
-//   '/': mikrokitSayHelloRoute,
+//   '/': mionSayHelloRoute,
 //   updateUser: (context, user: User): User => {
 //       return {
 //           ...user,

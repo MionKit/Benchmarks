@@ -3,7 +3,7 @@ const start = process.hrtime();
 const {
   initDeepkitApp,
   deepKitSayHelloRoute,
-} = require("@mikrokit/compiled-app");
+} = require("@MionKit/compiled-app");
 
 const { deepkitServer, deepKitRouter } = initDeepkitApp();
 

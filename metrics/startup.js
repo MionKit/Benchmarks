@@ -34,7 +34,7 @@ const measureStartupValidate = runSample(async () => {
 const measureStartupNoValidate = runSample(async () => {
   for (let n = 1; n <= 10000; n *= 10) {
     await new Promise((resolve) => {
-      new Worker(path.join(__dirname, "./startup-a-mikrokit-routes.js"), {
+      new Worker(path.join(__dirname, "./startup-a-mion-routes.js"), {
         env: {
           routes: n,
         },

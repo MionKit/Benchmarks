@@ -1,8 +1,8 @@
 "use strict";
 
-const { initHttp, addRoutes, routes } = require("@mikrokit/compiled-app");
+const { initHttp, addRoutes, routes } = require("@MionKit/compiled-app");
 
-// ###### Original app in typescript, check @mikrokit/compiled-app src. full validation and serialization out of the box
+// ###### Original app in typescript, check @MionKit/compiled-app src. full validation and serialization out of the box
 
 // export interface User {
 //   id: number;
@@ -34,8 +34,8 @@ const { initHttp, addRoutes, routes } = require("@mikrokit/compiled-app");
 const { startHttpServer } = initHttp({});
 
 /**
- * Mikrokit includes automatic validation depending on types and requires pre-compilation.
- * So everything is precompiled inside the @mikrokit/compiled-app.
+ * mion includes automatic validation depending on types and requires pre-compilation.
+ * So everything is precompiled inside the @MionKit/compiled-app.
   routes = {
       '/': (): HelloReply => ({hello: 'world'}),
   };  
