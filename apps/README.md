@@ -16,7 +16,7 @@
 
 # Typescript apps
 
-These are the deepkit and mion apps required for the benchmarks. Both deepkit and mion requires compilation directly from typescript to generate the runtime type information.
+These are the [deepkit](https://deepkit.io/) and [mion](https://github.com/MionKit/mion) server apps required for the benchmarks. Both deepkit and mion requires compilation directly from typescript as they generate the runtime type information from typescript types.
 
 ### Compiling the apps
 
@@ -25,7 +25,9 @@ These are the deepkit and mion apps required for the benchmarks. Both deepkit an
 npm run build
 ```
 
-The apps are compiled and generated code is committed to the repo for better visibility and so the benchmarks work without any pre-compilation step.
+The typescript apps get compiled into `/compiled-apps` directory and used for the benchmarks.
+
+Compiled code is committed to the repo for better visibility and so the benchmarks work without any pre-compilation step.
 
 If any changes are required just update the ts apps, compile and commit the generated code.
 
