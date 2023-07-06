@@ -1,8 +1,8 @@
 {
-  "name": "fastify-benchmarks",
+  "name": "mion-benchmarks",
   "version": "1.0.0",
   "private": true,
-  "description": "Benchmarks for Fastify, a fast and low-overhead web framework.",
+  "description": "Benchmarks for mion framework.",
   "main": "index.js",
   "scripts": {
     "start": "node benchmark.js",
@@ -12,7 +12,8 @@
     "test": "standard | snazzy",
     "standard": "standard | snazzy",
     "metrics:run": "node metrics/startup.js",
-    "metrics:summary": "node metrics/process-results.js -u"
+    "metrics:summary": "node metrics/process-results.js -u",
+    "build": "rimraf ./compiled-apps && tsc --build tsconfig.json"
   },
   "bin": {
     "benchmark": "./benchmark.js"
@@ -31,9 +32,14 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@deepkit/app": "^1.0.1-alpha.98",
+    "@deepkit/framework": "^1.0.1-alpha.99",
+    "@deepkit/http": "^1.0.1-alpha.98",
     "@deepkit/type": "^1.0.1-alpha.75",
     "@hapi/hapi": "^20.0.1",
     "@leizm/web": "^2.7.0",
+    "@mionkit/http": "^0.3.0-alpha.0",
+    "@mionkit/router": "^0.3.0-alpha.0",
     "@trpc/server": "^9.27.2",
     "0http": "^3.0.0",
     "autocannon": "^7.0.1",
@@ -80,11 +86,15 @@
     "vapr": "^0.6.0",
     "x-xss-protection": "^2.0.0",
     "yeps": "^1.1.1",
-    "yeps-router": "^1.2.0",
-    "@MionKit/compiled-app": "^0.1.0"
+    "yeps-router": "^1.2.0"
   },
   "devDependencies": {
+    "@deepkit/core": "^1.0.1-alpha.97",
+    "@deepkit/type-compiler": "^1.0.1-alpha.97",
+    "@types/node": "^16.11.6",
+    "rimraf": "^5.0.1",
     "snazzy": "^9.0.0",
-    "standard": "^17.0.0"
+    "standard": "^17.0.0",
+    "typescript": "4.9.5"
   }
 }
