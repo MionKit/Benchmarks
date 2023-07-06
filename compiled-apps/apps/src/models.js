@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__ΩHelloReply = exports.__ΩSayHello = exports.__ΩPartialUser = exports.__ΩUserId = exports.__ΩNewUser = exports.__ΩUser = void 0;
+const __ΩPick = ['T', 'K', 'l+e#!e"!fRb!b"Pde""N#!'];
+const __ΩExclude = ['T', 'U', 'l6!Re$!RPe#!e$"qk#%QRb!b"Pde"!p)'];
+const __ΩOmit = ['T', 'K', () => __ΩPick, () => __ΩExclude, 'b!b"e!!e!!ge!"o$#o##'];
+const __ΩPartial = ['T', 'l+e#!e"!fRb!Pde"!gN#"'];
+const __ΩUser = ['id', 'name', 'surname', 'lastUpdate', 'P\'4!&4"&4#T4$M'];
+exports.__ΩUser = __ΩUser;
+const __ΩNewUser = [() => __ΩOmit, () => __ΩUser, "id", "lastUpdate", 'n"P.#.$Jo!#'];
+exports.__ΩNewUser = __ΩNewUser;
+const __ΩUserId = [() => __ΩUser, 'Pn!\'J'];
+exports.__ΩUserId = __ΩUserId;
+const __ΩPartialUser = [() => __ΩPartial, () => __ΩUser, 'id', 'Pn"o!"P\'4#MK'];
+exports.__ΩPartialUser = __ΩPartialUser;
+const __ΩSayHello = ['hello', 'P&4!M'];
+exports.__ΩSayHello = __ΩSayHello;
+const __ΩHelloReply = ['hello', 'P&4!M'];
+exports.__ΩHelloReply = __ΩHelloReply;
+//# sourceMappingURL=models.js.map

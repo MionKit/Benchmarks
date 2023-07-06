@@ -152,3 +152,24 @@ profile*
 
 # benchmark results
 results
+
+########################
+# misc / editors
+########################
+*~
+*#
+.DS_STORE
+.netbeans
+nbproject
+.idea
+.vscode
+
+########################
+# generated files
+########################
+.dist
+dist
+.tmp
+tmp
+.coverage
+coverage

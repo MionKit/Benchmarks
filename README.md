@@ -86,15 +86,15 @@ app.post("/updateUser", function (req, res) {
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v16.18.0`
-- **Run:** Fri Oct 28 2022 22:23:45 GMT+0200 (Central European Summer Time)
+- **Run:** Thu Jul 06 2023 01:50:26 GMT+0100 (Irish Standard Time)
 - **Method:** `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 |           |           Vers |  Rout |  Req (R/s)  | Laten (ms) | Output (Mb/s) | Vali Dation | Description                                                                                                                                                      |
 | :-------- | -------------: | ----: | :---------: | ---------: | ------------: | :---------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| http-bare |        10.13.0 |     ✗ |   18324.6   |      54.05 |          4.70 |      ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance.                                                       |
-| fastify   |          4.9.2 |     ✓ |   15576.2   |      63.67 |          4.01 |      -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.                                                         |
-| **mion**  |      **0.1.0** | **✓** | **12935.4** |  **76.74** |      **3.60** |    **✓**    | **Automatic validation out of the box using @deepkit/types.**                                                                                                    |
-| restify   |          8.6.1 |     ✓ |   12421.8   |      79.94 |          3.21 |      ✗      | Requires third party tools.                                                                                                                                      |
-| hapi      |         20.2.2 |     ✓ |   7992.4    |     124.47 |          2.05 |      ✗      | Manual validation using joi, or third party tools.                                                                                                               |
-| express   |         4.18.2 |     ✓ |   4640.6    |     214.29 |          1.19 |      ✗      | needs third party tools, or third party tools                                                                                                                    |
-| deepkit   | 1.0.1-alpha.75 |     ✓ |   2144.9    |     464.61 |          0.55 |      ✓      | Automatic validation out of the box (The ones that made @deepkit/types👍). They have a RPC over webSockets that's way more performant than the http tested here. |
+| http-bare |        10.13.0 |     ✗ |   18045.3   |      54.87 |          4.63 |      ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance.                                                       |
+| fastify   |          4.9.2 |     ✓ |   15201.8   |      65.24 |          3.91 |      -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.                                                         |
+| **mion**  |      **0.1.0** | **✓** | **12872.8** |  **77.16** |      **3.57** |    **✓**    | **Automatic validation out of the box using @deepkit/types.**                                                                                                    |
+| restify   |          8.6.1 |     ✓ |   11215.9   |      88.62 |          2.90 |      ✗      | Requires third party tools.                                                                                                                                      |
+| hapi      |         20.2.2 |     ✓ |   7886.4    |     126.13 |          2.02 |      ✗      | Manual validation using joi, or third party tools.                                                                                                               |
+| express   |         4.18.2 |     ✓ |   4600.7    |     216.34 |          1.18 |      ✗      | needs third party tools, or third party tools                                                                                                                    |
+| deepkit   | 1.0.1-alpha.75 |     ✓ |   1703.9    |     583.36 |          0.44 |      ✓      | Automatic validation out of the box (The ones that made @deepkit/types👍). They have a RPC over webSockets that's way more performant than the http tested here. |
