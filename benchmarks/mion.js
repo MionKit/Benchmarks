@@ -9,4 +9,4 @@ const { startHttpServer } = require("@mionkit/http");
 initHttp({});
 addRoutes(routes);
 
-startHttpServer({ port: 3000, logger: console });
+startHttpServer({ port: 3000 });

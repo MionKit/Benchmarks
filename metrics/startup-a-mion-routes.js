@@ -1,7 +1,8 @@
 const start = process.hrtime();
 
-const { initHttp, routes } = require("@MionKit/compiled-app");
-const { startHttpServer, MkRouter } = initHttp({});
+const { initHttp, addRoutes, routes } = require("../compiled-apps/apps");
+const { startHttpServer } = require("@mionkit/http");
+const { getComplexity } = require("@mionkit/router");
 
 const totalRoutes = process.env.routes || 0;
 const defaultRoute = routes["/"]; // this handler contains type information.
@@ -9,9 +10,11 @@ const routerRoutes = {};
 for (let i = 0; i < totalRoutes; ++i) {
   routerRoutes[`route-${i}`] = defaultRoute;
 }
+
+initHttp({});
 const loadingTime = process.hrtime(start);
 
-MkRouter.addRoutes(routerRoutes);
+addRoutes(routerRoutes);
 
 startHttpServer({ port: 3000 })
   .then((server) => {
@@ -19,11 +22,11 @@ startHttpServer({ port: 3000 })
     const path = require("path");
     require("fs").writeFileSync(
       path.join(__dirname, `${totalRoutes}-${path.basename(__filename)}.txt`),
-      `${loadingTime} | ${listenTime} | ${MkRouter.getComplexity()} |\n`,
+      `${loadingTime} | ${listenTime} | ${getComplexity()} |\n`,
       { encoding: "utf-8", flag: "a" }
     );
     server.close();
   })
   .catch((e) => {
-    console.err("Error Starting Server", e);
+    console.error("Error Starting Server", e);
   });

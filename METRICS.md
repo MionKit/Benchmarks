@@ -7,30 +7,30 @@ Cold start times are also indicative of how the [serverless version](https://git
 - The `listen time` is the time it takes to parse and generate a flat router so there is no need to process the url when a request come in.
 - The `complexity` is the number of iterations done to parse the routes, it depends on the number of routes and hooks, the order they are defined, and few other factors.
 
-###### Metrics
+####### Metrics
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v16.18.0`
-- **Run:** Wed Oct 26 2022 22:56:19 GMT+0200 (Central European Summer Time)
+- **Run:** Thu Jul 06 2023 02:04:37 GMT+0100 (Irish Standard Time)
 - **Method:** `npm run metrics` (samples: 5)
 - **startup:** time elapsed to setup the application
 - **listen:** time elapsed until the http server is ready to accept requests (cold start)
 
 |                                   | startup(ms) | listen(ms) | complexity |
 | --------------------------------- | ----------- | ---------- | ---------- |
-| 1-startup-a-mion-routes.js        | 527.97      | 536        | 2          |
-| 1-startup-b-deepkit-routes.js     | 1229.33     | 1231       | NA         |
-| 1-startup-c-fastify-routes.js     | 169.71      | 236        | NA         |
-| 10-startup-a-mion-routes.js       | 529.37      | 539        | 30         |
-| 10-startup-b-deepkit-routes.js    | 1228.51     | 1230       | NA         |
-| 10-startup-c-fastify-routes.js    | 149.29      | 226        | NA         |
-| 100-startup-a-mion-routes.js      | 532.46      | 543        | 300        |
-| 100-startup-b-deepkit-routes.js   | 1227.42     | 1229       | NA         |
-| 100-startup-c-fastify-routes.js   | 165.47      | 340        | NA         |
-| 1000-startup-a-mion-routes.js     | 530.33      | 551        | 3000       |
-| 1000-startup-b-deepkit-routes.js  | 1240.44     | 1242       | NA         |
-| 1000-startup-c-fastify-routes.js  | 338.71      | 1314       | NA         |
-| 10000-startup-a-mion-routes.js    | 535.44      | 633        | 30000      |
-| 10000-startup-b-deepkit-routes.js | 1337.99     | 1340       | NA         |
-| 10000-startup-c-fastify-routes.js | 4561.52     | 14958      | NA         |
-| startup-listen.js                 | 535.71      | 538        | 0          |
+| 1-startup-a-mion-routes.js        | 516.57      | 523        | 2          |
+| 1-startup-b-deepkit-routes.js     | 1330.90     | 1332       | NA         |
+| 1-startup-c-fastify-routes.js     | 156.04      | 224        | NA         |
+| 10-startup-a-mion-routes.js       | 516.35      | 524        | 30         |
+| 10-startup-b-deepkit-routes.js    | 1321.95     | 1323       | NA         |
+| 10-startup-c-fastify-routes.js    | 147.10      | 224        | NA         |
+| 100-startup-a-mion-routes.js      | 519.52      | 529        | 300        |
+| 100-startup-b-deepkit-routes.js   | 1401.96     | 1404       | NA         |
+| 100-startup-c-fastify-routes.js   | 162.98      | 336        | NA         |
+| 1000-startup-a-mion-routes.js     | 517.66      | 535        | 3000       |
+| 1000-startup-b-deepkit-routes.js  | 1330.78     | 1332       | NA         |
+| 1000-startup-c-fastify-routes.js  | 338.42      | 1324       | NA         |
+| 10000-startup-a-mion-routes.js    | 523.82      | 607        | 30000      |
+| 10000-startup-b-deepkit-routes.js | 1426.04     | 1428       | NA         |
+| 10000-startup-c-fastify-routes.js | 4101.30     | 14398      | NA         |
+| startup-listen.js                 | 515.74      | 518        | 0          |

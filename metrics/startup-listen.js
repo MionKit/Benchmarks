@@ -1,7 +1,8 @@
 const start = process.hrtime();
 
-const { initHttp, addRoutes, routes } = require("@MionKit/compiled-app");
-const { startHttpServer } = initHttp({});
+const { initHttp, addRoutes, routes } = require("../compiled-apps/apps");
+const { startHttpServer } = require("@mionkit/http");
+initHttp({});
 
 const loadingTime = process.hrtime(start);
 
@@ -16,5 +17,5 @@ startHttpServer()
     server.close();
   })
   .catch((e) => {
-    console.err("Error Starting Server", e);
+    console.error("Error Starting Server", e);
   });
