@@ -24,31 +24,36 @@ const http_1 = require("@mionkit/http");
 const __ΩLogger = [() => console, 'Pi!-J'];
 let fastify;
 let httpOptions;
+const allMethods = ["GET", "POST", "PUT", "OPTIONS"];
 exports.initFsHttp = __assignType((app, handlersDataFactory, routerOptions) => {
     fastify = (0, fastify_1.default)({
         logger: false,
     });
     (0, router_1.initRouter)(app, handlersDataFactory, routerOptions);
-    fastify.get("*", __assignType(function handler(fsRequest, fsResponse) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return (0, router_1.dispatchRoute)(fsRequest.url, {
-                rawRequest: fsRequest,
-                rawResponse: fsResponse,
-            })
-                .then(__assignType((routeResponse) => {
-                addResponseHeaders(fsResponse, routeResponse.headers);
-                reply(fsResponse, routeResponse.json, routeResponse.statusCode);
-            }, ['routeResponse', '', 'P"2!"/"']))
-                .catch(__assignType((e) => {
-                const error = new router_1.RouteError({
-                    statusCode: router_1.StatusCodes.INTERNAL_SERVER_ERROR,
-                    publicMessage: "Internal Error",
-                    originalError: e,
-                });
-                replyError(fsResponse, console, error);
-            }, ['e', '', 'P"2!"/"']));
-        });
-    }, ['fsRequest', 'fsResponse', 'handler', 'P"2!"2""/#']));
+    fastify.route({
+        method: ["GET", "POST"],
+        url: "*",
+        handler: __assignType(function handler(fsRequest, fsResponse) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return (0, router_1.dispatchRoute)(fsRequest.url, {
+                    rawRequest: fsRequest,
+                    rawResponse: fsResponse,
+                })
+                    .then(__assignType((routeResponse) => {
+                    addResponseHeaders(fsResponse, routeResponse.headers);
+                    reply(fsResponse, routeResponse.json, routeResponse.statusCode);
+                }, ['routeResponse', '', 'P"2!"/"']))
+                    .catch(__assignType((e) => {
+                    const error = new router_1.RouteError({
+                        statusCode: router_1.StatusCodes.INTERNAL_SERVER_ERROR,
+                        publicMessage: "Internal Error",
+                        originalError: e,
+                    });
+                    replyError(fsResponse, console, error);
+                }, ['e', '', 'P"2!"/"']));
+            });
+        }, ['fsRequest', 'fsResponse', 'handler', 'P"2!"2""/#']),
+    });
 }, ['app', 'handlersDataFactory', () => __ΩPartial, 'routerOptions', '', 'P"2!"2"8"o#"2$8"/%']);
 exports.startFsServer = __assignType((httpOptions_ = {}) => __awaiter(void 0, void 0, void 0, function* () {
     httpOptions = Object.assign(Object.assign({}, http_1.DEFAULT_HTTP_OPTIONS), httpOptions_);

@@ -24,23 +24,23 @@ So the idea of the experiment is to replace `@mionkit/http` that uses native htt
 ### Conclusions:
 
 - **Cold starts** did not improve so look like the slow cold start time ir related to importing the router library. (we might need to look into the option to build this library disabling deepkit's `reflection` in tsconfig when building the library as we only need reflection when developing for unit tests )
-- **Request per second and Throughput** did improve which is surprising as we are no taking advantage of using schemas for faster json parsing but fastify might be doing some magic with the http module or something.
+- **Request per second and Throughput**: the benchmarks improve when we using a single http method i.e: `fastify.get({method: "GET", handler: () => ...)` but they are worst when redirecting multiple methods to mion router i.e: `fastify.get({method: ["GET", "POST", "PUT", "OPTIONS"], handler: () => ...)`.
 
-> Looks like we should look into replacing the http wrapper by a fastify wrapper
+> Looks like we should look investigate replacing the http wrapper by a fastify wrapper as this could lead to more performance as well as more battle tested server. But we need to mange to get the performance as when declaring a single http method
 
 ### Benchmarks
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v16.18.0`
-- **Run:** Fri Jul 07 2023 18:37:03 GMT+0100 (Irish Standard Time)
+- **Run:** Fri Jul 07 2023 20:52:27 GMT+0100 (Irish Standard Time)
 - **Method:** `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 |           |        Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Validation | Description                                                                                                |
 | :-------- | -------------: | -----: | :---------: | -----------: | ------------: | :--------: | :--------------------------------------------------------------------------------------------------------- |
 | node-http |        16.18.0 |      ✗ |   19594.5   |        50.50 |          5.03 |     ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
 | fastify   |          4.9.2 |      ✓ |   16831.4   |        58.88 |          4.33 |     -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
-| **mion**  |      **0.1.0** |  **✓** | **16175.9** |    **61.29** |      **4.03** |   **✓**    | **Automatic validation out of the box using @deepkit/types.**                                              |
 | restify   |          8.6.1 |      ✓ |   11766.4   |        84.41 |          3.04 |     ✗      | Requires third party tools.                                                                                |
+| **mion**  |      **0.1.0** |  **✓** | **10778.9** |    **92.19** |      **3.00** |   **✓**    | **Automatic validation out of the box using @deepkit/types.**                                              |
 | hapi      |         20.2.2 |      ✓ |   7173.4    |       138.40 |          1.84 |     ✗      | Manual validation using joi, or third party tools.                                                         |
 | express   |         4.18.2 |      ✓ |   4497.8    |       221.34 |          1.15 |     ✗      | needs third party tools, or third party tools                                                              |
 | deepkit   | 1.0.1-alpha.75 |      ✓ |   1647.8    |       604.28 |          0.42 |     ✓      | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |

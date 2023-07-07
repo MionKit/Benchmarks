@@ -1,4 +1,4 @@
-import Fastify, { FastifyInstance, FastifyReply } from "fastify";
+import Fastify, { FastifyInstance, FastifyReply, HTTPMethods } from "fastify";
 import {
   StatusCodes,
   initRouter,
@@ -19,6 +19,7 @@ type Logger = typeof console | undefined;
 
 let fastify: FastifyInstance;
 let httpOptions: HttpOptions;
+const allMethods: HTTPMethods[] = ["GET", "POST", "PUT", "OPTIONS"];
 
 export const initFsHttp = <App extends Obj, SharedData extends Obj>(
   app: App,
@@ -30,24 +31,29 @@ export const initFsHttp = <App extends Obj, SharedData extends Obj>(
   });
   initRouter(app, handlersDataFactory, routerOptions);
   // Declare a route
-  fastify.get("*", async function handler(fsRequest, fsResponse) {
-    return dispatchRoute(fsRequest.url, {
-      rawRequest: fsRequest as any as RawRequest,
-      rawResponse: fsResponse,
-    })
-      .then((routeResponse) => {
-        addResponseHeaders(fsResponse, routeResponse.headers);
-
-        reply(fsResponse, routeResponse.json, routeResponse.statusCode);
+  fastify.route({
+    // method: ["GET", "POST", "PUT", "OPTIONS"], // This has worst performance than @mionkit/http
+    method: ["GET", "POST"],
+    url: "*",
+    handler: async function handler(fsRequest, fsResponse) {
+      return dispatchRoute(fsRequest.url, {
+        rawRequest: fsRequest as any as RawRequest,
+        rawResponse: fsResponse,
       })
-      .catch((e) => {
-        const error = new RouteError({
-          statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-          publicMessage: "Internal Error",
-          originalError: e,
+        .then((routeResponse) => {
+          addResponseHeaders(fsResponse, routeResponse.headers);
+
+          reply(fsResponse, routeResponse.json, routeResponse.statusCode);
+        })
+        .catch((e) => {
+          const error = new RouteError({
+            statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+            publicMessage: "Internal Error",
+            originalError: e,
+          });
+          replyError(fsResponse, console, error);
         });
-        replyError(fsResponse, console, error);
-      });
+    },
   });
 };
 
