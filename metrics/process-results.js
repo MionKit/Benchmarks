@@ -30,7 +30,7 @@ ${startupResults}
 const results = fs.readdirSync(__dirname).filter((x) => x.endsWith(".txt"));
 
 let md = `
-| | startup(ms) | listen(ms) | complexity |
+| | startup(ms) | listen(ms) |
 |-| -       | -      | -      |`;
 
 for (const r of results) {
@@ -39,11 +39,9 @@ for (const r of results) {
   const temp = {
     startup: 0,
     listen: 0,
-    complexity: 0,
   };
   lines.forEach((x) => {
-    const [startup, listen, complexity] = x.split("|");
-    temp.complexity = complexity || "NA";
+    const [startup, listen] = x.split("|");
     temp.startup += readableHRTimeMs(
       startup.split(",").map((x) => parseInt(x))
     );
@@ -51,7 +49,7 @@ for (const r of results) {
   });
   md += `\n| ${r.replace(".txt", "")} | ${(temp.startup / lines.length).toFixed(
     2
-  )} | ${(temp.listen / lines.length).toFixed(0)} |  ${temp.complexity}|`;
+  )} | ${(temp.listen / lines.length).toFixed(0)} |`;
 }
 
 if (process.argv.length >= 3 && process.argv[2] === "-u") {

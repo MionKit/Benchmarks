@@ -9,8 +9,6 @@ function __assignType(fn, args) {
 }
 const __ΩPartial = ['T', 'l+e#!e"!fRb!Pde"!gN#"'];
 const http_1 = require("@mionkit/http");
-const router_1 = require("@mionkit/router");
-Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
 exports.app = {};
 exports.shared = {};
 const __ΩApp = [() => exports.app, 'i!'];
@@ -27,4 +25,6 @@ exports.routes = {
 exports.initHttp = __assignType((options) => {
     return (http_1.initHttpApp.Ω = [[() => __ΩApp, 'n!'], [() => __ΩShared, 'n!']], (0, http_1.initHttpApp)(exports.app, undefined, options));
 }, [() => __ΩPartial, 'options', '', 'P"o!"2"8"/#']);
+var router_1 = require("@mionkit/router");
+Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
 //# sourceMappingURL=mionApp.js.map

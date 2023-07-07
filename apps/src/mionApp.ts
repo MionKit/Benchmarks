@@ -6,12 +6,7 @@
  * ######## */
 
 import { initHttpApp } from "@mionkit/http";
-import type {
-  RouterOptions,
-  Routes,
-  Route,
-  registerRoutes,
-} from "@mionkit/router";
+import type { RouterOptions, Routes, Route } from "@mionkit/router";
 import { SayHello, User } from "./models";
 
 export const app = {};
@@ -35,4 +30,4 @@ export const initHttp = (options?: Partial<RouterOptions>) => {
   return initHttpApp<App, Shared>(app, undefined, options);
 };
 
-export { registerRoutes as addRoutes };
+export { registerRoutes as addRoutes } from "@mionkit/router";
