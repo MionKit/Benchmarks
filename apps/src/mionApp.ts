@@ -5,14 +5,14 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { initHttpApp } from "@mionkit/http";
+// import { initHttpApp } from "@mionkit/http";
 import type {
   RouterOptions,
   Routes,
   Route,
-  registerRoutes,
 } from "@mionkit/router";
 import { SayHello, User } from "./models";
+import { initFsHttp } from "./fastMion";
 
 export const app = {};
 export const shared = {};
@@ -32,7 +32,8 @@ export const routes: Routes = {
 };
 
 export const initHttp = (options?: Partial<RouterOptions>) => {
-  return initHttpApp<App, Shared>(app, undefined, options);
+  return initFsHttp<App, Shared>(app, undefined, options);
 };
 
-export { registerRoutes as addRoutes };
+export { startFsServer } from "./fastMion";
+export { registerRoutes as addRoutes } from "@mionkit/router";
