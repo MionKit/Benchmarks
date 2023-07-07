@@ -13,7 +13,7 @@
     "standard": "standard | snazzy",
     "metrics:run": "node metrics/startup.js",
     "metrics:summary": "node metrics/process-results.js -u",
-    "build": "rimraf ./compiled-apps && tsc --build tsconfig.json"
+    "build": "rimraf ./_compiled-apps && tsc --build tsconfig.json"
   },
   "bin": {
     "benchmark": "./benchmark.js"
