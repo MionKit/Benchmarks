@@ -22,7 +22,7 @@ const measureStartupListen = runSample(() => {
 const measureStartupValidate = runSample(async () => {
   for (let n = 1; n <= 10000; n *= 10) {
     await new Promise((resolve) => {
-      new Worker(path.join(__dirname, "./startup-b-deepkit-routes.js"), {
+      new Worker(path.join(__dirname, "./startup-deepkit-routes.js"), {
         env: {
           routes: n,
         },
@@ -34,7 +34,7 @@ const measureStartupValidate = runSample(async () => {
 const measureStartupNoValidate = runSample(async () => {
   for (let n = 1; n <= 10000; n *= 10) {
     await new Promise((resolve) => {
-      new Worker(path.join(__dirname, "./startup-a-mion-routes.js"), {
+      new Worker(path.join(__dirname, "./startup-mion-routes.js"), {
         env: {
           routes: n,
         },
@@ -46,7 +46,7 @@ const measureStartupNoValidate = runSample(async () => {
 const measureFastifySchema = runSample(async () => {
   for (let n = 1; n <= 10000; n *= 10) {
     await new Promise((resolve) => {
-      new Worker(path.join(__dirname, "./startup-c-fastify-routes.js"), {
+      new Worker(path.join(__dirname, "./startup-fastify-routes.js"), {
         env: {
           routes: n,
         },

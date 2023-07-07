@@ -6,8 +6,12 @@
  * ######## */
 
 import { initHttpApp } from "@mionkit/http";
-import { registerRoutes } from "@mionkit/router";
-import type { RouterOptions, Routes, Route } from "@mionkit/router";
+import type {
+  RouterOptions,
+  Routes,
+  Route,
+  registerRoutes,
+} from "@mionkit/router";
 import { SayHello, User } from "./models";
 
 export const app = {};

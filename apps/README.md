@@ -25,7 +25,7 @@ These are the [deepkit](https://deepkit.io/) and [mion](https://github.com/MionK
 npm run build
 ```
 
-The typescript apps get compiled into `/compiled-apps` directory and used for the benchmarks.
+The typescript apps get compiled into `/_compiled-apps` directory and used for the benchmarks.
 
 Compiled code is committed to the repo for better visibility and so the benchmarks work without any pre-compilation step.
 

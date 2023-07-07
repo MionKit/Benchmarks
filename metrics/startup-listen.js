@@ -1,6 +1,6 @@
 const start = process.hrtime();
 
-const { initHttp, addRoutes, routes } = require("../compiled-apps/apps");
+const { initHttp, addRoutes, routes } = require("../_compiled-apps/apps");
 const { startHttpServer } = require("@mionkit/http");
 initHttp({});
 
