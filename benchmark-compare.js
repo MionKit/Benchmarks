@@ -111,13 +111,26 @@ function compareResults(markdown, outputResults) {
       "Req (R/s)",
       "Latency (ms)",
       "Output (Mb/s)",
+      "Max Memory (Mb)",
+      "Max Cpu (%)",
       "Validation",
       "Description",
     ],
   });
 
   if (markdown) {
-    table.push([":--", "--:", "--:", ":-:", "--:", "--:", ":-:", ":--"]);
+    table.push([
+      ":--",
+      "--:",
+      "--:",
+      ":-:",
+      "--:",
+      "--:",
+      "--:",
+      "--:",
+      ":-:",
+      ":--",
+    ]);
   }
   const results = outputResults || getOutputResults();
 
@@ -130,6 +143,8 @@ function compareResults(markdown, outputResults) {
       bold(beBold, result.requests, markdown),
       bold(beBold, result.latency, markdown),
       bold(beBold, result.throughput, markdown),
+      bold(beBold, result.maxMem, markdown),
+      bold(beBold, result.maxCpu, markdown),
       bold(beBold, result.validation, markdown),
       bold(beBold, result.description, markdown),
     ]);
@@ -164,6 +179,8 @@ function getOutputResults() {
       throughput: formatThroughput(throughput),
       validation,
       description: description,
+      maxMem: (result.maxMem / 1000_000).toFixed(0),
+      maxCpu: result.maxCpu.toFixed(0),
     });
   }
 
@@ -237,6 +254,8 @@ async function getMarkdownCharts(outputResults) {
     { metricName: "requests", metricLabel: "Req (R/s)" },
     { metricName: "throughput", metricLabel: "Throughput (Mb/s)" },
     { metricName: "latency", metricLabel: "Latency (ms)" },
+    { metricName: "maxMem", metricLabel: "Max Memory (Mb)" },
+    { metricName: "maxCpu", metricLabel: "Max Cpu (%)" },
   ];
 
   const results = await Promise.all(

@@ -9,7 +9,7 @@ Cold start times are also indicative of how the [serverless version](https://git
 ## Metrics
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v16.18.0`
-* __Run:__ Sat Jul 08 2023 19:13:39 GMT+0100 (Irish Standard Time)
+* __Run:__ Sat Jul 08 2023 20:09:04 GMT+0100 (Irish Standard Time)
 * __Method:__ `npm run metrics` (samples: 5)
 * __startup:__ time elapsed to setup the application
 * __listen:__ time elapsed until the http server is ready to accept requests (cold start)
