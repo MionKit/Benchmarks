@@ -13,14 +13,17 @@ const runSample = (cb) => {
   };
 };
 
+const routeNumbers = [10, 100, 500, 1000, 2000, 3000, 4000, 5000];
+
 const measureStartupListen = runSample(() => {
   return new Promise((resolve) => {
     new Worker(path.join(__dirname, "./startup-listen.js")).on("exit", resolve);
   });
 });
 
-const measureStartupValidate = runSample(async () => {
-  for (let n = 1; n <= 10000; n *= 10) {
+const measureStartupDeepkit = runSample(async () => {
+  console.log("#### deepkit metrics ####");
+  for (const n of routeNumbers) {
     await new Promise((resolve) => {
       new Worker(path.join(__dirname, "./startup-deepkit-routes.js"), {
         env: {
@@ -31,8 +34,9 @@ const measureStartupValidate = runSample(async () => {
   }
 });
 
-const measureStartupNoValidate = runSample(async () => {
-  for (let n = 1; n <= 10000; n *= 10) {
+const measureStartupMion = runSample(async () => {
+  console.log("#### mion metrics ####");
+  for (const n of routeNumbers) {
     await new Promise((resolve) => {
       new Worker(path.join(__dirname, "./startup-mion-routes.js"), {
         env: {
@@ -43,8 +47,9 @@ const measureStartupNoValidate = runSample(async () => {
   }
 });
 
-const measureFastifySchema = runSample(async () => {
-  for (let n = 1; n <= 10000; n *= 10) {
+const measureFastify = runSample(async () => {
+  console.log("#### fastify metrics ####");
+  for (const n of routeNumbers) {
     await new Promise((resolve) => {
       new Worker(path.join(__dirname, "./startup-fastify-routes.js"), {
         env: {
@@ -56,6 +61,6 @@ const measureFastifySchema = runSample(async () => {
 });
 
 measureStartupListen()
-  .then(measureStartupNoValidate)
-  .then(measureStartupValidate)
-  .then(measureFastifySchema);
+  .then(measureStartupMion)
+  .then(measureStartupDeepkit)
+  .then(measureFastify);
