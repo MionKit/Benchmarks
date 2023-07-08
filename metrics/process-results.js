@@ -31,7 +31,7 @@ const results = fs.readdirSync(__dirname).filter((x) => x.endsWith(".txt"));
 
 let md = `
 | | startup(ms) | listen(ms) |
-|-| -       | -      | -      |`;
+|-| -           | -          |`;
 
 for (const r of results) {
   const data = fs.readFileSync(path.join(__dirname, r), { encoding: "utf-8" });

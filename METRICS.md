@@ -6,11 +6,11 @@ Cold start times are also indicative of how the [serverless version](https://git
 - The `startup time` is the time it takes to load the @MionKit/http library itself + create the routes object in memory.
 - The `listen time` is the time it takes to parse and generate a flat router so there is no need to process the url when a request come in.
 
-################### Metrics
+###################### Metrics
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v16.18.0`
-- **Run:** Fri Jul 07 2023 21:23:07 GMT+0100 (Irish Standard Time)
+- **Run:** Sat Jul 08 2023 16:21:45 GMT+0100 (Irish Standard Time)
 - **Method:** `npm run metrics` (samples: 5)
 - **startup:** time elapsed to setup the application
 - **listen:** time elapsed until the http server is ready to accept requests (cold start)

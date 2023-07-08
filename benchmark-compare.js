@@ -10,6 +10,7 @@ const { join } = require("path");
 const { readdirSync, readFileSync, writeFileSync } = require("fs");
 const { info } = require("./lib/packages");
 const { compare } = require("./lib/autocannon");
+const { chartScreenshot } = require("./lib/chart-screenshot");
 
 const resultsPath = join(process.cwd(), "results");
 
@@ -25,14 +26,18 @@ if (opts.markdown || opts.update) {
   chalk.level = 0;
 }
 
-if (!getAvailableResults().length) {
-  console.log(chalk.red("Benchmark to gather some results to compare."));
-} else if (opts.update) {
-  updateReadme();
-} else if (opts.table) {
-  console.log(compareResults(opts.markdown));
-} else {
-  compareResultsInteractive();
+async function runCompare() {
+  if (!getAvailableResults().length) {
+    console.log(chalk.red("Benchmark to gather some results to compare."));
+  } else if (opts.update) {
+    const outputResults = getOutputResults();
+    const markdownChartImages = await getMarkdownCharts(outputResults);
+    await updateReadme(markdownChartImages, outputResults);
+  } else if (opts.table) {
+    console.log(compareResults(opts.markdown));
+  } else {
+    compareResultsInteractive();
+  }
 }
 
 function getAvailableResults() {
@@ -46,7 +51,7 @@ function formatHasRouter(hasRouter) {
   return typeof hasRouter === "string" ? hasRouter : hasRouter ? "✓" : "✗";
 }
 
-function updateReadme() {
+async function updateReadme(markdownChartImages, outputResults) {
   const machineInfo = `${os.platform()} ${os.arch()} | ${
     os.cpus().length
   } vCPUs | ${(os.totalmem() / 1024 ** 3).toFixed(1)}GB Mem`;
@@ -57,7 +62,9 @@ function updateReadme() {
 * __Run:__ ${new Date()}
 * __Method:__ \`autocannon -c 100 -d 40 -p 10 localhost:3000\` (two rounds; one to warm-up, one to measure)
 
-${compareResults(true)}
+${markdownChartImages ? markdownChartImages : ""}
+
+${compareResults(true, outputResults)}
 `;
   const md = readFileSync("README.md", "utf8");
   writeFileSync(
@@ -67,7 +74,7 @@ ${compareResults(true)}
   );
 }
 
-function compareResults(markdown) {
+function compareResults(markdown, outputResults) {
   const tableStyle = !markdown
     ? {}
     : {
@@ -111,20 +118,34 @@ function compareResults(markdown) {
   if (markdown) {
     table.push([":--", "--:", "--:", ":-:", "--:", "--:", ":-:", ":--"]);
   }
-
-  const results = getAvailableResults()
-    .map((file) => {
-      const content = readFileSync(`${resultsPath}/${file}.json`);
-      return JSON.parse(content.toString());
-    })
-    .sort((a, b) => parseFloat(b.requests.mean) - parseFloat(a.requests.mean));
-
-  const outputResults = [];
-  const formatThroughput = (throughput) =>
-    throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A";
+  const results = outputResults || getOutputResults();
 
   for (const result of results) {
-    const beBold = result.server === "mion";
+    const beBold = result.name === "mion";
+    table.push([
+      bold(beBold, chalk.blue(result.name), markdown),
+      bold(beBold, result.version, markdown),
+      bold(beBold, formatHasRouter(result.hasRouter), markdown),
+      bold(beBold, result.requests, markdown),
+      bold(beBold, result.latency, markdown),
+      bold(beBold, result.throughput, markdown),
+      bold(beBold, result.validation, markdown),
+      bold(beBold, result.description, markdown),
+    ]);
+  }
+  writeFileSync(
+    "benchmark-results.json",
+    JSON.stringify(outputResults),
+    "utf8"
+  );
+  return table.toString();
+}
+
+function getOutputResults() {
+  const results = getFormattedResults();
+  const outputResults = [];
+
+  for (const result of results) {
     const { hasRouter, version, description, validation } =
       info(result.server) || {};
     const {
@@ -143,28 +164,22 @@ function compareResults(markdown) {
       validation,
       description: description,
     });
-
-    table.push([
-      bold(beBold, chalk.blue(result.server), markdown),
-      bold(beBold, version, markdown),
-      bold(beBold, formatHasRouter(hasRouter), markdown),
-      bold(beBold, requests ? requests.toFixed(1) : "N/A", markdown),
-      bold(beBold, latency ? latency.toFixed(2) : "N/A", markdown),
-      bold(
-        beBold,
-        throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A",
-        markdown
-      ),
-      bold(beBold, validation || "NA", markdown),
-      bold(beBold, description || "NA", markdown),
-    ]);
   }
-  writeFileSync(
-    "benchmark-results.json",
-    JSON.stringify(outputResults),
-    "utf8"
-  );
-  return table.toString();
+
+  return outputResults;
+}
+
+function getFormattedResults() {
+  return getAvailableResults()
+    .map((file) => {
+      const content = readFileSync(`${resultsPath}/${file}.json`);
+      return JSON.parse(content.toString());
+    })
+    .sort((a, b) => parseFloat(b.requests.mean) - parseFloat(a.requests.mean));
+}
+
+function formatThroughput(throughput) {
+  return throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A";
 }
 
 async function compareResultsInteractive() {
@@ -215,3 +230,56 @@ async function compareResultsInteractive() {
 function bold(writeBold, str, markdown) {
   return writeBold ? chalk.bold(markdown ? `**${str}**` : str) : str;
 }
+
+async function getMarkdownCharts(outputResults) {
+  const charts = [
+    { metricName: "requests", metricLabel: "Req (R/s)" },
+    { metricName: "throughput", metricLabel: "Throughput (Mb/s)" },
+    { metricName: "latency", metricLabel: "Latency (ms)" },
+  ];
+
+  const results = await Promise.all(
+    charts.map(({ metricName, metricLabel }) =>
+      getMarkdownChat(outputResults, metricName, metricLabel)
+    )
+  );
+
+  return results.join("\n\n");
+}
+
+async function getMarkdownChat(outputResults, metricName, metricLabel) {
+  const columnsData = outputResults.map((result) => [
+    `${result.name}`,
+    `${result[metricName]}`,
+  ]);
+
+  // const max = outputResults.reduce((acc, result) => {
+  //   return Math.max(acc, parseFloat(result[metricName]));
+  // }, 0);
+
+  const img64 = await chartScreenshot({
+    data: {
+      x: "x",
+      columns: [["x", metricLabel], ...columnsData],
+      type: "bar",
+      labels: true,
+    },
+    axis: {
+      // y: {
+      //   show: false,
+      //   type: "log",
+      //   max: max * 1.5,
+      // },
+      x: {
+        type: "category",
+      },
+    },
+    transition: {
+      duration: 0,
+    },
+  });
+
+  return `#### ${metricLabel} \n\n![benchmarks](data:image/png;base64,${img64})\n\n`;
+}
+
+runCompare();
