@@ -6,13 +6,14 @@ const commander = require("commander");
 const inquirer = require("inquirer");
 const Table = require("cli-table");
 const chalk = require("chalk");
-const { join } = require("path");
+const { join, relative } = require("path");
 const { readdirSync, readFileSync, writeFileSync } = require("fs");
 const { info } = require("./lib/packages");
 const { compare } = require("./lib/autocannon");
 const { chartScreenshot } = require("./lib/chart-screenshot");
 
 const resultsPath = join(process.cwd(), "results");
+const chartPaths = join(process.cwd(), "assets", "public", "charts");
 
 commander
   .option("-t, --table", "print table")
@@ -257,29 +258,36 @@ async function getMarkdownChat(outputResults, metricName, metricLabel) {
   //   return Math.max(acc, parseFloat(result[metricName]));
   // }, 0);
 
-  const img64 = await chartScreenshot({
-    data: {
-      x: "x",
-      columns: [["x", metricLabel], ...columnsData],
-      type: "bar",
-      labels: true,
-    },
-    axis: {
-      // y: {
-      //   show: false,
-      //   type: "log",
-      //   max: max * 1.5,
-      // },
-      x: {
-        type: "category",
+  const file = await chartScreenshot(
+    {
+      data: {
+        x: "x",
+        columns: [["x", metricLabel], ...columnsData],
+        type: "bar",
+        labels: true,
+      },
+      axis: {
+        // y: {
+        //   show: false,
+        //   type: "log",
+        //   max: max * 1.5,
+        // },
+        x: {
+          type: "category",
+        },
+      },
+      transition: {
+        duration: 0,
       },
     },
-    transition: {
-      duration: 0,
-    },
-  });
+    chartPaths,
+    metricName
+  );
 
-  return `#### ${metricLabel} \n\n![benchmarks](data:image/png;base64,${img64})\n\n`;
+  const relativePath = relative(process.cwd(), file);
+  console.log(`relativePath ${relativePath}`);
+
+  return `#### ${metricLabel} \n\n![benchmarks](${relativePath})\n\n`;
 }
 
 runCompare();
