@@ -75,8 +75,37 @@ In this scenario we can see how performance using url params is better as we don
 
 |                     | Version | Req (R/s) | Latency (ms) | Output (Mb/s) | Description                                     |
 | :------------------ | ------: | :-------: | -----------: | ------------: | :---------------------------------------------- |
-| fastify-findId-json |  4.19.2 |  15936.9  |        62.21 |          4.00 | sending user id in json body `{user: {id:123}}` |
+| fastify-findId-json |  4.19.2 |  16689.7  |        59.39 |          4.20 | sending user id in json body `{user: {id:123}}` |
 | fastify-findId-url  |  4.19.2 |  21533.7  |        45.91 |          6.94 | sending user id in the url `findUser/123`       |
+
+## URL params vs Query params
+
+```js
+fastify.post("/findUser/:userId", function (req, reply) {
+  const userId = req.params.userId;
+  reply.send({
+    user: {
+      id: userId, // rest of user fields ...
+    },
+  });
+});
+
+fastify.post("/getUser", function (req, reply) {
+  const userId = req.query.userId; // /getUser?userId=xxx
+  reply.send({
+    user: {
+      id: userId, // rest of user fields ...
+    },
+  });
+});
+```
+
+|                      | Version | Req (R/s) | Latency (ms) | Output (Mb/s) | Description                              |
+| :------------------- | ------: | :-------: | -----------: | ------------: | :--------------------------------------- |
+| fastify-url-params   |  4.19.2 |  21156.8  |        46.76 |          6.82 | using url params: `/findUser/123`        |
+| fastify-query-params |  4.19.2 |  22429.3  |        44.07 |          7.23 | using query params `/getUser?userId=123` |
+
+Doesn't seems to be any relevant difference!
 
 ## How using url params affect all routes, not only the ones that uses them?
 
