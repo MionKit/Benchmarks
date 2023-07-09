@@ -84,7 +84,7 @@ app.post("/updateUser", function (req, res) {
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v16.18.0`
-* __Run:__ Sat Jul 08 2023 20:44:57 GMT+0100 (Irish Standard Time)
+* __Run:__ Sun Jul 09 2023 01:09:31 GMT+0100 (Irish Standard Time)
 * __Method:__ `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
@@ -119,10 +119,10 @@ app.post("/updateUser", function (req, res) {
 
 |           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                                |
 | :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                        |
-| fastify   | 4.19.2         | ✓      | 16191.4     | 61.24        | 4.17          | 90              | 68          | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
-| http-node | 16.18.0        | ✗      | 15897.5     | 62.41        | 4.08          | 80              | 69          | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
-| **mion**  | **0.1.0**      | **✓**  | **13535.6** | **73.37**    | **3.76**      | **186**         | **75**      | **✓**      | **Automatic validation out of the box using @deepkit/types.**                                              |
-| restify   | 8.6.1          | ✓      | 10962.0     | 90.99        | 2.83          | 106             | 53          | ✗          | Requires third party tools.                                                                                |
-| hapi      | 20.3.0         | ✓      | 7966.4      | 124.90       | 2.04          | 101             | 72          | ✗          | Manual validation using joi, or third party tools.                                                         |
-| express   | 4.18.2         | ✓      | 4648.2      | 214.14       | 1.19          | 111             | 65          | ✗          | needs third party tools, or third party tools                                                              |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 2436.4      | 410.82       | 0.62          | 284             | 64          | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
+| http-node | 16.18.0        | ✗      | 17992.5     | 55.10        | 4.62          | 77              | 120         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
+| fastify   | 4.19.2         | ✓      | 17514.1     | 56.59        | 4.51          | 89              | 124         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
+| **mion**  | **0.1.0**      | **✓**  | **14845.6** | **66.89**    | **4.12**      | **188**         | **135**     | **✓**      | **Automatic validation out of the box using @deepkit/types.**                                              |
+| restify   | 8.6.1          | ✓      | 11060.0     | 89.85        | 2.86          | 108             | 117         | ✗          | Requires third party tools.                                                                                |
+| hapi      | 20.3.0         | ✓      | 7741.8      | 128.53       | 1.99          | 114             | 128         | ✗          | Manual validation using joi, or third party tools.                                                         |
+| deepkit   | 1.0.1-alpha.75 | ✓      | 5185.0      | 192.09       | 1.33          | 286             | 130         | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
+| express   | 4.18.2         | ✓      | 4558.4      | 218.46       | 1.17          | 112             | 127         | ✗          | needs third party tools, or third party tools                                                              |
