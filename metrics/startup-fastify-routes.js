@@ -23,7 +23,7 @@ for (let i = 0; i < routes; ++i) {
 }
 
 const loadingTime = process.hrtime(start);
-server.listen(0, () => {
+server.listen({ port: 3000 }, () => {
   const listenTime = process.hrtime(start);
   const path = require("path");
   require("fs").writeFileSync(

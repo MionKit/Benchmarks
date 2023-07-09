@@ -2,7 +2,8 @@ const start = process.hrtime();
 
 const { initHttp, addRoutes, routes } = require("../_compiled-apps/apps");
 const { startHttpServer } = require("@mionkit/http");
-const { getComplexity } = require("@mionkit/router");
+
+console.log("child pid", process.pid);
 
 const totalRoutes = process.env.routes || 0;
 const defaultRoute = routes["/"]; // this handler contains type information.
@@ -22,7 +23,7 @@ startHttpServer({ port: 3000 })
     const path = require("path");
     require("fs").writeFileSync(
       path.join(__dirname, `${totalRoutes}-${path.basename(__filename)}.txt`),
-      `${loadingTime} | ${listenTime} | ${getComplexity()} |\n`,
+      `${loadingTime} | ${listenTime} |\n`,
       { encoding: "utf-8", flag: "a" }
     );
     server.close();

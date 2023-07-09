@@ -15,6 +15,12 @@ import {
   HttpResponse,
   HttpKernel,
 } from "@deepkit/http";
+import {
+  Logger,
+  LogMessage,
+  LoggerTransport,
+  LoggerLevel,
+} from "@deepkit/logger";
 import { SayHello, User } from "./models";
 
 type mionUpdate = {
@@ -26,6 +32,17 @@ type mionSayHelloResponse = {
 };
 
 let app: App<any>;
+
+// LoggerTransport to disable console output
+export class MyTransport implements LoggerTransport {
+  write(message: LogMessage) {
+    // does nothing to disable console output
+  }
+
+  supportsColor() {
+    return false;
+  }
+}
 
 export const deepKitSayHelloRoute = (): mionSayHelloResponse => {
   return { "/": { hello: "world" } };
@@ -50,9 +67,14 @@ export const setRoutes = () => {
 export const initDeepkitApp = () => {
   app = new App({
     imports: [new FrameworkModule()],
+  }).setup((module, config) => {
+    module
+      .setupGlobalProvider(undefined, Logger)
+      .setTransport([new MyTransport()]);
   });
 
   const httpKernel = app.get(HttpKernel);
+  // console.log("httpKernel", httpKernel);
   const router = app.get(HttpRouterRegistry);
 
   const server = new Server(

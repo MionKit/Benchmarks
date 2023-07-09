@@ -10,6 +10,10 @@ const { join } = require("path");
 const { readdirSync, readFileSync, writeFileSync } = require("fs");
 const { info } = require("./lib/packages");
 const { compare } = require("./lib/autocannon");
+const {
+  getMarkdownBarChart,
+  getMarkdownChartMemSeries,
+} = require("./lib/chart-screenshot");
 
 const resultsPath = join(process.cwd(), "results");
 
@@ -25,14 +29,25 @@ if (opts.markdown || opts.update) {
   chalk.level = 0;
 }
 
-if (!getAvailableResults().length) {
-  console.log(chalk.red("Benchmark to gather some results to compare."));
-} else if (opts.update) {
-  updateReadme();
-} else if (opts.table) {
-  console.log(compareResults(opts.markdown));
-} else {
-  compareResultsInteractive();
+async function runCompare() {
+  if (!getAvailableResults().length) {
+    console.log(chalk.red("Benchmark to gather some results to compare."));
+  } else if (opts.update) {
+    const outputResults = getOutputResults();
+    const markdownChartImages = await getMarkdownCharts(outputResults);
+
+    // disable memory series as it doesn't gives much more info than max memory
+    // const memSeriesChartImages = await getMarkdownChartMemSeries(
+    //   outputResults,
+    //   `memSeries`,
+    //   `Memory Series (MB)`
+    // );
+    await updateReadme(markdownChartImages, null, outputResults);
+  } else if (opts.table) {
+    console.log(compareResults(opts.markdown));
+  } else {
+    compareResultsInteractive();
+  }
 }
 
 function getAvailableResults() {
@@ -46,7 +61,11 @@ function formatHasRouter(hasRouter) {
   return typeof hasRouter === "string" ? hasRouter : hasRouter ? "✓" : "✗";
 }
 
-function updateReadme() {
+async function updateReadme(
+  markdownChartImages,
+  memSeriesChartImages,
+  outputResults
+) {
   const machineInfo = `${os.platform()} ${os.arch()} | ${
     os.cpus().length
   } vCPUs | ${(os.totalmem() / 1024 ** 3).toFixed(1)}GB Mem`;
@@ -57,7 +76,11 @@ function updateReadme() {
 * __Run:__ ${new Date()}
 * __Method:__ \`autocannon -c 100 -d 40 -p 10 localhost:3000\` (two rounds; one to warm-up, one to measure)
 
-${compareResults(true)}
+${markdownChartImages ? markdownChartImages : ""}
+
+${memSeriesChartImages ? memSeriesChartImages : ""}
+
+${compareResults(true, outputResults)}
 `;
   const md = readFileSync("README.md", "utf8");
   writeFileSync(
@@ -67,7 +90,7 @@ ${compareResults(true)}
   );
 }
 
-function compareResults(markdown) {
+function compareResults(markdown, outputResults) {
   const tableStyle = !markdown
     ? {}
     : {
@@ -103,28 +126,57 @@ function compareResults(markdown) {
       "Req (R/s)",
       "Latency (ms)",
       "Output (Mb/s)",
+      "Max Memory (Mb)",
+      "Max Cpu (%)",
       "Validation",
       "Description",
     ],
   });
 
   if (markdown) {
-    table.push([":--", "--:", "--:", ":-:", "--:", "--:", ":-:", ":--"]);
+    table.push([
+      ":--",
+      "--:",
+      "--:",
+      ":-:",
+      "--:",
+      "--:",
+      "--:",
+      "--:",
+      ":-:",
+      ":--",
+    ]);
   }
-
-  const results = getAvailableResults()
-    .map((file) => {
-      const content = readFileSync(`${resultsPath}/${file}.json`);
-      return JSON.parse(content.toString());
-    })
-    .sort((a, b) => parseFloat(b.requests.mean) - parseFloat(a.requests.mean));
-
-  const outputResults = [];
-  const formatThroughput = (throughput) =>
-    throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A";
+  const results = outputResults || getOutputResults();
 
   for (const result of results) {
-    const beBold = result.server === "mion";
+    const beBold = result.name === "mion";
+    table.push([
+      bold(beBold, chalk.blue(result.name), markdown),
+      bold(beBold, result.version, markdown),
+      bold(beBold, formatHasRouter(result.hasRouter), markdown),
+      bold(beBold, result.requests, markdown),
+      bold(beBold, result.latency, markdown),
+      bold(beBold, result.throughput, markdown),
+      bold(beBold, result.maxMem, markdown),
+      bold(beBold, result.maxCpu, markdown),
+      bold(beBold, result.validation, markdown),
+      bold(beBold, result.description, markdown),
+    ]);
+  }
+  writeFileSync(
+    "benchmark-results.json",
+    JSON.stringify(outputResults),
+    "utf8"
+  );
+  return table.toString();
+}
+
+function getOutputResults() {
+  const results = getFormattedResults();
+  const outputResults = [];
+
+  for (const result of results) {
     const { hasRouter, version, description, validation } =
       info(result.server) || {};
     const {
@@ -142,29 +194,26 @@ function compareResults(markdown) {
       throughput: formatThroughput(throughput),
       validation,
       description: description,
+      maxMem: (result.maxMem / 1000_000).toFixed(0),
+      maxCpu: result.maxCpu.toFixed(0),
+      memSeries: result.memSeries.map((mem) => (mem / 1000_000).toFixed(0)),
     });
-
-    table.push([
-      bold(beBold, chalk.blue(result.server), markdown),
-      bold(beBold, version, markdown),
-      bold(beBold, formatHasRouter(hasRouter), markdown),
-      bold(beBold, requests ? requests.toFixed(1) : "N/A", markdown),
-      bold(beBold, latency ? latency.toFixed(2) : "N/A", markdown),
-      bold(
-        beBold,
-        throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A",
-        markdown
-      ),
-      bold(beBold, validation || "NA", markdown),
-      bold(beBold, description || "NA", markdown),
-    ]);
   }
-  writeFileSync(
-    "benchmark-results.json",
-    JSON.stringify(outputResults),
-    "utf8"
-  );
-  return table.toString();
+
+  return outputResults;
+}
+
+function getFormattedResults() {
+  return getAvailableResults()
+    .map((file) => {
+      const content = readFileSync(`${resultsPath}/${file}.json`);
+      return JSON.parse(content.toString());
+    })
+    .sort((a, b) => parseFloat(b.requests.mean) - parseFloat(a.requests.mean));
+}
+
+function formatThroughput(throughput) {
+  return throughput ? (throughput / 1024 / 1024).toFixed(2) : "N/A";
 }
 
 async function compareResultsInteractive() {
@@ -215,3 +264,24 @@ async function compareResultsInteractive() {
 function bold(writeBold, str, markdown) {
   return writeBold ? chalk.bold(markdown ? `**${str}**` : str) : str;
 }
+
+async function getMarkdownCharts(outputResults) {
+  const charts = [
+    { metricName: "requests", metricLabel: "Req (R/s)" },
+    { metricName: "throughput", metricLabel: "Throughput (Mb/s)" },
+    { metricName: "latency", metricLabel: "Latency (ms)" },
+    { metricName: "maxMem", metricLabel: "Max Memory (Mb)" },
+    // cpu disabled as doesn't seems to be too reliable
+    // { metricName: "maxCpu", metricLabel: "Max Cpu (%)" },
+  ];
+
+  const results = await Promise.all(
+    charts.map(({ metricName, metricLabel }) =>
+      getMarkdownBarChart(outputResults, metricName, metricLabel)
+    )
+  );
+
+  return results.join("\n\n");
+}
+
+runCompare();

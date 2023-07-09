@@ -5,32 +5,45 @@ Cold start times are also indicative of how the [serverless version](https://git
 - These metrics show the start time when loading 1 route and then increasing the number or routes loaded until 10,000.
 - The `startup time` is the time it takes to load the @MionKit/http library itself + create the routes object in memory.
 - The `listen time` is the time it takes to parse and generate a flat router so there is no need to process the url when a request come in.
-- The `complexity` is the number of iterations done to parse the routes, it depends on the number of routes and hooks, the order they are defined, and few other factors.
 
-################# Metrics
+## Metrics
+* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
+* __Node:__ `v16.18.0`
+* __Run:__ Sat Jul 08 2023 20:09:04 GMT+0100 (Irish Standard Time)
+* __Method:__ `npm run metrics` (samples: 5)
+* __startup:__ time elapsed to setup the application
+* __listen:__ time elapsed until the http server is ready to accept requests (cold start)
 
-- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
-- **Node:** `v16.18.0`
-- **Run:** Fri Jul 07 2023 02:02:58 GMT+0100 (Irish Standard Time)
-- **Method:** `npm run metrics` (samples: 5)
-- **startup:** time elapsed to setup the application
-- **listen:** time elapsed until the http server is ready to accept requests (cold start)
+### Cold starts:  listen time (ms) lower is better 
 
-|                                 | startup(ms) | listen(ms) | complexity |
-| ------------------------------- | ----------- | ---------- | ---------- |
-| 1-startup-deepkit-routes.js     | 1413.17     | 1415       | NA         |
-| 1-startup-fastify-routes.js     | 172.91      | 237        | NA         |
-| 1-startup-mion-routes.js        | 545.50      | 549        | 2          |
-| 10-startup-deepkit-routes.js    | 1487.21     | 1489       | NA         |
-| 10-startup-fastify-routes.js    | 148.85      | 225        | NA         |
-| 10-startup-mion-routes.js       | 568.02      | 572        | 30         |
-| 100-startup-deepkit-routes.js   | 1394.54     | 1396       | NA         |
-| 100-startup-fastify-routes.js   | 165.82      | 345        | NA         |
-| 100-startup-mion-routes.js      | 526.59      | 531        | 300        |
-| 1000-startup-deepkit-routes.js  | 1410.95     | 1413       | NA         |
-| 1000-startup-fastify-routes.js  | 353.65      | 1356       | NA         |
-| 1000-startup-mion-routes.js     | 548.72      | 557        | 3000       |
-| 10000-startup-deepkit-routes.js | 1555.60     | 1557       | NA         |
-| 10000-startup-fastify-routes.js | 3920.21     | 14728      | NA         |
-| 10000-startup-mion-routes.js    | 545.69      | 582        | 30000      |
-| startup-listen.js               | 519.68      | 522        | 0          |
+![benchmarks](assets/public/charts/cold-starts.png)
+
+
+
+  | | startup(ms) | listen(ms) |
+  |-| -           | -          |
+| 10-startup-deepkit-routes.js | 1496 | 1497 |
+| 10-startup-fastify-routes.js | 159 | 237 |
+| 10-startup-mion-routes.js | 502 | 508 |
+| 100-startup-deepkit-routes.js | 1467 | 1468 |
+| 100-startup-fastify-routes.js | 179 | 381 |
+| 100-startup-mion-routes.js | 506 | 513 |
+| 500-startup-deepkit-routes.js | 1632 | 1633 |
+| 500-startup-fastify-routes.js | 263 | 836 |
+| 500-startup-mion-routes.js | 503 | 513 |
+| 1000-startup-deepkit-routes.js | 1416 | 1418 |
+| 1000-startup-fastify-routes.js | 425 | 1524 |
+| 1000-startup-mion-routes.js | 503 | 516 |
+| 2000-startup-deepkit-routes.js | 1468 | 1469 |
+| 2000-startup-fastify-routes.js | 603 | 2646 |
+| 2000-startup-mion-routes.js | 505 | 533 |
+| 3000-startup-deepkit-routes.js | 1464 | 1465 |
+| 3000-startup-fastify-routes.js | 874 | 3765 |
+| 3000-startup-mion-routes.js | 502 | 536 |
+| 4000-startup-deepkit-routes.js | 1516 | 1518 |
+| 4000-startup-fastify-routes.js | 1311 | 5212 |
+| 4000-startup-mion-routes.js | 500 | 537 |
+| 5000-startup-deepkit-routes.js | 1608 | 1610 |
+| 5000-startup-fastify-routes.js | 2039 | 7468 |
+| 5000-startup-mion-routes.js | 498 | 542 |
+| startup-listen.js | 537 | 539 |
