@@ -38,8 +38,10 @@ const rootRequestOpts = {
       200: {
         type: "object",
         properties: {
-          hello: {
-            type: "string",
+          "/": {
+            hello: {
+              type: "string",
+            },
           },
         },
       },
@@ -69,7 +71,6 @@ const updateUserOpts = {
 
 // ##### ROUTES ############
 fastify.post("/", rootRequestOpts, function (req, reply) {
-  console.log("here");
   reply.send({ "/": { hello: "world" } });
 });
 

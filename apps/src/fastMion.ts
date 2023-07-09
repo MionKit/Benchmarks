@@ -14,6 +14,18 @@ import {
   PublicError,
 } from "@mionkit/router";
 import { DEFAULT_HTTP_OPTIONS, HttpOptions } from "@mionkit/http";
+import fp from "fastify-plugin";
+import { createServer } from "http";
+
+// function fastifyMion(fastify, options, next) {
+
+// }
+
+// module.exports = fp(fastifyMion, {
+//   fastify: "4.x",
+//   name: "@fastify/mion",
+// });
+// module.exports.default = fastifyExpress;
 
 type Logger = typeof console | undefined;
 
@@ -26,34 +38,39 @@ export const initFsHttp = <App extends Obj, SharedData extends Obj>(
   handlersDataFactory?: SharedDataFactory<SharedData>,
   routerOptions?: Partial<RouterOptions<any>>
 ) => {
+  const serverFactory = (handler, opts) => {
+    const server = createServer((req, res) => {
+      req.method = "POST"; // redirects any method to POST fastify request
+      handler(req, res);
+    });
+
+    return server;
+  };
+
   fastify = Fastify({
     logger: false,
+    serverFactory,
   });
-  initRouter(app, handlersDataFactory, routerOptions);
-  // Declare a route
-  fastify.route({
-    // method: ["GET", "POST", "PUT", "OPTIONS"], // This has worst performance than @mionkit/http
-    method: ["GET", "POST"],
-    url: "*",
-    handler: async function handler(fsRequest, fsResponse) {
-      return dispatchRoute(fsRequest.url, {
-        rawRequest: fsRequest as any as RawRequest,
-        rawResponse: fsResponse,
-      })
-        .then((routeResponse) => {
-          addResponseHeaders(fsResponse, routeResponse.headers);
 
-          reply(fsResponse, routeResponse.json, routeResponse.statusCode);
-        })
-        .catch((e) => {
-          const error = new RouteError({
-            statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-            publicMessage: "Internal Error",
-            originalError: e,
-          });
-          replyError(fsResponse, console, error);
+  initRouter(app, handlersDataFactory, routerOptions);
+  fastify.post("*", (fsRequest, fsResponse) => {
+    return dispatchRoute(fsRequest.url, {
+      rawRequest: fsRequest as any as RawRequest,
+      rawResponse: fsResponse,
+    })
+      .then((routeResponse) => {
+        addResponseHeaders(fsResponse, routeResponse.headers);
+
+        reply(fsResponse, routeResponse.json, routeResponse.statusCode);
+      })
+      .catch((e) => {
+        const error = new RouteError({
+          statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+          publicMessage: "Internal Error",
+          originalError: e,
         });
-    },
+        replyError(fsResponse, console, error);
+      });
   });
 };
 

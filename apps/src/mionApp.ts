@@ -6,13 +6,10 @@
  * ######## */
 
 // import { initHttpApp } from "@mionkit/http";
-import type {
-  RouterOptions,
-  Routes,
-  Route,
-} from "@mionkit/router";
+import type { RouterOptions, Routes, Route } from "@mionkit/router";
 import { SayHello, User } from "./models";
 import { initFsHttp } from "./fastMion";
+import { initHttpApp } from "@mionkit/http";
 
 export const app = {};
 export const shared = {};
@@ -32,8 +29,13 @@ export const routes: Routes = {
 };
 
 export const initHttp = (options?: Partial<RouterOptions>) => {
+  return initHttpApp<App, Shared>(app, undefined, options);
+};
+
+export const initHttpFastify = (options?: Partial<RouterOptions>) => {
   return initFsHttp<App, Shared>(app, undefined, options);
 };
 
 export { startFsServer } from "./fastMion";
+export { startHttpServer } from "@mionkit/http";
 export { registerRoutes as addRoutes } from "@mionkit/router";

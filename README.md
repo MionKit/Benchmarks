@@ -15,76 +15,25 @@
   <img src="https://img.shields.io/badge/license-MIT-97ca00.svg?style=flat-square&maxAge=99999999" alt="npm"  style="max-width:100%;">
 </p>
 
-# mion Http Benchmarks
+# mion fastify experiment
 
-- These benchmarks are based on the [fastify benchmarks](https://github.com/fastify/benchmarks) repo!
-- `@MionKit/http` is part of the mion Framework. It uses and RPC style router!
-- **This package shows how fast is mion comparatively to full featured frameworks like fastify and others.**
-- You can find a full list of many other small and faster servers in the original fastify benchmarks repo.
-- For metrics (cold-start) see [metrics.md](./METRICS.md)
+Test creating a wrapper for @mionrouter using fastify instead native http server. plus other benchmarks using fastify with no schemas and mion with serialization and validation disabled.
 
-📚 [Full mion framework documentation here!](https://github.com/MionKit/mion)
+Added extra benchmarks:
 
-### Running & displaying the benchmarks
+- fastify wrapper aroud mion router, instead native http
+- fastify server without schemas
+- mion server with validation and serialization enabled
 
-```sh
-# start the tests
-npm start
+## Conclusions
 
-# display results in a table
-npm run compare-t
-```
-
-### Cold start times
-
-**For cold start times please check [METRICS.md](METRICS.md)**
-
-Cold start times are also indicative of how the [serverless version](https://github.com/MionKit/mion/tree/master/packages/serverless) could perform in this regard, as both `@MionKit/http` an `@MionKit/serverless` are just a wrapper around `@MionKit/router` which contains all the logic.
-
-## What's tested
-
-The test consist of an `updateUser` request where the fields of the user must be validated, the `lastUpdate` field is a date that must be transformed into a JS Date (deserialized), and the same user must be returned back with an updated `lastUpdate` to the time of the request.
-
-```ts
-export interface User {
-  id: number;
-  name: string;
-  surname: string;
-  lastUpdate: Date;
-}
-
-// ### mion ###
-// the received user by the route is already validated and deserialized
-// user.lastUpdate is already a js date instead and string (result of JSON.parse)
-export const routes: Routes = {
-  updateUser: (context, user: User): User => {
-    return {
-      ...user,
-      lastUpdate: new Date(),
-    };
-  },
-};
-
-// ### Express ###
-// A plugin must be used to parse the json body
-// validation must be done manually and user.lastUpdate must be deserialized manually into a date
-// in this example the complexity would be in the isUser and deserializeUser functions (check src code fo that)
-app.post("/updateUser", function (req, res) {
-  const rawUser = req.body?.updateUser;
-  if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
-  const user = deserializeUser(rawUser);
-  res.json({
-    ...user,
-    lastUpdate: new Date(),
-  });
-});
-```
+Against initial tests adding a functional fastify wrapper around the router instead using native http seems to have a detrimental effect.
 
 ### Benchmarks
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v16.18.0`
-* __Run:__ Sun Jul 09 2023 15:32:53 GMT+0100 (Irish Standard Time)
+* __Run:__ Sun Jul 09 2023 20:33:06 GMT+0100 (Irish Standard Time)
 * __Method:__ `autocannon -c 100 -d 40 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
@@ -113,12 +62,15 @@ app.post("/updateUser", function (req, res) {
 
 
 
-|           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                                |
-| :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                        |
-| http-node | 16.18.0        | ✗      | 18776.1     | 52.75        | 4.82          | 77              | 121         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
-| fastify   | 4.19.2         | ✓      | 16573.8     | 59.81        | 4.27          | 89              | 119         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
-| **mion**  | **0.1.0**      | **✓**  | **15028.2** | **66.01**    | **4.17**      | **171**         | **128**     | **✓**      | **Automatic validation out of the box using @deepkit/types.**                                              |
-| restify   | 8.6.1          | ✓      | 12100.8     | 82.09        | 3.13          | 94              | 124         | ✗          | Requires third party tools.                                                                                |
-| hapi      | 20.3.0         | ✓      | 7987.1      | 124.58       | 2.05          | 94              | 129         | ✗          | Manual validation using joi, or third party tools.                                                         |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 5498.7      | 181.03       | 1.41          | 286             | 143         | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
-| express   | 4.18.2         | ✓      | 4554.9      | 218.50       | 1.17          | 111             | 117         | ✗          | needs third party tools, or third party tools                                                              |
+|                     | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                                |
+| :--                 | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                        |
+| http-node           | 16.18.0        | ✗      | 19241.3     | 51.48        | 4.94          | 76              | 119         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
+| fastifynoschemas    | 4.19.2         | ✓      | 16267.9     | 60.96        | 4.19          | 85              | 118         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
+| fastify             | 4.19.2         | ✓      | 16264.9     | 60.96        | 4.19          | 89              | 121         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
+| **mion**            | **0.1.0**      | **✓**  | **14133.6** | **70.25**    | **3.92**      | **180**         | **138**     | **✓**      | **Automatic validation out of the box using @deepkit/types.**                                              |
+| restify             | 8.6.1          | ✓      | 12121.0     | 81.97        | 3.13          | 89              | 127         | ✗          | Requires third party tools.                                                                                |
+| mionnoserialisation | 0.1.0          | ✓      | 11112.6     | 89.40        | 3.53          | 180             | 138         | ✓          | mion with serialization nad validation disabled.                                                           |
+| mionfast            | 0.1.0          | ✓      | 10587.0     | 93.87        | 3.36          | 103             | 121         | ✓          | Fastifi sertver instead @mionkit/http.                                                                     |
+| hapi                | 20.3.0         | ✓      | 7802.2      | 127.51       | 2.00          | 92              | 126         | ✗          | Manual validation using joi, or third party tools.                                                         |
+| deepkit             | 1.0.1-alpha.99 | ✓      | 5498.9      | 181.02       | 1.41          | 296             | 143         | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
+| express             | 4.18.2         | ✓      | 4627.7      | 215.09       | 1.19          | 111             | 126         | ✗          | needs third party tools, or third party tools                                                              |

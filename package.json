@@ -92,6 +92,7 @@
     "@deepkit/core": "^1.0.1-alpha.97",
     "@deepkit/type-compiler": "^1.0.1-alpha.97",
     "@types/node": "^16.11.6",
+    "fastify-plugin": "^4.5.0",
     "pidusage": "^3.0.2",
     "puppeteer": "^20.8.0",
     "rimraf": "^5.0.1",
