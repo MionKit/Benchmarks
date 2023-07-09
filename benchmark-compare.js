@@ -6,14 +6,16 @@ const commander = require("commander");
 const inquirer = require("inquirer");
 const Table = require("cli-table");
 const chalk = require("chalk");
-const { join, relative } = require("path");
+const { join } = require("path");
 const { readdirSync, readFileSync, writeFileSync } = require("fs");
 const { info } = require("./lib/packages");
 const { compare } = require("./lib/autocannon");
-const { chartScreenshot } = require("./lib/chart-screenshot");
+const {
+  getMarkdownBarChart,
+  getMarkdownChartMemSeries,
+} = require("./lib/chart-screenshot");
 
 const resultsPath = join(process.cwd(), "results");
-const chartPaths = join(process.cwd(), "assets", "public", "charts");
 
 commander
   .option("-t, --table", "print table")
@@ -33,7 +35,14 @@ async function runCompare() {
   } else if (opts.update) {
     const outputResults = getOutputResults();
     const markdownChartImages = await getMarkdownCharts(outputResults);
-    await updateReadme(markdownChartImages, outputResults);
+
+    // disable memory series as it doesn't gives much more info than max memory
+    // const memSeriesChartImages = await getMarkdownChartMemSeries(
+    //   outputResults,
+    //   `memSeries`,
+    //   `Memory Series (MB)`
+    // );
+    await updateReadme(markdownChartImages, null, outputResults);
   } else if (opts.table) {
     console.log(compareResults(opts.markdown));
   } else {
@@ -52,7 +61,11 @@ function formatHasRouter(hasRouter) {
   return typeof hasRouter === "string" ? hasRouter : hasRouter ? "✓" : "✗";
 }
 
-async function updateReadme(markdownChartImages, outputResults) {
+async function updateReadme(
+  markdownChartImages,
+  memSeriesChartImages,
+  outputResults
+) {
   const machineInfo = `${os.platform()} ${os.arch()} | ${
     os.cpus().length
   } vCPUs | ${(os.totalmem() / 1024 ** 3).toFixed(1)}GB Mem`;
@@ -64,6 +77,8 @@ async function updateReadme(markdownChartImages, outputResults) {
 * __Method:__ \`autocannon -c 100 -d 40 -p 10 localhost:3000\` (two rounds; one to warm-up, one to measure)
 
 ${markdownChartImages ? markdownChartImages : ""}
+
+${memSeriesChartImages ? memSeriesChartImages : ""}
 
 ${compareResults(true, outputResults)}
 `;
@@ -181,6 +196,7 @@ function getOutputResults() {
       description: description,
       maxMem: (result.maxMem / 1000_000).toFixed(0),
       maxCpu: result.maxCpu.toFixed(0),
+      memSeries: result.memSeries.map((mem) => (mem / 1000_000).toFixed(0)),
     });
   }
 
@@ -255,58 +271,17 @@ async function getMarkdownCharts(outputResults) {
     { metricName: "throughput", metricLabel: "Throughput (Mb/s)" },
     { metricName: "latency", metricLabel: "Latency (ms)" },
     { metricName: "maxMem", metricLabel: "Max Memory (Mb)" },
-    { metricName: "maxCpu", metricLabel: "Max Cpu (%)" },
+    // cpu disabled as doesn't seems to be too reliable
+    // { metricName: "maxCpu", metricLabel: "Max Cpu (%)" },
   ];
 
   const results = await Promise.all(
     charts.map(({ metricName, metricLabel }) =>
-      getMarkdownChat(outputResults, metricName, metricLabel)
+      getMarkdownBarChart(outputResults, metricName, metricLabel)
     )
   );
 
   return results.join("\n\n");
-}
-
-async function getMarkdownChat(outputResults, metricName, metricLabel) {
-  const columnsData = outputResults.map((result) => [
-    `${result.name}`,
-    `${result[metricName]}`,
-  ]);
-
-  // const max = outputResults.reduce((acc, result) => {
-  //   return Math.max(acc, parseFloat(result[metricName]));
-  // }, 0);
-
-  const file = await chartScreenshot(
-    {
-      data: {
-        x: "x",
-        columns: [["x", metricLabel], ...columnsData],
-        type: "bar",
-        labels: true,
-      },
-      axis: {
-        // y: {
-        //   show: false,
-        //   type: "log",
-        //   max: max * 1.5,
-        // },
-        x: {
-          type: "category",
-        },
-      },
-      transition: {
-        duration: 0,
-      },
-    },
-    chartPaths,
-    metricName
-  );
-
-  const relativePath = relative(process.cwd(), file);
-  console.log(`relativePath ${relativePath}`);
-
-  return `#### ${metricLabel} \n\n![benchmarks](${relativePath})\n\n`;
 }
 
 runCompare();

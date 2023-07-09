@@ -3,6 +3,8 @@ const start = process.hrtime();
 const { initHttp, addRoutes, routes } = require("../_compiled-apps/apps");
 const { startHttpServer } = require("@mionkit/http");
 
+console.log("child pid", process.pid);
+
 const totalRoutes = process.env.routes || 0;
 const defaultRoute = routes["/"]; // this handler contains type information.
 const routerRoutes = {};

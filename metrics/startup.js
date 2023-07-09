@@ -38,6 +38,7 @@ const measureStartupMion = runSample(async () => {
   console.log("#### mion metrics ####");
   for (const n of routeNumbers) {
     await new Promise((resolve) => {
+      console.log("parent pid", process.pid);
       new Worker(path.join(__dirname, "./startup-mion-routes.js"), {
         env: {
           routes: n,
