@@ -1,1 +1,67 @@
-[{"name":"http-node","version":"16.18.0","hasRouter":false,"requests":"18776.1","latency":"52.75","throughput":"4.82","validation":"✗","description":"Super basic and completely useless bare http server, should be the theoretical upper limit in performance.","maxMem":"77","maxCpu":"121","memSeries":["77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77","77"]},{"name":"fastify","version":"4.19.2","hasRouter":true,"requests":"16573.8","latency":"59.81","throughput":"4.27","validation":"-","description":"Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.","maxMem":"89","maxCpu":"119","memSeries":["89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89","89"]},{"name":"mion","version":"0.1.0","hasRouter":true,"requests":"15028.2","latency":"66.01","throughput":"4.17","validation":"✓","description":"Automatic validation out of the box using @deepkit/types.","maxMem":"171","maxCpu":"128","memSeries":["116","113","108","164","142","133","119","110","168","152","136","120","110","171","152","138","124","111","110","165","148","129","111","110","165","153","129","111","110","165","152","140","120","110","168","156","119","110","165","147"]},{"name":"restify","version":"8.6.1","hasRouter":true,"requests":"12100.8","latency":"82.09","throughput":"3.13","validation":"✗","description":"Requires third party tools.","maxMem":"94","maxCpu":"124","memSeries":["87","87","87","87","87","87","88","88","88","89","89","89","89","90","90","90","90","90","90","91","91","91","91","91","91","92","92","92","92","93","93","93","93","94","94","94","94","94","94","94"]},{"name":"hapi","version":"20.3.0","hasRouter":true,"requests":"7987.1","latency":"124.58","throughput":"2.05","validation":"✗","description":"Manual validation using joi, or third party tools.","maxMem":"94","maxCpu":"129","memSeries":["93","93","94","93","93","93","93","93","93","94","92","92","92","92","93","93","93","94","94","94","92","92","92","92","93","93","93","94","93","92","93","93","93","92","93","94","93","93","94","93"]},{"name":"deepkit","version":"1.0.1-alpha.75","hasRouter":true,"requests":"5498.7","latency":"181.03","throughput":"1.41","validation":"✓","description":"Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant.","maxMem":"286","maxCpu":"143","memSeries":["236","201","217","273","204","253","204","235","205","217","271","202","249","204","232","286","211","265","204","247","205","229","282","211","265","204","247","205","229","283","208","265","203","246","202","229","283","208","262","204"]},{"name":"express","version":"4.18.2","hasRouter":true,"requests":"4554.9","latency":"218.50","throughput":"1.17","validation":"✗","description":"needs third party tools, or third party tools","maxMem":"111","maxCpu":"117","memSeries":["100","105","102","102","103","101","103","102","104","101","101","105","102","105","102","102","103","102","102","103","101","101","101","101","105","104","111","101","101","102","103","101","102","102","103","105","102","111","102","102"]}]
+[
+  {
+    "name": "mion",
+    "version": "0.1.0",
+    "hasRouter": true,
+    "requests": "16442.0",
+    "latency": "60.31",
+    "throughput": "4.56",
+    "validation": "✓",
+    "description": "validation and serialization out of the box",
+    "maxMem": "214",
+    "maxCpu": "145",
+    "memSeries": [
+      "164",
+      "154",
+      "214",
+      "173",
+      "136",
+      "122",
+      "194",
+      "171",
+      "153",
+      "121"
+    ]
+  },
+  {
+    "name": "mion-async-context-callbacks",
+    "requests": "14934.9",
+    "latency": "66.29",
+    "throughput": "4.74",
+    "maxMem": "106",
+    "maxCpu": "131",
+    "memSeries": [
+      "105",
+      "105",
+      "105",
+      "105",
+      "106",
+      "106",
+      "106",
+      "105",
+      "106",
+      "106",
+      "106"
+    ]
+  },
+  {
+    "name": "mion-async-context",
+    "requests": "13372.0",
+    "latency": "74.11",
+    "throughput": "4.25",
+    "maxMem": "180",
+    "maxCpu": "136",
+    "memSeries": [
+      "150",
+      "119",
+      "178",
+      "149",
+      "120",
+      "180",
+      "148",
+      "121",
+      "177",
+      "146"
+    ]
+  }
+]

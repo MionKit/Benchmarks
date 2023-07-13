@@ -8,19 +8,27 @@ const Table = require("cli-table");
 const chalk = require("chalk");
 const { join } = require("path");
 const { readdirSync, readFileSync, writeFileSync } = require("fs");
-const { info } = require("./lib/packages");
+const benchmarkServers = require("./lib/packages");
+const benchmarkMion = require("./lib/packages-mion-options");
 const { compare } = require("./lib/autocannon");
 const {
   getMarkdownBarChart,
   getMarkdownChartMemSeries,
 } = require("./lib/chart-screenshot");
 
-const resultsPath = join(process.cwd(), "results");
+let resultsMarkdownFilename;
+let resultsJsonFilename;
+let resultsPath;
+let info;
+let chartsDirectory;
+
+let ranParameters = "--connections=100 --duration=40 --pipelining=10";
 
 commander
   .option("-t, --table", "print table")
   .option("-m --markdown", "format table for markdown")
   .option("-u --update", "update README.md")
+  .option("-b --benchmark", "benchmark to compare (servers or mion)")
   .parse(process.argv);
 
 const opts = commander.opts();
@@ -29,20 +37,60 @@ if (opts.markdown || opts.update) {
   chalk.level = 0;
 }
 
+async function getBenchmarkOptions() {
+  if (opts.benchmark) return opts.benchmark;
+  return inquirer.prompt([
+    {
+      type: "list",
+      message: "Select what benchmark do you want to run?",
+      name: "benchmark",
+      choices: [
+        {
+          name: "servers",
+          value: "servers",
+          description: "compare multiple libraries",
+        },
+        {
+          name: "mion",
+          value: "mion",
+          description: "compare mion performance options",
+        },
+      ],
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return "You must choose at least one benchmark.";
+        }
+        return true;
+      },
+    },
+  ]);
+}
+
 async function runCompare() {
+  const options = await getBenchmarkOptions();
+  setBenchmark(options.benchmark);
   if (!getAvailableResults().length) {
     console.log(chalk.red("Benchmark to gather some results to compare."));
   } else if (opts.update) {
     const outputResults = getOutputResults();
     const markdownChartImages = await getMarkdownCharts(outputResults);
 
-    // disable memory series as it doesn't gives much more info than max memory
-    // const memSeriesChartImages = await getMarkdownChartMemSeries(
-    //   outputResults,
-    //   `memSeries`,
-    //   `Memory Series (MB)`
-    // );
-    await updateReadme(markdownChartImages, null, outputResults);
+    // memory series only available for mion benchmark
+
+    const memSeriesChartImages =
+      options.benchmark === "mion"
+        ? await getMarkdownChartMemSeries(
+            outputResults,
+            `memSeries`,
+            `Memory Series (MB)`,
+            chartsDirectory
+          )
+        : null;
+    await updateReadme(
+      markdownChartImages,
+      memSeriesChartImages,
+      outputResults
+    );
   } else if (opts.table) {
     console.log(compareResults(opts.markdown));
   } else {
@@ -74,7 +122,7 @@ async function updateReadme(
 * __Machine:__ ${machineInfo}
 * __Node:__ \`${process.version}\`
 * __Run:__ ${new Date()}
-* __Method:__ \`autocannon -c 100 -d 40 -p 10 localhost:3000\` (two rounds; one to warm-up, one to measure)
+* __Method:__ \`autocannon ${ranParameters} localhost:3000\` (two rounds; one to warm-up, one to measure)
 
 ${markdownChartImages ? markdownChartImages : ""}
 
@@ -82,12 +130,38 @@ ${memSeriesChartImages ? memSeriesChartImages : ""}
 
 ${compareResults(true, outputResults)}
 `;
-  const md = readFileSync("README.md", "utf8");
+  const md = readFileSync(resultsMarkdownFilename, "utf8");
   writeFileSync(
-    "README.md",
+    resultsMarkdownFilename,
     md.split("### Benchmarks")[0] + benchmarkMd,
     "utf8"
   );
+}
+
+function setBenchmark(benchmark) {
+  switch (benchmark) {
+    case "mion":
+      resultsMarkdownFilename = "MION-OPTIONS.md";
+      resultsPath = join(process.cwd(), "results-mion");
+      resultsJsonFilename = "benchmark-results-mion.json";
+      info = benchmarkMion.info;
+      chartsDirectory = join(
+        process.cwd(),
+        "assets",
+        "public",
+        "charts-servers"
+      );
+      break;
+    default:
+    case "servers":
+      resultsMarkdownFilename = "README.md";
+      resultsPath = join(process.cwd(), "results");
+      resultsJsonFilename = "benchmark-results-servers.json";
+      info = benchmarkServers.info;
+      chartsDirectory = join(process.cwd(), "assets", "public", "charts-mion");
+
+      break;
+  }
 }
 
 function compareResults(markdown, outputResults) {
@@ -164,16 +238,14 @@ function compareResults(markdown, outputResults) {
       bold(beBold, result.description, markdown),
     ]);
   }
-  writeFileSync(
-    "benchmark-results.json",
-    JSON.stringify(outputResults),
-    "utf8"
-  );
+  writeFileSync(resultsJsonFilename, JSON.stringify(outputResults), "utf8");
   return table.toString();
 }
 
 function getOutputResults() {
   const results = getFormattedResults();
+  const { connections, duration, pipelining } = results[0]; // assuming all results ran at the same time
+  ranParameters = `-c ${connections} -d ${duration} -p ${pipelining}`;
   const outputResults = [];
 
   for (const result of results) {
@@ -271,13 +343,20 @@ async function getMarkdownCharts(outputResults) {
     { metricName: "throughput", metricLabel: "Throughput (Mb/s)" },
     { metricName: "latency", metricLabel: "Latency (ms)" },
     { metricName: "maxMem", metricLabel: "Max Memory (Mb)" },
-    // cpu disabled as doesn't seems to be too reliable
-    // { metricName: "maxCpu", metricLabel: "Max Cpu (%)" },
   ];
+
+  if (opts.benchmark === "mion") {
+    charts.push({ metricName: "maxCpu", metricLabel: "Max Cpu (%)" });
+  }
 
   const results = await Promise.all(
     charts.map(({ metricName, metricLabel }) =>
-      getMarkdownBarChart(outputResults, metricName, metricLabel)
+      getMarkdownBarChart(
+        outputResults,
+        metricName,
+        metricLabel,
+        chartsDirectory
+      )
     )
   );
 

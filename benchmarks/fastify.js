@@ -73,7 +73,7 @@ fastify.post("/", rootRequestOpts, function (req, reply) {
   reply.send({ "/": { hello: "world" } });
 });
 
-fastify.post("/updateUser", updateUserOpts, function (req, reply) {
+fastify.post("/updateUser", updateUserOpts, async function (req, reply) {
   const rawUser = req.body["/updateUser"]; //date is not deserialized, it is with fastify and
   const user = deserializeUser(rawUser); // we need to convert date input manually
   reply.send({
