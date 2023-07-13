@@ -35,11 +35,12 @@ npm start
 npm run compare-t
 ```
 
-### Cold start times
+## Other benchmarks
 
-**For cold start times please check [METRICS.md](METRICS.md)**
-
-Cold start times are also indicative of how the [serverless version](https://github.com/MionKit/mion/tree/master/packages/serverless) could perform in this regard, as both `@MionKit/http` an `@MionKit/serverless` are just a wrapper around `@MionKit/router` which contains all the logic.
+- **Multiple mion settings:** [MION-OPTIONS.md](MION-OPTIONS.md)  
+  Running the same application but using different mion settings.
+- **Cold start times:** [METRICS.md](METRICS.md)  
+  Cold start times are also indicative of how the [serverless version](https://github.com/MionKit/mion/tree/master/packages/serverless) could perform in this regard, as both `@MionKit/http` an `@MionKit/serverless` are just a wrapper around `@MionKit/router` which contains all the logic.
 
 ## What's tested
 
@@ -82,43 +83,33 @@ app.post("/updateUser", function (req, res) {
 
 ### Benchmarks
 
-* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v16.18.0`
-* __Run:__ Thu Jul 13 2023 01:25:53 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
+- **Node:** `v16.18.0`
+- **Run:** Thu Jul 13 2023 01:25:53 GMT+0100 (Irish Standard Time)
+- **Method:** `autocannon -c 100 -d 40.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-#### Req (R/s) 
+#### Req (R/s)
 
 ![benchmarks](assets/public/charts-mion/requests.png)
 
-
-
-#### Throughput (Mb/s) 
+#### Throughput (Mb/s)
 
 ![benchmarks](assets/public/charts-mion/throughput.png)
 
-
-
-#### Latency (ms) 
+#### Latency (ms)
 
 ![benchmarks](assets/public/charts-mion/latency.png)
 
-
-
-#### Max Memory (Mb) 
+#### Max Memory (Mb)
 
 ![benchmarks](assets/public/charts-mion/maxMem.png)
 
-
-
-
-
-|           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                                |
-| :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                        |
-| http-node | 16.18.0        | ✗      | 18978.7     | 52.18        | 4.87          | 82              | 120         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
-| **mion**  | **0.1.0**      | **✓**  | **17199.2** | **57.65**    | **4.77**      | **223**         | **143**     | **✓**      | **validation and serialization out of the box**                                                            |
-| fastify   | 4.19.2         | ✓      | 15844.0     | 62.60        | 4.08          | 87              | 118         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
-| restify   | 8.6.1          | ✓      | 12429.4     | 79.91        | 3.21          | 94              | 116         | ✗          | Requires third party tools.                                                                                |
-| hapi      | 20.3.0         | ✓      | 7894.6      | 126.05       | 2.02          | 96              | 126         | ✗          | Manual validation using joi, or third party tools.                                                         |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 5369.7      | 185.43       | 1.37          | 313             | 131         | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
-| express   | 4.18.2         | ✓      | 4596.9      | 216.54       | 1.18          | 112             | 127         | ✗          | needs third party tools, or third party tools                                                              |
+|           |        Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                                |
+| :-------- | -------------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :--------------------------------------------------------------------------------------------------------- |
+| http-node |        16.18.0 |      ✗ |   18978.7   |        52.18 |          4.87 |              82 |         120 |     ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
+| **mion**  |      **0.1.0** |  **✓** | **17199.2** |    **57.65** |      **4.77** |         **223** |     **143** |   **✓**    | **validation and serialization out of the box**                                                            |
+| fastify   |         4.19.2 |      ✓ |   15844.0   |        62.60 |          4.08 |              87 |         118 |     -      | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
+| restify   |          8.6.1 |      ✓ |   12429.4   |        79.91 |          3.21 |              94 |         116 |     ✗      | Requires third party tools.                                                                                |
+| hapi      |         20.3.0 |      ✓ |   7894.6    |       126.05 |          2.02 |              96 |         126 |     ✗      | Manual validation using joi, or third party tools.                                                         |
+| deepkit   | 1.0.1-alpha.75 |      ✓ |   5369.7    |       185.43 |          1.37 |             313 |         131 |     ✓      | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
+| express   |         4.18.2 |      ✓ |   4596.9    |       216.54 |          1.18 |             112 |         127 |     ✗      | needs third party tools, or third party tools                                                              |
