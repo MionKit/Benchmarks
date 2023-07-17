@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addRoutes = exports.initHttp = exports.routesWithAsyncCallContext = exports.routes = exports.logAsyncCallContext = exports.updateUserNoAppOrContext = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.__ΩApp = exports.shared = exports.app = void 0;
+exports.addRoutes = exports.initHttp = exports.routesWithAsyncCallContext = exports.routes = exports.logAsyncCallContext = exports.updateUserNoAppOrContext = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
 const { __ΩSayHello } = require("./models");
 const { __ΩUser } = require("./models");
 function __assignType(fn, args) {
@@ -19,16 +19,13 @@ function __assignType(fn, args) {
 const __ΩPartial = ['T', 'l+e#!e"!fRb!Pde"!gN#"'];
 const http_1 = require("@mionkit/http");
 const router_1 = require("@mionkit/router");
-exports.app = {};
 exports.shared = {};
-const __ΩApp = [() => exports.app, 'i!'];
-exports.__ΩApp = __ΩApp;
 const __ΩShared = [() => SharedArrayBuffer, 'i!'];
 exports.__ΩShared = __ΩShared;
 exports.mionSayHelloRoute = __assignType(() => ({ hello: "world" }), [() => __ΩSayHello, '', 'Pn!/"']);
-exports.updateUser = __assignType((app, context, user) => {
+exports.updateUser = __assignType((context, user) => {
     return Object.assign(Object.assign({}, user), { lastUpdate: new Date() });
-}, ['app', 'context', () => __ΩUser, 'user', () => __ΩUser, '', 'P"2!"2"n#2$n%/&']);
+}, ['context', () => __ΩUser, 'user', () => __ΩUser, '', 'P"2!n"2#n$/%']);
 exports.updateUserNoAppOrContext = __assignType((user) => __awaiter(void 0, void 0, void 0, function* () {
     return Object.assign(Object.assign({}, user), { lastUpdate: new Date() });
 }), [() => __ΩUser, 'user', () => __ΩUser, '', 'Pn!2"n#`/$']);
@@ -47,7 +44,7 @@ exports.routesWithAsyncCallContext = {
     logAsyncCallContext: exports.logAsyncCallContext,
 };
 exports.initHttp = __assignType((options) => {
-    return (http_1.initHttpRouter.Ω = [[() => __ΩApp, 'n!'], [() => __ΩShared, 'n!']], (0, http_1.initHttpRouter)(exports.app, undefined, options));
+    return (http_1.initHttpRouter.Ω = [[() => __ΩShared, 'n!']], (0, http_1.initHttpRouter)(undefined, options));
 }, [() => __ΩPartial, 'options', '', 'P"o!"2"8"/#']);
 var router_2 = require("@mionkit/router");
 Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_2.registerRoutes; } });

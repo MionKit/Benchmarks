@@ -28,7 +28,10 @@ commander
   .option("-t, --table", "print table")
   .option("-m --markdown", "format table for markdown")
   .option("-u --update", "update README.md")
-  .option("-b --benchmark", "benchmark to compare (servers or mion)")
+  .option(
+    "-b --benchmark <benchmark>",
+    "benchmark to compare (servers or mion)"
+  )
   .parse(process.argv);
 
 const opts = commander.opts();
@@ -38,7 +41,7 @@ if (opts.markdown || opts.update) {
 }
 
 async function getBenchmarkOptions() {
-  if (opts.benchmark) return opts.benchmark;
+  if (opts.benchmark) return opts;
   return inquirer.prompt([
     {
       type: "list",
@@ -76,7 +79,6 @@ async function runCompare() {
     const markdownChartImages = await getMarkdownCharts(outputResults);
 
     // memory series only available for mion benchmark
-
     const memSeriesChartImages =
       options.benchmark === "mion"
         ? await getMarkdownChartMemSeries(
@@ -145,12 +147,7 @@ function setBenchmark(benchmark) {
       resultsPath = join(process.cwd(), "results-mion");
       resultsJsonFilename = "benchmark-results-mion.json";
       info = benchmarkMion.info;
-      chartsDirectory = join(
-        process.cwd(),
-        "assets",
-        "public",
-        "charts-servers"
-      );
+      chartsDirectory = join(process.cwd(), "assets", "public", "charts-mion");
       break;
     default:
     case "servers":
@@ -158,7 +155,12 @@ function setBenchmark(benchmark) {
       resultsPath = join(process.cwd(), "results");
       resultsJsonFilename = "benchmark-results-servers.json";
       info = benchmarkServers.info;
-      chartsDirectory = join(process.cwd(), "assets", "public", "charts-mion");
+      chartsDirectory = join(
+        process.cwd(),
+        "assets",
+        "public",
+        "charts-servers"
+      );
 
       break;
   }

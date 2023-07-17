@@ -55,11 +55,9 @@ export const setRoutes = () => {
 
   router.post("/updateUser", (body: HttpBody<mionUpdate>): mionUpdate => {
     const user = body["/updateUser"];
+    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
     return {
-      "/updateUser": {
-        ...user,
-        lastUpdate: new Date(),
-      },
+      "/updateUser": user,
     };
   });
 };

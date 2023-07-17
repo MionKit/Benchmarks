@@ -13,7 +13,15 @@
     "standard": "standard | snazzy",
     "metrics:run": "node metrics/startup.js",
     "metrics:summary": "node metrics/process-results.js -u",
-    "build": "rimraf ./_compiled-apps && tsc --build tsconfig.json"
+    "build": "rimraf ./_compiled-apps && tsc --build tsconfig.json",
+    "print-mion": "node benchmark-compare.js -u -b mion",
+    "print-servers": "node benchmark-compare.js -u -b servers",
+    "bench-mion": "node benchmark-bench.js  y 100 10 40 mion",
+    "bench-servers": "node benchmark-bench.js y 100 10 40 servers",
+    "mion": "npm run bench-mion && npm run print-mion",
+    "servers": "npm run bench-servers && npm run print-servers",
+    "metrics": "npm run metrics:run && npm run metrics:summary",
+    "report": "npm run mion && npm run servers && npm run metrics"
   },
   "bin": {
     "benchmark": "./benchmark.js"
@@ -38,8 +46,8 @@
     "@deepkit/type": "^1.0.1-alpha.75",
     "@hapi/hapi": "^20.0.1",
     "@leizm/web": "^2.7.0",
-    "@mionkit/http": "0.4.2-alpha.0",
-    "@mionkit/router": "0.4.2-alpha.0",
+    "@mionkit/http": "0.4.2",
+    "@mionkit/router": "0.4.2",
     "@trpc/server": "^9.27.2",
     "0http": "^3.0.0",
     "autocannon": "^7.0.1",
