@@ -61,13 +61,9 @@ app.post("/updateUser", function (req, res) {
   const rawUser = req.body?.["/updateUser"];
   if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
   const user = deserializeUser(rawUser);
+  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
   res.json({
-    "/updateUser": {
-      ...user,
-      name: "lorem",
-      surname: "ipsum",
-      lastUpdate: new Date(),
-    },
+    "/updateUser": user,
   });
 });
 

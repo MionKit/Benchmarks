@@ -27,7 +27,8 @@ exports.updateUser = __assignType((context, user) => {
     return Object.assign(Object.assign({}, user), { lastUpdate: new Date() });
 }, ['context', () => __ΩUser, 'user', () => __ΩUser, '', 'P"2!n"2#n$/%']);
 exports.updateUserNoAppOrContext = __assignType((user) => __awaiter(void 0, void 0, void 0, function* () {
-    return Object.assign(Object.assign({}, user), { lastUpdate: new Date() });
+    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+    return user;
 }), [() => __ΩUser, 'user', () => __ΩUser, '', 'Pn!2"n#`/$']);
 exports.logAsyncCallContext = __assignType((name) => {
     const callContext = (0, router_1.getCallContext)();

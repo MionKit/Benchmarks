@@ -34,8 +34,9 @@ const setRoutes = () => {
     router.any("/", exports.deepKitSayHelloRoute);
     router.post("/updateUser", __assignType((body) => {
         const user = body["/updateUser"];
+        user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
         return {
-            "/updateUser": Object.assign(Object.assign({}, user), { lastUpdate: new Date() }),
+            "/updateUser": user,
         };
     }, [() => __ΩHttpBody, () => __ΩmionUpdate, 'body', () => __ΩmionUpdate, '', 'Pn"o!"2#n$/%']));
 };

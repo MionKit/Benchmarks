@@ -45,16 +45,18 @@ server.use(restify.plugins.bodyParser({}));
 
 server.post("/updateUser", function (req, res) {
   const rawUser = req.body?.["/updateUser"];
-  if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
+  if (!isUser(rawUser)) {
+    res.statusCode = 400;
+    res.send({
+      error: "invalid parameter, not a user",
+    });
+    return;
+  }
   const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
+  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
   res.contentType = "json";
   res.send({
-    "/updateUser": {
-      ...user,
-      name: "lorem",
-      surname: "ipsum",
-      lastUpdate: new Date(),
-    },
+    "/updateUser": user,
   });
 });
 

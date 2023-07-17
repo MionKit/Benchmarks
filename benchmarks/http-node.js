@@ -48,31 +48,36 @@ const reply = (httpResponse, json, statusCode) => {
 const server = require("http").createServer(function (req, res) {
   res.setHeader("content-type", "application/json; charset=utf-8");
 
-  if (req.url === "/") {
-    res.end(JSON.stringify({ "/": { hello: "world" } }));
-  } else if (req.url === "/updateUser") {
-    const body = JSON.parse(
-      '{"/updateUser":{"id":123,"name":"john","surname":"smith","lastUpdate":"2020-12-17T02:24:00.000Z"}}'
-    ); // lazy to read request data properly in bare http
-    const rawUser = body["/updateUser"];
-    if (!isUser(rawUser)) {
-      const errorBody = JSON.stringify({ error: "invalid input, not an user" });
-      reply(res, errorBody, 400);
+  const data = [];
+  req.on("data", function (chunk) {
+    data.push(chunk);
+  });
+
+  req.on("end", function () {
+    const rawBody = Buffer.concat(data).toString();
+    if (req.url === "/") {
+      res.end(JSON.stringify({ "/": { hello: "world" } }));
+    } else if (req.url === "/updateUser") {
+      const body = JSON.parse(rawBody);
+      const rawUser = body["/updateUser"];
+      if (!isUser(rawUser)) {
+        const errorBody = JSON.stringify({
+          error: "invalid input, not an user",
+        });
+        reply(res, errorBody, 400);
+        return;
+      }
+      const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
+      user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+      const resBody = JSON.stringify({
+        "/updateUser": user,
+      });
+      reply(res, resBody, 200);
+    } else {
+      const errorBody = JSON.stringify({ error: "route not found" });
+      reply(res, errorBody, 404);
     }
-    const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
-    const resBody = JSON.stringify({
-      "/updateUser": {
-        ...user,
-        name: "lorem",
-        surname: "ipsum",
-        lastUpdate: new Date(),
-      },
-    });
-    reply(res, resBody, 200);
-  } else {
-    const errorBody = JSON.stringify({ error: "route not found" });
-    reply(res, errorBody, 404);
-  }
+  });
 });
 
 server.listen(3000);
