@@ -49,14 +49,12 @@ async function getBenchmarkOptions() {
       name: "benchmark",
       choices: [
         {
-          name: "servers",
+          name: "servers: compare multiple libraries",
           value: "servers",
-          description: "compare multiple libraries",
         },
         {
-          name: "mion",
+          name: "mion options:s benchmarks mion using different settings and options",
           value: "mion",
-          description: "compare mion performance options",
         },
       ],
       validate: function (answer) {
@@ -79,15 +77,18 @@ async function runCompare() {
     const markdownChartImages = await getMarkdownCharts(outputResults);
 
     // memory series only available for mion benchmark
-    const memSeriesChartImages =
+    const memSeriesToDisplay =
       options.benchmark === "mion"
-        ? await getMarkdownChartMemSeries(
-            outputResults,
-            `memSeries`,
-            `Memory Series (MB)`,
-            chartsDirectory
-          )
-        : null;
+        ? ["mion", "mion3000", "http-node"]
+        : outputResults.map((result) => result.name);
+    const memSeriesChartImages = await getMarkdownChartMemSeries(
+      outputResults,
+      `memSeries`,
+      `Memory Series (MB)`,
+      chartsDirectory,
+      0,
+      memSeriesToDisplay
+    );
     await updateReadme(
       markdownChartImages,
       memSeriesChartImages,
@@ -119,7 +120,7 @@ async function updateReadme(
   const machineInfo = `${os.platform()} ${os.arch()} | ${
     os.cpus().length
   } vCPUs | ${(os.totalmem() / 1024 ** 3).toFixed(1)}GB Mem`;
-  const benchmarkMd = `### Benchmarks
+  const benchmarkMd = `## Benchmark Results
 
 * __Machine:__ ${machineInfo}
 * __Node:__ \`${process.version}\`
@@ -135,7 +136,7 @@ ${compareResults(true, outputResults)}
   const md = readFileSync(resultsMarkdownFilename, "utf8");
   writeFileSync(
     resultsMarkdownFilename,
-    md.split("### Benchmarks")[0] + benchmarkMd,
+    md.split("## Benchmark Results")[0] + benchmarkMd,
     "utf8"
   );
 }

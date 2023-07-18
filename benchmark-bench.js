@@ -44,14 +44,12 @@ async function getBenchmarkOptions() {
       name: "benchmark",
       choices: [
         {
-          name: "servers",
+          name: "servers => compare multiple libraries",
           value: "servers",
-          description: "compare multiple libraries",
         },
         {
-          name: "mion",
+          name: "mion options => benchmarks mion using different settings and options",
           value: "mion",
-          description: "compare mion performance options",
         },
       ],
       validate: function (answer) {
