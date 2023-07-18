@@ -89,7 +89,7 @@ mion is focused on being lightweight and fast so it can be run in serverless env
 
 Our goal is to perform similar to fastify as it is the industry standard in terms of performance. Please always take benchmarks as general guidelines as you might obtain different results in your real world application. we just run the benchmarks to ensure there is no performance degradation when new features/fixes are added to mion.
 
-We are aware that the memory consumption is higher than other frameworks, this is mostly because there is [types cache](https://docs.deepkit.io/english/runtime-types.html#_type_cache) storing all extra run type metadata of the code. This means it is only the baseline memory which is Higher (when the code gets loaded) and mion memory keeps steady under heavy workloads. This is due mostly due to our dependency on @deepkit/types for run time types. We are aware of this and plan to work on it in the future. Please note both mion and deepkit are still in beta an there is room for improvement.
+We are aware that the memory consumption is higher than other frameworks, this is mostly because there is [types cache](https://docs.deepkit.io/english/runtime-types.html#_type_cache) storing all extra run type metadata of the code. This means it is only the baseline memory which is Higher (when the code gets loaded) and mion memory keeps steady under heavy workloads. Please note both mion and @deepkit/type are still in beta an there is room for improvement.
 
 ## Benchmark Results
 
