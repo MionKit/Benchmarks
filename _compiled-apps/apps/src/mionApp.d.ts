@@ -10,7 +10,7 @@ export declare const logAsyncCallContext: (name: string) => {
 };
 export declare const routes: Routes;
 export declare const routesWithAsyncCallContext: Routes;
-export declare const initHttp: (options?: Partial<RouterOptions>) => void;
+export declare const initHttp: (options?: Partial<RouterOptions>) => Promise<void>;
 export { registerRoutes as addRoutes } from "@mionkit/router";
 export declare type __ΩShared = any[];
 //# sourceMappingURL=mionApp.d.ts.map

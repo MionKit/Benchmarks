@@ -4,7 +4,7 @@ const {
   initHttp,
   addRoutes,
   routesWithAsyncCallContext,
-} = require("../_compiled-apps/apps");
+} = require("../_compiled-apps/apps/src/mionApp");
 const { startHttpServer } = require("@mionkit/http");
 
 // ###### check the apps/ directory for the original non compiled code

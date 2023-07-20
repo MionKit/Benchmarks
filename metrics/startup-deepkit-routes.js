@@ -3,7 +3,7 @@ const start = process.hrtime();
 const {
   initDeepkitApp,
   deepKitSayHelloRoute,
-} = require("../_compiled-apps/apps");
+} = require("../_compiled-apps/apps/src/deepkitApp");
 
 const { deepkitServer, deepKitRouter } = initDeepkitApp();
 

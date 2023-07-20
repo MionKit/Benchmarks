@@ -24,7 +24,8 @@ const __ΩShared = [() => SharedArrayBuffer, 'i!'];
 exports.__ΩShared = __ΩShared;
 exports.mionSayHelloRoute = __assignType(() => ({ hello: "world" }), [() => __ΩSayHello, '', 'Pn!/"']);
 exports.updateUser = __assignType((context, user) => {
-    return Object.assign(Object.assign({}, user), { lastUpdate: new Date() });
+    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+    return user;
 }, ['context', () => __ΩUser, 'user', () => __ΩUser, '', 'P"2!n"2#n$/%']);
 exports.updateUserNoAppOrContext = __assignType((user) => __awaiter(void 0, void 0, void 0, function* () {
     user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);

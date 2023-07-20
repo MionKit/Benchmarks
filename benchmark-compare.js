@@ -79,7 +79,7 @@ async function runCompare() {
     // memory series only available for mion benchmark
     const memSeriesToDisplay =
       options.benchmark === "mion"
-        ? ["mion", "mion3000", "http-node"]
+        ? ["mion", "mion3000", "http-node", "mion-no-reflection"]
         : outputResults.map((result) => result.name);
     const memSeriesChartImages = await getMarkdownChartMemSeries(
       outputResults,

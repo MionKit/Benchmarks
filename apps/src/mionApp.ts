@@ -19,10 +19,8 @@ export type Shared = typeof SharedArrayBuffer;
 
 export const mionSayHelloRoute: Route = (): SayHello => ({ hello: "world" });
 export const updateUser: Route = (context, user: User): User => {
-  return {
-    ...user,
-    lastUpdate: new Date(),
-  };
+  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+  return user;
 };
 
 export const updateUserNoAppOrContext = async (user: User): Promise<User> => {

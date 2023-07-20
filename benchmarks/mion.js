@@ -1,6 +1,10 @@
 "use strict";
 
-const { initHttp, addRoutes, routes } = require("../_compiled-apps/apps");
+const {
+  initHttp,
+  addRoutes,
+  routes,
+} = require("../_compiled-apps/apps/src/mionApp");
 const { startHttpServer } = require("@mionkit/http");
 
 // ###### check the apps/ directory for the original non compiled code
