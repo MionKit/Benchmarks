@@ -13,7 +13,7 @@ const runSample = (cb) => {
   };
 };
 
-const routeNumbers = [10, 100, 500, 1000, 2000, 3000, 4000, 5000];
+const routeNumbers = [10, 100, 500, 1000, 2000, 3000, 5000];
 
 const measureStartupListen = runSample(() => {
   return new Promise((resolve) => {

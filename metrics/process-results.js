@@ -13,7 +13,7 @@ async function updateReadme(startupResults) {
   const machineInfo = `${os.platform()} ${os.arch()} | ${
     os.cpus().length
   } vCPUs | ${(os.totalmem() / 1024 ** 3).toFixed(1)}GB Mem`;
-  const benchmarkMd = `## Metrics
+  const benchmarkMd = `## Benchmark Results
 * __Machine:__ ${machineInfo}
 * __Node:__ \`${process.version}\`
 * __Run:__ ${new Date()}
@@ -22,10 +22,10 @@ async function updateReadme(startupResults) {
 * __listen:__ time elapsed until the http server is ready to accept requests (cold start)
 ${startupResults}
 `;
-  const md = fs.readFileSync("METRICS.md", "utf8");
+  const md = fs.readFileSync("COLD-STARTS.md", "utf8");
   fs.writeFileSync(
-    "METRICS.md",
-    md.split("## Metrics")[0] + benchmarkMd,
+    "COLD-STARTS.md",
+    md.split("## Benchmark Results")[0] + benchmarkMd,
     "utf8"
   );
 }
