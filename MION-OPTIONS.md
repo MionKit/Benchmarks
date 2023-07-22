@@ -28,8 +28,8 @@ We show the benchmarks and let you take your own conclusions!!
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v16.18.0`
-* __Run:__ Sat Jul 22 2023 12:50:59 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Sat Jul 22 2023 19:37:36 GMT+0100 (Irish Standard Time)
+* __Method:__ `autocannon -c 100 -d 40.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -55,12 +55,6 @@ We show the benchmarks and let you take your own conclusions!!
 
 
 
-#### Max Cpu (%) 
-
-![benchmarks](assets/public/charts-mion/maxCpu.png)
-
-
-
 #### Memory Series (MB) 
 
 ![benchmarks](assets/public/charts-mion/memSeries.png)
@@ -69,9 +63,9 @@ We show the benchmarks and let you take your own conclusions!!
 
 |                              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                     |
 | :--                          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                             |
-| http-node                    | 16.18.0   | ✗      | 18676.9     | 53.03        | 4.77          | 84              | 121         | ✗          | theoretical upper limit in performance.                                                         |
-| **mion**                     | **0.1.0** | **✓**  | **17021.1** | **58.26**    | **4.72**      | **147**         | **143**     | **✓**      | **using mion http with promises `HttpOptions.useCallbacks = false`**                            |
-| mion-async-context-callbacks | 0.1.0     | ✓      | 14749.6     | 67.28        | 4.68          | 93              | 135         | ✓          | using mion http with callbacks and sync call context `RouterOptions.useAsyncCallContext = true` |
-| mion-async-context           | 0.1.0     | ✓      | 14355.2     | 69.18        | 4.56          | 88              | 134         | ✓          | using mion http with promises and sync call context `RouterOptions.useAsyncCallContext = true`  |
-| mion-callbacks               | 0.1.0     | ✓      | 14301.8     | 69.38        | 4.54          | 91              | 134         | ✓          | using mion http with callbacks `HttpOptions.useCallbacks = true`                                |
-| mion3000                     | 0.1.0     | ✓      | 13065.0     | 76.00        | 4.15          | 148             | 138         | ✓          | mion with 3000 routes loaded (should have the most memory usage)                                |
+| http-node                    | 16.18.0   | ✗      | 17167.7     | 57.73        | 4.39          | 78              | 123         | ✗          | theoretical upper limit in performance.                                                         |
+| **mion**                     | **0.1.0** | **✓**  | **16468.3** | **60.24**    | **4.57**      | **151**         | **140**     | **✓**      | **using mion http with promises `HttpOptions.useCallbacks = false`**                            |
+| mion-async-context-callbacks | 0.1.0     | ✓      | 13176.2     | 75.36        | 4.18          | 141             | 139         | ✓          | using mion http with callbacks and sync call context `RouterOptions.useAsyncCallContext = true` |
+| mion-callbacks               | 0.1.0     | ✓      | 12853.8     | 77.27        | 4.08          | 143             | 137         | ✓          | using mion http with callbacks `HttpOptions.useCallbacks = true`                                |
+| mion3000                     | 0.1.0     | ✓      | 12664.6     | 78.41        | 4.02          | 145             | 134         | ✓          | mion with 3000 routes loaded (should have the most memory usage)                                |
+| mion-async-context           | 0.1.0     | ✓      | 12627.6     | 78.68        | 4.01          | 142             | 137         | ✓          | using mion http with promises and sync call context `RouterOptions.useAsyncCallContext = true`  |

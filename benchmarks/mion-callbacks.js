@@ -11,7 +11,7 @@ const { startHttpServer } = require("@mionkit/http");
 // ###### check the apps/ directory for the original non compiled code
 // mion needs to be compiled from typescript to be able to generate runtime types metadata
 
-initHttp({});
+initHttp({ port: 3000, useCallbacks: true });
 addRoutes(routes);
 
-startHttpServer({ port: 3000, useCallbacks: true });
+startHttpServer();

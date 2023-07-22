@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addRoutes = exports.initHttp = exports.routesWithAsyncCallContext = exports.routes = exports.logAsyncCallContext = exports.updateUserNoAppOrContext = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
 const { __ΩSayHello } = require("./models");
 const { __ΩUser } = require("./models");
+const { __ΩHttpOptions } = require("@mionkit/http");
 function __assignType(fn, args) {
     fn.__type = args;
     return fn;
@@ -46,8 +47,8 @@ exports.routesWithAsyncCallContext = {
     logAsyncCallContext: exports.logAsyncCallContext,
 };
 exports.initHttp = __assignType((options) => {
-    return (http_1.initHttpRouter.Ω = [[() => __ΩShared, 'n!']], (0, http_1.initHttpRouter)(undefined, options));
-}, [() => __ΩPartial, 'options', '', 'P"o!"2"8"/#']);
+    return (0, http_1.initHttpRouter)(options);
+}, [() => __ΩPartial, () => __ΩHttpOptions, 'options', '', 'Pn"o!"2#8"/$']);
 var router_2 = require("@mionkit/router");
 Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_2.registerRoutes; } });
 //# sourceMappingURL=mionApp.js.map

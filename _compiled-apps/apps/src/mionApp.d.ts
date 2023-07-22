@@ -1,4 +1,5 @@
-import { type RouterOptions, type Routes, type Route } from "@mionkit/router";
+import { HttpOptions } from "@mionkit/http";
+import { type Routes, type Route } from "@mionkit/router";
 import { User } from "./models";
 export declare const shared: {};
 export type Shared = typeof SharedArrayBuffer;
@@ -10,7 +11,7 @@ export declare const logAsyncCallContext: (name: string) => {
 };
 export declare const routes: Routes;
 export declare const routesWithAsyncCallContext: Routes;
-export declare const initHttp: (options?: Partial<RouterOptions>) => Promise<void>;
+export declare const initHttp: (options?: Partial<HttpOptions>) => void;
 export { registerRoutes as addRoutes } from "@mionkit/router";
 export declare type __ΩShared = any[];
 //# sourceMappingURL=mionApp.d.ts.map

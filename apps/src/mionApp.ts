@@ -5,7 +5,7 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { initHttpRouter } from "@mionkit/http";
+import { HttpOptions, initHttpRouter } from "@mionkit/http";
 import {
   type RouterOptions,
   type Routes,
@@ -46,8 +46,8 @@ export const routesWithAsyncCallContext: Routes = {
   logAsyncCallContext: logAsyncCallContext as any,
 };
 
-export const initHttp = (options?: Partial<RouterOptions>) => {
-  return initHttpRouter<Shared>(undefined, options);
+export const initHttp = (options?: Partial<HttpOptions>) => {
+  return initHttpRouter(options);
 };
 
 export { registerRoutes as addRoutes } from "@mionkit/router";

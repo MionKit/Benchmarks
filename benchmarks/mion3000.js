@@ -20,7 +20,6 @@ for (let i = 0; i < totalRoutes; ++i) {
   routerRoutes[`route-${i}`] = defaultRoute;
 }
 
-initHttp({});
+initHttp({ port: 3000 });
 addRoutes(routes);
-
-startHttpServer({ port: 3000 });
+startHttpServer();
