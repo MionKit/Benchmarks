@@ -56,7 +56,7 @@ async function start() {
       state: { parse: false },
     },
     handler: function (request, h) {
-      return { sayHello: { hello: "world" } };
+      return { hello: "world" };
     },
   });
 
@@ -71,13 +71,11 @@ async function start() {
       state: { parse: false },
     },
     handler: function (request, h) {
-      const rawUser = request.payload?.["updateUser"];
+      const rawUser = request.payload;
       if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
       const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
       user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-      return {
-        updateUser: user,
-      };
+      return user;
     },
   });
 

@@ -54,17 +54,15 @@ app.disable("x-powered-by");
 
 // ##### ROUTES ############
 app.post("/", function (req, res) {
-  res.json({ sayHello: { hello: "world" } });
+  res.json({ hello: "world" });
 });
 
 app.post("/updateUser", function (req, res) {
-  const rawUser = req.body?.["updateUser"];
+  const rawUser = req.body;
   if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
   const user = deserializeUser(rawUser);
   user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-  res.json({
-    updateUser: user,
-  });
+  res.json(user);
 });
 
 app.listen(3000);

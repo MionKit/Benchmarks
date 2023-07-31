@@ -44,7 +44,7 @@ const server = restify.createServer();
 server.use(restify.plugins.bodyParser({}));
 
 server.post("/updateUser", function (req, res) {
-  const rawUser = req.body?.["updateUser"];
+  const rawUser = req.body;
   if (!isUser(rawUser)) {
     res.statusCode = 400;
     res.send({
@@ -62,7 +62,7 @@ server.post("/updateUser", function (req, res) {
 
 server.post("/", function (req, res) {
   res.contentType = "json";
-  res.send({ sayHello: { hello: "world" } });
+  res.send({ hello: "world" });
 });
 
 server.listen(3000);

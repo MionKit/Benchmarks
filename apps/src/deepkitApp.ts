@@ -23,14 +23,6 @@ import {
 } from "@deepkit/logger";
 import { SayHello, User } from "./models";
 
-type mionUpdate = {
-  updateUser: User;
-};
-
-type mionSayHelloResponse = {
-  sayHello: SayHello;
-};
-
 let app: App<any>;
 
 // LoggerTransport to disable console output
@@ -44,8 +36,8 @@ export class MyTransport implements LoggerTransport {
   }
 }
 
-export const deepKitSayHelloRoute = (): mionSayHelloResponse => {
-  return { sayHello: { hello: "world" } };
+export const deepKitSayHelloRoute = (): SayHello => {
+  return { hello: "world" };
 };
 
 export const setRoutes = () => {
@@ -53,12 +45,10 @@ export const setRoutes = () => {
 
   router.any("/", deepKitSayHelloRoute);
 
-  router.post("/updateUser", (body: HttpBody<mionUpdate>): mionUpdate => {
-    const user = body["updateUser"];
+  router.post("/updateUser", (body: HttpBody<User>): User => {
+    const user = body;
     user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-    return {
-      updateUser: user,
-    };
+    return user;
   });
 };
 

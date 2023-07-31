@@ -93,12 +93,14 @@ We are aware that the memory consumption is a bit higher than other frameworks, 
 
 This said it is the baseline memory which is a bit Higher (when the code gets loaded) and mion memory keeps steady under heavy workloads. Please note both mion and @deepkit/type are still in beta an there is room for improvement.
 
+Throughput is usually bigger on mion as we send/receive some more metadata in the request/response compared to other frameworks.
+
 ## Benchmark Results
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v16.18.0`
-* __Run:__ Mon Jul 31 2023 01:25:50 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Mon Jul 31 2023 02:20:30 GMT+0100 (Irish Standard Time)
+* __Method:__ `autocannon -c 100 -d 40.04 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -132,10 +134,10 @@ This said it is the baseline memory which is a bit Higher (when the code gets lo
 
 |           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                                |
 | :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                        |
-| http-node | 16.18.0        | ✗      | 17766.9     | 55.78        | 4.52          | 83              | 123         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
-| **mion**  | **0.1.0**      | **✓**  | **17638.6** | **56.21**    | **4.88**      | **97**          | **122**     | **✓**      | **validation and serialization out of the box**                                                            |
-| fastify   | 4.19.2         | ✓      | 15890.4     | 62.39        | 4.06          | 88              | 121         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
-| restify   | 8.6.1          | ✓      | 12381.2     | 80.20        | 3.18          | 93              | 119         | ✗          | Requires third party tools.                                                                                |
-| hapi      | 20.3.0         | ✓      | 7761.8      | 128.18       | 1.98          | 96              | 125         | ✗          | Manual validation using joi, or third party tools.                                                         |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 5407.5      | 184.08       | 1.38          | 287             | 141         | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
-| express   | 4.18.2         | ✓      | 4539.4      | 219.30       | 1.16          | 111             | 124         | ✗          | needs third party tools, or third party tools                                                              |
+| http-node | 16.18.0        | ✗      | 22079.6     | 44.81        | 4.57          | 76              | 121         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance. |
+| **mion**  | **0.1.0**      | **✓**  | **16241.6** | **61.08**    | **4.49**      | **159**         | **143**     | **✓**      | **validation and serialization out of the box**                                                            |
+| fastify   | 4.19.2         | ✓      | 15876.0     | 62.46        | 3.83          | 86              | 121         | -          | Validation is done using schemas and ajv. Schemas must be generated manually or using third party tools.   |
+| restify   | 8.6.1          | ✓      | 11874.2     | 83.67        | 3.05          | 93              | 122         | ✗          | Requires third party tools.                                                                                |
+| hapi      | 20.3.0         | ✓      | 7956.1      | 125.03       | 1.91          | 97              | 126         | ✗          | Manual validation using joi, or third party tools.                                                         |
+| deepkit   | 1.0.1-alpha.75 | ✓      | 5261.4      | 189.35       | 1.26          | 171             | 152         | ✓          | Automatic validation out of the box (The ones that made @deepkit/types), Their rpc is way more performant. |
+| express   | 4.18.2         | ✓      | 4507.0      | 220.85       | 1.08          | 106             | 124         | ✗          | needs third party tools, or third party tools                                                              |

@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initDeepkitApp = exports.setRoutes = exports.deepKitSayHelloRoute = exports.MyTransport = void 0;
 const { __ΩLogMessage } = require("@deepkit/logger");
+const { __ΩSayHello } = require("./models");
 const { __ΩHttpBody } = require("@deepkit/http");
 const { __ΩUser } = require("./models");
-const { __ΩSayHello } = require("./models");
 function __assignType(fn, args) {
     fn.__type = args;
     return fn;
@@ -14,8 +14,6 @@ const app_1 = require("@deepkit/app");
 const framework_1 = require("@deepkit/framework");
 const http_2 = require("@deepkit/http");
 const logger_1 = require("@deepkit/logger");
-const __ΩmionUpdate = [() => __ΩUser, 'updateUser', 'Pn!4"M'];
-const __ΩmionSayHelloResponse = [() => __ΩSayHello, 'sayHello', 'Pn!4"M'];
 let app;
 class MyTransport {
     write(message) {
@@ -27,18 +25,16 @@ class MyTransport {
 exports.MyTransport = MyTransport;
 MyTransport.__type = [() => __ΩLogMessage, 'message', 'write', 'supportsColor', 'Pn!2""0#P"0$5'];
 exports.deepKitSayHelloRoute = __assignType(() => {
-    return { sayHello: { hello: "world" } };
-}, [() => __ΩmionSayHelloResponse, '', 'Pn!/"']);
+    return { hello: "world" };
+}, [() => __ΩSayHello, '', 'Pn!/"']);
 const setRoutes = () => {
     const router = app.get(http_2.HttpRouterRegistry);
     router.any("/", exports.deepKitSayHelloRoute);
     router.post("/updateUser", __assignType((body) => {
-        const user = body["updateUser"];
+        const user = body;
         user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-        return {
-            updateUser: user,
-        };
-    }, [() => __ΩHttpBody, () => __ΩmionUpdate, 'body', () => __ΩmionUpdate, '', 'Pn"o!"2#n$/%']));
+        return user;
+    }, [() => __ΩHttpBody, () => __ΩUser, 'body', () => __ΩUser, '', 'Pn"o!"2#n$/%']));
 };
 exports.setRoutes = setRoutes;
 const initDeepkitApp = () => {
