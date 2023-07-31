@@ -32,15 +32,22 @@ fastify.addSchema({
   },
 });
 
+fastify.addSchema({
+  $id: "Hello",
+  type: "object",
+  required: ["hello"],
+  properties: {
+    hello: { type: "string" },
+  },
+});
+
 const rootRequestOpts = {
   schema: {
     response: {
       200: {
         type: "object",
         properties: {
-          hello: {
-            type: "string",
-          },
+          sayHello: { $ref: "Hello" },
         },
       },
     },
@@ -51,16 +58,16 @@ const updateUserOpts = {
   schema: {
     body: {
       type: "object",
-      required: ["/updateUser"],
+      required: ["updateUser"],
       properties: {
-        "/updateUser": { $ref: "User" },
+        updateUser: { $ref: "User" },
       },
     },
     response: {
       200: {
         type: "object",
         properties: {
-          "/updateUser": { $ref: "User" },
+          updateUser: { $ref: "User" },
         },
       },
     },
@@ -69,16 +76,15 @@ const updateUserOpts = {
 
 // ##### ROUTES ############
 fastify.post("/", rootRequestOpts, function (req, reply) {
-  console.log("here");
-  reply.send({ "/": { hello: "world" } });
+  reply.send({ sayHello: { hello: "world" } });
 });
 
 fastify.post("/updateUser", updateUserOpts, async function (req, reply) {
-  const rawUser = req.body["/updateUser"]; //date is not deserialized, it is with fastify and
+  const rawUser = req.body["updateUser"]; //date is not deserialized, it is with fastify and
   const user = deserializeUser(rawUser); // we need to convert date input manually
   user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
   reply.send({
-    "/updateUser": user,
+    updateUser: user,
   });
 });
 

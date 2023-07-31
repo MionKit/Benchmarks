@@ -6,9 +6,6 @@ export type Shared = typeof SharedArrayBuffer;
 export declare const mionSayHelloRoute: Route;
 export declare const updateUser: Route;
 export declare const updateUserNoAppOrContext: (user: User) => Promise<User>;
-export declare const logAsyncCallContext: (name: string) => {
-    hello: string;
-};
 export declare const routes: Routes;
 export declare const routesWithAsyncCallContext: Routes;
 export declare const initHttp: (options?: Partial<HttpOptions>) => void;

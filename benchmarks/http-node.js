@@ -56,10 +56,10 @@ const server = require("http").createServer(function (req, res) {
   req.on("end", function () {
     const rawBody = Buffer.concat(data).toString();
     if (req.url === "/") {
-      res.end(JSON.stringify({ "/": { hello: "world" } }));
+      res.end(JSON.stringify({ sayHello: { hello: "world" } }));
     } else if (req.url === "/updateUser") {
       const body = JSON.parse(rawBody);
-      const rawUser = body["/updateUser"];
+      const rawUser = body["updateUser"];
       if (!isUser(rawUser)) {
         const errorBody = JSON.stringify({
           error: "invalid input, not an user",
@@ -70,7 +70,7 @@ const server = require("http").createServer(function (req, res) {
       const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
       user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
       const resBody = JSON.stringify({
-        "/updateUser": user,
+        updateUser: user,
       });
       reply(res, resBody, 200);
     } else {

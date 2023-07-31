@@ -5,7 +5,7 @@ import { HttpRouterRegistry, HttpRequest } from "@deepkit/http";
 import { LogMessage, LoggerTransport } from "@deepkit/logger";
 import { SayHello } from "./models";
 type mionSayHelloResponse = {
-    "/": SayHello;
+    sayHello: SayHello;
 };
 export declare class MyTransport implements LoggerTransport {
     write(message: LogMessage): void;

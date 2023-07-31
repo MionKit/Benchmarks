@@ -14,8 +14,8 @@ const app_1 = require("@deepkit/app");
 const framework_1 = require("@deepkit/framework");
 const http_2 = require("@deepkit/http");
 const logger_1 = require("@deepkit/logger");
-const __ΩmionUpdate = [() => __ΩUser, '/updateUser', 'Pn!4"M'];
-const __ΩmionSayHelloResponse = [() => __ΩSayHello, '/', 'Pn!4"M'];
+const __ΩmionUpdate = [() => __ΩUser, 'updateUser', 'Pn!4"M'];
+const __ΩmionSayHelloResponse = [() => __ΩSayHello, 'sayHello', 'Pn!4"M'];
 let app;
 class MyTransport {
     write(message) {
@@ -27,16 +27,16 @@ class MyTransport {
 exports.MyTransport = MyTransport;
 MyTransport.__type = [() => __ΩLogMessage, 'message', 'write', 'supportsColor', 'Pn!2""0#P"0$5'];
 exports.deepKitSayHelloRoute = __assignType(() => {
-    return { "/": { hello: "world" } };
+    return { sayHello: { hello: "world" } };
 }, [() => __ΩmionSayHelloResponse, '', 'Pn!/"']);
 const setRoutes = () => {
     const router = app.get(http_2.HttpRouterRegistry);
     router.any("/", exports.deepKitSayHelloRoute);
     router.post("/updateUser", __assignType((body) => {
-        const user = body["/updateUser"];
+        const user = body["updateUser"];
         user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
         return {
-            "/updateUser": user,
+            updateUser: user,
         };
     }, [() => __ΩHttpBody, () => __ΩmionUpdate, 'body', () => __ΩmionUpdate, '', 'Pn"o!"2#n$/%']));
 };

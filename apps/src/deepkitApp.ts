@@ -24,11 +24,11 @@ import {
 import { SayHello, User } from "./models";
 
 type mionUpdate = {
-  "/updateUser": User;
+  updateUser: User;
 };
 
 type mionSayHelloResponse = {
-  "/": SayHello;
+  sayHello: SayHello;
 };
 
 let app: App<any>;
@@ -45,7 +45,7 @@ export class MyTransport implements LoggerTransport {
 }
 
 export const deepKitSayHelloRoute = (): mionSayHelloResponse => {
-  return { "/": { hello: "world" } };
+  return { sayHello: { hello: "world" } };
 };
 
 export const setRoutes = () => {
@@ -54,10 +54,10 @@ export const setRoutes = () => {
   router.any("/", deepKitSayHelloRoute);
 
   router.post("/updateUser", (body: HttpBody<mionUpdate>): mionUpdate => {
-    const user = body["/updateUser"];
+    const user = body["updateUser"];
     user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
     return {
-      "/updateUser": user,
+      updateUser: user,
     };
   });
 };

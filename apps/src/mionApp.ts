@@ -6,12 +6,7 @@
  * ######## */
 
 import { HttpOptions, initHttpRouter } from "@mionkit/http";
-import {
-  type RouterOptions,
-  type Routes,
-  type Route,
-  getCallContext,
-} from "@mionkit/router";
+import { type Routes, type Route } from "@mionkit/router";
 import { SayHello, User } from "./models";
 
 export const shared = {};
@@ -28,22 +23,16 @@ export const updateUserNoAppOrContext = async (user: User): Promise<User> => {
   return user;
 };
 
-// this is just for manual testing, not used in the benchmarks
-export const logAsyncCallContext = (name: string): { hello: string } => {
-  const callContext = getCallContext();
-  console.log(callContext);
-  return { hello: name };
-};
-
 export const routes: Routes = {
   "/": mionSayHelloRoute,
+  sayHello: mionSayHelloRoute,
   updateUser,
 };
 
 export const routesWithAsyncCallContext: Routes = {
   "/": mionSayHelloRoute,
+  sayHello: mionSayHelloRoute,
   updateUser: updateUserNoAppOrContext as any,
-  logAsyncCallContext: logAsyncCallContext as any,
 };
 
 export const initHttp = (options?: Partial<HttpOptions>) => {
