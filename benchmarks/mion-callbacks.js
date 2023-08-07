@@ -1,6 +1,5 @@
 "use strict";
 
-const { use } = require("h3");
 const {
   initHttp,
   addRoutes,

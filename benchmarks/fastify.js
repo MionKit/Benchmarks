@@ -76,4 +76,4 @@ fastify.post("/updateUser", updateUserOpts, async function (req, reply) {
   reply.send(user);
 });
 
-fastify.listen({ port: 3000, host: "127.0.0.1" });
+fastify.listen({ port: 3000, host: "localhost" });

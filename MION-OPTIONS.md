@@ -26,9 +26,9 @@ We show the benchmarks and let you take your own conclusions!!
 ## Benchmark Results
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v16.18.0`
-* __Run:__ Mon Jul 31 2023 02:13:23 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.04 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Node:__ `v18.17.0`
+* __Run:__ Mon Aug 07 2023 00:57:59 GMT+0100 (Irish Standard Time)
+* __Method:__ `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -54,12 +54,6 @@ We show the benchmarks and let you take your own conclusions!!
 
 
 
-#### Max Cpu (%) 
-
-![benchmarks](assets/public/charts-mion/maxCpu.png)
-
-
-
 #### Memory Series (MB) 
 
 ![benchmarks](assets/public/charts-mion/memSeries.png)
@@ -68,7 +62,7 @@ We show the benchmarks and let you take your own conclusions!!
 
 |                | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                          |
 | :--            | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                  |
-| http-node      | 16.18.0   | ✗      | 20317.2     | 48.73        | 4.20          | 82              | 129         | ✗          | theoretical upper limit in performance.                              |
-| **mion**       | **0.1.0** | **✓**  | **17263.2** | **57.42**    | **4.77**      | **101**         | **127**     | **✓**      | **using mion http with promises `HttpOptions.useCallbacks = false`** |
-| mion-callbacks | 0.1.0     | ✓      | 11537.6     | 86.12        | 4.82          | 87              | 132         | ✓          | using mion http with callbacks `HttpOptions.useCallbacks = true`     |
-| mion3000       | 0.1.0     | ✓      | 11247.6     | 88.34        | 4.70          | 98              | 125         | ✓          | mion with 3000 routes loaded (should have the most memory usage)     |
+| http-node      | 16.18.0   | ✗      | 17362.0     | 57.07        | 4.17          | 87              | 125         | ✗          | theoretical upper limit in performance.                              |
+| mion3000       | 0.1.0     | ✓      | 15597.2     | 63.59        | 4.31          | 119             | 123         | ✓          | mion with 3000 routes loaded (should have the most memory usage)     |
+| mion-callbacks | 0.1.0     | ✓      | 14824.0     | 66.91        | 4.10          | 157             | 141         | ✓          | using mion http with callbacks `HttpOptions.useCallbacks = true`     |
+| **mion**       | **0.1.0** | **✓**  | **14781.8** | **67.13**    | **4.09**      | **159**         | **143**     | **✓**      | **using mion http with promises `HttpOptions.useCallbacks = false`** |

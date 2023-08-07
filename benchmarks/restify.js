@@ -43,14 +43,14 @@ const deserializeUser = (jsonParseResult) => {
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser({}));
 
-server.post("/updateUser", function (req, res) {
+server.post("/updateUser", function (req, res, next) {
   const rawUser = req.body;
   if (!isUser(rawUser)) {
     res.statusCode = 400;
     res.send({
       error: "invalid parameter, not a user",
     });
-    return;
+    return next();
   }
   const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
   user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
@@ -60,9 +60,10 @@ server.post("/updateUser", function (req, res) {
   });
 });
 
-server.post("/", function (req, res) {
+server.post("/", function (req, res, next) {
   res.contentType = "json";
   res.send({ hello: "world" });
+  return next();
 });
 
 server.listen(3000);
