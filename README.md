@@ -32,13 +32,10 @@
 npm run report
 ```
 
-#### Other Benchmarks
+#### Cold Starts
 
 - Cold start times: This is a metric we specially want to keep in check as fast cold start times are essential for serverless environments  
   [COLD-STARTS.md](COLD-STARTS.md)
-
-- mion options: Benchmarks mion running the same mion application but using different mion settings  
-  [MION-OPTIONS.md](MION-OPTIONS.md)
 
 ## What's tested
 
@@ -89,47 +86,37 @@ Throughput is usually bigger on mion as we send/receive slightly more data in th
 
 ## Benchmark Results
 
-* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v18.17.0`
-* __Run:__ Wed Aug 16 2023 23:11:20 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
+- **Node:** `v18.17.0`
+- **Run:** Wed Aug 16 2023 23:11:20 GMT+0100 (Irish Standard Time)
+- **Method:** `autocannon -c 100 -d 40.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-#### Req (R/s) 
+#### Req (R/s)
 
 ![benchmarks](assets/public/charts-servers/requests.png)
 
-
-
-#### Throughput (Mb/s) 
+#### Throughput (Mb/s)
 
 ![benchmarks](assets/public/charts-servers/throughput.png)
 
-
-
-#### Latency (ms) 
+#### Latency (ms)
 
 ![benchmarks](assets/public/charts-servers/latency.png)
 
-
-
-#### Max Memory (Mb) 
+#### Max Memory (Mb)
 
 ![benchmarks](assets/public/charts-servers/maxMem.png)
 
-
-
-#### Memory Series (MB) 
+#### Memory Series (MB)
 
 ![benchmarks](assets/public/charts-servers/memSeries.png)
 
-
-
-|           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                               |
-| :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                       |
-| http-node | 16.18.0        | ✗      | 17621.1     | 56.22        | 4.24          | 86              | 120         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
-| **mion**  | **0.1.0**      | **✓**  | **15449.4** | **64.21**    | **4.27**      | **120**         | **129**     | **✓**      | **Automatic validation and serialization out of the box**                                                 |
-| fastify   | 4.10.2         | ✓      | 15342.6     | 64.65        | 3.70          | 96              | 124         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
-| restify   | 11.1.0         | ✓      | 11962.2     | 83.02        | 3.07          | 104             | 119         | ✗          | manual validation or third party tools                                                                    |
-| hapi      | 21.3.2         | ✓      | 8494.1      | 117.09       | 2.04          | 106             | 130         | ✗          | validation using joi or third party tools                                                                 |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 5267.5      | 188.96       | 1.27          | 301             | 135         | ✓          | Automatic validation and serialization out of the box                                                     |
-| express   | 4.18.2         | ✓      | 4578.2      | 217.50       | 1.10          | 125             | 120         | ✗          | manual validation or third party tools                                                                    |
+|           |        Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                               |
+| :-------- | -------------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :-------------------------------------------------------------------------------------------------------- |
+| http-node |        16.18.0 |      ✗ |   17621.1   |        56.22 |          4.24 |              86 |         120 |     ✗      | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
+| **mion**  |      **0.1.0** |  **✓** | **15449.4** |    **64.21** |      **4.27** |         **120** |     **129** |   **✓**    | **Automatic validation and serialization out of the box**                                                 |
+| fastify   |         4.10.2 |      ✓ |   15342.6   |        64.65 |          3.70 |              96 |         124 |     -      | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
+| restify   |         11.1.0 |      ✓ |   11962.2   |        83.02 |          3.07 |             104 |         119 |     ✗      | manual validation or third party tools                                                                    |
+| hapi      |         21.3.2 |      ✓ |   8494.1    |       117.09 |          2.04 |             106 |         130 |     ✗      | validation using joi or third party tools                                                                 |
+| deepkit   | 1.0.1-alpha.75 |      ✓ |   5267.5    |       188.96 |          1.27 |             301 |         135 |     ✓      | Automatic validation and serialization out of the box                                                     |
+| express   |         4.18.2 |      ✓ |   4578.2    |       217.50 |          1.10 |             125 |         120 |     ✗      | manual validation or third party tools                                                                    |
