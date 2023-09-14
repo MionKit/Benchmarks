@@ -14,14 +14,11 @@
     "metrics:run": "node metrics/startup.js",
     "metrics:summary": "node metrics/process-results.js -u",
     "build": "rimraf ./_compiled-apps && tsc --build tsconfig.json",
-    "print-mion": "node benchmark-compare.js -u -b mion",
     "print-servers": "node benchmark-compare.js -u -b servers",
-    "bench-mion": "node benchmark-bench.js  y 100 10 40 mion",
     "bench-servers": "node benchmark-bench.js y 100 10 40 servers",
-    "mion": "npm run bench-mion && npm run print-mion",
     "servers": "npm run bench-servers && npm run print-servers",
     "metrics": "npm run metrics:run && npm run metrics:summary",
-    "report": "npm run mion && npm run servers && npm run metrics"
+    "report": "npm run servers && npm run metrics"
   },
   "bin": {
     "benchmark": "./benchmark.js"
