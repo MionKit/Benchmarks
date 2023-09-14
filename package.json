@@ -13,12 +13,15 @@
     "standard": "standard | snazzy",
     "metrics:run": "node metrics/startup.js",
     "metrics:summary": "node metrics/process-results.js -u",
+    "metrics": "npm run metrics:run && npm run metrics:summary",
     "build": "rimraf ./_compiled-apps && tsc --build tsconfig.json",
     "print-servers": "node benchmark-compare.js -u -b servers",
     "bench-servers": "node benchmark-bench.js y 100 10 40 servers",
     "servers": "npm run bench-servers && npm run print-servers",
-    "metrics": "npm run metrics:run && npm run metrics:summary",
-    "report": "npm run servers && npm run metrics"
+    "print-servers-hello": "node benchmark-compare.js -u -b servers-hello",
+    "bench-servers-hello": "node benchmark-bench.js y 100 10 40 servers-hello",
+    "servers-hello": "npm run bench-servers-hello && npm run print-servers-hello",
+    "report": "npm run servers && npm run servers-hello && npm run metrics"
   },
   "bin": {
     "benchmark": "./benchmark.js"
@@ -26,11 +29,6 @@
   "repository": "https://github.com/fastify/benchmarks.git",
   "author": "Çağatay Çalı",
   "contributors": [
-    {
-      "name": "Stefan Aichholzer",
-      "email": "theaichholzer@gmail.com",
-      "url": "https://github.com/aichholzer"
-    },
     {
       "name": "Ma Jerez"
     }

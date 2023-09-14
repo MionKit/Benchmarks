@@ -65,7 +65,7 @@ const updateUserOpts = {
 };
 
 // ##### ROUTES ############
-fastify.post("/", rootRequestOpts, function (req, reply) {
+fastify.get("/hello", rootRequestOpts, function (req, reply) {
   reply.send({ hello: "world" });
 });
 

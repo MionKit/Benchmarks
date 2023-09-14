@@ -60,7 +60,7 @@ server.post("/updateUser", function (req, res, next) {
   });
 });
 
-server.post("/", function (req, res, next) {
+server.post("/hello", function (req, res, next) {
   res.contentType = "json";
   res.send({ hello: "world" });
   return next();

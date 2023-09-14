@@ -8,7 +8,7 @@ const {
 const { startHttpServer } = require("@mionkit/http");
 
 const totalRoutes = process.env.routes || 0;
-const defaultRoute = routes["/"]; // this handler contains type information.
+const defaultRoute = routes.hello; // this handler contains type information.
 const routerRoutes = {};
 for (let i = 0; i < totalRoutes; ++i) {
   routerRoutes[`route-${i}`] = defaultRoute;

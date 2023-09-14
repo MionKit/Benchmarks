@@ -43,7 +43,7 @@ export const deepKitSayHelloRoute = (): SayHello => {
 export const setRoutes = () => {
   const router = app.get(HttpRouterRegistry);
 
-  router.any("/", deepKitSayHelloRoute);
+  router.any("/hello", deepKitSayHelloRoute);
 
   router.post("/updateUser", (body: HttpBody<User>): User => {
     const user = body;

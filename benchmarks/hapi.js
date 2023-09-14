@@ -46,8 +46,8 @@ async function start() {
   const server = Hapi.server({ port: 3000, debug: false });
 
   server.route({
-    method: "POST",
-    path: "/",
+    method: "GET",
+    path: "/hello",
     config: {
       cache: false,
       response: {

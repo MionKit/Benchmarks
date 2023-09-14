@@ -55,7 +55,7 @@ const server = require("http").createServer(function (req, res) {
 
   req.on("end", function () {
     const rawBody = Buffer.concat(data).toString();
-    if (req.url === "/") {
+    if (req.url === "/hello") {
       res.end(JSON.stringify({ hello: "world" }));
     } else if (req.url === "/updateUser") {
       const body = JSON.parse(rawBody);

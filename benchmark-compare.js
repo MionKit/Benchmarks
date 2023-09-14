@@ -49,13 +49,17 @@ async function getBenchmarkOptions() {
       name: "benchmark",
       choices: [
         {
-          name: "servers: compare multiple libraries",
+          name: "servers => compare multiple libraries (update User)",
           value: "servers",
         },
         {
-          name: "mion options:s benchmarks mion using different settings and options",
-          value: "mion",
+          name: "servers => compare multiple libraries (hello world)",
+          value: "servers-hello",
         },
+        // {
+        //   name: "mion options:s benchmarks mion using different settings and options",
+        //   value: "mion",
+        // },
       ],
       validate: function (answer) {
         if (answer.length < 1) {
@@ -149,6 +153,18 @@ function setBenchmark(benchmark) {
       resultsJsonFilename = "benchmark-results-mion.json";
       info = benchmarkMion.info;
       chartsDirectory = join(process.cwd(), "assets", "public", "charts-mion");
+      break;
+    case "servers-hello":
+      resultsMarkdownFilename = "HELLO-WORLD.md";
+      resultsPath = join(process.cwd(), "results-hello");
+      resultsJsonFilename = "benchmark-results-servers-hello.json";
+      info = benchmarkServers.info;
+      chartsDirectory = join(
+        process.cwd(),
+        "assets",
+        "public",
+        "charts-servers-hello"
+      );
       break;
     default:
     case "servers":

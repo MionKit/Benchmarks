@@ -29,7 +29,7 @@ exports.deepKitSayHelloRoute = __assignType(() => {
 }, [() => __ΩSayHello, '', 'Pn!/"']);
 const setRoutes = () => {
     const router = app.get(http_2.HttpRouterRegistry);
-    router.any("/", exports.deepKitSayHelloRoute);
+    router.any("/hello", exports.deepKitSayHelloRoute);
     router.post("/updateUser", __assignType((body) => {
         const user = body;
         user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);

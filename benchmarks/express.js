@@ -53,7 +53,7 @@ app.disable("etag");
 app.disable("x-powered-by");
 
 // ##### ROUTES ############
-app.post("/", function (req, res) {
+app.get("/hello", function (req, res) {
   res.json({ hello: "world" });
 });
 

@@ -12,28 +12,17 @@ import { SayHello, User } from "./models";
 export const shared = {};
 export type Shared = typeof SharedArrayBuffer;
 
-export const mionSayHelloRoute: Route = (): SayHello => ({ hello: "world" });
+export const mionSayHelloRoute: Route = (): string => "world";
+
 export const updateUser: Route = (context, user: User): User => {
   user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
   return user;
 };
 
-export const updateUserNoAppOrContext = async (user: User): Promise<User> => {
-  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-  return user;
-};
-
-export const routes: Routes = {
-  "/": mionSayHelloRoute,
-  sayHello: mionSayHelloRoute,
+export const routes = {
+  hello: mionSayHelloRoute,
   updateUser,
-};
-
-export const routesWithAsyncCallContext: Routes = {
-  "/": mionSayHelloRoute,
-  sayHello: mionSayHelloRoute,
-  updateUser: updateUserNoAppOrContext as any,
-};
+} satisfies Routes;
 
 export const initHttp = (options?: Partial<HttpOptions>) => {
   return initHttpRouter(options);
