@@ -13,7 +13,7 @@ We are comparing mion against fastify as we consider it to be the gold standard 
 ## Benchmark Results
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v18.17.0`
-* __Run:__ Thu Sep 14 2023 23:13:44 GMT+0100 (Irish Standard Time)
+* __Run:__ Fri Sep 15 2023 02:00:23 GMT+0100 (Irish Standard Time)
 * __Method:__ `npm run metrics` (samples: 5)
 * __startup:__ time elapsed to setup the application
 * __listen:__ time elapsed until the http server is ready to accept requests (cold start)
@@ -26,25 +26,25 @@ We are comparing mion against fastify as we consider it to be the gold standard 
 
   | | startup(ms) | listen(ms) |
   |-| -           | -          |
-| 10-startup-deepkit-routes.js | 1254 | 1256 |
-| 10-startup-fastify-routes.js | 154 | 221 |
+| 10-startup-deepkit-routes.js | 1253 | 1254 |
+| 10-startup-fastify-routes.js | 153 | 220 |
 | 10-startup-mion-routes.js | 82 | 89 |
-| 100-startup-deepkit-routes.js | 1247 | 1249 |
-| 100-startup-fastify-routes.js | 163 | 321 |
+| 100-startup-deepkit-routes.js | 1246 | 1248 |
+| 100-startup-fastify-routes.js | 162 | 320 |
 | 100-startup-mion-routes.js | 81 | 89 |
-| 500-startup-deepkit-routes.js | 1245 | 1247 |
-| 500-startup-fastify-routes.js | 238 | 749 |
-| 500-startup-mion-routes.js | 80 | 91 |
-| 1000-startup-deepkit-routes.js | 1247 | 1249 |
-| 1000-startup-fastify-routes.js | 341 | 1248 |
+| 500-startup-deepkit-routes.js | 1246 | 1247 |
+| 500-startup-fastify-routes.js | 237 | 748 |
+| 500-startup-mion-routes.js | 81 | 91 |
+| 1000-startup-deepkit-routes.js | 1246 | 1248 |
+| 1000-startup-fastify-routes.js | 339 | 1245 |
 | 1000-startup-mion-routes.js | 81 | 95 |
-| 2000-startup-deepkit-routes.js | 1265 | 1266 |
-| 2000-startup-fastify-routes.js | 560 | 2319 |
-| 2000-startup-mion-routes.js | 82 | 106 |
-| 3000-startup-deepkit-routes.js | 1272 | 1274 |
-| 3000-startup-fastify-routes.js | 840 | 3503 |
+| 2000-startup-deepkit-routes.js | 1264 | 1265 |
+| 2000-startup-fastify-routes.js | 558 | 2314 |
+| 2000-startup-mion-routes.js | 82 | 105 |
+| 3000-startup-deepkit-routes.js | 1272 | 1273 |
+| 3000-startup-fastify-routes.js | 838 | 3495 |
 | 3000-startup-mion-routes.js | 83 | 114 |
-| 5000-startup-deepkit-routes.js | 1290 | 1292 |
-| 5000-startup-fastify-routes.js | 1860 | 6501 |
+| 5000-startup-deepkit-routes.js | 1292 | 1294 |
+| 5000-startup-fastify-routes.js | 1851 | 6467 |
 | 5000-startup-mion-routes.js | 84 | 126 |
 | startup-listen.js | 85 | 91 |

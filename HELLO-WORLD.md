@@ -37,8 +37,8 @@ app.get("/hello", function (req, res) {
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v18.17.0`
-* __Run:__ Thu Sep 14 2023 23:42:46 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.09 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Fri Sep 15 2023 01:58:11 GMT+0100 (Irish Standard Time)
+* __Method:__ `autocannon -c 100 -d 40.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -72,10 +72,10 @@ app.get("/hello", function (req, res) {
 
 |           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                               |
 | :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                       |
-| http-node | 16.18.0        | ✗      | 33180.6     | 29.69        | 5.92          | 85              | 100         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
-| fastify   | 4.10.2         | ✓      | 32377.8     | 30.38        | 5.81          | 92              | 125         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 26864.8     | 36.71        | 4.79          | 182             | 134         | ✓          | Automatic validation and serialization out of the box                                                     |
-| hapi      | 21.3.2         | ✓      | 24300.0     | 40.67        | 4.33          | 117             | 127         | ✗          | validation using joi or third party tools                                                                 |
-| **mion**  | **0.1.0**      | **✓**  | **21565.2** | **45.85**    | **4.32**      | **168**         | **144**     | **✓**      | **Automatic validation and serialization out of the box**                                                 |
-| restify   | 11.1.0         | ✓      | 10033.5     | 99.08        | 2.48          | 104             | 120         | ✗          | manual validation or third party tools                                                                    |
-| express   | 4.18.2         | ✓      | 7597.0      | 131.11       | 1.35          | 140             | 123         | ✗          | manual validation or third party tools                                                                    |
+| http-node | 16.18.0        | ✗      | 36277.0     | 27.07        | 6.47          | 86              | 116         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
+| fastify   | 4.10.2         | ✓      | 32503.0     | 30.26        | 5.83          | 92              | 120         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
+| **mion**  | **0.1.0**      | **✓**  | **29408.8** | **33.50**    | **5.89**      | **92**          | **125**     | **✓**      | **Automatic validation and serialization out of the box**                                                 |
+| deepkit   | 1.0.1-alpha.75 | ✓      | 27302.0     | 36.12        | 4.87          | 177             | 136         | ✓          | Automatic validation and serialization out of the box                                                     |
+| hapi      | 21.3.2         | ✓      | 24191.6     | 40.82        | 4.31          | 116             | 126         | ✗          | validation using joi or third party tools                                                                 |
+| restify   | 11.1.0         | ✓      | 10375.4     | 95.78        | 2.56          | 99              | 121         | ✗          | manual validation or third party tools                                                                    |
+| express   | 4.18.2         | ✓      | 7876.1      | 126.32       | 1.40          | 129             | 123         | ✗          | manual validation or third party tools                                                                    |
