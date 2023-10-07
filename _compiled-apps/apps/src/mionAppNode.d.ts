@@ -11,4 +11,4 @@ export declare const routes: {
 export declare const initHttp: (options?: Partial<HttpOptions>) => void;
 export { registerRoutes as addRoutes } from "@mionkit/router";
 export declare type __ΩShared = any[];
-//# sourceMappingURL=mionApp.d.ts.map
+//# sourceMappingURL=mionAppNode.d.ts.map

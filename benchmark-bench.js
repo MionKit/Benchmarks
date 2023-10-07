@@ -10,7 +10,7 @@ let choices;
 let list;
 
 run().catch((err) => {
-  console.error(err);
+  console.error("error general 2===>", err);
   process.exit(1);
 });
 

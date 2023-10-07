@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addRoutes = exports.initHttp = exports.routes = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
+exports.addRoutes = exports.initHttpBun = exports.routes = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
 const { __ΩUser } = require("./models");
-const { __ΩHttpOptions } = require("@mionkit/http");
+const { __ΩBunHttpOptions } = require("@mionkit/bun");
 function __assignType(fn, args) {
     fn.__type = args;
     return fn;
 }
 const __ΩPartial = ['T', 'l+e#!e"!fRb!Pde"!gN#"'];
-const http_1 = require("@mionkit/http");
+const bun_1 = require("@mionkit/bun");
 exports.shared = {};
 const __ΩShared = [() => SharedArrayBuffer, 'i!'];
 exports.__ΩShared = __ΩShared;
@@ -21,9 +21,9 @@ exports.routes = {
     hello: exports.mionSayHelloRoute,
     updateUser: exports.updateUser,
 };
-exports.initHttp = __assignType((options) => {
-    return (0, http_1.initHttpRouter)(options);
-}, [() => __ΩPartial, () => __ΩHttpOptions, 'options', '', 'Pn"o!"2#8"/$']);
+exports.initHttpBun = __assignType((options) => {
+    return (0, bun_1.initBunHttpRouter)(options);
+}, [() => __ΩPartial, () => __ΩBunHttpOptions, 'options', '', 'Pn"o!"2#8"/$']);
 var router_1 = require("@mionkit/router");
 Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
-//# sourceMappingURL=mionApp.js.map
+//# sourceMappingURL=mionAppBun.js.map

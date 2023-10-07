@@ -88,8 +88,8 @@ Throughput is usually bigger on mion as we send/receive slightly more data in th
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v18.17.0`
-* __Run:__ Fri Sep 15 2023 01:51:04 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Sat Oct 07 2023 14:14:11 GMT+0100 (Irish Standard Time)
+* __Method:__ `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -123,10 +123,11 @@ Throughput is usually bigger on mion as we send/receive slightly more data in th
 
 |           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                               |
 | :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                       |
-| http-node | 16.18.0        | ✗      | 17568.9     | 56.39        | 4.22          | 86              | 119         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
-| fastify   | 4.10.2         | ✓      | 14859.8     | 66.75        | 3.59          | 98              | 119         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
-| **mion**  | **0.1.0**      | **✓**  | **13910.2** | **71.34**    | **3.85**      | **100**         | **123**     | **✓**      | **Automatic validation and serialization out of the box**                                                 |
-| restify   | 11.1.0         | ✓      | 11803.3     | 83.92        | 3.03          | 102             | 134         | ✗          | manual validation or third party tools                                                                    |
-| hapi      | 21.3.2         | ✓      | 8182.1      | 121.56       | 1.97          | 108             | 129         | ✗          | validation using joi or third party tools                                                                 |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 5194.8      | 191.62       | 1.25          | 307             | 144         | ✓          | Automatic validation and serialization out of the box                                                     |
-| express   | 4.18.2         | ✓      | 4555.2      | 218.49       | 1.09          | 120             | 125         | ✗          | manual validation or third party tools                                                                    |
+| http-node | 16.18.0        | ✗      | 17071.8     | 58.04        | 4.10          | 85              | 120         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
+| mion.bun  | 0.6.2          | ✓      | 17005.9     | 58.27        | 3.94          | 110             | 107         | ✓          | mion using bun, automatic validation and serialization                                                    |
+| fastify   | 4.10.2         | ✓      | 15164.0     | 65.41        | 3.66          | 98              | 118         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
+| **mion**  | **0.6.2**      | **✓**  | **13971.8** | **71.02**    | **3.86**      | **100**         | **117**     | **✓**      | **Automatic validation and serialization out of the box**                                                 |
+| restify   | 11.1.0         | ✓      | 11498.2     | 86.39        | 2.95          | 133             | 118         | ✗          | manual validation or third party tools                                                                    |
+| hapi      | 21.3.2         | ✓      | 8177.9      | 121.65       | 1.97          | 105             | 132         | ✗          | validation using joi or third party tools                                                                 |
+| deepkit   | 1.0.1-alpha.75 | ✓      | 5268.5      | 188.92       | 1.27          | 283             | 142         | ✓          | Automatic validation and serialization out of the box                                                     |
+| express   | 4.18.2         | ✓      | 4471.4      | 222.63       | 1.07          | 119             | 126         | ✗          | manual validation or third party tools                                                                    |
