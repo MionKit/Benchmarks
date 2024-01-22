@@ -2,14 +2,14 @@
 
 const {
   initHttp,
-  addRoutes,
+  initRouter,
+  registerRoutes,
   routes,
 } = require("../_compiled-apps/apps/src/mionAppNode");
-const { startHttpServer } = require("@mionkit/http");
 
 // ###### check the apps/ directory for the original non compiled code
 // mion needs to be compiled from typescript to be able to generate runtime types metadata
 
+initRouter();
+registerRoutes(routes);
 initHttp({ port: 3000 });
-addRoutes(routes);
-startHttpServer();

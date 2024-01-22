@@ -5,7 +5,7 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { BunHttpOptions, initBunHttpRouter } from "@mionkit/bun";
+import { BunHttpOptions, startBunServer } from "@mionkit/bun";
 import { type Routes, type Route } from "@mionkit/router";
 import { SayHello, User } from "./models";
 
@@ -25,7 +25,7 @@ export const routes = {
 } satisfies Routes;
 
 export const initHttpBun = (options?: Partial<BunHttpOptions>) => {
-  return initBunHttpRouter(options);
+  return startBunServer(options);
 };
 
-export { registerRoutes as addRoutes } from "@mionkit/router";
+export { registerRoutes, initRouter } from "@mionkit/router";

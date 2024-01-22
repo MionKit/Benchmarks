@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addRoutes = exports.initHttpBun = exports.routes = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
+exports.initRouter = exports.registerRoutes = exports.initHttpBun = exports.routes = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
 const { __ΩUser } = require("./models");
 const { __ΩBunHttpOptions } = require("@mionkit/bun");
 function __assignType(fn, args) {
@@ -22,8 +22,9 @@ exports.routes = {
     updateUser: exports.updateUser,
 };
 exports.initHttpBun = __assignType((options) => {
-    return (0, bun_1.initBunHttpRouter)(options);
+    return (0, bun_1.startBunServer)(options);
 }, [() => __ΩPartial, () => __ΩBunHttpOptions, 'options', '', 'Pn"o!"2#8"/$']);
 var router_1 = require("@mionkit/router");
-Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
+Object.defineProperty(exports, "registerRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
+Object.defineProperty(exports, "initRouter", { enumerable: true, get: function () { return router_1.initRouter; } });
 //# sourceMappingURL=mionAppBun.js.map

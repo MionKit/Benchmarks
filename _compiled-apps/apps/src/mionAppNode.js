@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addRoutes = exports.initHttp = exports.routes = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
+exports.initRouter = exports.registerRoutes = exports.initHttp = exports.routes = exports.updateUser = exports.mionSayHelloRoute = exports.__ΩShared = exports.shared = void 0;
 const { __ΩUser } = require("./models");
-const { __ΩHttpOptions } = require("@mionkit/http");
+const { __ΩNodeHttpOptions } = require("@mionkit/http");
 function __assignType(fn, args) {
     fn.__type = args;
     return fn;
@@ -22,8 +22,9 @@ exports.routes = {
     updateUser: exports.updateUser,
 };
 exports.initHttp = __assignType((options) => {
-    return (0, http_1.initHttpRouter)(options);
-}, [() => __ΩPartial, () => __ΩHttpOptions, 'options', '', 'Pn"o!"2#8"/$']);
+    return (0, http_1.startNodeServer)(options);
+}, [() => __ΩPartial, () => __ΩNodeHttpOptions, 'options', '', 'Pn"o!"2#8"/$']);
 var router_1 = require("@mionkit/router");
-Object.defineProperty(exports, "addRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
+Object.defineProperty(exports, "registerRoutes", { enumerable: true, get: function () { return router_1.registerRoutes; } });
+Object.defineProperty(exports, "initRouter", { enumerable: true, get: function () { return router_1.initRouter; } });
 //# sourceMappingURL=mionAppNode.js.map

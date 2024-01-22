@@ -2,10 +2,10 @@ const start = process.hrtime();
 
 const {
   initHttp,
-  addRoutes,
+  initRouter,
+  registerRoutes,
   routes,
 } = require("../_compiled-apps/apps/src/mionAppNode");
-const { startHttpServer } = require("@mionkit/http");
 
 const totalRoutes = process.env.routes || 0;
 const defaultRoute = routes.hello; // this handler contains type information.
@@ -14,12 +14,12 @@ for (let i = 0; i < totalRoutes; ++i) {
   routerRoutes[`route-${i}`] = defaultRoute;
 }
 
-initHttp({});
+initRouter();
 const loadingTime = process.hrtime(start);
 
-addRoutes(routerRoutes);
+registerRoutes(routerRoutes);
 
-startHttpServer({ port: 3000 })
+initHttp({ port: 3000 })
   .then((server) => {
     const listenTime = process.hrtime(start);
     const path = require("path");

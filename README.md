@@ -41,6 +41,8 @@ npm run report
 
 The test consist of an `updateUser` request where the fields of the user must be validated, the `lastUpdate` field is a date that must be transformed into a JS Date (deserialized), then add one month and send back in the response.
 
+> The benchmark involves both routing + validation of parameters!
+
 ```ts
 export interface User {
   id: number;
@@ -78,56 +80,40 @@ mion is focused on being lightweight and fast so it can be run in serverless env
 
 Our goal is to perform similar to fastify as it is the industry standard in terms of performance. Please always take benchmarks as general guidelines as you might obtain different results in your real world application. we just run the benchmarks to ensure there is no performance degradation when new features/fixes are added to mion.
 
-We are aware that the memory consumption is a bit higher than other frameworks, this is in part because there is [types cache](https://docs.deepkit.io/english/runtime-types.html#_type_cache) storing all extra run type metadata of the code, and partly due to some design decision to not reuse the native request and response objects within mion routes.
-
-This said it is the baseline memory which is a bit Higher (when the code gets loaded) and mion memory keeps steady under heavy workloads. Please note both mion and @deepkit/type are still in beta an there is room for improvement.
-
-Throughput is usually bigger on mion as we send/receive slightly more data in the request/response body compared to other frameworks.
-
 ## Benchmark Results
 
-* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v18.17.0`
-* __Run:__ Sat Oct 07 2023 14:14:11 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
+- **Node:** `v18.17.0`
+- **Run:** Mon Jan 22 2024 03:07:04 GMT+0000 (Greenwich Mean Time)
+- **Method:** `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-#### Req (R/s) 
+#### Req (R/s)
 
 ![benchmarks](assets/public/charts-servers/requests.png)
 
-
-
-#### Throughput (Mb/s) 
+#### Throughput (Mb/s)
 
 ![benchmarks](assets/public/charts-servers/throughput.png)
 
-
-
-#### Latency (ms) 
+#### Latency (ms)
 
 ![benchmarks](assets/public/charts-servers/latency.png)
 
-
-
-#### Max Memory (Mb) 
+#### Max Memory (Mb)
 
 ![benchmarks](assets/public/charts-servers/maxMem.png)
 
-
-
-#### Memory Series (MB) 
+#### Memory Series (MB)
 
 ![benchmarks](assets/public/charts-servers/memSeries.png)
 
-
-
-|           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                               |
-| :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                                       |
-| http-node | 16.18.0        | ✗      | 17071.8     | 58.04        | 4.10          | 85              | 120         | ✗          | Super basic and completely useless bare http server, should be the theoretical upper limit in performance |
-| mion.bun  | 0.6.2          | ✓      | 17005.9     | 58.27        | 3.94          | 110             | 107         | ✓          | mion using bun, automatic validation and serialization                                                    |
-| fastify   | 4.10.2         | ✓      | 15164.0     | 65.41        | 3.66          | 98              | 118         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools               |
-| **mion**  | **0.6.2**      | **✓**  | **13971.8** | **71.02**    | **3.86**      | **100**         | **117**     | **✓**      | **Automatic validation and serialization out of the box**                                                 |
-| restify   | 11.1.0         | ✓      | 11498.2     | 86.39        | 2.95          | 133             | 118         | ✗          | manual validation or third party tools                                                                    |
-| hapi      | 21.3.2         | ✓      | 8177.9      | 121.65       | 1.97          | 105             | 132         | ✗          | validation using joi or third party tools                                                                 |
-| deepkit   | 1.0.1-alpha.75 | ✓      | 5268.5      | 188.92       | 1.27          | 283             | 142         | ✓          | Automatic validation and serialization out of the box                                                     |
-| express   | 4.18.2         | ✓      | 4471.4      | 222.63       | 1.07          | 119             | 126         | ✗          | manual validation or third party tools                                                                    |
+|           |        Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                 |
+| :-------- | -------------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :------------------------------------------------------------------------------------------ |
+| http-node |        16.18.0 |      ✗ |   17525.5   |        56.54 |          4.21 |              88 |         119 |     ✗      | bare node http server, should be the theoretical upper limit in node.js performance         |
+| mion.bun  |          0.6.2 |      ✓ |   16691.8   |        59.38 |          3.87 |             110 |         108 |     ✓      | mion using bun, automatic validation and serialization                                      |
+| fastify   |         4.10.2 |      ✓ |   16044.6   |        61.80 |          3.87 |              96 |         118 |     -      | Validation using schemas and ajv. schemas are generated manually or using third party tools |
+| **mion**  |      **0.6.2** |  **✓** | **14439.8** |    **68.71** |      **3.99** |         **101** |     **127** |   **✓**    | **Automatic validation and serialization out of the box**                                   |
+| restify   |         11.1.0 |      ✓ |   12183.6   |        81.52 |          3.13 |             133 |         116 |     ✗      | manual validation or third party tools                                                      |
+| hapi      |         21.3.2 |      ✓ |   8419.5    |       118.12 |          2.02 |             104 |         131 |     ✗      | validation using joi or third party tools                                                   |
+| deepkit   | 1.0.1-alpha.75 |      ✓ |   5282.7    |       188.41 |          1.27 |             289 |         141 |     ✓      | Automatic validation and serialization out of the box                                       |
+| express   |         4.18.2 |      ✓ |   4617.9    |       215.54 |          1.11 |             125 |         127 |     ✗      | manual validation or third party tools                                                      |

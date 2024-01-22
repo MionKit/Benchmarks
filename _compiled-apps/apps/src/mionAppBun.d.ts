@@ -1,3 +1,4 @@
+/// <reference types="bun-types" />
 import { BunHttpOptions } from "@mionkit/bun";
 import { type Route } from "@mionkit/router";
 export declare const shared: {};
@@ -8,7 +9,7 @@ export declare const routes: {
     hello: import("@mionkit/router").Handler<import("@mionkit/router").CallContext<any>, any>;
     updateUser: import("@mionkit/router").Handler<import("@mionkit/router").CallContext<any>, any>;
 };
-export declare const initHttpBun: (options?: Partial<BunHttpOptions>) => void;
-export { registerRoutes as addRoutes } from "@mionkit/router";
+export declare const initHttpBun: (options?: Partial<BunHttpOptions>) => import("bun").Server;
+export { registerRoutes, initRouter } from "@mionkit/router";
 export declare type __ΩShared = any[];
 //# sourceMappingURL=mionAppBun.d.ts.map

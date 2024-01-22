@@ -2,15 +2,16 @@ const start = process.hrtime();
 
 const {
   initHttp,
-  addRoutes,
+  initRouter,
+  registerRoutes,
   routes,
 } = require("../_compiled-apps/apps/src/mionAppNode");
-const { startHttpServer } = require("@mionkit/http");
-initHttp({});
+
+initRouter({});
 
 const loadingTime = process.hrtime(start);
 
-startHttpServer()
+initHttp()
   .then((server) => {
     const listenTime = process.hrtime(start);
     require("fs").writeFileSync(
