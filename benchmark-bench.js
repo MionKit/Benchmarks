@@ -8,6 +8,7 @@ const argv = process.argv.slice(2);
 
 let choices;
 let list;
+let getBenchmarkInfo;
 
 run().catch((err) => {
   console.error("error general 2===>", err);
@@ -19,11 +20,13 @@ function setBenchmarks(benchmarkName) {
     case "mion":
       choices = mionBenchmarks.choices;
       list = mionBenchmarks.list;
+      getBenchmarkInfo = mionBenchmarks.info;
       break;
     case "servers":
     default:
       choices = serverBenchmarks.choices;
       list = serverBenchmarks.list;
+      getBenchmarkInfo = serverBenchmarks.info;
       break;
   }
 }
@@ -32,7 +35,7 @@ async function run() {
   const options = await getBenchmarkOptions();
   setBenchmarks(options.benchmark);
   const modules = options.all ? choices : await select();
-  return bench(options, modules);
+  return bench(options, modules, getBenchmarkInfo);
 }
 
 async function getBenchmarkOptions() {
