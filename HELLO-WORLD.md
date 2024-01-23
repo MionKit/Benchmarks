@@ -37,38 +37,49 @@ app.get("/hello", function (req, res) {
 
 ## Benchmark Results
 
-- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
-- **Node:** `v18.17.0`
-- **Run:** Mon Jan 22 2024 03:06:55 GMT+0000 (Greenwich Mean Time)
-- **Method:** `autocannon -c 100 -d 40.26 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
+* __Node:__ `v18.17.0`
+* __Run:__ Tue Jan 23 2024 02:21:24 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 40.2 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-#### Req (R/s)
+#### Req (R/s) 
 
 ![benchmarks](assets/public/charts-servers-hello/requests.png)
 
-#### Throughput (Mb/s)
+
+
+#### Throughput (Mb/s) 
 
 ![benchmarks](assets/public/charts-servers-hello/throughput.png)
 
-#### Latency (ms)
+
+
+#### Latency (ms) 
 
 ![benchmarks](assets/public/charts-servers-hello/latency.png)
 
-#### Max Memory (Mb)
+
+
+#### Max Memory (Mb) 
 
 ![benchmarks](assets/public/charts-servers-hello/maxMem.png)
 
-#### Memory Series (MB)
+
+
+#### Memory Series (MB) 
 
 ![benchmarks](assets/public/charts-servers-hello/memSeries.png)
 
-|           |        Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                 |
-| :-------- | -------------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :------------------------------------------------------------------------------------------ |
-| mion.bun  |          0.6.2 |      ✓ |   61640.8   |        15.83 |          9.58 |              84 |         106 |     ✓      | mion using bun, automatic validation and serialization                                      |
-| http-node |        16.18.0 |      ✗ |   38760.8   |        25.30 |          6.91 |              87 |         119 |     ✗      | bare node http server, should be the theoretical upper limit in node.js performance         |
-| fastify   |         4.10.2 |      ✓ |   34918.6   |        28.14 |          6.26 |              93 |         100 |     -      | Validation using schemas and ajv. schemas are generated manually or using third party tools |
-| **mion**  |      **0.6.2** |  **✓** | **31288.4** |    **31.46** |      **6.27** |          **98** |     **124** |   **✓**    | **Automatic validation and serialization out of the box**                                   |
-| deepkit   | 1.0.1-alpha.75 |      ✓ |   27358.8   |        36.04 |          4.88 |             183 |         135 |     ✓      | Automatic validation and serialization out of the box                                       |
-| hapi      |         21.3.2 |      ✓ |   26126.4   |        37.76 |          4.66 |             127 |         129 |     ✗      | validation using joi or third party tools                                                   |
-| restify   |         11.1.0 |      ✓ |   10575.8   |        94.04 |          2.61 |             104 |         122 |     ✗      | manual validation or third party tools                                                      |
-| express   |         4.18.2 |      ✓ |   8306.4    |       119.71 |          1.48 |             139 |         123 |     ✗      | manual validation or third party tools                                                      |
+
+
+|           | Version        | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                                 |
+| :--       | --:            | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                         |
+| mion.bun  | 0.6.2          | ✓      | 63281.6     | 15.38        | 9.84          | 82              | 105         | ✓          | mion using bun, automatic validation and serialization                                      |
+| http-node | 16.18.0        | ✗      | 36608.8     | 26.82        | 6.53          | 83              | 115         | ✗          | bare node http server, should be the theoretical upper limit in node.js performance         |
+| fastify   | 4.10.2         | ✓      | 34427.8     | 28.58        | 6.17          | 92              | 126         | -          | Validation using schemas and ajv. schemas are generated manually or using third party tools |
+| **mion**  | **0.6.2**      | **✓**  | **30097.2** | **32.76**    | **6.03**      | **95**          | **121**     | **✓**      | **Automatic validation and serialization out of the box**                                   |
+| deepkit   | 1.0.1-alpha.75 | ✓      | 26647.6     | 37.02        | 4.75          | 198             | 132         | ✓          | Automatic validation and serialization out of the box                                       |
+| hapi      | 21.3.2         | ✓      | 25451.2     | 38.78        | 4.54          | 118             | 116         | ✗          | validation using joi or third party tools                                                   |
+| hono      | 3.12.6         | ✓      | 24569.2     | 40.19        | 4.38          | 104             | 118         | ✗          | hono node server, manual validation or third party tools                                    |
+| restify   | 11.1.0         | ✓      | 9878.0      | 100.74       | 2.44          | 170             | 140         | ✗          | manual validation or third party tools                                                      |
+| express   | 4.18.2         | ✓      | 8012.3      | 124.14       | 1.43          | 132             | 123         | ✗          | manual validation or third party tools                                                      |
