@@ -129,7 +129,8 @@ async function getMarkdownChat(groupedResults, metricLabel, chartName) {
   // TODO this can be done dinamically so more packages can be added
   const columnsData = [
     // [`deepkit-startup`, ...startup(groupedResults.deepkit)],
-    [`deepkit-listen`, ...listen(groupedResults.deepkit)],
+    // TODO: uncomment once deepkit is fixed
+    //  [`deepkit-listen`, ...listen(groupedResults.deepkit)],
     // [`fastify-startup`, ...startup(groupedResults.fastify)],
     [`fastify-listen`, ...listen(groupedResults.fastify)],
     // [`mion-startup`, ...startup(groupedResults.mion)],
