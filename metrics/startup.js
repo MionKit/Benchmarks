@@ -62,5 +62,5 @@ const measureFastify = runSample(async () => {
 
 measureStartupListen()
   .then(measureStartupMion)
-  .then(measureStartupDeepkit)
+  //  .then(measureStartupDeepkit)
   .then(measureFastify);

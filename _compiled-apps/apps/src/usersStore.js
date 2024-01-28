@@ -18,7 +18,11 @@ const store = (Map.Ω = [['\''], [() => __ΩUser, 'n!']], new Map());
 exports.usersStore = {
     create: __assignType((user) => {
         const id = store.size + 1;
-        const newUser = Object.assign(Object.assign({ id }, user), { lastUpdate: new Date() });
+        const newUser = {
+            id,
+            ...user,
+            lastUpdate: new Date(),
+        };
         store.set(id, newUser);
         return newUser;
     }, [() => __ΩNewUser, 'user', () => __ΩUser, '', 'Pn!2"n#/$']),
@@ -29,7 +33,11 @@ exports.usersStore = {
         const existing = store.get(user.id);
         if (!existing)
             return undefined;
-        const updated = Object.assign(Object.assign(Object.assign({}, existing), user), { lastUpdate: new Date() });
+        const updated = {
+            ...existing,
+            ...user,
+            lastUpdate: new Date(),
+        };
         store.set(user.id, updated);
         return updated;
     }, [() => __ΩPartialUser, 'user', () => __ΩUser, '', 'Pn!2"Pn#-J/$']),
@@ -55,31 +63,34 @@ exports.isUserId = __assignType((input) => {
         return false;
     if ((0, exports.hasUnknownKeys)(["id", "name", "surname", "lastUpdate"], input))
         return false;
-    return (typeof (input === null || input === void 0 ? void 0 : input.id) === "number" &&
-        typeof (input === null || input === void 0 ? void 0 : input.name) === "string" &&
-        typeof (input === null || input === void 0 ? void 0 : input.string) === "string" &&
-        (input === null || input === void 0 ? void 0 : input.lastUpdate) instanceof Date);
+    return (typeof input?.id === "number" &&
+        typeof input?.name === "string" &&
+        typeof input?.string === "string" &&
+        input?.lastUpdate instanceof Date);
 }, ['input', '', 'P"2!!/"']);
 exports.isNewUser = __assignType((input) => {
     if (typeof input !== "object")
         return false;
     if ((0, exports.hasUnknownKeys)(["id", "name", "surname", "lastUpdate"], input))
         return false;
-    return (!(input === null || input === void 0 ? void 0 : input.id) &&
-        typeof (input === null || input === void 0 ? void 0 : input.name) === "string" &&
-        typeof (input === null || input === void 0 ? void 0 : input.string) === "string" &&
-        !(input === null || input === void 0 ? void 0 : input.lastUpdate));
+    return (!input?.id &&
+        typeof input?.name === "string" &&
+        typeof input?.string === "string" &&
+        !input?.lastUpdate);
 }, ['input', '', 'P"2!!/"']);
 exports.isPartialuser = __assignType((input) => {
     if (typeof input !== "object")
         return false;
     if ((0, exports.hasUnknownKeys)(["id", "name", "surname", "lastUpdate"], input))
         return false;
-    return typeof (input === null || input === void 0 ? void 0 : input.id) === "number";
+    return typeof input?.id === "number";
 }, ['input', '', 'P"2!!/"']);
 exports.deserializeUser = __assignType((jsonParseResult) => {
-    if (typeof (jsonParseResult === null || jsonParseResult === void 0 ? void 0 : jsonParseResult.lastUpdate) === "string")
-        return Object.assign(Object.assign({}, jsonParseResult), { lastUpdate: new Date(jsonParseResult.lastUpdate) });
+    if (typeof jsonParseResult?.lastUpdate === "string")
+        return {
+            ...jsonParseResult,
+            lastUpdate: new Date(jsonParseResult.lastUpdate),
+        };
     return jsonParseResult;
 }, ['jsonParseResult', '', 'P"2!"/"']);
 //# sourceMappingURL=usersStore.js.map

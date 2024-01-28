@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "module": "commonjs",
-    "moduleResolution": "Node",
+    "module": "CommonJS",
     "skipLibCheck": true,
     "noImplicitAny": false,
     "removeComments": true,
@@ -10,7 +9,7 @@
     "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2020",
     "lib": ["es6", "ES2021"],
     "composite": true,
     "declaration": true,
@@ -23,6 +22,6 @@
     "esModuleInterop": true
   },
   "reflection": true,
-  "include": ["apps"],
+  "include": ["apps", "apps/src/mionAppBun.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "examples", ".dist"]
 }

@@ -6,18 +6,18 @@
  * ######## */
 
 import { BunHttpOptions, startBunServer } from "@mionkit/bun";
-import { type Routes, type Route } from "@mionkit/router";
+import { type Routes, type Route, route } from "@mionkit/router";
 import { SayHello, User } from "./models";
 
 export const shared = {};
 export type Shared = typeof SharedArrayBuffer;
 
-export const mionSayHelloRoute: Route = (): string => "world";
+export const mionSayHelloRoute = route((): string => "world") satisfies Route;
 
-export const updateUser: Route = (context, user: User): User => {
+export const updateUser = route((ctx, user: User): User => {
   user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
   return user;
-};
+}) satisfies Route;
 
 export const routes = {
   hello: mionSayHelloRoute,
