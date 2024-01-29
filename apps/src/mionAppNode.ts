@@ -14,10 +14,10 @@ export type Shared = typeof SharedArrayBuffer;
 
 export const mionSayHelloRoute = route((): string => "world");
 
-export const updateUser: Route = route((context, user: User): User => {
+export const updateUser = route((context, user: User): User => {
   user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
   return user;
-});
+}) satisfies Route;
 
 export const routes = {
   hello: mionSayHelloRoute,

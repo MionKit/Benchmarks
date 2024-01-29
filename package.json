@@ -23,7 +23,8 @@
     "bench-servers-hello": "node benchmark-bench.js y 100 10 40 servers-hello",
     "servers-hello": "npm run bench-servers-hello && npm run print-servers-hello",
     "report": "npm run servers && npm run servers-hello && npm run metrics",
-    "deepkit-install": "deepkit-type-install"
+    "deepkit-install": "deepkit-type-install",
+    "mionlink": "npm link @mionkit/router @mionkit/core @mionkit/bun @mionkit/http"
   },
   "bin": {
     "benchmark": "./benchmark.js"
@@ -37,12 +38,12 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@deepkit/app": "^1.0.1-alpha.114",
+    "@deepkit/app": "^1.0.1-alpha.119",
     "@deepkit/filesystem": "^1.0.1-alpha.114",
-    "@deepkit/framework": "^1.0.1-alpha.114",
-    "@deepkit/http": "^1.0.1-alpha.114",
+    "@deepkit/framework": "^1.0.1-alpha.119",
+    "@deepkit/http": "^1.0.1-alpha.119",
     "@deepkit/logger": "^1.0.1-alpha.119",
-    "@deepkit/type": "^1.0.1-alpha.114",
+    "@deepkit/type": "^1.0.1-alpha.119",
     "@hapi/hapi": "^21.3.2",
     "@hono/node-server": "^1.4.1",
     "@trpc/server": "^9.27.2",
@@ -74,7 +75,7 @@
   },
   "devDependencies": {
     "@deepkit/core": "^1.0.1-alpha.114",
-    "@deepkit/type-compiler": "^1.0.1-alpha.114",
+    "@deepkit/type-compiler": "^1.0.1-alpha.117",
     "@types/node": "^16.11.6",
     "pidusage": "^3.0.2",
     "puppeteer": "^20.8.0",
