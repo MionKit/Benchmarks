@@ -243,7 +243,7 @@ function compareResults(markdown, outputResults) {
   const results = outputResults || getOutputResults();
 
   for (const result of results) {
-    const beBold = result.name === "mion";
+    const beBold = result.name.includes("mion");
     table.push([
       bold(beBold, chalk.blue(result.name), markdown),
       bold(beBold, result.version, markdown),

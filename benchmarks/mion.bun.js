@@ -10,6 +10,6 @@ const {
 // ###### check the apps/ directory for the original non compiled code
 // mion needs to be compiled from typescript to be able to generate runtime types metadata
 
-initRouter();
+initRouter({ skipClientRoutes: true });
 registerRoutes(routes);
 initHttpBun({ port: 3000 });

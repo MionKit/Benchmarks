@@ -20,6 +20,6 @@ for (let i = 0; i < totalRoutes; ++i) {
   routerRoutes[`route-${i}`] = defaultRoute;
 }
 
-initRouter();
+initRouter({ skipClientRoutes: true });
 registerRoutes(routerRoutes);
 initHttp({ port: 3000 });
