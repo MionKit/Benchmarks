@@ -5,6 +5,7 @@ const { __ΩUserId } = require("./models");
 const { __ΩUser } = require("./models");
 const { __ΩNewUser } = require("./models");
 const { __ΩPartialUser } = require("./models");
+const { __ΩRawUser } = require("./models");
 function __assignType(fn, args) {
     fn.__type = args;
     return fn;
@@ -86,11 +87,7 @@ exports.isPartialuser = __assignType((input) => {
     return typeof input?.id === "number";
 }, ['input', '', 'P"2!!/"']);
 exports.deserializeUser = __assignType((jsonParseResult) => {
-    if (typeof jsonParseResult?.lastUpdate === "string")
-        return {
-            ...jsonParseResult,
-            lastUpdate: new Date(jsonParseResult.lastUpdate),
-        };
+    jsonParseResult.lastUpdate = new Date(jsonParseResult.lastUpdate);
     return jsonParseResult;
-}, ['jsonParseResult', '', 'P"2!"/"']);
+}, [() => __ΩRawUser, 'jsonParseResult', () => __ΩUser, '', 'Pn!2"n#/$']);
 //# sourceMappingURL=usersStore.js.map

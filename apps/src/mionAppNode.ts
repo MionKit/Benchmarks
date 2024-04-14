@@ -6,22 +6,15 @@
  * ######## */
 
 import { NodeHttpOptions, startNodeServer } from "@mionkit/http";
-import { type Routes, type Route, route } from "@mionkit/router";
-import { SayHello, User } from "./models";
-
-export const shared = {};
-export type Shared = typeof SharedArrayBuffer;
-
-export const mionSayHelloRoute = route((): string => "world");
-
-export const updateUser = route((context, user: User): User => {
-  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-  return user;
-}) satisfies Route;
+import { type Routes, route } from "@mionkit/router";
+import { User } from "./models";
 
 export const routes = {
-  hello: mionSayHelloRoute,
-  updateUser,
+  hello: route((): string => "world"),
+  updateUser: route((ctx, user: User): User => {
+    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+    return user;
+  }),
 } satisfies Routes;
 
 export const initHttp = (options?: Partial<NodeHttpOptions>) => {

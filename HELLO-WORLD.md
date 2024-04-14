@@ -39,8 +39,8 @@ app.get("/hello", function (req, res) {
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v20.11.0`
-* __Run:__ Mon Jan 29 2024 22:27:22 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Sun Mar 24 2024 03:12:52 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 40.32 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -74,11 +74,13 @@ app.get("/hello", function (req, res) {
 
 |              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                         |
 | :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                 |
-| **mion.bun** | **0.6.2** | **✓**  | **63724.8** | **15.19**    | **9.91**      | **87**          | **107**     | **✓**      | **mion using bun, automatic validation and serialization**                          |
-| http-node    | 16.18.0   | ✗      | 39481.6     | 24.83        | 7.04          | 81              | 129         | ✗          | bare node http server, should be the theoretical upper limit in node.js performance |
-| fastify      | 4.10.2    | ✓      | 39065.6     | 25.10        | 7.00          | 87              | 123         | -          | Validation using schemas and ajv. schemas are generated manually                    |
-| **mion**     | **0.6.2** | **✓**  | **33488.6** | **29.35**    | **6.71**      | **91**          | **127**     | **✓**      | **Automatic validation and serialization out of the box**                           |
-| hono         | 3.12.6    | ✓      | 29306.0     | 33.61        | 5.23          | 89              | 123         | ✗          | hono node server, manual validation or third party tools                            |
-| hapi         | 21.3.2    | ✓      | 26155.6     | 37.72        | 4.66          | 101             | 128         | ✗          | validation using joi or third party tools                                           |
-| restify      | 11.1.0    | ✓      | 10475.8     | 94.94        | 2.59          | 165             | 144         | ✗          | manual validation or third party tools                                              |
-| express      | 4.18.2    | ✓      | 8172.9      | 121.70       | 1.46          | 121             | 126         | ✗          | manual validation or third party tools                                              |
+| hono.bun     | 3.12.6    | ✓      | 67727.6     | 14.38        | 9.04          | 63              | 108         | ✗          | hono bun server, manual validation or third party tools                             |
+| **mion.bun** | **0.6.2** | **✓**  | **62457.2** | **15.58**    | **9.71**      | **81**          | **110**     | **✓**      | **mion using bun, automatic validation and serialization**                          |
+| elysia.bun   | 0.7.5     | ✓      | 54493.6     | 18.07        | 14.60         | 49              | 108         | ✓          | bun FrameWork with validation using TypeBox                                         |
+| http-node    | 16.18.0   | ✗      | 36443.0     | 26.94        | 6.50          | 79              | 124         | ✗          | bare node http server, should be the theoretical upper limit in node.js performance |
+| fastify      | 4.10.2    | ✓      | 36173.8     | 27.20        | 6.49          | 86              | 120         | -          | Validation using schemas and ajv. schemas are generated manually                    |
+| **mion**     | **0.6.2** | **✓**  | **31552.1** | **31.23**    | **6.32**      | **87**          | **113**     | **✓**      | **Automatic validation and serialization out of the box**                           |
+| hapi         | 21.3.2    | ✓      | 25139.6     | 39.27        | 4.48          | 117             | 130         | ✗          | validation using joi or third party tools                                           |
+| hono         | 3.12.6    | ✓      | 24847.6     | 39.75        | 4.43          | 95              | 118         | ✗          | hono node server, manual validation or third party tools                            |
+| restify      | 11.1.0    | ✓      | 10074.0     | 98.73        | 2.49          | 160             | 141         | ✗          | manual validation or third party tools                                              |
+| express      | 4.18.2    | ✓      | 7771.3      | 128.01       | 1.39          | 121             | 126         | ✗          | manual validation or third party tools                                              |

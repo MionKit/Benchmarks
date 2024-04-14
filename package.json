@@ -14,7 +14,7 @@
     "metrics:run": "node metrics/startup.js",
     "metrics:summary": "node metrics/process-results.js -u",
     "metrics": "npm run metrics:run && npm run metrics:summary",
-    "build": "rimraf ./_compiled-apps && tsc --project tsconfig.json",
+    "build": "rimraf ./_compiled-apps && tsc --project tsconfig.json && MION_COMPILE=true node ./benchmarks/mion.js",
     "print-servers": "node benchmark-compare.js -u -b servers",
     "bench-servers": "node benchmark-bench.js y 100 10 40 servers",
     "test-bench-servers": "node benchmark-bench.js y 100 10 4 servers",

@@ -12,6 +12,14 @@ export interface User {
   lastUpdate: Date;
 }
 
+
+export interface RawUser {
+  id: number;
+  name: string;
+  surname: string;
+  lastUpdate: string;
+}
+
 export type NewUser = Omit<User, "id" | "lastUpdate">;
 export type UserId = User | number;
 export type PartialUser = Partial<User> & { id: number };

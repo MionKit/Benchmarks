@@ -8,7 +8,7 @@
 //   lastUpdate: Date;
 // }
 
-// ##### validation / deserialization ############
+// ##### deserialization ############
 const deserializeUser = (jsonParseResult) => {
   if (typeof jsonParseResult?.lastUpdate === "string")
     return {

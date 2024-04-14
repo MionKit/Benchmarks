@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__ΩHelloReply = exports.__ΩSayHello = exports.__ΩPartialUser = exports.__ΩUserId = exports.__ΩNewUser = exports.__ΩUser = void 0;
+exports.__ΩHelloReply = exports.__ΩSayHello = exports.__ΩPartialUser = exports.__ΩUserId = exports.__ΩNewUser = exports.__ΩRawUser = exports.__ΩUser = void 0;
 const __ΩOmit = ['T', 'K', () => __ΩPick, () => __ΩExclude, 'Omit', 'b!b"e!!e!!ge!"o$#o##w%y'];
 const __ΩPartial = ['T', 'Partial', 'l+e#!e"!fRb!Pde"!gN#"w"y'];
 const __ΩPick = ['T', 'K', 'Pick', 'l+e#!e"!fRb!b"Pde""N#!w#y'];
 const __ΩExclude = ['T', 'U', 'Exclude', 'l6!Re$!RPe#!e$"qk#%QRb!b"Pde"!p)w#y'];
 const __ΩUser = ['id', 'name', 'surname', 'lastUpdate', 'User', 'P\'4!&4"&4#T4$Mw%y'];
 exports.__ΩUser = __ΩUser;
+const __ΩRawUser = ['id', 'name', 'surname', 'lastUpdate', 'RawUser', 'P\'4!&4"&4#&4$Mw%y'];
+exports.__ΩRawUser = __ΩRawUser;
 const __ΩNewUser = [() => __ΩOmit, () => __ΩUser, "id", "lastUpdate", 'NewUser', 'n"P.#.$Jo!#w%y'];
 exports.__ΩNewUser = __ΩNewUser;
 const __ΩUserId = [() => __ΩUser, 'UserId', 'Pn!\'Jw"y'];

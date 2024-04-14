@@ -5,7 +5,7 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { NewUser, PartialUser, User, UserId } from "./models";
+import { NewUser, PartialUser, RawUser, User, UserId } from "./models";
 
 const getId = (entOrId: UserId): number => {
   if (typeof entOrId === "number") return entOrId;
@@ -86,11 +86,7 @@ export const isPartialuser = (input: any): input is PartialUser => {
   return typeof input?.id === "number";
 };
 
-export const deserializeUser = (jsonParseResult: any) => {
-  if (typeof jsonParseResult?.lastUpdate === "string")
-    return {
-      ...jsonParseResult,
-      lastUpdate: new Date(jsonParseResult.lastUpdate),
-    };
-  return jsonParseResult;
+export const deserializeUser = (jsonParseResult: RawUser): User => {
+  (jsonParseResult as any).lastUpdate = new Date(jsonParseResult.lastUpdate);
+  return jsonParseResult as any as User;
 };
