@@ -236,14 +236,17 @@ When developing mion locally, you need to link the mion packages from the main m
 ```bash
 cd ~/Projects/mion
 npm link --workspaces
-# This creates global symlinks for @mionkit/router, @mionkit/core, @mionkit/bun, @mionkit/http
+# This creates global symlinks for all @mionkit/* packages:
+# @mionkit/aot-caches, @mionkit/aws, @mionkit/bun, @mionkit/client,
+# @mionkit/codegen, @mionkit/core, @mionkit/drizze, @mionkit/gcloud,
+# @mionkit/http, @mionkit/quick-start, @mionkit/router, @mionkit/run-types
 ```
 
 **Step 2: In this benchmarks repository**, consume the links:
 ```bash
 cd ~/Projects/mion-benchmarks
 npm run mionlink
-# This runs: npm link @mionkit/router @mionkit/core @mionkit/bun @mionkit/http
+# This runs: npm link @mionkit/aot-caches @mionkit/aws @mionkit/bun @mionkit/client @mionkit/codegen @mionkit/core @mionkit/drizze @mionkit/gcloud @mionkit/http @mionkit/quick-start @mionkit/router @mionkit/run-types
 ```
 
 > **Note**: You must run `npm link` in the mion repo first, otherwise `npm run mionlink` will fail because the global links don't exist yet.

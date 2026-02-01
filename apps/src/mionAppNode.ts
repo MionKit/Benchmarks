@@ -6,7 +6,12 @@
  * ######## */
 
 import { NodeHttpOptions, startNodeServer } from "@mionkit/http";
-import { type Routes, route } from "@mionkit/router";
+import {
+  type Routes,
+  route,
+  initMionRouter,
+  RouterOptions,
+} from "@mionkit/router";
 import { User } from "./models";
 
 export const routes = {
@@ -17,8 +22,10 @@ export const routes = {
   }),
 } satisfies Routes;
 
-export const initHttp = (options?: Partial<NodeHttpOptions>) => {
-  return startNodeServer(options);
+export const initHttp = async (
+  routerOpts?: Partial<RouterOptions>,
+  httpOpts?: Partial<NodeHttpOptions>,
+) => {
+  await initMionRouter(routes, routerOpts);
+  return startNodeServer(httpOpts);
 };
-
-export { registerRoutes, initRouter } from "@mionkit/router";

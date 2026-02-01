@@ -12,7 +12,6 @@ export interface User {
   lastUpdate: Date;
 }
 
-
 export interface RawUser {
   id: number;
   name: string;

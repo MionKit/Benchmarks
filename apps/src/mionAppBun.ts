@@ -6,7 +6,12 @@
  * ######## */
 
 import { BunHttpOptions, startBunServer } from "@mionkit/bun";
-import { type Routes, route } from "@mionkit/router";
+import {
+  type Routes,
+  route,
+  initMionRouter,
+  RouterOptions,
+} from "@mionkit/router";
 import { User } from "./models";
 
 export const routes = {
@@ -17,8 +22,10 @@ export const routes = {
   }),
 } satisfies Routes;
 
-export const initHttpBun = (options?: Partial<BunHttpOptions>) => {
+export const initHttpBun = async (
+  routerOpts?: Partial<RouterOptions>,
+  options?: Partial<BunHttpOptions>,
+) => {
+  await initMionRouter(routes, routerOpts);
   return startBunServer(options);
 };
-
-export { registerRoutes, initRouter } from "@mionkit/router";

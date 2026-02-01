@@ -1,7 +1,7 @@
-import { App } from "@deepkit/app";
-import { FrameworkModule } from "@deepkit/framework";
-import { HttpRouterRegistry } from "@deepkit/http";
-import { LogMessage, LoggerTransport } from "@deepkit/logger";
+import { App } from '@deepkit/app';
+import { FrameworkModule } from '@deepkit/framework';
+import { HttpRouterRegistry } from '@deepkit/http';
+import { LogMessage, LoggerTransport } from '@deepkit/logger';
 export declare class MyTransport implements LoggerTransport {
     constructor();
     write(message: LogMessage): void;
