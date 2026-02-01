@@ -24,7 +24,8 @@
     "servers-hello": "npm run bench-servers-hello && npm run print-servers-hello",
     "report": "npm run servers && npm run servers-hello && npm run metrics",
     "deepkit-install": "deepkit-type-install",
-    "mionlink": "bun pm cache rm && npm link @mionkit/aot-caches @mionkit/aws @mionkit/bun @mionkit/client @mionkit/codegen @mionkit/core @mionkit/eslint-plugin @mionkit/gcloud @mionkit/http @mionkit/quick-start @mionkit/router @mionkit/run-types @mionkit/type-formats"
+    "mionlink": "bun pm cache rm && npm link @mionkit/aot-caches @mionkit/aws @mionkit/bun @mionkit/client @mionkit/codegen @mionkit/core @mionkit/eslint-plugin @mionkit/gcloud @mionkit/http @mionkit/quick-start @mionkit/router @mionkit/run-types @mionkit/type-formats",
+    "mionCopy": "node scripts/copy-mion-packages.js"
   },
   "bin": {
     "benchmark": "./benchmark.js"

@@ -2,13 +2,54 @@
 
 /**
  * Script to copy mion packages from the linked mion repository to node_modules.
- * This is a workaround for a Bun bug where symlinked CJS packages don't resolve correctly.
  *
- * The script:
- * 1. Checks that packages are currently symlinked (safety check)
- * 2. Copies the packages from the mion repo
- * 3. Removes TypeScript source files (index.ts, src/) to prevent Bun from using them
- * 4. Keeps only the .dist folder with compiled JS
+ * ## Why This Script Exists (Bun Bug Workaround)
+ *
+ * There is a bug in Bun's CJS module resolution when using npm-linked (symlinked) packages.
+ * When a symlinked package (e.g., @mionkit/router) requires another symlinked package
+ * (e.g., @mionkit/core), Bun creates a SEPARATE empty module instance instead of sharing
+ * the same module object.
+ *
+ * ### The Problem
+ *
+ * In `@mionkit/router/.dist/cjs/src/routes/client.routes.js`, line 3:
+ *   const core = require("@mionkit/core");
+ *
+ * The `core` object captured in this closure has 0 keys in Bun (but 205 keys in Node.js).
+ * This causes lazy type references like `() => core.__ΩSerializableMethodsData` to return
+ * `undefined`, which deepkit interprets as `unknown`.
+ *
+ * ### Evidence
+ *
+ * | Runtime   | core === _internalCore | core keys | _internalCore keys |
+ * |-----------|------------------------|-----------|-------------------|
+ * | Node.js   | true (same object)     | 205       | 205               |
+ * | Bun       | false (different!)     | 205       | 0                 |
+ *
+ * ### The Error
+ *
+ * When running `bun benchmarks/mion.bun.js` with symlinked packages:
+ *
+ *   Error: Can not get Jit Functions for Return of route/linkedFn "mion@methodsMetadataById."
+ *   Error: Union can not have 'any' or 'unknown' types.
+ *   Type: unknown | RpcError<'rpc-metadata-not-found'>
+ *
+ * The `SerializableMethodsData` type is resolved as `unknown` because the lazy reference
+ * `() => core.__ΩSerializableMethodsData` returns `undefined`.
+ *
+ * ### The Solution
+ *
+ * This script copies the packages instead of symlinking them, which avoids the Bun bug.
+ * It also removes TypeScript source files (index.ts, src/) to prevent Bun from preferring
+ * them over the compiled JavaScript in .dist/.
+ *
+ * ## Usage
+ *
+ *   npm run mionlink && npm run mionCopy
+ *
+ * Or to restore symlinks for development:
+ *
+ *   npm run mionlink
  */
 
 const fs = require("fs");
@@ -29,6 +70,9 @@ const MION_PACKAGES = [
   "run-types",
   "type-formats",
 ];
+
+// Files/folders to remove after copying (TypeScript sources that Bun might pick up)
+const FILES_TO_REMOVE = ["index.ts", "src"];
 
 const NODE_MODULES_MIONKIT = path.join(
   __dirname,
@@ -89,7 +133,8 @@ function removeIfExists(filePath) {
 }
 
 function main() {
-  console.log("=== Mion Packages Copy Script ===\n");
+  console.log("=== Mion Packages Copy Script ===");
+  console.log("(Workaround for Bun CJS symlink module resolution bug)\n");
 
   // Check if @mionkit directory exists
   if (!fs.existsSync(NODE_MODULES_MIONKIT)) {
@@ -146,10 +191,16 @@ function main() {
       continue;
     }
 
-    // Check that .dist folder exists in source
+    // Check that either .dist or build folder exists in source
     const sourceDistPath = path.join(sourcePath, ".dist");
-    if (!fs.existsSync(sourceDistPath)) {
-      console.error(`  Error: .dist folder not found in ${sourcePath}`);
+    const sourceBuildPath = path.join(sourcePath, "build");
+    const hasDistFolder = fs.existsSync(sourceDistPath);
+    const hasBuildFolder = fs.existsSync(sourceBuildPath);
+
+    if (!hasDistFolder && !hasBuildFolder) {
+      console.error(
+        `  Error: Neither .dist nor build folder found in ${sourcePath}`,
+      );
       console.error(
         `  Please build the mion packages first (npm run build in mion repo)`,
       );
@@ -160,30 +211,29 @@ function main() {
     console.log(`  Removing symlink...`);
     fs.unlinkSync(pkg.path);
 
-    // Create the package directory
-    fs.mkdirSync(pkg.path, { recursive: true });
+    // Copy the entire package directory
+    console.log(`  Copying package...`);
+    copyDirRecursive(sourcePath, pkg.path);
 
-    // Copy package.json
-    const pkgJsonSrc = path.join(sourcePath, "package.json");
-    const pkgJsonDest = path.join(pkg.path, "package.json");
-    if (fs.existsSync(pkgJsonSrc)) {
-      fs.copyFileSync(pkgJsonSrc, pkgJsonDest);
-      console.log(`  Copied package.json`);
+    // Remove TypeScript source files to prevent Bun from using them
+    let removedCount = 0;
+    for (const fileToRemove of FILES_TO_REMOVE) {
+      const filePath = path.join(pkg.path, fileToRemove);
+      if (removeIfExists(filePath)) {
+        removedCount++;
+      }
     }
 
-    // Copy .dist folder
-    console.log(`  Copying .dist folder...`);
-    copyDirRecursive(sourceDistPath, path.join(pkg.path, ".dist"));
-
-    // Copy README.md if exists
-    const readmeSrc = path.join(sourcePath, "README.md");
-    if (fs.existsSync(readmeSrc)) {
-      fs.copyFileSync(readmeSrc, path.join(pkg.path, "README.md"));
+    if (removedCount > 0) {
+      console.log(
+        `  Removed ${removedCount} TypeScript source file(s)/folder(s)`,
+      );
     }
 
     // Verify the copy
     const destDistPath = path.join(pkg.path, ".dist");
-    if (fs.existsSync(destDistPath)) {
+    const destBuildPath = path.join(pkg.path, "build");
+    if (fs.existsSync(destDistPath) || fs.existsSync(destBuildPath)) {
       console.log(`  ✓ Successfully copied ${pkg.name}`);
     } else {
       console.error(`  ✗ Failed to copy ${pkg.name}`);
