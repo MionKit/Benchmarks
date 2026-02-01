@@ -34,7 +34,21 @@ function setBenchmarks(benchmarkName) {
 async function run() {
   const options = await getBenchmarkOptions();
   setBenchmarks(options.benchmark);
-  const modules = options.all ? choices : await select();
+
+  // Support selecting specific servers via BENCH_SERVERS environment variable
+  // Example: BENCH_SERVERS=mion.bun,hono.bun node benchmark-bench.js y 100 10 4 servers
+  const envServers = process.env.BENCH_SERVERS;
+  let modules;
+  if (envServers) {
+    modules = envServers
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => choices.includes(s));
+    console.log(`Running benchmarks for: ${modules.join(", ")}`);
+  } else {
+    modules = options.all ? choices : await select();
+  }
+
   return bench(options, modules, getBenchmarkInfo);
 }
 

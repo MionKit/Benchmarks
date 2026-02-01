@@ -73,7 +73,6 @@ const MION_PACKAGES = [
 
 // Files/folders to remove after copying (TypeScript sources that Bun might pick up)
 const FILES_TO_REMOVE = ["index.ts", "src"];
-
 const NODE_MODULES_MIONKIT = path.join(
   __dirname,
   "..",
