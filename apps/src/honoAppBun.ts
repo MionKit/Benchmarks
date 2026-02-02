@@ -1,3 +1,9 @@
+/* ########
+ * 2024 mion-benchmarks
+ * Hono Bun Server - Pre-compiled for consistent benchmarking
+ * License: MIT
+ * ######## */
+
 import { Hono } from "hono";
 import { z } from "zod";
 
@@ -26,8 +32,20 @@ app.post("/updateUser", async (c) => {
   return c.json(user);
 });
 
-// Bun's native way to start an HTTP server with Hono
-export default {
-  fetch: app.fetch,
-  port: 3000,
+export interface BunServerOptions {
+  port?: number;
+}
+
+export const initHttpBun = (options: BunServerOptions = {}) => {
+  const port = options.port ?? 3000;
+  return Bun.serve({
+    port,
+    fetch: app.fetch,
+  });
 };
+
+// For direct execution
+if (import.meta.main) {
+  initHttpBun({ port: 3000 });
+  console.log("Hono Bun server running on port 3000");
+}

@@ -23,7 +23,7 @@
     "esModuleInterop": true
   },
   "reflection": true,
-  "include": ["apps", "apps/src/mionAppBun.ts"],
+  "include": ["apps", "apps/src/**/*.ts"],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",

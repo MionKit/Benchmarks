@@ -64,6 +64,7 @@
     "fastify": "4.10",
     "frameguard": "^4.0.0",
     "hide-powered-by": "^1.0.0",
+    "elysia": "^1.0.0",
     "hono": "^3.12.6",
     "hsts": "^2.1.0",
     "ienoopen": "^1.0.0",
