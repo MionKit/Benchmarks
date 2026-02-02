@@ -23,6 +23,20 @@ These benchmarks test the typical hello world response, not very useful, but sho
 
 > The hello world benchmark is related to the router's performance as parameters validation is not involved.
 
+## Why Bun servers are excluded
+
+Bun servers (mion.bun, hono.bun, elysia.bun) are **excluded from the hello world benchmarks** because the benchmarking tool used (autocannon) is not fast enough to accurately measure Bun's performance.
+
+As stated in the [Bun documentation](https://bun.sh/docs/project/benchmarking):
+
+> "For load testing, you _must use_ an HTTP benchmarking tool that is at least as fast as `Bun.serve()`, or your results will be skewed. Some popular Node.js-based benchmarking tools like `autocannon` are not fast enough."
+
+When benchmarking Bun servers with autocannon, the results show inverted performance characteristics (simple endpoints appearing slower than complex ones), which indicates the benchmarking tool itself is the bottleneck, not the server.
+
+**Bun servers are still included in the [main benchmarks](README.md)** (updateUser endpoint) where the additional processing overhead (validation, serialization, business logic) makes autocannon's limitations less impactful on the results.
+
+For accurate Bun benchmarks, tools like `bombardier`, `oha`, or `http_load_test` (all written in Rust/Go) should be used instead.
+
 ```ts
 // ### mion ###
 export const routes = {
@@ -39,8 +53,8 @@ app.get("/hello", function (req, res) {
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v24.13.0`
-* __Run:__ Mon Feb 02 2026 19:48:33 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 4.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Mon Feb 02 2026 20:34:03 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 30.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -72,14 +86,11 @@ app.get("/hello", function (req, res) {
 
 
 
-|              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                |
-| :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                        |
-| http-node    | 16.18.0   | ✗      | 35544.0     | 27.57        | 6.34          | 75              | 121         | ✓          | bare node http server with Zod validation                  |
-| **mion**     | **0.6.2** | **✓**  | **28888.0** | **34.00**    | **5.21**      | **108**         | **106**     | **✓**      | **Automatic validation and serialization out of the box**  |
-| fastify      | 4.10.2    | ✓      | 24660.0     | 40.25        | 4.42          | 106             | 119         | ✓          | Fastify with Zod validation                                |
-| hono         | 3.12.6    | ✓      | 24452.0     | 40.20        | 4.36          | 164             | 109         | ✓          | hono node server with Zod validation                       |
-| elysia.bun   | 1.0.0     | ✓      | 15480.0     | 63.67        | 1.85          | 43              | 97          | ✓          | Elysia framework with TypeBox validation                   |
-| hono.bun     | 3.12.6    | ✓      | 12956.0     | 75.96        | 1.73          | 47              | 95          | ✓          | hono bun server with Zod validation                        |
-| express      | 4.22.1    | ✓      | 12098.0     | 81.42        | 2.16          | 106             | 113         | ✓          | Express with Zod validation                                |
-| **mion.bun** | **0.6.2** | **✓**  | **11068.0** | **88.94**    | **1.50**      | **81**          | **99**      | **✓**      | **mion using bun, automatic validation and serialization** |
-| hapi         | 21.4.4    | ✓      | 9580.5      | 103.55       | 1.71          | 111             | 87          | ✓          | Hapi with Zod validation                                   |
+|           | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
+| :--       | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                       |
+| http-node | 16.18.0   | ✗      | 41799.5     | 23.40        | 7.45          | 128             | 120         | ✓          | bare node http server with Zod validation                 |
+| fastify   | 4.10.2    | ✓      | 38932.3     | 25.20        | 6.98          | 145             | 119         | ✓          | Fastify with Zod validation                               |
+| **mion**  | **0.6.2** | **✓**  | **37097.6** | **26.44**    | **6.69**      | **143**         | **118**     | **✓**      | **Automatic validation and serialization out of the box** |
+| hono      | 3.12.6    | ✓      | 29589.3     | 33.28        | 5.28          | 219             | 117         | ✓          | hono node server with Zod validation                      |
+| hapi      | 21.4.4    | ✓      | 28793.1     | 34.21        | 5.13          | 225             | 121         | ✓          | Hapi with Zod validation                                  |
+| express   | 4.22.1    | ✓      | 21454.9     | 46.07        | 3.83          | 151             | 116         | ✓          | Express with Zod validation                               |

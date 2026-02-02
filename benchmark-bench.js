@@ -49,6 +49,21 @@ async function run() {
     modules = options.all ? choices : await select();
   }
 
+  // Filter out Bun servers from hello world benchmarks
+  // Reason: autocannon (Node.js-based) is not fast enough to accurately benchmark Bun servers
+  // See: https://bun.sh/docs/project/benchmarking
+  if (options.benchmark === "servers-hello") {
+    const excludedModules = modules.filter(
+      (m) => getBenchmarkInfo(m).excludeFromHelloWorld,
+    );
+    if (excludedModules.length > 0) {
+      console.log(
+        `Excluding Bun servers from hello world benchmark (autocannon limitation): ${excludedModules.join(", ")}`,
+      );
+    }
+    modules = modules.filter((m) => !getBenchmarkInfo(m).excludeFromHelloWorld);
+  }
+
   return bench(options, modules, getBenchmarkInfo);
 }
 
