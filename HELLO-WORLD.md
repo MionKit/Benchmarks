@@ -39,8 +39,8 @@ app.get("/hello", function (req, res) {
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v24.13.0`
-* __Run:__ Sun Feb 01 2026 17:29:41 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 40.11 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Mon Feb 02 2026 18:10:41 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 40.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -72,15 +72,14 @@ app.get("/hello", function (req, res) {
 
 
 
-|              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                         |
-| :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                 |
-| hono.bun     | 3.12.6    | ✓      | 80580.8     | 11.95        | 10.76         | 66              | 108         | ✗          | hono bun server, manual validation or third party tools                             |
-| elysia.bun   | 0.7.5     | ✓      | 65219.6     | 14.97        | 17.48         | 49              | 106         | ✓          | bun FrameWork with validation using TypeBox                                         |
-| **mion.bun** | **0.6.2** | **✓**  | **50218.4** | **19.41**    | **7.57**      | **113**         | **108**     | **✓**      | **mion using bun, automatic validation and serialization**                          |
-| http-node    | 16.18.0   | ✗      | 36483.2     | 26.91        | 6.51          | 126             | 124         | ✗          | bare node http server, should be the theoretical upper limit in node.js performance |
-| fastify      | 4.10.2    | ✓      | 36275.8     | 27.06        | 6.50          | 142             | 119         | -          | Validation using schemas and ajv. schemas are generated manually                    |
-| **mion**     | **0.6.2** | **✓**  | **31235.2** | **31.51**    | **6.11**      | **142**         | **117**     | **✓**      | **Automatic validation and serialization out of the box**                           |
-| hapi         | 21.4.4    | ✓      | 26048.4     | 37.88        | 4.65          | 226             | 122         | ✗          | validation using joi or third party tools                                           |
-| hono         | 3.12.6    | ✓      | 25814.4     | 38.22        | 4.60          | 223             | 120         | ✗          | hono node server, manual validation or third party tools                            |
-| express      | 4.22.1    | ✓      | 20060.8     | 49.32        | 3.58          | 151             | 117         | ✗          | manual validation or third party tools                                              |
-| restify      | 11.1.0    | ✓      | N/A         | N/A          | N/A           | 0               | 0           | ✗          | manual validation or third party tools                                              |
+|              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                |
+| :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                        |
+| http-node    | 16.18.0   | ✗      | 40033.6     | 24.49        | 7.14          | 135             | 122         | ✓          | bare node http server with Zod validation                  |
+| fastify      | 4.10.2    | ✓      | 38732.8     | 25.33        | 6.95          | 141             | 121         | ✓          | Fastify with Zod validation                                |
+| **mion**     | **0.6.2** | **✓**  | **36230.4** | **27.10**    | **6.53**      | **218**         | **117**     | **✓**      | **Automatic validation and serialization out of the box**  |
+| hono         | 3.12.6    | ✓      | 30116.8     | 32.70        | 5.37          | 221             | 119         | ✓          | hono node server with Zod validation                       |
+| hapi         | 21.4.4    | ✓      | 28455.6     | 34.63        | 5.07          | 239             | 124         | ✓          | Hapi with Zod validation                                   |
+| express      | 4.22.1    | ✓      | 21273.6     | 46.48        | 3.79          | 149             | 117         | ✓          | Express with Zod validation                                |
+| hono.bun     | 3.12.6    | ✓      | 15730.2     | 63.03        | 2.10          | 52              | 103         | ✓          | hono bun server with Zod validation                        |
+| **mion.bun** | **0.6.2** | **✓**  | **11961.4** | **83.02**    | **1.62**      | **78**          | **103**     | **✓**      | **mion using bun, automatic validation and serialization** |
+| elysia.bun   | 0.7.5     | ✓      | 8072.0      | 123.21       | 2.16          | 43              | 102         | ✓          | bun FrameWork with validation using TypeBox                |

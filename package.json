@@ -18,6 +18,7 @@
     "print-servers": "node benchmark-compare.js -u -b servers",
     "bench-servers": "node benchmark-bench.js y 100 10 40 servers",
     "quick-bench-servers": "node benchmark-bench.js y 100 10 4 servers",
+    "quick-servers": "npm run quick-bench-servers && npm run print-servers",
     "servers": "npm run bench-servers && npm run print-servers",
     "print-servers-hello": "node benchmark-compare.js -u -b servers-hello",
     "bench-servers-hello": "node benchmark-bench.js y 100 10 40 servers-hello",
@@ -72,7 +73,8 @@
     "server-base": "^7.1.23",
     "server-base-router": "^7.1.23",
     "total.js": "^3.2.4",
-    "x-xss-protection": "^2.0.0"
+    "x-xss-protection": "^2.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@deepkit/core": "1.0.19",

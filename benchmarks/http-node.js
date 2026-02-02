@@ -1,41 +1,6 @@
 "use strict";
 
-// ##### user type
-// interface User {
-//   id: number;
-//   name: string;
-//   surname: string;
-//   lastUpdate: Date;
-// }
-
-// ##### validation / deserialization : USING MANUAL Validation, the framework might support something else ############
-const hasUnknownKeys = (knownKeys, input) => {
-  if (typeof input !== "object") return true;
-  const unknownKeys = Object.keys(input);
-  return unknownKeys.some((ukn) => !knownKeys.includes(ukn));
-};
-
-// before serialize
-const isUser = (input) => {
-  if (typeof input !== "object") return false;
-  if (hasUnknownKeys(["id", "name", "surname", "lastUpdate"], input))
-    return false;
-  return (
-    typeof input?.id === "number" &&
-    typeof input?.name === "string" &&
-    typeof input?.surname === "string" &&
-    typeof input?.lastUpdate === "string"
-  );
-};
-
-const deserializeUser = (jsonParseResult) => {
-  if (typeof jsonParseResult?.lastUpdate === "string")
-    return {
-      ...jsonParseResult,
-      lastUpdate: new Date(jsonParseResult.lastUpdate),
-    };
-  return jsonParseResult;
-};
+const { UserSchema } = require("../lib/zod-schemas");
 
 // ##### ROUTES ############
 const reply = (httpResponse, json, statusCode) => {
@@ -58,19 +23,19 @@ const server = require("http").createServer(function (req, res) {
     if (req.url === "/hello") {
       res.end(JSON.stringify({ hello: "world" }));
     } else if (req.url === "/updateUser") {
-      const body = JSON.parse(rawBody);
-      const rawUser = body;
-      if (!isUser(rawUser)) {
+      try {
+        const body = JSON.parse(rawBody);
+        const user = UserSchema.parse(body); // Validates + deserializes date
+        user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+        const resBody = JSON.stringify(user);
+        reply(res, resBody, 200);
+      } catch (err) {
         const errorBody = JSON.stringify({
-          error: "invalid input, not an user",
+          error:
+            err.name === "ZodError" ? "Validation failed" : "Invalid input",
         });
         reply(res, errorBody, 400);
-        return;
       }
-      const user = deserializeUser(rawUser); // we would need to deserialize to be able to use date etc
-      user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-      const resBody = JSON.stringify(user);
-      reply(res, resBody, 200);
     } else {
       const errorBody = JSON.stringify({ error: "route not found" });
       reply(res, errorBody, 404);
