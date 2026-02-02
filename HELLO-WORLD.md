@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/public/logo-dark.svg?raw=true">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/public/logo.svg?raw=true">
-    <img alt='mion, a mikro kit for Typescript Serverless APIs' src='./assets/public/logo.svg?raw=true' width="403" height="150">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/images/logo-dark.svg?raw=true">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/images/logo.svg?raw=true">
+    <img alt='mion, a mikro kit for Typescript Serverless APIs' src='./assets/images/logo.svg?raw=true' width="403" height="150">
   </picture>
 </p>
 
@@ -51,46 +51,36 @@ app.get("/hello", function (req, res) {
 
 ## Benchmark Results
 
-* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v24.13.0`
-* __Run:__ Mon Feb 02 2026 20:34:03 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 30.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
+- **Node:** `v24.13.0`
+- **Run:** Mon Feb 02 2026 20:34:03 GMT+0000 (Greenwich Mean Time)
+- **Method:** `autocannon -c 100 -d 30.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-#### Req (R/s) 
+#### Req (R/s)
 
 ![benchmarks](assets/public/charts-servers-hello/requests.png)
 
-
-
-#### Throughput (Mb/s) 
+#### Throughput (Mb/s)
 
 ![benchmarks](assets/public/charts-servers-hello/throughput.png)
 
-
-
-#### Latency (ms) 
+#### Latency (ms)
 
 ![benchmarks](assets/public/charts-servers-hello/latency.png)
 
-
-
-#### Max Memory (Mb) 
+#### Max Memory (Mb)
 
 ![benchmarks](assets/public/charts-servers-hello/maxMem.png)
 
-
-
-#### Memory Series (MB) 
+#### Memory Series (MB)
 
 ![benchmarks](assets/public/charts-servers-hello/memSeries.png)
 
-
-
-|           | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
-| :--       | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                       |
-| http-node | 16.18.0   | ✗      | 41799.5     | 23.40        | 7.45          | 128             | 120         | ✓          | bare node http server with Zod validation                 |
-| fastify   | 4.10.2    | ✓      | 38932.3     | 25.20        | 6.98          | 145             | 119         | ✓          | Fastify with Zod validation                               |
-| **mion**  | **0.6.2** | **✓**  | **37097.6** | **26.44**    | **6.69**      | **143**         | **118**     | **✓**      | **Automatic validation and serialization out of the box** |
-| hono      | 3.12.6    | ✓      | 29589.3     | 33.28        | 5.28          | 219             | 117         | ✓          | hono node server with Zod validation                      |
-| hapi      | 21.4.4    | ✓      | 28793.1     | 34.21        | 5.13          | 225             | 121         | ✓          | Hapi with Zod validation                                  |
-| express   | 4.22.1    | ✓      | 21454.9     | 46.07        | 3.83          | 151             | 116         | ✓          | Express with Zod validation                               |
+|           |   Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
+| :-------- | --------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :-------------------------------------------------------- |
+| http-node |   16.18.0 |      ✗ |   41799.5   |        23.40 |          7.45 |             128 |         120 |     ✓      | bare node http server with Zod validation                 |
+| fastify   |    4.10.2 |      ✓ |   38932.3   |        25.20 |          6.98 |             145 |         119 |     ✓      | Fastify with Zod validation                               |
+| **mion**  | **0.6.2** |  **✓** | **37097.6** |    **26.44** |      **6.69** |         **143** |     **118** |   **✓**    | **Automatic validation and serialization out of the box** |
+| hono      |    3.12.6 |      ✓ |   29589.3   |        33.28 |          5.28 |             219 |         117 |     ✓      | hono node server with Zod validation                      |
+| hapi      |    21.4.4 |      ✓ |   28793.1   |        34.21 |          5.13 |             225 |         121 |     ✓      | Hapi with Zod validation                                  |
+| express   |    4.22.1 |      ✓ |   21454.9   |        46.07 |          3.83 |             151 |         116 |     ✓      | Express with Zod validation                               |
