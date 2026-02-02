@@ -47,6 +47,9 @@ export default defineConfig({
       compilerOptions: {
         sourceMap: true,
       },
+      // Exclude hono and elysia apps from deepkit type metadata emission
+      // These frameworks don't need runtime type metadata and the __assignType wrappers add overhead
+      exclude: "**/{honoAppBun,elysiaAppBun}.ts",
     }),
     dts({
       outDir: "_compiled-apps",
