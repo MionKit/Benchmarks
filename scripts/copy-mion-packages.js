@@ -43,12 +43,22 @@
  * It also removes TypeScript source files (index.ts, src/) to prevent Bun from preferring
  * them over the compiled JavaScript in .dist/.
  *
+ * ## Behavior
+ *
+ * - **Symlinked packages**: Copies from symlink target, removes TS source files, saves source path
+ * - **Already-copied packages**: Re-copies from saved source path (stored in .mion-source-paths.json)
+ * - **Safety**: Only removes FILES_TO_REMOVE (index.ts, src/) from copied files, never from symlinked
+ *   originals. Source paths are saved so re-copying works even after packages are already copied.
+ *
  * ## Usage
  *
+ *   # First time: link then copy
  *   npm run mionlink && npm run mionCopy
  *
- * Or to restore symlinks for development:
+ *   # Subsequent times: just re-copy (uses saved source paths)
+ *   npm run mionCopy
  *
+ *   # To restore symlinks for development:
  *   npm run mionlink
  */
 
@@ -78,6 +88,12 @@ const NODE_MODULES_MIONKIT = path.join(
   "..",
   "node_modules",
   "@mionkit",
+);
+
+// File to store source paths for re-copying already-copied packages
+const SOURCE_PATHS_FILE = path.join(
+  NODE_MODULES_MIONKIT,
+  ".mion-source-paths.json",
 );
 
 function isSymlink(filePath) {
@@ -131,6 +147,31 @@ function removeIfExists(filePath) {
   return false;
 }
 
+function loadSourcePaths() {
+  try {
+    if (fs.existsSync(SOURCE_PATHS_FILE)) {
+      return JSON.parse(fs.readFileSync(SOURCE_PATHS_FILE, "utf8"));
+    }
+  } catch (e) {
+    console.warn("  Warning: Could not load source paths file:", e.message);
+  }
+  return {};
+}
+
+function saveSourcePaths(sourcePaths) {
+  try {
+    fs.writeFileSync(SOURCE_PATHS_FILE, JSON.stringify(sourcePaths, null, 2));
+  } catch (e) {
+    console.warn("  Warning: Could not save source paths file:", e.message);
+  }
+}
+
+function removeDirRecursive(dirPath) {
+  if (fs.existsSync(dirPath)) {
+    fs.rmSync(dirPath, { recursive: true, force: true });
+  }
+}
+
 function main() {
   console.log("=== Mion Packages Copy Script ===");
   console.log("(Workaround for Bun CJS symlink module resolution bug)\n");
@@ -171,16 +212,20 @@ function main() {
     nonSymlinkedPackages.forEach((p) => console.log(`  - ${p.name}`));
   }
 
-  if (symlinkedPackages.length === 0) {
-    console.log("\nNo symlinked packages found. Nothing to copy.");
+  if (symlinkedPackages.length === 0 && nonSymlinkedPackages.length === 0) {
+    console.log("\nNo packages found. Nothing to copy.");
     console.log("If you want to link packages first, run: npm run mionlink");
     process.exit(0);
   }
 
+  // Load saved source paths for re-copying already-copied packages
+  const savedSourcePaths = loadSourcePaths();
+
   console.log("\n--- Starting copy process ---\n");
 
+  // Process symlinked packages - copy and remove TS source files
   for (const pkg of symlinkedPackages) {
-    console.log(`Processing ${pkg.name}...`);
+    console.log(`Processing ${pkg.name} (symlinked)...`);
 
     // Resolve the symlink target to get the actual source path
     const sourcePath = path.resolve(path.dirname(pkg.path), pkg.target);
@@ -206,15 +251,19 @@ function main() {
       continue;
     }
 
+    // Save the source path for future re-copying
+    savedSourcePaths[pkg.name] = sourcePath;
+
     // Remove the symlink
     console.log(`  Removing symlink...`);
     fs.unlinkSync(pkg.path);
 
     // Copy the entire package directory
-    console.log(`  Copying package...`);
+    console.log(`  Copying package from source...`);
     copyDirRecursive(sourcePath, pkg.path);
 
     // Remove TypeScript source files to prevent Bun from using them
+    // Safe to remove since we just copied them (not original files)
     let removedCount = 0;
     for (const fileToRemove of FILES_TO_REMOVE) {
       const filePath = path.join(pkg.path, fileToRemove);
@@ -238,6 +287,80 @@ function main() {
       console.error(`  ✗ Failed to copy ${pkg.name}`);
     }
   }
+
+  // Process already-copied packages - re-copy from saved source path
+  for (const pkg of nonSymlinkedPackages) {
+    console.log(`Processing ${pkg.name} (already copied)...`);
+
+    // Try to get the source path from saved paths
+    const sourcePath = savedSourcePaths[pkg.name];
+
+    if (!sourcePath) {
+      console.log(`  Warning: No saved source path found for ${pkg.name}`);
+      console.log(
+        `  Run 'npm run mionlink' first to establish symlinks, then run this script again.`,
+      );
+      continue;
+    }
+
+    if (!fs.existsSync(sourcePath)) {
+      console.error(`  Error: Source path not found: ${sourcePath}`);
+      console.log(`  Run 'npm run mionlink' to re-establish symlinks.`);
+      continue;
+    }
+
+    // Check that either .dist or build folder exists in source
+    const sourceDistPath = path.join(sourcePath, ".dist");
+    const sourceBuildPath = path.join(sourcePath, "build");
+    const hasDistFolder = fs.existsSync(sourceDistPath);
+    const hasBuildFolder = fs.existsSync(sourceBuildPath);
+
+    if (!hasDistFolder && !hasBuildFolder) {
+      console.error(
+        `  Error: Neither .dist nor build folder found in ${sourcePath}`,
+      );
+      console.error(
+        `  Please build the mion packages first (npm run build in mion repo)`,
+      );
+      continue;
+    }
+
+    // Remove the existing copied directory
+    console.log(`  Removing existing copy...`);
+    removeDirRecursive(pkg.path);
+
+    // Copy the entire package directory
+    console.log(`  Copying package from source...`);
+    copyDirRecursive(sourcePath, pkg.path);
+
+    // Remove TypeScript source files to prevent Bun from using them
+    // Safe to remove since we just copied them (not original files)
+    let removedCount = 0;
+    for (const fileToRemove of FILES_TO_REMOVE) {
+      const filePath = path.join(pkg.path, fileToRemove);
+      if (removeIfExists(filePath)) {
+        removedCount++;
+      }
+    }
+
+    if (removedCount > 0) {
+      console.log(
+        `  Removed ${removedCount} TypeScript source file(s)/folder(s)`,
+      );
+    }
+
+    // Verify the copy
+    const destDistPath = path.join(pkg.path, ".dist");
+    const destBuildPath = path.join(pkg.path, "build");
+    if (fs.existsSync(destDistPath) || fs.existsSync(destBuildPath)) {
+      console.log(`  ✓ Successfully re-copied ${pkg.name}`);
+    } else {
+      console.error(`  ✗ Failed to copy ${pkg.name}`);
+    }
+  }
+
+  // Save source paths for future re-copying
+  saveSourcePaths(savedSourcePaths);
 
   console.log("\n=== Copy complete ===");
   console.log("\nNote: To restore symlinks, run: npm run mionlink");
