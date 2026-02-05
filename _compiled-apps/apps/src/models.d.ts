@@ -67,6 +67,12 @@ export type SayHello = {
 export type HelloReply = {
     hello: string;
 };
+export interface SimpleUser {
+    id: number;
+    name: string;
+    surname: string;
+    lastUpdate: Date;
+}
 export declare type __ΩUserRole = any[];
 export declare type __ΩAccountStatus = any[];
 export declare type __ΩAddress = any[];
@@ -79,4 +85,5 @@ export declare type __ΩUserId = any[];
 export declare type __ΩPartialUser = any[];
 export declare type __ΩSayHello = any[];
 export declare type __ΩHelloReply = any[];
+export declare type __ΩSimpleUser = any[];
 //# sourceMappingURL=models.d.ts.map

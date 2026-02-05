@@ -11,6 +11,7 @@
     "report-simple": "node reports.js simple-user",
     "build": "rimraf ./_compiled-apps && vite build",
     "test": "standard | snazzy",
+    "test-servers": "node ./scripts/test-mion-servers.js",
     "mionlink": "bun pm cache rm && npm link @mionkit/aot-caches @mionkit/aws @mionkit/bun @mionkit/client @mionkit/codegen @mionkit/core @mionkit/eslint-plugin @mionkit/gcloud @mionkit/node @mionkit/quick-start @mionkit/router @mionkit/run-types @mionkit/type-formats && node scripts/copy-mion-packages.js"
   },
   "bin": {

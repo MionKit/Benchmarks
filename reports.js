@@ -52,7 +52,7 @@ const BENCHMARK_TYPES = {
 // Default benchmark parameters
 const DEFAULT_CONNECTIONS = 100;
 const DEFAULT_PIPELINING = 10;
-const DEFAULT_DURATION = 30;
+const DEFAULT_DURATION = 20;
 const QUICK_DURATION = 4;
 
 /**

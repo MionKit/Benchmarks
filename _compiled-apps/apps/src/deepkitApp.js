@@ -7,13 +7,11 @@ const app = require("@deepkit/app");
 const framework = require("@deepkit/framework");
 const http = require("@deepkit/http");
 const logger = require("@deepkit/logger");
+const apps_src_models = require("./models.js");
 function __assignType(fn, args) {
   fn.__type = args;
   return fn;
 }
-var { __ΩHttpBody } = require("@deepkit/http");
-var { __ΩLogMessage, __ΩLoggerTransport } = require("@deepkit/logger");
-var { __ΩSayHello, __ΩUser } = require("./models");
 class MyTransport {
   constructor() {
     console.log("MyTransport constructor");
@@ -24,7 +22,7 @@ class MyTransport {
     return false;
   }
 }
-__publicField(MyTransport, "__type", ["constructor", () => __ΩLogMessage, "message", "write", "supportsColor", () => __ΩLoggerTransport, "MyTransport", `P"0!Pn"2#"0$P"0%5n&x"w'`]);
+__publicField(MyTransport, "__type", ["constructor", "message", "write", "supportsColor", "MyTransport", 'P"0!P!2""0#P"0$5!x"w%']);
 const initDeepkitApp = () => {
   const app$1 = new app.App({
     imports: [new framework.FrameworkModule()]
@@ -34,14 +32,14 @@ const initDeepkitApp = () => {
   const router = app$1.get(http.HttpRouterRegistry);
   router.any("/hello", __assignType(() => {
     return { hello: "world" };
-  }, [() => __ΩSayHello, "", 'Pn!/"']));
+  }, [() => apps_src_models.__ΩSayHello, "", 'Pn!/"']));
   router.post("/updateUser", __assignType((body) => {
     const user = body;
     user.updatedAt = /* @__PURE__ */ new Date();
     user.lastLoginAt = /* @__PURE__ */ new Date();
     user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
     return user;
-  }, [() => __ΩHttpBody, () => __ΩUser, "body", () => __ΩUser, "", 'Pn"o!"2#n$/%']));
+  }, ["body", () => apps_src_models.__ΩUser, "", 'P!2!n"/#']));
   return { deepKitApp: app$1, deepKitRouter: router };
 };
 exports.MyTransport = MyTransport;

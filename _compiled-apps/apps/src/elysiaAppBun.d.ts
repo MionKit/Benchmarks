@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia';
-import { User } from './models';
+import { User, SimpleUser } from './models';
 export interface BunServerOptions {
     port?: number;
 }
@@ -92,6 +92,32 @@ export declare const initHttpBun: (options?: BunServerOptions) => Elysia<"", {
             headers: unknown;
             response: {
                 200: User;
+                422: {
+                    type: "validation";
+                    on: string;
+                    summary?: string;
+                    message?: string;
+                    found?: unknown;
+                    property?: string;
+                    expected?: string;
+                };
+            };
+        };
+    };
+} & {
+    updateSimpleUser: {
+        post: {
+            body: {
+                id: number;
+                name: string;
+                surname: string;
+                lastUpdate: Date;
+            };
+            params: {};
+            query: unknown;
+            headers: unknown;
+            response: {
+                200: SimpleUser;
                 422: {
                     type: "validation";
                     on: string;

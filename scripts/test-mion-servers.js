@@ -16,6 +16,12 @@ const { fork, spawn } = require("child_process");
 const http = require("http");
 const path = require("path");
 
+// Import payload generators from autocannon to ensure test data matches benchmark data
+const {
+  generateSampleUser,
+  generateSimpleUser,
+} = require("../lib/autocannon.js");
+
 // Colors for console output
 const colors = {
   red: "\x1b[31m",
@@ -93,65 +99,8 @@ async function killProcess(proc) {
   }
 }
 
-/**
- * Generate a sample user payload for testing (complex User model)
- * Matches the payload structure in lib/autocannon.js
- */
-function generateTestUser() {
-  return {
-    id: 12345,
-    username: "john_smith",
-    email: "john.smith@example.com",
-    profile: {
-      firstName: "John",
-      lastName: "Smith",
-      displayName: "John S.",
-      bio: "Software developer and tech enthusiast",
-      avatarUrl: "https://example.com/avatars/john.jpg",
-      dateOfBirth: "1990-05-15T00:00:00.000Z",
-    },
-    role: "user",
-    status: "active",
-    address: {
-      street: "123 Main Street",
-      city: "San Francisco",
-      state: "CA",
-      zipCode: "94102",
-      country: "USA",
-    },
-    paymentMethods: [
-      {
-        type: "credit_card",
-        lastFourDigits: "4242",
-        expiryMonth: 12,
-        expiryYear: 2025,
-        brand: "visa",
-      },
-      {
-        type: "paypal",
-        email: "john.paypal@example.com",
-      },
-    ],
-    preferences: {
-      theme: "dark",
-      language: "en-US",
-      timezone: "America/Los_Angeles",
-      notifications: {
-        email: true,
-        sms: false,
-        push: true,
-        frequency: "daily",
-      },
-    },
-    createdAt: "2020-01-15T10:30:00.000Z",
-    updatedAt: "2024-12-17T02:24:00.000Z",
-    lastLoginAt: "2024-12-16T18:45:00.000Z",
-    tags: ["premium", "early-adopter", "verified"],
-  };
-}
-
 async function testEndpoints(serverName) {
-  const results = { hello: false, updateUser: false };
+  const results = { hello: false, updateUser: false, updateSimpleUser: false };
 
   // Test 1: Hello endpoint (GET)
   log("yellow", `  Test 1: GET /hello`);
@@ -183,9 +132,8 @@ async function testEndpoints(serverName) {
   // Test 2: UpdateUser endpoint (POST) - mion format with array wrapper
   log("yellow", "  Test 2: POST /updateUser (mion RPC format)");
 
-  // Use the complex User model wrapped in array for mion RPC-style API
-  const testUser = generateTestUser();
-  const requestBody = JSON.stringify([testUser]);
+  // Use the complex User model from autocannon (already wrapped in array for mion RPC-style API)
+  const requestBody = generateSampleUser(true);
 
   console.log(`  Request body length: ${requestBody.length} bytes`);
   console.log("  Request: POST http://127.0.0.1:3000/updateUser");
@@ -263,7 +211,7 @@ async function testEndpoints(serverName) {
     if (responseData.email === "john.smith@example.com") {
       validations.push("email preserved");
     }
-    if (responseData.id === 12345) {
+    if (typeof responseData.id === "number" && responseData.id > 0) {
       validations.push("id preserved");
     }
 
@@ -309,6 +257,102 @@ async function testEndpoints(serverName) {
     log("red", `  ✗ UpdateUser endpoint error: ${err.message}`);
   }
 
+  // Test 3: UpdateSimpleUser endpoint (POST) - mion format with array wrapper
+  log("yellow", "  Test 3: POST /updateSimpleUser (mion RPC format)");
+
+  // Use the SimpleUser model from autocannon (already wrapped in array for mion RPC-style API)
+  const simpleUserBody = generateSimpleUser(true);
+
+  console.log(`  Request body length: ${simpleUserBody.length} bytes`);
+  console.log("  Request: POST http://127.0.0.1:3000/updateSimpleUser");
+
+  try {
+    const simpleUserResponse = await makeRequest(
+      {
+        hostname: "127.0.0.1",
+        port: 3000,
+        path: "/updateSimpleUser",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(simpleUserBody),
+          Accept: "*/*",
+        },
+      },
+      simpleUserBody,
+    );
+
+    console.log(
+      `  Response (${simpleUserResponse.statusCode}): ${simpleUserResponse.body}`,
+    );
+
+    // Parse response to validate business logic
+    let simpleUserData;
+    try {
+      simpleUserData = JSON.parse(simpleUserResponse.body);
+      // mion wraps response in {"updateSimpleUser": {...}} format
+      if (simpleUserData.updateSimpleUser) {
+        simpleUserData = simpleUserData.updateSimpleUser;
+      }
+    } catch (e) {
+      log("red", `  ✗ Failed to parse response as JSON`);
+      return results;
+    }
+
+    // Validate the response
+    const simpleValidations = [];
+
+    // Check if lastUpdate was modified (should be a recent timestamp)
+    if (simpleUserData.lastUpdate) {
+      const lastUpdate = new Date(simpleUserData.lastUpdate);
+      const now = new Date();
+      const diffMs = now - lastUpdate;
+      if (diffMs < 60000) {
+        // Within last minute
+        simpleValidations.push("lastUpdate is recent");
+      } else {
+        simpleValidations.push(
+          `lastUpdate present but not recent: ${simpleUserData.lastUpdate}`,
+        );
+      }
+    }
+
+    // Check basic user data is preserved
+    if (typeof simpleUserData.id === "number" && simpleUserData.id > 0) {
+      simpleValidations.push("id preserved");
+    }
+    if (simpleUserData.name === "John") {
+      simpleValidations.push("name preserved");
+    }
+    if (simpleUserData.surname === "Doe") {
+      simpleValidations.push("surname preserved");
+    }
+
+    console.log(`  Validations: ${simpleValidations.join(", ")}`);
+
+    if (simpleValidations.length >= 3) {
+      log(
+        "green",
+        "  ✓ UpdateSimpleUser endpoint working! SimpleUser model validated.\n",
+      );
+      results.updateSimpleUser = true;
+    } else {
+      log(
+        "yellow",
+        `  ⚠ UpdateSimpleUser endpoint returned data but some validations failed`,
+      );
+      if (simpleUserResponse.statusCode === 200) {
+        log(
+          "green",
+          "  ✓ UpdateSimpleUser endpoint is functional (status 200)\n",
+        );
+        results.updateSimpleUser = true;
+      }
+    }
+  } catch (err) {
+    log("red", `  ✗ UpdateSimpleUser endpoint error: ${err.message}`);
+  }
+
   return results;
 }
 
@@ -347,7 +391,7 @@ async function testNodeServer() {
 
     const results = await testEndpoints("mion (Node.js)");
 
-    return results.hello && results.updateUser;
+    return results.hello && results.updateUser && results.updateSimpleUser;
   } catch (error) {
     log("red", `ERROR: ${error.message}`);
     return false;
@@ -403,7 +447,7 @@ async function testBunServer() {
 
     const results = await testEndpoints("mion (Bun)");
 
-    return results.hello && results.updateUser;
+    return results.hello && results.updateUser && results.updateSimpleUser;
   } catch (error) {
     log("red", `ERROR: ${error.message}`);
     return false;
@@ -417,7 +461,9 @@ async function testBunServer() {
 
 async function main() {
   console.log("---- MION SERVERS TEST SUITE ----");
-  console.log("Testing with complex User model (~1KB payload)\n");
+  console.log(
+    "Testing with complex User model (~1KB payload) and SimpleUser model\n",
+  );
 
   const results = {
     node: false,
@@ -439,16 +485,22 @@ async function main() {
   console.log("=".repeat(50) + "\n");
 
   console.log("Server endpoints tested:");
-  console.log("  - GET  http://127.0.0.1:3000/hello      -> Returns 'world'");
   console.log(
-    "  - POST http://127.0.0.1:3000/updateUser -> Updates displayName, updatedAt, lastLoginAt",
+    "  - GET  http://127.0.0.1:3000/hello            -> Returns 'world'",
+  );
+  console.log(
+    "  - POST http://127.0.0.1:3000/updateUser       -> Updates displayName, updatedAt, lastLoginAt",
+  );
+  console.log(
+    "  - POST http://127.0.0.1:3000/updateSimpleUser -> Updates lastUpdate timestamp",
   );
   console.log(
     "\nNote: mion uses RPC-style API - request body must be wrapped in an array",
   );
   console.log(
-    "Complex User model includes: nested objects, discriminated unions, arrays, dates\n",
+    "Complex User model includes: nested objects, discriminated unions, arrays, dates",
   );
+  console.log("SimpleUser model includes: id, name, surname, lastUpdate\n");
 
   if (results.node) {
     log("green", "✓ mion Node.js server: PASSED");

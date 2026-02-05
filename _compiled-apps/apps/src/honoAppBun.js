@@ -85,6 +85,13 @@ const UserSchema = zod.z.object({
   // Tags
   tags: zod.z.array(zod.z.string())
 }).strict();
+const SimpleUserSchema = zod.z.object({
+  id: zod.z.number(),
+  name: zod.z.string(),
+  surname: zod.z.string(),
+  lastUpdate: zod.z.coerce.date()
+  // Automatically converts ISO string to Date
+}).strict();
 const app = new hono.Hono();
 app.get("/hello", (c) => {
   return c.json({ hello: "world" });
@@ -95,6 +102,12 @@ app.post("/updateUser", async (c) => {
   user.updatedAt = /* @__PURE__ */ new Date();
   user.lastLoginAt = /* @__PURE__ */ new Date();
   user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+  return c.json(user);
+});
+app.post("/updateSimpleUser", async (c) => {
+  const rawUser = await c.req.json();
+  const user = SimpleUserSchema.parse(rawUser);
+  user.lastUpdate = /* @__PURE__ */ new Date();
   return c.json(user);
 });
 const initHttpBun = (options = {}) => {

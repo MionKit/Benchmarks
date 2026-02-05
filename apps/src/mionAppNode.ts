@@ -20,10 +20,8 @@ export const routes = {
     // Update timestamps
     user.updatedAt = new Date();
     user.lastLoginAt = new Date();
-
     // Update profile modification
     user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
-
     return user;
   }),
   updateSimpleUser: route((ctx, user: SimpleUser): SimpleUser => {

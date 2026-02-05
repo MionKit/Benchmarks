@@ -26,7 +26,7 @@ const server = require("http").createServer(function (req, res) {
       try {
         const body = JSON.parse(rawBody);
         const user = UserSchema.parse(body); // Validates + deserializes date
-        user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+        user.updatedAt.setMonth(user.updatedAt.getMonth() + 1);
         const resBody = JSON.stringify(user);
         reply(res, resBody, 200);
       } catch (err) {

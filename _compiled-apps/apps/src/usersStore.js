@@ -1,32 +1,32 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const apps_src_models = require("./models.js");
 function __assignType(fn, args) {
   fn.__type = args;
   return fn;
 }
-var { __ΩUserId, __ΩUser, __ΩNewUser, __ΩPartialUser } = require("./models");
 const getId = __assignType((entOrId) => {
   if (typeof entOrId === "number")
     return entOrId;
   return entOrId.id;
-}, [() => __ΩUserId, "entOrId", "", `Pn!2"'/#`]);
-const store = (Map.Ω = [["'"], [() => __ΩUser, "n!"]], /* @__PURE__ */ new Map());
+}, [() => apps_src_models.__ΩUserId, "entOrId", "", `Pn!2"'/#`]);
+const store = (Map.Ω = [["'"], [() => apps_src_models.__ΩUser, "n!"]], /* @__PURE__ */ new Map());
 const createDefaultUser = __assignType((id, newUser) => ({
   id,
   ...newUser,
   createdAt: /* @__PURE__ */ new Date(),
   updatedAt: /* @__PURE__ */ new Date()
-}), ["id", () => __ΩNewUser, "newUser", () => __ΩUser, "", `P'2!n"2#n$/%`]);
+}), ["id", () => apps_src_models.__ΩNewUser, "newUser", () => apps_src_models.__ΩUser, "", `P'2!n"2#n$/%`]);
 const usersStore = {
   create: __assignType((user) => {
     const id = store.size + 1;
     const newUser = createDefaultUser(id, user);
     store.set(id, newUser);
     return newUser;
-  }, [() => __ΩNewUser, "user", () => __ΩUser, "", 'Pn!2"n#/$']),
+  }, [() => apps_src_models.__ΩNewUser, "user", () => apps_src_models.__ΩUser, "", 'Pn!2"n#/$']),
   get: __assignType((userId) => {
     return store.get(getId(userId));
-  }, [() => __ΩUserId, "userId", () => __ΩUser, "", 'Pn!2"Pn#-J/$']),
+  }, [() => apps_src_models.__ΩUserId, "userId", () => apps_src_models.__ΩUser, "", 'Pn!2"Pn#-J/$']),
   update: __assignType((user) => {
     const existing = store.get(user.id);
     if (!existing)
@@ -38,7 +38,7 @@ const usersStore = {
     };
     store.set(user.id, updated);
     return updated;
-  }, [() => __ΩPartialUser, "user", () => __ΩUser, "", 'Pn!2"Pn#-J/$']),
+  }, [() => apps_src_models.__ΩPartialUser, "user", () => apps_src_models.__ΩUser, "", 'Pn!2"Pn#-J/$']),
   delete: __assignType((userId) => {
     const id = getId(userId);
     const user = store.get(id);
@@ -46,7 +46,7 @@ const usersStore = {
       return void 0;
     store.delete(getId(id));
     return user;
-  }, [() => __ΩUserId, "userId", () => __ΩUser, "", 'Pn!2"Pn#-J/$'])
+  }, [() => apps_src_models.__ΩUserId, "userId", () => apps_src_models.__ΩUser, "", 'Pn!2"Pn#-J/$'])
 };
 const hasUnknownKeys = __assignType((knownKeys, input) => {
   if (typeof input !== "object")

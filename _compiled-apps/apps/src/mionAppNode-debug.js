@@ -3,12 +3,11 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const node = require("@mionkit/node");
 const router = require("@mionkit/router");
 const core = require("@mionkit/core");
-const __ΩPartial = ["T", "Partial", 'l+e#!e"!fRb!Pde"!gN#"w"y'];
+const apps_src_models = require("./models.js");
 function __assignType(fn, args) {
   fn.__type = args;
   return fn;
 }
-var { __ΩUser } = require("./models");
 let requestCount = 0;
 const getCacheSize = __assignType((cache) => {
   if (cache instanceof Map)
@@ -38,14 +37,14 @@ const routes = {
     user.lastLoginAt = /* @__PURE__ */ new Date();
     user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
     return user;
-  }, ["ctx", () => __ΩUser, "user", () => __ΩUser, "", 'P"2!n"2#n$/%']))
+  }, ["ctx", () => apps_src_models.__ΩUser, "user", () => apps_src_models.__ΩUser, "", 'P"2!n"2#n$/%']))
 };
 const initHttp = __assignType(async (routerOpts, httpOpts) => {
   await router.initMionRouter(routes, routerOpts);
   const { jitFnsCache, pureFnsCache } = core.getJitFnCaches();
   console.log(`[mion.node] Initial JIT Cache: jitFns=${getCacheSize(jitFnsCache)}, pureFns=${getCacheSize(pureFnsCache)}`);
   return node.startNodeServer(httpOpts);
-}, [() => __ΩPartial, "routerOpts", () => __ΩPartial, "httpOpts", "", 'P!o!"2"8!o#"2$8"/%']);
+}, ["routerOpts", "httpOpts", "", 'P!2!8!2"8"/#']);
 exports.initHttp = initHttp;
 exports.routes = routes;
 //# sourceMappingURL=mionAppNode-debug.js.map

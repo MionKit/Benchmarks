@@ -89,6 +89,12 @@ const UserSchema = elysia.t.Object({
   // Tags
   tags: elysia.t.Array(elysia.t.String())
 });
+const SimpleUserSchema = elysia.t.Object({
+  id: elysia.t.Number(),
+  name: elysia.t.String(),
+  surname: elysia.t.String(),
+  lastUpdate: DateString
+});
 const createApp = () => {
   return new elysia.Elysia().get("/hello", () => ({ hello: "world" })).post(
     "/updateUser",
@@ -100,6 +106,14 @@ const createApp = () => {
       return user;
     },
     { body: UserSchema }
+  ).post(
+    "/updateSimpleUser",
+    ({ body }) => {
+      const user = body;
+      user.lastUpdate = /* @__PURE__ */ new Date();
+      return user;
+    },
+    { body: SimpleUserSchema }
   );
 };
 const initHttpBun = (options = {}) => {
