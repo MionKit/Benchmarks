@@ -99,3 +99,11 @@ export type UserId = User | number;
 export type PartialUser = Partial<User> & { id: number };
 export type SayHello = { hello: string };
 export type HelloReply = { hello: string };
+
+// ============ Simple User Model (for simple-user benchmark) ============
+export interface SimpleUser {
+  id: number;
+  name: string;
+  surname: string;
+  lastUpdate: Date;
+}

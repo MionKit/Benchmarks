@@ -43,6 +43,10 @@ const BENCHMARK_TYPES = {
     name: "servers-hello",
     description: "Hello World benchmark (GET /hello)",
   },
+  "simple-user": {
+    name: "servers-simple",
+    description: "Simple User benchmark (POST /updateSimpleUser)",
+  },
 };
 
 // Default benchmark parameters
@@ -107,7 +111,8 @@ Usage:
 Types:
   user        - Run updateUser benchmark (POST /updateUser)
   hello-world - Run hello world benchmark (GET /hello)
-  all         - Run both benchmarks
+  simple-user - Run simple user benchmark (POST /updateSimpleUser)
+  all         - Run all benchmarks
 
 Options:
   --quick, -q           Run quick benchmarks (4 seconds instead of 30)
@@ -115,13 +120,14 @@ Options:
   --help, -h            Show this help message
 
 Environment Variables:
-  BENCH_TYPE      Benchmark type (user, hello-world, all)
+  BENCH_TYPE      Benchmark type (user, hello-world, simple-user, all)
   BENCH_SERVERS   Comma-separated list of servers to benchmark
   BENCH_QUICK     Set to 'true' for quick benchmarks
 
 Examples:
   node reports.js user
   node reports.js hello-world --quick
+  node reports.js simple-user --quick
   node reports.js all -q
   node reports.js user --servers=mion.bun,hono.bun
   BENCH_TYPE=user BENCH_QUICK=true node reports.js
@@ -218,7 +224,7 @@ async function main() {
     process.exit(1);
   }
 
-  const validTypes = ["user", "hello-world", "all"];
+  const validTypes = ["user", "hello-world", "simple-user", "all"];
   if (!validTypes.includes(options.type)) {
     console.error(`Error: Invalid benchmark type '${options.type}'`);
     console.error(`Valid types: ${validTypes.join(", ")}`);
@@ -234,9 +240,10 @@ async function main() {
 
   try {
     if (options.type === "all") {
-      // Run both benchmarks
+      // Run all benchmarks
       await runBenchmark("user", options);
       await runBenchmark("hello-world", options);
+      await runBenchmark("simple-user", options);
     } else {
       // Run single benchmark
       await runBenchmark(options.type, options);

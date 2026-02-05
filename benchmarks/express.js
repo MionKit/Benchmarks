@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express");
-const { UserSchema } = require("../lib/zod-schemas");
+const { UserSchema, SimpleUserSchema } = require("../lib/zod-schemas");
 
 const app = express();
 
@@ -35,6 +35,12 @@ app.post("/updateUser", function (req, res) {
   // Update profile modification
   user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
+  res.json(user);
+});
+
+app.post("/updateSimpleUser", function (req, res) {
+  const user = SimpleUserSchema.parse(req.body); // Validates + deserializes dates
+  user.lastUpdate = new Date();
   res.json(user);
 });
 

@@ -113,6 +113,18 @@ const UserSchema = z
 
 type User = z.infer<typeof UserSchema>;
 
+// ============ Simple User Schema (for simple-user benchmark) ============
+const SimpleUserSchema = z
+  .object({
+    id: z.number(),
+    name: z.string(),
+    surname: z.string(),
+    lastUpdate: z.coerce.date(), // Automatically converts ISO string to Date
+  })
+  .strict();
+
+type SimpleUser = z.infer<typeof SimpleUserSchema>;
+
 const app = new Hono();
 
 app.get("/hello", (c) => {
@@ -130,6 +142,13 @@ app.post("/updateUser", async (c) => {
   // Update profile modification
   user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
+  return c.json(user);
+});
+
+app.post("/updateSimpleUser", async (c) => {
+  const rawUser = await c.req.json();
+  const user = SimpleUserSchema.parse(rawUser); // Validates + deserializes dates
+  user.lastUpdate = new Date();
   return c.json(user);
 });
 

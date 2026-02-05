@@ -5,7 +5,7 @@
  * ######## */
 
 import { Elysia, t } from "elysia";
-import type { User } from "./models";
+import type { User, SimpleUser } from "./models";
 
 // TypeBox schema with Transform for automatic date coercion
 const DateString = t
@@ -124,6 +124,14 @@ const UserSchema = t.Object({
   tags: t.Array(t.String()),
 });
 
+// ============ Simple User Schema (for simple-user benchmark) ============
+const SimpleUserSchema = t.Object({
+  id: t.Number(),
+  name: t.String(),
+  surname: t.String(),
+  lastUpdate: DateString,
+});
+
 // Create app without starting server
 const createApp = () => {
   return new Elysia()
@@ -145,6 +153,16 @@ const createApp = () => {
         return user;
       },
       { body: UserSchema },
+    )
+    .post(
+      "/updateSimpleUser",
+      ({ body }) => {
+        // body fields are already Date objects thanks to Transform
+        const user = body as unknown as SimpleUser;
+        user.lastUpdate = new Date();
+        return user;
+      },
+      { body: SimpleUserSchema },
     );
 };
 

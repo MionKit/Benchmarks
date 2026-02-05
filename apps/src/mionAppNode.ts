@@ -12,7 +12,7 @@ import {
   initMionRouter,
   RouterOptions,
 } from "@mionkit/router";
-import { User } from "./models";
+import { User, SimpleUser } from "./models";
 
 export const routes = {
   hello: route((): string => "world"),
@@ -24,6 +24,10 @@ export const routes = {
     // Update profile modification
     user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
+    return user;
+  }),
+  updateSimpleUser: route((ctx, user: SimpleUser): SimpleUser => {
+    user.lastUpdate = new Date();
     return user;
   }),
 } satisfies Routes;

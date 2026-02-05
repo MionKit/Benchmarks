@@ -1,6 +1,6 @@
 "use strict";
 
-const { UserSchema } = require("../lib/zod-schemas");
+const { UserSchema, SimpleUserSchema } = require("../lib/zod-schemas");
 
 const fastify = require("fastify")();
 
@@ -19,6 +19,12 @@ fastify.post("/updateUser", async function (req, reply) {
   // Update profile modification
   user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
+  reply.send(user);
+});
+
+fastify.post("/updateSimpleUser", async function (req, reply) {
+  const user = SimpleUserSchema.parse(req.body); // Validates + deserializes dates
+  user.lastUpdate = new Date();
   reply.send(user);
 });
 

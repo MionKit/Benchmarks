@@ -3,7 +3,7 @@
 require("make-promises-safe");
 
 const Hapi = require("@hapi/hapi");
-const { UserSchema } = require("../lib/zod-schemas");
+const { UserSchema, SimpleUserSchema } = require("../lib/zod-schemas");
 
 // ##### ROUTES ############
 async function start() {
@@ -44,6 +44,23 @@ async function start() {
       // Update profile modification
       user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
+      return user;
+    },
+  });
+
+  server.route({
+    method: "POST",
+    path: "/updateSimpleUser",
+    config: {
+      cache: false,
+      response: {
+        ranges: false,
+      },
+      state: { parse: false },
+    },
+    handler: function (request, h) {
+      const user = SimpleUserSchema.parse(request.payload); // Validates + deserializes dates
+      user.lastUpdate = new Date();
       return user;
     },
   });

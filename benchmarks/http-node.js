@@ -1,6 +1,6 @@
 "use strict";
 
-const { UserSchema } = require("../lib/zod-schemas");
+const { UserSchema, SimpleUserSchema } = require("../lib/zod-schemas");
 
 // ##### ROUTES ############
 const reply = (httpResponse, json, statusCode) => {
@@ -27,6 +27,20 @@ const server = require("http").createServer(function (req, res) {
         const body = JSON.parse(rawBody);
         const user = UserSchema.parse(body); // Validates + deserializes date
         user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+        const resBody = JSON.stringify(user);
+        reply(res, resBody, 200);
+      } catch (err) {
+        const errorBody = JSON.stringify({
+          error:
+            err.name === "ZodError" ? "Validation failed" : "Invalid input",
+        });
+        reply(res, errorBody, 400);
+      }
+    } else if (req.url === "/updateSimpleUser") {
+      try {
+        const body = JSON.parse(rawBody);
+        const user = SimpleUserSchema.parse(body); // Validates + deserializes date
+        user.lastUpdate = new Date();
         const resBody = JSON.stringify(user);
         reply(res, resBody, 200);
       } catch (err) {
