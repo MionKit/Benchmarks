@@ -151,17 +151,10 @@ ${compareResults(true, outputResults)}
 
 function setBenchmark(benchmark) {
   switch (benchmark) {
-    case "mion":
-      resultsMarkdownFilename = "MION-OPTIONS.md";
-      resultsPath = join(process.cwd(), "results-mion");
-      resultsJsonFilename = "benchmark-results-mion.json";
-      info = benchmarkMion.info;
-      chartsDirectory = join(process.cwd(), "assets", "public", "charts-mion");
-      break;
     case "servers-hello":
       resultsMarkdownFilename = "HELLO-WORLD.md";
       resultsPath = join(process.cwd(), "results-hello");
-      resultsJsonFilename = "benchmark-results-servers-hello.json";
+      resultsJsonFilename = "benchmark-results-hello-world.json";
       info = benchmarkServers.info;
       chartsDirectory = join(
         process.cwd(),
@@ -171,10 +164,10 @@ function setBenchmark(benchmark) {
       );
       break;
     default:
-    case "servers":
+    case "update-user":
       resultsMarkdownFilename = "UPDATE-USER.md";
-      resultsPath = join(process.cwd(), "results");
-      resultsJsonFilename = "benchmark-results-servers.json";
+      resultsPath = join(process.cwd(), "results-update-user");
+      resultsJsonFilename = "benchmark-results-update-user.json";
       info = benchmarkServers.info;
       chartsDirectory = join(
         process.cwd(),

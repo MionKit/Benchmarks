@@ -17,12 +17,7 @@ run().catch((err) => {
 
 function setBenchmarks(benchmarkName) {
   switch (benchmarkName) {
-    case "mion":
-      choices = mionBenchmarks.choices;
-      list = mionBenchmarks.list;
-      getBenchmarkInfo = mionBenchmarks.info;
-      break;
-    case "servers":
+    case "update-user":
     default:
       choices = serverBenchmarks.choices;
       list = serverBenchmarks.list;
@@ -76,17 +71,13 @@ async function getBenchmarkOptions() {
       name: "benchmark",
       choices: [
         {
-          name: "servers => compare multiple libraries (update User)",
-          value: "servers",
+          name: "update-user => compare multiple libraries (update User)",
+          value: "update-user",
         },
         {
           name: "servers => compare multiple libraries (hello world)",
           value: "servers-hello",
         },
-        // {
-        //   name: "mion options => benchmarks mion using different settings and options",
-        //   value: "mion",
-        // },
       ],
       validate: function (answer) {
         if (answer.length < 1) {
