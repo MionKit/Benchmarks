@@ -6,8 +6,9 @@ Fork/adaptation of the [fastify benchmarks](https://github.com/fastify/benchmark
 
 Entry points:
 
-- `benchmark-bench.js` - runs benchmarks
-- `benchmark-compare.js` - generates reports
+- `reports.js` - unified benchmark runner (recommended)
+- `benchmark-bench.js` - runs benchmarks (low-level)
+- `benchmark-compare.js` - generates reports (low-level)
 
 Core libraries:
 
@@ -27,34 +28,41 @@ Output files:
 - `assets/public/charts-*/*.png` - generated charts
 - `UPDATE-USER.md`, `HELLO-WORLD.md` - updated with results
 
-## NPM Scripts
-
-Main benchmarks:
-
-- `npm run servers` - full updateUser benchmark + report (updates UPDATE-USER.md)
-- `npm run servers-hello` - hello world benchmark + report (updates HELLO-WORLD.md)
-- `npm run report` - runs both benchmarks
-
-Build:
-
-- `npm run build` - compiles TypeScript apps (required for runtime type metadata)
-- `npm run mionlink` - links local mion packages for development
-
 ## Running Benchmarks
 
-```bash
-# Arguments: all connections pipelining duration benchmark
-node benchmark-bench.js y 100 10 40 servers
-```
-
-Run specific servers using BENCH_SERVERS environment variable:
+Use `reports.js` for running benchmarks (recommended):
 
 ```bash
-BENCH_SERVERS=hono.bun node benchmark-bench.js y 100 10 4 servers
-BENCH_SERVERS=mion.bun,hono.bun,elysia.bun node benchmark-bench.js y 100 10 4 servers
+# Run updateUser benchmark (full 30s duration)
+node reports.js user
+
+# Run hello-world benchmark (full 30s duration)
+node reports.js hello-world
+
+# Run all benchmarks
+node reports.js all
+
+# Quick mode (4s duration for faster iteration)
+node reports.js user --quick
+node reports.js all -q
+
+# Run specific servers only
+node reports.js user --servers=mion.bun,hono.bun
+BENCH_SERVERS=mion.bun,hono.bun node reports.js user
+
+# Environment variables
+BENCH_TYPE=user BENCH_QUICK=true node reports.js
 ```
 
 Available servers: http-node, mion, mion.bun, hono, hono.bun, elysia.bun, fastify, hapi, express
+
+## NPM Scripts
+
+- `npm run report` - run all benchmarks
+- `npm run report-user` - run updateUser benchmark
+- `npm run report-hello` - run hello-world benchmark
+- `npm run build` - compiles TypeScript apps (required for runtime type metadata)
+- `npm run mionlink` - links local mion packages for development
 
 ## How Benchmarking Works
 

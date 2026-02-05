@@ -24,20 +24,24 @@ let chartsDirectory;
 
 let ranParameters = "--connections=100 --duration=40 --pipelining=10";
 
-commander
-  .option("-t, --table", "print table")
-  .option("-m --markdown", "format table for markdown")
-  .option("-u --update", "update UPDATE-USER.md")
-  .option(
-    "-b --benchmark <benchmark>",
-    "benchmark to compare (servers or mion)",
-  )
-  .parse(process.argv);
+// Only parse CLI args when run directly (not when imported)
+let opts = {};
+if (require.main === module) {
+  commander
+    .option("-t, --table", "print table")
+    .option("-m --markdown", "format table for markdown")
+    .option("-u --update", "update UPDATE-USER.md")
+    .option(
+      "-b --benchmark <benchmark>",
+      "benchmark to compare (servers or mion)",
+    )
+    .parse(process.argv);
 
-const opts = commander.opts();
+  opts = commander.opts();
 
-if (opts.markdown || opts.update) {
-  chalk.level = 0;
+  if (opts.markdown || opts.update) {
+    chalk.level = 0;
+  }
 }
 
 async function getBenchmarkOptions() {
@@ -382,4 +386,43 @@ async function getMarkdownCharts(outputResults) {
   return results.join("\n\n");
 }
 
-runCompare();
+/**
+ * Generate report for a benchmark type (exported for programmatic use)
+ * @param {string} benchmarkType - 'servers' or 'servers-hello'
+ */
+async function generateReport(benchmarkType) {
+  // Disable chalk colors for markdown output
+  chalk.level = 0;
+
+  setBenchmark(benchmarkType);
+
+  if (!getAvailableResults().length) {
+    console.log(chalk.red("No benchmark results found to compare."));
+    return;
+  }
+
+  const outputResults = getOutputResults();
+  const markdownChartImages = await getMarkdownCharts(outputResults);
+
+  const memSeriesToDisplay =
+    benchmarkType === "mion"
+      ? ["mion", "mion3000", "http-node", "mion-no-reflection"]
+      : outputResults.map((result) => result.name);
+  const memSeriesChartImages = await getMarkdownChartMemSeries(
+    outputResults,
+    `memSeries`,
+    `Memory Series (MB)`,
+    chartsDirectory,
+    0,
+    memSeriesToDisplay,
+  );
+  await updateReadme(markdownChartImages, memSeriesChartImages, outputResults);
+}
+
+// Export for programmatic use
+module.exports = { generateReport };
+
+// Run CLI when executed directly
+if (require.main === module) {
+  runCompare();
+}

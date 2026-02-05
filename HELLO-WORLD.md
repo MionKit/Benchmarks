@@ -51,36 +51,46 @@ app.get("/hello", function (req, res) {
 
 ## Benchmark Results
 
-- **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
-- **Node:** `v24.13.0`
-- **Run:** Wed Feb 04 2026 23:11:44 GMT+0000 (Greenwich Mean Time)
-- **Method:** `autocannon -c 100 -d 30.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
+* __Node:__ `v24.13.0`
+* __Run:__ Thu Feb 05 2026 21:22:17 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 4.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
-#### Req (R/s)
+#### Req (R/s) 
 
 ![benchmarks](assets/public/charts-servers-hello/requests.png)
 
-#### Throughput (Mb/s)
+
+
+#### Throughput (Mb/s) 
 
 ![benchmarks](assets/public/charts-servers-hello/throughput.png)
 
-#### Latency (ms)
+
+
+#### Latency (ms) 
 
 ![benchmarks](assets/public/charts-servers-hello/latency.png)
 
-#### Max Memory (Mb)
+
+
+#### Max Memory (Mb) 
 
 ![benchmarks](assets/public/charts-servers-hello/maxMem.png)
 
-#### Memory Series (MB)
+
+
+#### Memory Series (MB) 
 
 ![benchmarks](assets/public/charts-servers-hello/memSeries.png)
 
-|           |   Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
-| :-------- | --------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :-------------------------------------------------------- |
-| http-node |   16.18.0 |      ✗ |   39257.6   |        24.97 |          7.00 |             129 |         121 |     ✓      | bare node http server with Zod validation                 |
-| fastify   |    4.10.2 |      ✓ |   38138.7   |        25.72 |          6.84 |             145 |         102 |     ✓      | Fastify with Zod validation                               |
-| **mion**  | **0.6.2** |  **✓** | **36114.9** |    **27.21** |      **7.06** |         **143** |     **117** |   **✓**    | **Automatic validation and serialization out of the box** |
-| hono      |    3.12.6 |      ✓ |   29229.9   |        33.70 |          5.21 |             221 |         118 |     ✓      | hono node server with Zod validation                      |
-| hapi      |    21.4.4 |      ✓ |   28594.7   |        34.45 |          5.10 |             230 |         123 |     ✓      | Hapi with Zod validation                                  |
-| express   |    4.22.1 |      ✓ |   21108.3   |        46.86 |          3.76 |             150 |         117 |     ✓      | Express with Zod validation                               |
+
+
+|           | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
+| :--       | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                       |
+| http-node | 16.18.0   | ✗      | 32066.0     | 30.63        | 5.72          | 77              | 114         | ✓          | bare node http server with Zod validation                 |
+| **mion**  | **0.6.2** | **✓**  | **27104.0** | **36.25**    | **5.30**      | **108**         | **107**     | **✓**      | **Automatic validation and serialization out of the box** |
+| hono      | 3.12.6    | ✓      | 19948.0     | 49.39        | 3.56          | 162             | 106         | ✓          | hono node server with Zod validation                      |
+| fastify   | 4.10.2    | ✓      | 19765.0     | 49.95        | 3.54          | 107             | 94          | ✓          | Fastify with Zod validation                               |
+| hapi      | 21.4.4    | ✓      | 16745.0     | 58.86        | 2.99          | 147             | 106         | ✓          | Hapi with Zod validation                                  |
+| express   | 4.22.1    | ✓      | 7554.0      | 121.46       | 1.35          | 100             | 94          | ✓          | Express with Zod validation                               |

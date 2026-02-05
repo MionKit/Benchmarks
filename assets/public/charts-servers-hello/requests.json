@@ -1,1 +1,1 @@
-{"data":{"x":"x","columns":[["x","Req (R/s)"],["http-node",39257],["fastify",38138],["mion",36114],["hono",29229],["hapi",28594],["express",21108]],"type":"bar","labels":true},"axis":{"x":{"type":"category","labels":{"rotate":75}}},"transition":{"duration":0}}
+{"data":{"x":"x","columns":[["x","Req (R/s)"],["http-node",32066],["mion",27104],["hono",19948],["fastify",19765],["hapi",16745],["express",7554]],"type":"bar","labels":true},"axis":{"x":{"type":"category","labels":{"rotate":75}}},"transition":{"duration":0}}
