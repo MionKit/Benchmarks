@@ -25,7 +25,7 @@ Output files:
 - `results/*.json` and `results-hello/*.json` - raw benchmark results
 - `benchmark-results-*.json` - aggregated results
 - `assets/public/charts-*/*.png` - generated charts
-- `UPDATE-USER.md`, `HELLO-WORLD.md`, `COLD-STARTS.md` - updated with results
+- `UPDATE-USER.md`, `HELLO-WORLD.md` - updated with results
 
 ## NPM Scripts
 
@@ -33,11 +33,7 @@ Main benchmarks:
 
 - `npm run servers` - full updateUser benchmark + report (updates UPDATE-USER.md)
 - `npm run servers-hello` - hello world benchmark + report (updates HELLO-WORLD.md)
-- `npm run report` - runs both benchmarks + cold-start metrics
-
-Metrics:
-
-- `npm run metrics` - measures cold-start times (updates COLD-STARTS.md)
+- `npm run report` - runs both benchmarks
 
 Build:
 
