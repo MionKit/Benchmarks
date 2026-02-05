@@ -153,6 +153,8 @@ profile*
 # benchmark results
 results
 results-mion
+results-update-user
+results-hello
 
 ########################
 # misc / editors
