@@ -5,7 +5,7 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { NodeHttpOptions, startNodeServer } from "@mionkit/http";
+import { NodeHttpOptions, startNodeServer } from "@mionkit/node";
 import {
   type Routes,
   route,
@@ -47,7 +47,14 @@ export const routes = {
         `[mion.node] Request #${requestCount} - JIT Cache: jitFns=${getCacheSize(jitFnsCache)}, pureFns=${getCacheSize(pureFnsCache)} - Memory: heapUsed=${(mem.heapUsed / 1024 / 1024).toFixed(1)}MB, rss=${(mem.rss / 1024 / 1024).toFixed(1)}MB`,
       );
     }
-    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+
+    // Update timestamps
+    user.updatedAt = new Date();
+    user.lastLoginAt = new Date();
+
+    // Update profile modification
+    user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+
     return user;
   }),
 } satisfies Routes;

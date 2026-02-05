@@ -10,8 +10,15 @@ fastify.get("/hello", function (req, reply) {
 });
 
 fastify.post("/updateUser", async function (req, reply) {
-  const user = UserSchema.parse(req.body); // Validates + deserializes date
-  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+  const user = UserSchema.parse(req.body); // Validates + deserializes dates
+
+  // Update timestamps
+  user.updatedAt = new Date();
+  user.lastLoginAt = new Date();
+
+  // Update profile modification
+  user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+
   reply.send(user);
 });
 

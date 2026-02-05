@@ -1,10 +1,5 @@
 import { Elysia } from 'elysia';
-export interface User {
-    id: number;
-    name: string;
-    surname: string;
-    lastUpdate: Date;
-}
+import { User } from './models';
 export interface BunServerOptions {
     port?: number;
 }
@@ -42,9 +37,55 @@ export declare const initHttpBun: (options?: BunServerOptions) => Elysia<"", {
         post: {
             body: {
                 id: number;
-                lastUpdate: Date;
-                name: string;
-                surname: string;
+                createdAt: Date;
+                updatedAt: Date;
+                username: string;
+                email: string;
+                profile: {
+                    bio?: string | undefined;
+                    avatarUrl?: string | undefined;
+                    firstName: string;
+                    lastName: string;
+                    displayName: string;
+                    dateOfBirth: Date;
+                };
+                role: "admin" | "user" | "guest" | "moderator";
+                status: "active" | "suspended" | "pending_verification" | "deactivated";
+                address: {
+                    street: string;
+                    city: string;
+                    state: string;
+                    zipCode: string;
+                    country: string;
+                };
+                paymentMethods: ({
+                    type: "credit_card";
+                    lastFourDigits: string;
+                    expiryMonth: number;
+                    expiryYear: number;
+                    brand: string;
+                } | {
+                    type: "bank_account";
+                    bankName: string;
+                    accountLastFour: string;
+                    routingNumber: string;
+                } | {
+                    email: string;
+                    type: "paypal";
+                })[];
+                preferences: {
+                    theme: "light" | "dark" | "system";
+                    language: string;
+                    timezone: string;
+                    notifications: {
+                        email: boolean;
+                        sms: boolean;
+                        push: boolean;
+                        frequency: "immediate" | "daily" | "weekly";
+                    };
+                };
+                lastLoginAt: Date | undefined;
+                tags: string[];
             };
             params: {};
             query: unknown;
@@ -76,6 +117,5 @@ export declare const initHttpBun: (options?: BunServerOptions) => Elysia<"", {
     standaloneSchema: {};
     response: {};
 }>;
-export declare type __ΩUser = any[];
 export declare type __ΩBunServerOptions = any[];
 //# sourceMappingURL=elysiaAppBun.d.ts.map

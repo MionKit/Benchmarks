@@ -42,7 +42,14 @@ export const initDeepkitApp = () => {
 
   router.post("/updateUser", (body: HttpBody<User>): User => {
     const user = body;
-    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+
+    // Update timestamps
+    user.updatedAt = new Date();
+    user.lastLoginAt = new Date();
+
+    // Update profile modification
+    user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+
     return user;
   });
 

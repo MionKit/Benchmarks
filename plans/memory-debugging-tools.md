@@ -103,7 +103,7 @@ bun --smol benchmarks/mion.bun.js  # Uses less memory
 
 Compare the HTTP server implementations:
 
-- [`@mionkit/http`](../node_modules/@mionkit/http) (Node)
+- [`@mionkit/node`](../node_modules/@mionkit/node) (Node)
 - [`@mionkit/bun`](../node_modules/@mionkit/bun) (Bun)
 
 Look for:

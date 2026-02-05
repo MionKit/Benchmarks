@@ -27,10 +27,10 @@ let ranParameters = "--connections=100 --duration=40 --pipelining=10";
 commander
   .option("-t, --table", "print table")
   .option("-m --markdown", "format table for markdown")
-  .option("-u --update", "update README.md")
+  .option("-u --update", "update UPDATE-USER.md")
   .option(
     "-b --benchmark <benchmark>",
-    "benchmark to compare (servers or mion)"
+    "benchmark to compare (servers or mion)",
   )
   .parse(process.argv);
 
@@ -91,12 +91,12 @@ async function runCompare() {
       `Memory Series (MB)`,
       chartsDirectory,
       0,
-      memSeriesToDisplay
+      memSeriesToDisplay,
     );
     await updateReadme(
       markdownChartImages,
       memSeriesChartImages,
-      outputResults
+      outputResults,
     );
   } else if (opts.table) {
     console.log(compareResults(opts.markdown));
@@ -119,7 +119,7 @@ function formatHasRouter(hasRouter) {
 async function updateReadme(
   markdownChartImages,
   memSeriesChartImages,
-  outputResults
+  outputResults,
 ) {
   const machineInfo = `${os.platform()} ${os.arch()} | ${
     os.cpus().length
@@ -141,7 +141,7 @@ ${compareResults(true, outputResults)}
   writeFileSync(
     resultsMarkdownFilename,
     md.split("## Benchmark Results")[0] + benchmarkMd,
-    "utf8"
+    "utf8",
   );
 }
 
@@ -163,12 +163,12 @@ function setBenchmark(benchmark) {
         process.cwd(),
         "assets",
         "public",
-        "charts-servers-hello"
+        "charts-servers-hello",
       );
       break;
     default:
     case "servers":
-      resultsMarkdownFilename = "README.md";
+      resultsMarkdownFilename = "UPDATE-USER.md";
       resultsPath = join(process.cwd(), "results");
       resultsJsonFilename = "benchmark-results-servers.json";
       info = benchmarkServers.info;
@@ -176,7 +176,7 @@ function setBenchmark(benchmark) {
         process.cwd(),
         "assets",
         "public",
-        "charts-servers"
+        "charts-servers",
       );
 
       break;
@@ -346,8 +346,8 @@ async function compareResultsInteractive() {
 
   console.log(`
  ${chalk.blue("Both are awesome but")} ${fastest} ${chalk.blue(
-    "is"
-  )} ${diff} ${chalk.blue("faster than")} ${slowest}
+   "is",
+ )} ${diff} ${chalk.blue("faster than")} ${slowest}
  • ${fastest} ${chalk.blue("request average is")} ${fastestAverage}
  • ${slowest} ${chalk.blue("request average is")} ${slowestAverage}`);
 }
@@ -374,9 +374,9 @@ async function getMarkdownCharts(outputResults) {
         outputResults,
         metricName,
         metricLabel,
-        chartsDirectory
-      )
-    )
+        chartsDirectory,
+      ),
+    ),
   );
 
   return results.join("\n\n");

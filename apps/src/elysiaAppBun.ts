@@ -5,13 +5,7 @@
  * ######## */
 
 import { Elysia, t } from "elysia";
-
-export interface User {
-  id: number;
-  name: string;
-  surname: string;
-  lastUpdate: Date;
-}
+import type { User } from "./models";
 
 // TypeBox schema with Transform for automatic date coercion
 const DateString = t
@@ -19,11 +13,115 @@ const DateString = t
   .Decode((value) => new Date(value)) // string -> Date on input
   .Encode((value) => value.toISOString()); // Date -> string on output
 
+const OptionalDateString = t
+  .Transform(t.Optional(t.String({ format: "date-time" })))
+  .Decode((value) => (value ? new Date(value) : undefined))
+  .Encode((value) => (value ? value.toISOString() : undefined));
+
+// ============ Nested Objects ============
+const AddressSchema = t.Object({
+  street: t.String(),
+  city: t.String(),
+  state: t.String(),
+  zipCode: t.String(),
+  country: t.String(),
+});
+
+const NotificationSettingsSchema = t.Object({
+  email: t.Boolean(),
+  sms: t.Boolean(),
+  push: t.Boolean(),
+  frequency: t.Union([
+    t.Literal("immediate"),
+    t.Literal("daily"),
+    t.Literal("weekly"),
+  ]),
+});
+
+const UserPreferencesSchema = t.Object({
+  theme: t.Union([t.Literal("light"), t.Literal("dark"), t.Literal("system")]),
+  language: t.String(),
+  timezone: t.String(),
+  notifications: NotificationSettingsSchema,
+});
+
+// ============ Discriminated Union ============
+const CreditCardSchema = t.Object({
+  type: t.Literal("credit_card"),
+  lastFourDigits: t.String(),
+  expiryMonth: t.Number(),
+  expiryYear: t.Number(),
+  brand: t.String(),
+});
+
+const BankAccountSchema = t.Object({
+  type: t.Literal("bank_account"),
+  bankName: t.String(),
+  accountLastFour: t.String(),
+  routingNumber: t.String(),
+});
+
+const PaypalSchema = t.Object({
+  type: t.Literal("paypal"),
+  email: t.String(),
+});
+
+const PaymentMethodSchema = t.Union([
+  CreditCardSchema,
+  BankAccountSchema,
+  PaypalSchema,
+]);
+
+// ============ Profile Schema ============
+const ProfileSchema = t.Object({
+  firstName: t.String(),
+  lastName: t.String(),
+  displayName: t.String(),
+  bio: t.Optional(t.String()),
+  avatarUrl: t.Optional(t.String()),
+  dateOfBirth: DateString,
+});
+
+// ============ User Schema ============
 const UserSchema = t.Object({
+  // Basic info
   id: t.Number(),
-  name: t.String(),
-  surname: t.String(),
-  lastUpdate: DateString,
+  username: t.String(),
+  email: t.String(),
+
+  // Profile
+  profile: ProfileSchema,
+
+  // Account metadata
+  role: t.Union([
+    t.Literal("admin"),
+    t.Literal("user"),
+    t.Literal("guest"),
+    t.Literal("moderator"),
+  ]),
+  status: t.Union([
+    t.Literal("active"),
+    t.Literal("suspended"),
+    t.Literal("pending_verification"),
+    t.Literal("deactivated"),
+  ]),
+
+  // Single address
+  address: AddressSchema,
+
+  // Array of discriminated union
+  paymentMethods: t.Array(PaymentMethodSchema),
+
+  // Preferences
+  preferences: UserPreferencesSchema,
+
+  // Timestamps
+  createdAt: DateString,
+  updatedAt: DateString,
+  lastLoginAt: OptionalDateString,
+
+  // Tags
+  tags: t.Array(t.String()),
 });
 
 // Create app without starting server
@@ -33,10 +131,17 @@ const createApp = () => {
     .post(
       "/updateUser",
       ({ body }) => {
-        // body.lastUpdate is already a Date object thanks to Transform
+        // body fields are already Date objects thanks to Transform
         // Type assertion needed because TypeBox's type inference doesn't understand Transform
         const user = body as unknown as User;
-        user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+
+        // Update timestamps
+        user.updatedAt = new Date();
+        user.lastLoginAt = new Date();
+
+        // Update profile modification
+        user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+
         return user;
       },
       { body: UserSchema },

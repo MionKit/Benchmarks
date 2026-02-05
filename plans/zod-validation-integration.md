@@ -568,7 +568,7 @@ flowchart TB
 ### Phase 4: Documentation
 
 - [ ] Update `lib/packages.js` validation status
-- [ ] Update `README.md` to reflect Zod usage
+- [ ] Update `UPDATE-USER.md` to reflect Zod usage
 - [ ] Update `AGENTS.md` if needed
 
 ### Phase 5: Testing

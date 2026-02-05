@@ -7,36 +7,36 @@ on:
       - master
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 0 * * 1'
+    - cron: "0 0 * * 1"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: 14
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
 
-    - name: run benchmarks
-      run: |
-        npm install
-        npm start y 100 10 40
+      - name: run benchmarks
+        run: |
+          npm install
+          npm start y 100 10 40
 
-    - name: compare results
-      run: |
-        node ./benchmark compare -t
-        node ./benchmark compare -u
+      - name: compare results
+        run: |
+          node ./benchmark compare -t
+          node ./benchmark compare -u
 
-    - name: commit and push updated results
-      uses: github-actions-x/commit@v2.9
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: 'master'
-        commit-message: 'chore: update benchmark results'
-        force-add: 'true'
-        files: benchmark-results.json README.md
-        name: Github Actions
-        email: <>
+      - name: commit and push updated results
+        uses: github-actions-x/commit@v2.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: "master"
+          commit-message: "chore: update benchmark results"
+          force-add: "true"
+          files: benchmark-results.json UPDATE-USER.md
+          name: Github Actions
+          email: <>

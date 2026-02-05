@@ -1,4 +1,4 @@
- /* ########
+/* ########
  * 2022 mion
  * Author: Ma-jerez
  * License: MIT
@@ -18,7 +18,13 @@ import { User } from "./models";
 export const routes = {
   hello: route((): string => "world"),
   updateUser: route((ctx, user: User): User => {
-    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+    // Update timestamps
+    user.updatedAt = new Date();
+    user.lastLoginAt = new Date();
+
+    // Update profile modification
+    user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+
     return user;
   }),
 } satisfies Routes;

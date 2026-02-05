@@ -69,7 +69,7 @@ const MION_PACKAGES = [
   "core",
   "eslint-plugin",
   "gcloud",
-  "http",
+  "node",
   "quick-start",
   "router",
   "run-types",

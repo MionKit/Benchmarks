@@ -10,8 +10,15 @@ app.get("/hello", (c) => {
 
 app.post("/updateUser", async (c) => {
   const rawUser = await c.req.json();
-  const user = UserSchema.parse(rawUser); // Validates + deserializes date
-  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
+  const user = UserSchema.parse(rawUser); // Validates + deserializes dates
+
+  // Update timestamps
+  user.updatedAt = new Date();
+  user.lastLoginAt = new Date();
+
+  // Update profile modification
+  user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+
   return c.json(user);
 });
 

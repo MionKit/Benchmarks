@@ -5,7 +5,7 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { NewUser, PartialUser, RawUser, User, UserId } from "./models";
+import { NewUser, PartialUser, User, UserId } from "./models";
 
 const getId = (entOrId: UserId): number => {
   if (typeof entOrId === "number") return entOrId;
@@ -14,14 +14,18 @@ const getId = (entOrId: UserId): number => {
 
 const store = new Map<number, User>();
 
+// Default values for creating a new user
+const createDefaultUser = (id: number, newUser: NewUser): User => ({
+  id,
+  ...newUser,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+});
+
 export const usersStore = {
   create: (user: NewUser): User => {
     const id = store.size + 1;
-    const newUser: User = {
-      id,
-      ...user,
-      lastUpdate: new Date(),
-    };
+    const newUser = createDefaultUser(id, user);
     store.set(id, newUser);
     return newUser;
   },
@@ -34,7 +38,7 @@ export const usersStore = {
     const updated = {
       ...existing,
       ...user,
-      lastUpdate: new Date(),
+      updatedAt: new Date(),
     };
     store.set(user.id, updated);
     return updated;
@@ -54,39 +58,47 @@ export const hasUnknownKeys = (knownKeys: string[], input: any): boolean => {
   return unknownKeys.some((ukn) => !knownKeys.includes(ukn));
 };
 
+// Known keys for the complex User model
+const userKnownKeys = [
+  "id",
+  "username",
+  "email",
+  "profile",
+  "role",
+  "status",
+  "address",
+  "paymentMethods",
+  "preferences",
+  "createdAt",
+  "updatedAt",
+  "lastLoginAt",
+  "tags",
+];
+
 export const isUserId = (input: any): input is UserId => {
   if (typeof input === "number") return true;
   if (typeof input !== "object") return false;
-  if (hasUnknownKeys(["id", "name", "surname", "lastUpdate"], input))
-    return false;
+  if (hasUnknownKeys(userKnownKeys, input)) return false;
   return (
     typeof input?.id === "number" &&
-    typeof input?.name === "string" &&
-    typeof input?.string === "string" &&
-    input?.lastUpdate instanceof Date
+    typeof input?.username === "string" &&
+    typeof input?.email === "string"
   );
 };
 
 export const isNewUser = (input: any): input is NewUser => {
   if (typeof input !== "object") return false;
-  if (hasUnknownKeys(["id", "name", "surname", "lastUpdate"], input))
-    return false;
+  // NewUser doesn't have id, createdAt, or updatedAt
   return (
     !input?.id &&
-    typeof input?.name === "string" &&
-    typeof input?.string === "string" &&
-    !input?.lastUpdate
+    typeof input?.username === "string" &&
+    typeof input?.email === "string" &&
+    !input?.createdAt &&
+    !input?.updatedAt
   );
 };
 
 export const isPartialuser = (input: any): input is PartialUser => {
   if (typeof input !== "object") return false;
-  if (hasUnknownKeys(["id", "name", "surname", "lastUpdate"], input))
-    return false;
   return typeof input?.id === "number";
-};
-
-export const deserializeUser = (jsonParseResult: RawUser): User => {
-  (jsonParseResult as any).lastUpdate = new Date(jsonParseResult.lastUpdate);
-  return jsonParseResult as any as User;
 };

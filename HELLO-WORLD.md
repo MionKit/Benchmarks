@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>Benchmarks for  @mionkit/http 🚀</strong><br/>
+  <strong>Benchmarks for  @mionkit/node 🚀</strong><br/>
 </p>
 
 <p align=center>
@@ -33,7 +33,7 @@ As stated in the [Bun documentation](https://bun.sh/docs/project/benchmarking):
 
 When benchmarking Bun servers with autocannon, the results show inverted performance characteristics (simple endpoints appearing slower than complex ones), which indicates the benchmarking tool itself is the bottleneck, not the server.
 
-**Bun servers are still included in the [main benchmarks](README.md)** (updateUser endpoint) where the additional processing overhead (validation, serialization, business logic) makes autocannon's limitations less impactful on the results.
+**Bun servers are still included in the [main benchmarks](UPDATE-USER.md)** (updateUser endpoint) where the additional processing overhead (validation, serialization, business logic) makes autocannon's limitations less impactful on the results.
 
 For accurate Bun benchmarks, tools like `bombardier`, `oha`, or `http_load_test` (all written in Rust/Go) should be used instead.
 
@@ -53,8 +53,8 @@ app.get("/hello", function (req, res) {
 
 - **Machine:** darwin x64 | 8 vCPUs | 16.0GB Mem
 - **Node:** `v24.13.0`
-- **Run:** Mon Feb 02 2026 20:34:03 GMT+0000 (Greenwich Mean Time)
-- **Method:** `autocannon -c 100 -d 30.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+- **Run:** Wed Feb 04 2026 23:11:44 GMT+0000 (Greenwich Mean Time)
+- **Method:** `autocannon -c 100 -d 30.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s)
 
@@ -78,9 +78,9 @@ app.get("/hello", function (req, res) {
 
 |           |   Version | Router |  Req (R/s)  | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
 | :-------- | --------: | -----: | :---------: | -----------: | ------------: | --------------: | ----------: | :--------: | :-------------------------------------------------------- |
-| http-node |   16.18.0 |      ✗ |   41799.5   |        23.40 |          7.45 |             128 |         120 |     ✓      | bare node http server with Zod validation                 |
-| fastify   |    4.10.2 |      ✓ |   38932.3   |        25.20 |          6.98 |             145 |         119 |     ✓      | Fastify with Zod validation                               |
-| **mion**  | **0.6.2** |  **✓** | **37097.6** |    **26.44** |      **6.69** |         **143** |     **118** |   **✓**    | **Automatic validation and serialization out of the box** |
-| hono      |    3.12.6 |      ✓ |   29589.3   |        33.28 |          5.28 |             219 |         117 |     ✓      | hono node server with Zod validation                      |
-| hapi      |    21.4.4 |      ✓ |   28793.1   |        34.21 |          5.13 |             225 |         121 |     ✓      | Hapi with Zod validation                                  |
-| express   |    4.22.1 |      ✓ |   21454.9   |        46.07 |          3.83 |             151 |         116 |     ✓      | Express with Zod validation                               |
+| http-node |   16.18.0 |      ✗ |   39257.6   |        24.97 |          7.00 |             129 |         121 |     ✓      | bare node http server with Zod validation                 |
+| fastify   |    4.10.2 |      ✓ |   38138.7   |        25.72 |          6.84 |             145 |         102 |     ✓      | Fastify with Zod validation                               |
+| **mion**  | **0.6.2** |  **✓** | **36114.9** |    **27.21** |      **7.06** |         **143** |     **117** |   **✓**    | **Automatic validation and serialization out of the box** |
+| hono      |    3.12.6 |      ✓ |   29229.9   |        33.70 |          5.21 |             221 |         118 |     ✓      | hono node server with Zod validation                      |
+| hapi      |    21.4.4 |      ✓ |   28594.7   |        34.45 |          5.10 |             230 |         123 |     ✓      | Hapi with Zod validation                                  |
+| express   |    4.22.1 |      ✓ |   21108.3   |        46.86 |          3.76 |             150 |         117 |     ✓      | Express with Zod validation                               |
