@@ -119,7 +119,6 @@ const initHttpBun = (options = {}) => {
 };
 if (void 0) {
   initHttpBun({ port: 3e3 });
-  console.log("Hono Bun server running on port 3000");
 }
 exports.initHttpBun = initHttpBun;
 //# sourceMappingURL=honoAppBun.js.map

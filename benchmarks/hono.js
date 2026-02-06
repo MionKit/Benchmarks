@@ -30,7 +30,11 @@ app.post("/updateSimpleUser", async (c) => {
 });
 
 const port = 3000;
-console.log(`Server is running on port ${port}`);
+
+// Only log in non-benchmark mode (when BENCH_VERBOSE is set)
+if (process.env.BENCH_VERBOSE === "true") {
+  console.log(`Server is running on port ${port}`);
+}
 
 serve({
   fetch: app.fetch,

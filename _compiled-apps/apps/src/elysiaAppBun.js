@@ -119,7 +119,6 @@ const createApp = () => {
 const initHttpBun = (options = {}) => {
   const port = options.port ?? 3e3;
   const app = createApp().listen(port);
-  console.log(`Elysia server running on port ${port}`);
   return app;
 };
 if (void 0) {

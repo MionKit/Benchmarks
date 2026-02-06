@@ -167,5 +167,6 @@ export const initHttpBun = (options: BunServerOptions = {}) => {
 // For direct execution
 if (import.meta.main) {
   initHttpBun({ port: 3000 });
-  console.log("Hono Bun server running on port 3000");
+  // Logging disabled for benchmarks - uncomment for debugging
+  // console.log("Hono Bun server running on port 3000");
 }

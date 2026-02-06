@@ -2,7 +2,13 @@
 
 const { UserSchema, SimpleUserSchema } = require("../lib/zod-schemas");
 
-const fastify = require("fastify")();
+// Disable logging and optimize for benchmarks
+const fastify = require("fastify")({
+  logger: false,
+  disableRequestLogging: true,
+  requestIdHeader: false,
+  requestIdLogLabel: false,
+});
 
 // ##### ROUTES ############
 fastify.get("/hello", function (req, reply) {

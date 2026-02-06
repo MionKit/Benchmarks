@@ -173,7 +173,8 @@ export interface BunServerOptions {
 export const initHttpBun = (options: BunServerOptions = {}) => {
   const port = options.port ?? 3000;
   const app = createApp().listen(port);
-  console.log(`Elysia server running on port ${port}`);
+  // Logging disabled for benchmarks - uncomment for debugging
+  // console.log(`Elysia server running on port ${port}`);
   return app;
 };
 

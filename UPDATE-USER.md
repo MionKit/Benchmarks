@@ -119,8 +119,8 @@ Our goal is to perform similar to fastify as it is the industry standard in term
 
 * __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
 * __Node:__ `v24.13.0`
-* __Run:__ Thu Feb 05 2026 23:32:45 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 20.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Fri Feb 06 2026 00:08:39 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 4.03 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -154,12 +154,12 @@ Our goal is to perform similar to fastify as it is the industry standard in term
 
 |              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                |
 | :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                        |
-| **mion.bun** | **0.6.2** | **✓**  | **15277.6** | **64.86**    | **15.76**     | **96**          | **104**     | **✓**      | **mion using bun, automatic validation and serialization** |
-| hono.bun     | 3.12.6    | ✓      | 13190.8     | 75.18        | 13.19         | 88              | 104         | ✓          | hono bun server with Zod validation                        |
-| elysia.bun   | 1.0.0     | ✓      | 13078.4     | 75.82        | 12.89         | 100             | 107         | ✓          | Elysia framework with TypeBox validation                   |
-| **mion**     | **0.6.2** | **✓**  | **11677.2** | **84.99**    | **12.57**     | **124**         | **118**     | **✓**      | **Automatic validation and serialization out of the box**  |
-| http-node    | 16.18.0   | ✗      | 10529.6     | 94.30        | 11.00         | 99              | 117         | ✓          | bare node http server with Zod validation                  |
-| fastify      | 4.10.2    | ✓      | 9744.8      | 101.90       | 10.19         | 111             | 113         | ✓          | Fastify with Zod validation                                |
-| express      | 4.22.1    | ✓      | 7204.2      | 137.89       | 7.53          | 153             | 115         | ✓          | Express with Zod validation                                |
-| hono         | 3.12.6    | ✓      | 6361.2      | 156.18       | 6.65          | 263             | 115         | ✓          | hono node server with Zod validation                       |
-| hapi         | 21.4.4    | ✓      | 6299.6      | 157.69       | 6.58          | 156             | 116         | ✓          | Hapi with Zod validation                                   |
+| **mion.bun** | **0.6.2** | **✓**  | **14086.0** | **70.03**    | **14.53**     | **95**          | **102**     | **✓**      | **mion using bun, automatic validation and serialization** |
+| hono.bun     | 3.12.6    | ✓      | 13242.0     | 74.43        | 13.05         | 90              | 100         | ✓          | hono bun server with Zod validation                        |
+| elysia.bun   | 1.0.0     | ✓      | 10514.0     | 96.61        | 10.37         | 98              | 101         | ✓          | Elysia framework with TypeBox validation                   |
+| http-node    | 16.18.0   | ✗      | 10380.0     | 91.25        | 10.84         | 92              | 118         | ✓          | bare node http server with Zod validation                  |
+| **mion**     | **0.6.2** | **✓**  | **10212.0** | **91.72**    | **11.00**     | **119**         | **116**     | **✓**      | **Automatic validation and serialization out of the box**  |
+| hapi         | 21.4.4    | ✓      | 5842.0      | 114.81       | 6.11          | 103             | 140         | ✓          | Hapi with Zod validation                                   |
+| fastify      | 5.7.4     | ✓      | 5055.8      | 129.41       | 5.29          | 266             | 124         | ✓          | Fastify with Zod validation                                |
+| express      | 5.2.1     | ✓      | 3881.5      | 145.75       | 4.06          | 114             | 94          | ✓          | Express with Zod validation                                |
+| hono         | 3.12.6    | ✓      | 3281.3      | 156.79       | 3.38          | 187             | 127         | ✓          | hono node server with Zod validation                       |
