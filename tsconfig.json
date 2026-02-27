@@ -20,7 +20,8 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["@mionkit/devtools/virtual-modules"]
   },
   "reflection": true,
   "include": ["apps", "apps/src/**/*.ts"],

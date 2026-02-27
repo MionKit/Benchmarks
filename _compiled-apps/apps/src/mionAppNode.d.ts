@@ -1,5 +1,6 @@
 import { NodeHttpOptions } from '@mionkit/node';
 import { RouterOptions } from '@mionkit/router';
-export declare const routes: Routes;
+import { routes } from './mionRoutes';
+export { routes };
 export declare const initHttp: (routerOpts?: Partial<RouterOptions>, httpOpts?: Partial<NodeHttpOptions>) => Promise<any>;
 //# sourceMappingURL=mionAppNode.d.ts.map

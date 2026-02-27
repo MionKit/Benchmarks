@@ -13,10 +13,12 @@ const DateString = t
   .Decode((value) => new Date(value)) // string -> Date on input
   .Encode((value) => value.toISOString()); // Date -> string on output
 
-const OptionalDateString = t
-  .Transform(t.Optional(t.String({ format: "date-time" })))
-  .Decode((value) => (value ? new Date(value) : undefined))
-  .Encode((value) => (value ? value.toISOString() : undefined));
+const OptionalDateString = t.Optional(
+  t
+    .Transform(t.String({ format: "date-time" }))
+    .Decode((value) => new Date(value))
+    .Encode((value) => value.toISOString()),
+);
 
 // ============ Nested Objects ============
 const AddressSchema = t.Object({

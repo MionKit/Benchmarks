@@ -61,14 +61,10 @@ const fs = require("fs");
 const path = require("path");
 
 const MION_PACKAGES = [
-  "aot-caches",
-  "aws",
   "bun",
   "client",
-  "codegen",
   "core",
-  "eslint-plugin",
-  "gcloud",
+  "devtools",
   "node",
   "quick-start",
   "router",
@@ -235,6 +231,17 @@ function main() {
       console.log(
         `  Removed ${removedCount} TypeScript source file(s)/folder(s)`,
       );
+    }
+
+    // Add {"type": "commonjs"} to .dist/cjs/ so Node doesn't treat .js as ESM
+    // (needed because root package.json has "type": "module")
+    const cjsDir = path.join(destPath, ".dist", "cjs");
+    if (fs.existsSync(cjsDir)) {
+      const cjsPkgPath = path.join(cjsDir, "package.json");
+      if (!fs.existsSync(cjsPkgPath)) {
+        fs.writeFileSync(cjsPkgPath, '{"type": "commonjs"}\n');
+        console.log(`  Added package.json to .dist/cjs/`);
+      }
     }
 
     // Verify the copy
