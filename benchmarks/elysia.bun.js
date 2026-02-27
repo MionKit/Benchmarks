@@ -1,6 +1,6 @@
 "use strict";
 
-const { initHttpBun } = require("../_compiled-apps/apps/src/elysiaAppBun");
+const { initHttpBun } = require("../apps/src/elysiaAppBun.ts");
 
-// Elysia Bun server - uses pre-compiled TypeScript for consistent benchmarking
+// Elysia Bun server - Bun runs TypeScript natively
 initHttpBun({ port: 3000 });

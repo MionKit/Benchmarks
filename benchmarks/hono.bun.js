@@ -1,6 +1,6 @@
 "use strict";
 
-const { initHttpBun } = require("../_compiled-apps/apps/src/honoAppBun");
+const { initHttpBun } = require("../apps/src/honoAppBun.ts");
 
-// Hono Bun server - uses pre-compiled TypeScript for consistent benchmarking
+// Hono Bun server - Bun runs TypeScript natively
 initHttpBun({ port: 3000 });
