@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("../../mionRoutes-CtbFi3fe.js");
+const mionRoutes = require("../../mionRoutes-CaK3IXAt.js");
 require("path");
 const DEFAULT_BUN_HTTP_OPTIONS = {
   port: 80,
@@ -14,13 +14,13 @@ const DEFAULT_BUN_HTTP_OPTIONS = {
   // 256KB
 };
 let httpOptions = { ...DEFAULT_BUN_HTTP_OPTIONS };
-let defaultHeaders = [["server", "@mionkit"]];
+let defaultHeaders = [["server", "@mionjs"]];
 function setBunHttpOpts(options) {
   httpOptions = {
     ...httpOptions,
     ...options
   };
-  defaultHeaders = [["server", "@mionkit"], ...Object.entries(httpOptions.defaultResponseHeaders)];
+  defaultHeaders = [["server", "@mionjs"], ...Object.entries(httpOptions.defaultResponseHeaders)];
   return httpOptions;
 }
 async function startBunServer(options) {
@@ -75,7 +75,7 @@ async function startBunServer(options) {
     },
     error(errReq) {
       const responseHeaders = new Headers({
-        server: "@mionkit",
+        server: "@mionjs",
         ...httpOptions.defaultResponseHeaders
       });
       const error = errReq instanceof mionRoutes.RpcError ? errReq : new mionRoutes.RpcError({

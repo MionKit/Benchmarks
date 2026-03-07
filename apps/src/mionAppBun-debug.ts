@@ -5,14 +5,14 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { BunHttpOptions, startBunServer } from "@mionkit/bun";
+import { BunHttpOptions, startBunServer } from "@mionjs/platform-bun";
 import {
   type Routes,
   route,
   initMionRouter,
   RouterOptions,
-} from "@mionkit/router";
-import { getJitFnCaches } from "@mionkit/core";
+} from "@mionjs/router";
+import { getJitFnCaches } from "@mionjs/core";
 import { User } from "./models";
 
 export const routes = {

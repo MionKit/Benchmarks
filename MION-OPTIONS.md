@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>Benchmarks for  @mionkit/node 🚀</strong><br/>
+  <strong>Benchmarks for  @mionjs/platform-node 🚀</strong><br/>
 </p>
 
 <p align=center>

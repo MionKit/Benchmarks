@@ -82,7 +82,7 @@ flowchart LR
 
 ### 1. Body Parsing Strategy: `req.json()` vs `req.text()` - HIGH IMPACT
 
-**Location**: [`bunHttp.ts:61`](node_modules/@mionkit/bun/src/bunHttp.ts:61)
+**Location**: [`bunHttp.ts:61`](node_modules/@mionjs/bun/src/bunHttp.ts:61)
 
 ```typescript
 const rawBody = req.body
@@ -132,7 +132,7 @@ const parsedBody = req.body ? await req.json() : null;
 
 ### 2. URL Parsing Per Request - HIGH
 
-**Location**: [`bunHttp.ts:57`](node_modules/@mionkit/bun/src/bunHttp.ts:57)
+**Location**: [`bunHttp.ts:57`](node_modules/@mionjs/bun/src/bunHttp.ts:57)
 
 ```typescript
 const path = new URL(req.url).pathname;
@@ -156,7 +156,7 @@ const path = req.path; // Bun-specific optimization
 
 ### 3. Headers Object Creation Per Request - MEDIUM
 
-**Location**: [`bunHttp.ts:62`](node_modules/@mionkit/bun/src/bunHttp.ts:62)
+**Location**: [`bunHttp.ts:62`](node_modules/@mionjs/bun/src/bunHttp.ts:62)
 
 ```typescript
 const responseHeaders = new Headers(defaultHeaders);
@@ -171,7 +171,7 @@ const responseHeaders = new Headers(defaultHeaders);
 
 ### 4. TextEncoder Per Response - MEDIUM
 
-**Location**: [`bunHttp.ts:123`](node_modules/@mionkit/bun/src/bunHttp.ts:123)
+**Location**: [`bunHttp.ts:123`](node_modules/@mionjs/bun/src/bunHttp.ts:123)
 
 ```typescript
 const buffer = textEncoder.encode(mionResp.rawBody as string);
@@ -190,7 +190,7 @@ const buffer = textEncoder.encode(mionResp.rawBody as string);
 
 ### 6. Potential Memory Leak in dispatchRoute - CRITICAL
 
-The memory growth pattern (linear increase from 2154 → 5017 MB) suggests a **memory leak** rather than just inefficient allocation. This is likely in the `dispatchRoute` function from `@mionkit/router`, not in the Bun wrapper itself.
+The memory growth pattern (linear increase from 2154 → 5017 MB) suggests a **memory leak** rather than just inefficient allocation. This is likely in the `dispatchRoute` function from `@mionjs/router`, not in the Bun wrapper itself.
 
 **Possible causes:**
 

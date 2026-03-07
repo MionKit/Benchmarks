@@ -5,7 +5,7 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { type Routes, route } from "@mionkit/router";
+import { type Routes, route } from "@mionjs/router";
 import { User, SimpleUser } from "./models";
 
 export const routes = {

@@ -21,7 +21,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "types": ["@mionkit/devtools/virtual-modules"]
+    "types": ["@mionjs/devtools/virtual-modules"]
   },
   "reflection": true,
   "include": ["apps", "apps/src/**/*.ts"],

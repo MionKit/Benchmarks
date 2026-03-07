@@ -2,7 +2,7 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-const mionRoutes = require("./mionRoutes-CtbFi3fe.js");
+const mionRoutes = require("./mionRoutes-CaK3IXAt.js");
 const type = require("@deepkit/type");
 const hashes = /* @__PURE__ */ new Map();
 const literalHashes = /* @__PURE__ */ new Map();
@@ -80,7 +80,7 @@ const __ΩMutable = ["T", "Mutable", 'l+e#!e"!fRb!Pde"!gN#)w"y'];
 const __ΩDeepRequired = ["T", 0, "DeepRequired", 'lGe&!e"!fo""RPde%!gN#"Re$!RPe#!%qk.8QRb!Pde"!p<w#y'];
 const __ΩDeepPartial = ["T", 0, "DeepPartial", 'lGe&!e"!fo""RPde%!gN#"Re$!RPe#!%qk.8QRb!Pde"!p<w#y'];
 const __ΩRecord$1 = ["K", "T", "Record", `l'e#"Rb!b"Pde"!N#!w#y`];
-function __assignType$3(fn, args) {
+function __assignType$h(fn, args) {
   fn.__type = args;
   return fn;
 }
@@ -222,7 +222,7 @@ const JitFunctions$1 = {
   mock: {
     id: mionRoutes.JIT_FUNCTION_IDS.mock,
     name: "mockType",
-    import: () => Promise.resolve().then(() => require("./mockType-DZ6Y0CXz.js")).then((n) => n.mockType$1).then(__assignType$3((m) => m.mockType, ["m", "", 'P"2!"/"'])),
+    import: () => Promise.resolve().then(() => require("./mockType-wJdL7Xqb.js")).then((n) => n.mockType$1).then(__assignType$h((m) => m.mockType, ["m", "", 'P"2!"/"'])),
     jitArgs,
     jitDefaultArgs,
     returnName: jitArgs.vλl
@@ -237,7 +237,7 @@ const JitFunctions$1 = {
   }
 };
 const jitFunctionList = Object.values(JitFunctions$1);
-const jitFunctionsById = Object.fromEntries(jitFunctionList.map(__assignType$3((f) => [f.id, f], ["f", "", 'P"2!"/"'])));
+const jitFunctionsById = Object.fromEntries(jitFunctionList.map(__assignType$h((f) => [f.id, f], ["f", "", 'P"2!"/"'])));
 const ReflectionKindName = {
   0: "never",
   1: "any",
@@ -931,7 +931,7 @@ function dependenciesToLiteral(comp, params, ignoreProps = []) {
   return toLiteralInContext(comp, params, ignoreProps, true);
 }
 const __ΩRecord = ["K", "T", "Record", `l'e#"Rb!b"Pde"!N#!w#y`];
-function __assignType$2(fn, args) {
+function __assignType$g(fn, args) {
   fn.__type = args;
   return fn;
 }
@@ -940,7 +940,7 @@ const cpf_asJSONString = mionRoutes.registerPureFnFactory("mion", "asJSONString"
     return JSON.stringify;
   const STR_ESCAPE = /[\u0000-\u001f\u0022\u005c\ud800-\udfff]/;
   const MAX_SCAPE_TEST_LENGTH = 1e3;
-  return __assignType$2(function _asJSONStringRegexOnly(str) {
+  return __assignType$g(function _asJSONStringRegexOnly(str) {
     if (str.length < MAX_SCAPE_TEST_LENGTH && STR_ESCAPE.test(str) === false) {
       return '"' + str + '"';
     } else {
@@ -959,7 +959,7 @@ const cpf_asJSONString = mionRoutes.registerPureFnFactory("mion", "asJSONString"
   };` });
 const cpf_getUnknownKeysFromArray = mionRoutes.registerPureFnFactory("mion", "getUnknownKeysFromArray", function() {
   const MAX_UNKNOWN_KEYS = 10;
-  return __assignType$2(function _getUnknownKeysFromArray(obj, keys) {
+  return __assignType$g(function _getUnknownKeysFromArray(obj, keys) {
     const unknownKeys = [];
     for (const prop in obj) {
       let found = false;
@@ -979,7 +979,7 @@ const cpf_getUnknownKeysFromArray = mionRoutes.registerPureFnFactory("mion", "ge
   }, [() => __ΩRecord, "StrNumber", "obj", "keys", "_getUnknownKeysFromArray", 'P"w""o!#2#"w"F2$"w"F/%']);
 }, { bodyHash: "D2CDXI8OoGLGyW", paramNames: [], code: 'const MAX_UNKNOWN_KEYS = 10;\n  return function _getUnknownKeysFromArray(obj, keys) {\n    const unknownKeys = [];\n    for (const prop in obj) {\n      let found = false;\n      for (let j = 0; j < keys.length; j++) {\n        if (keys[j] === prop) {\n          found = true;\n          break;\n        }\n      }\n      if (!found) {\n        unknownKeys.push(prop);\n        if (unknownKeys.length >= MAX_UNKNOWN_KEYS) throw new Error("Too many unknown keys");\n      }\n    }\n    return unknownKeys;\n  };' });
 const cpf_hasUnknownKeysFromArray = mionRoutes.registerPureFnFactory("mion", "hasUnknownKeysFromArray", function() {
-  return __assignType$2(function _hasUnknownKeysFromArray(obj, keys) {
+  return __assignType$g(function _hasUnknownKeysFromArray(obj, keys) {
     for (const prop in obj) {
       let found = false;
       for (let j = 0; j < keys.length; j++) {
@@ -995,14 +995,14 @@ const cpf_hasUnknownKeysFromArray = mionRoutes.registerPureFnFactory("mion", "ha
   }, [() => __ΩRecord, "StrNumber", "obj", "keys", "_hasUnknownKeysFromArray", 'P"w""o!#2#"w"F2$)/%']);
 }, { bodyHash: "K7uzDGNnPwcqQ9", paramNames: [], code: "return function _hasUnknownKeysFromArray(obj, keys) {\n    for (const prop in obj) {\n      let found = false;\n      for (let j = 0; j < keys.length; j++) {\n        if (keys[j] === prop) {\n          found = true;\n          break;\n        }\n      }\n      if (!found) return true;\n    }\n    return false;\n  };" });
 const cpf_newRunTypeErr = mionRoutes.registerPureFnFactory("mion", "newRunTypeErr", function() {
-  return __assignType$2(function _err(pλth, εrr, expected, accessPath) {
+  return __assignType$g(function _err(pλth, εrr, expected, accessPath) {
     const path = (accessPath == null ? void 0 : accessPath.length) ? [...pλth, ...accessPath] : [...pλth];
     const runTypeErr = { expected, path };
     εrr.push(runTypeErr);
   }, ["StrNumber", "pλth", "RunTypeError", "εrr", "expected", "accessPath", "_err", `P"w!F92""w#F2$&2%"w!F92&8$/'`]);
 }, { bodyHash: "eCwDrS1nuSv7ge", paramNames: [], code: "return function _err(p\\u03BBth, \\u03B5rr, expected, accessPath) {\n    const path = accessPath?.length ? [...p\\u03BBth, ...accessPath] : [...p\\u03BBth];\n    const runTypeErr = { expected, path };\n    \\u03B5rr.push(runTypeErr);\n  };" });
 const cpf_formatErr = mionRoutes.registerPureFnFactory("mion", "formatErr", function() {
-  return __assignType$2(function _formatErr(pλth, εrr, expected, fmtName, paramName, paramVal, fmtPath, accessPath, fmtAccessPath) {
+  return __assignType$g(function _formatErr(pλth, εrr, expected, fmtName, paramName, paramVal, fmtPath, accessPath, fmtAccessPath) {
     const path = (accessPath == null ? void 0 : accessPath.length) ? [...pλth, ...accessPath] : [...pλth];
     const formatPath = (fmtAccessPath == null ? void 0 : fmtAccessPath.length) ? [...fmtPath, ...fmtAccessPath, paramName] : [...fmtPath, paramName];
     const format = { name: fmtName, formatPath, val: paramVal };
@@ -1011,7 +1011,7 @@ const cpf_formatErr = mionRoutes.registerPureFnFactory("mion", "formatErr", func
   }, ["StrNumber", "pλth", "RunTypeError", "εrr", "expected", "fmtName", "paramName", "paramVal", "fmtPath", "accessPath", "fmtAccessPath", "_formatErr", `P"w!F2""w#F2$&2%&2&&2'P&')*J2("w!F2)"w!F2*8"w!F2+8$/,`]);
 }, { bodyHash: "2isPiuLWPtohVR", paramNames: [], code: "return function _formatErr(p\\u03BBth, \\u03B5rr, expected, fmtName, paramName, paramVal, fmtPath, accessPath, fmtAccessPath) {\n    const path = accessPath?.length ? [...p\\u03BBth, ...accessPath] : [...p\\u03BBth];\n    const formatPath = fmtAccessPath?.length ? [...fmtPath, ...fmtAccessPath, paramName] : [...fmtPath, paramName];\n    const format = { name: fmtName, formatPath, val: paramVal };\n    const runTypeErr = { expected, path, format };\n    \\u03B5rr.push(runTypeErr);\n  };" });
 const cpf_safeIterableKey = mionRoutes.registerPureFnFactory("mion", "safeIterableKey", function() {
-  return __assignType$2(function _safeKey(value) {
+  return __assignType$g(function _safeKey(value) {
     if (value === void 0)
       return null;
     if (value === null)
@@ -2238,7 +2238,7 @@ function createJitFunction(comp) {
 }
 function createJitFnWithContext(comp, fnName, fnCode, contextCode) {
   const context = contextCode ? `${contextCode};` : "";
-  let fnWithContext = `${context} return ${fnCode}`;
+  let fnWithContext = `'use strict'; ${context} return ${fnCode}`;
   if (mionRoutes.getENV("DEBUG_RUN_TIME")) {
     const fnArgs = getJitFnArgs(comp);
     const argsCall = getJitFnArgs(comp, false);
@@ -2247,7 +2247,7 @@ function createJitFnWithContext(comp, fnName, fnCode, contextCode) {
             console.log('${fnName} ${getJITFnName(comp.fnID)} ${comp.rootType.getTypeName()}', 'result:', resp, ' value:', ${argsCall});
             return resp;
         }`;
-    fnWithContext = `${context} ${fnCode} ${debugWrapper} return debug_${fnName};`;
+    fnWithContext = `'use strict'; ${context} ${fnCode} ${debugWrapper} return debug_${fnName};`;
   }
   try {
     const wrapperWithContext = new Function("utl", fnWithContext);
@@ -3511,6 +3511,7 @@ class StringRunType extends AtomicRunType {
     return { code: `if (typeof ${comp.vλl} !== 'string') ${comp.callJitErr(this)}`, type: "S" };
   }
 }
+__publicField(StringRunType, "__type", ["TypeString", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "StringRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(5"w!6"w)`]);
 class DateRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `(${comp.vλl} instanceof Date && !isNaN(${comp.vλl}.getTime()))`, type: "E" };
@@ -3525,6 +3526,7 @@ class DateRunType extends AtomicRunType {
     return { code: `new Date(${comp.vλl})`, type: "E" };
   }
 }
+__publicField(DateRunType, "__type", ["TypeClass", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "DateRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w%0)P"w#2$"w%0*5"w!6"w+`]);
 class NumberRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `Number.isFinite(${comp.vλl})`, type: "E" };
@@ -3539,6 +3541,7 @@ class NumberRunType extends AtomicRunType {
     return { code: void 0, type: "S" };
   }
 }
+__publicField(NumberRunType, "__type", ["TypeNumber", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "NumberRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w%0)P"w%0*5"w!6"w+`]);
 class BooleanRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `typeof ${comp.vλl} === 'boolean'`, type: "E" };
@@ -3553,6 +3556,7 @@ class BooleanRunType extends AtomicRunType {
     return { code: void 0, type: "S" };
   }
 }
+__publicField(BooleanRunType, "__type", ["TypeBoolean", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "BooleanRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w%0)P"w%0*5"w!6"w+`]);
 class NullRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `${comp.vλl} === null`, type: "E" };
@@ -3567,6 +3571,7 @@ class NullRunType extends AtomicRunType {
     return { code: void 0, type: "S" };
   }
 }
+__publicField(NullRunType, "__type", ["TypeNull", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "NullRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w%0)P"w%0*5"w!6"w+`]);
 class BigIntRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `typeof ${comp.vλl} === 'bigint'`, type: "E" };
@@ -3581,16 +3586,19 @@ class BigIntRunType extends AtomicRunType {
     return { code: `BigInt(${comp.vλl})`, type: "E" };
   }
 }
+__publicField(BigIntRunType, "__type", ["TypeBigInt", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "BigIntRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w#2$"w%0)P"w#2$"w%0*5"w!6"w+`]);
 class AnyRunType extends AtomicRunType {
   emitIsType(comp) {
     const isRoot = comp.getNestLevel(this) === 0;
-    if (isRoot) return { code: void 0, type: "E" };
+    if (isRoot)
+      return { code: void 0, type: "E" };
     return { code: "true", type: "E" };
   }
   emitTypeErrors() {
     return { code: void 0, type: "S" };
   }
 }
+__publicField(AnyRunType, "__type", ["TypeAny", "TypeUnknown", () => AtomicRunType, () => JitFnCompiler, "comp", "JitCode", "emitIsType", "emitTypeErrors", "AnyRunType", `PP"w!"w"J7#PP7$2%"w&0'P"w&0(5P"w!"w"J6"w)`]);
 class UndefinedRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `typeof ${comp.vλl} === 'undefined'`, type: "E" };
@@ -3602,8 +3610,10 @@ class UndefinedRunType extends AtomicRunType {
     return { code: `undefined`, type: "E" };
   }
 }
+__publicField(UndefinedRunType, "__type", ["TypeUndefined", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitRestoreFromJson", "UndefinedRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w%0)5"w!6"w*`]);
 class UnknownRunType extends AnyRunType {
 }
+__publicField(UnknownRunType, "__type", [() => AnyRunType, "UnknownRunType", 'P7!5w"']);
 class VoidRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `${comp.vλl} === undefined`, type: "E" };
@@ -3618,6 +3628,7 @@ class VoidRunType extends AtomicRunType {
     return { code: `${comp.vλl} = undefined`, type: "E" };
   }
 }
+__publicField(VoidRunType, "__type", ["TypeVoid", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "VoidRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w#2$"w%0)P"w#2$"w%0*5"w!6"w+`]);
 class ArrayRunType extends MemberRunType {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   startIndex(comp) {
@@ -3642,8 +3653,10 @@ class ArrayRunType extends MemberRunType {
     const index = this.getChildVarName(comp);
     const child = this.getJitChild(comp);
     const childJit = comp.compileIsType(child, "E");
-    if (!(childJit == null ? void 0 : childJit.code) && comp.opts.noIsArrayCheck) return { code: void 0, type: "E" };
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: `Array.isArray(${comp.vλl})`, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code) && comp.opts.noIsArrayCheck)
+      return { code: void 0, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: `Array.isArray(${comp.vλl})`, type: "E" };
     const isArrayCheckCode = comp.opts.noIsArrayCheck ? "" : `if (!Array.isArray(${comp.vλl})) return false;`;
     return {
       code: `
@@ -3662,10 +3675,13 @@ class ArrayRunType extends MemberRunType {
     const index = this.getChildVarName(comp);
     const child = this.getJitChild(comp);
     const childJit = comp.compileTypeErrors(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code) && comp.opts.noIsArrayCheck) return { code: void 0, type: "E" };
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: `if (!Array.isArray(${comp.vλl})) ${comp.callJitErr(this)};`, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code) && comp.opts.noIsArrayCheck)
+      return { code: void 0, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: `if (!Array.isArray(${comp.vλl})) ${comp.callJitErr(this)};`, type: "S" };
     const itemsCode = `for (let ${index} = ${this.startIndex(comp)}; ${index} < ${comp.vλl}.length; ${index}++) {${childJit.code}}`;
-    if (comp.opts.noIsArrayCheck) return { code: itemsCode, type: "S" };
+    if (comp.opts.noIsArrayCheck)
+      return { code: itemsCode, type: "S" };
     return {
       code: `if (!Array.isArray(${comp.vλl})) {${comp.callJitErr(this)}} else {${itemsCode}}`,
       type: "S"
@@ -3676,7 +3692,8 @@ class ArrayRunType extends MemberRunType {
     const index = this.getChildVarName(comp);
     const child = this.getJitChild(comp);
     const childJit = comp.compilePrepareForJson(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code) || !child) return { code: void 0, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code) || !child)
+      return { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
     return {
@@ -3689,7 +3706,8 @@ class ArrayRunType extends MemberRunType {
     const index = this.getChildVarName(comp);
     const child = this.getJitChild(comp);
     const childJit = comp.compileRestoreFromJson(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code) || !child) return { code: void 0, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code) || !child)
+      return { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
     return {
@@ -3699,10 +3717,12 @@ class ArrayRunType extends MemberRunType {
   }
   emitHasUnknownKeys(comp) {
     this.checkNonSkipTypes(comp);
-    if (this.getMemberType().getFamily() === "A") return { code: void 0, type: "E" };
+    if (this.getMemberType().getFamily() === "A")
+      return { code: void 0, type: "E" };
     const child = this.getJitChild(comp);
     const childJit = comp.compileHasUnknownKeys(child, "E");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "E" };
     const resultVal = comp.getLocalVarName("res", this);
     const index = this.getChildVarName(comp);
     return {
@@ -3719,27 +3739,31 @@ class ArrayRunType extends MemberRunType {
   }
   emitUnknownKeyErrors(comp) {
     this.checkNonSkipTypes(comp);
-    if (this.getMemberType().getFamily() === "A") return { code: "", type: "E" };
+    if (this.getMemberType().getFamily() === "A")
+      return { code: "", type: "E" };
     const child = this.getJitChild(comp);
     const childJit = comp.compileUnknownKeyErrors(child, "S");
     return this.traverseCode(comp, childJit);
   }
   emitStripUnknownKeys(comp) {
     this.checkNonSkipTypes(comp);
-    if (this.getMemberType().getFamily() === "A") return { code: "", type: "E" };
+    if (this.getMemberType().getFamily() === "A")
+      return { code: "", type: "E" };
     const child = this.getJitChild(comp);
     const childJit = comp.compileStripUnknownKeys(child, "S");
     return this.traverseCode(comp, childJit);
   }
   emitUnknownKeysToUndefined(comp) {
     this.checkNonSkipTypes(comp);
-    if (this.getMemberType().getFamily() === "A") return { code: "", type: "E" };
+    if (this.getMemberType().getFamily() === "A")
+      return { code: "", type: "E" };
     const child = this.getJitChild(comp);
     const childJit = comp.compileUnknownKeysToUndefined(child, "S");
     return this.traverseCode(comp, childJit);
   }
   traverseCode(comp, childJit) {
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
     const index = this.getChildVarName(comp);
     return {
       code: `for (let ${index} = ${this.startIndex(comp)}; ${index} < ${comp.vλl}.length; ${index}++) {${childJit.code}}`,
@@ -3748,9 +3772,11 @@ class ArrayRunType extends MemberRunType {
   }
   checkNonSkipTypes(comp) {
     const child = this.getMemberType();
-    if (child.skipJit(comp)) throw new Error(`Arrays can not have non serializable types, ie: Symbol[], Function[], etc.`);
+    if (child.skipJit(comp))
+      throw new Error(`Arrays can not have non serializable types, ie: Symbol[], Function[], etc.`);
   }
 }
+__publicField(ArrayRunType, "__type", ["TypeArray", "T", () => MemberRunType, "JitFnCompiler", "comp", "startIndex", "getChildVarName", "getChildLiteral", true, "useArrayAccessor", "isOptional", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "emitHasUnknownKeys", "emitUnknownKeyErrors", "emitStripUnknownKeys", "emitUnknownKeysToUndefined", "childJit", "code", "S", "type", "traverseCode", "checkNonSkipTypes", "ArrayRunType", `"w!c"Pe"!7#P"w$2%'0&P"w$2%&0'P"w$2%&0(P.)0*P)0+P"w$2%"w,0-P"w.2%"w,0/P"w$2%"w,00P"w$2%"w,01P"w$2%"w,02P"w.2%"w,03P"w$2%"w,04P"w$2%"w,05P"w$2%P"w,-J26PP&-J47.849M0:P"w$2%"0;5e!!6"w<`]);
 class RegexpRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `(${comp.vλl} instanceof RegExp)`, type: "E" };
@@ -3768,9 +3794,11 @@ class RegexpRunType extends AtomicRunType {
     };
   }
 }
+__publicField(RegexpRunType, "__type", ["TypeRegexp", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "RegexpRunType", `P"w!7"P"w#2$"w%0&P"w'2$"w%0(P"w#2$"w%0)P"w#2$"w%0*5"w!6"w+`]);
 class SymbolRunType extends AtomicRunType {
   skipJit(comp) {
-    if (!comp) return true;
+    if (!comp)
+      return true;
     return comp.fnID !== JitFunctions$1.toJSCode.id;
   }
   emitIsType(comp) {
@@ -3786,12 +3814,14 @@ class SymbolRunType extends AtomicRunType {
     return { code: `Symbol(${comp.vλl}.substring(7))`, type: "E" };
   }
 }
+__publicField(SymbolRunType, "__type", ["TypeSymbol", () => AtomicRunType, "JitFnCompiler", "comp", "skipJit", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "SymbolRunType", `P"w!7"P"w#2$)0%P"w#2$"w&0'P"w(2$"w&0)P"w#2$"w&0*P"w#2$"w&0+5"w!6"w,`]);
 const stringRt = new StringRunType();
 const numberRt = new NumberRunType();
 const booleanRt = new BooleanRunType();
 const symbolRt = new SymbolRunType();
 const regexpRt = new RegexpRunType();
 const bigIntRt = new BigIntRunType();
+const __ΩAnyLiteralRunType = [() => StringRunType, () => NumberRunType, () => BooleanRunType, () => SymbolRunType, () => RegexpRunType, () => BigIntRunType, "AnyLiteralRunType", `PP7!P7"P7#P7$P7%P7&Jw'y`];
 class LiteralRunType extends AtomicRunType {
   getRunTypeForLiteral(comp) {
     const noLiterals = comp.opts.noLiterals;
@@ -3800,29 +3830,35 @@ class LiteralRunType extends AtomicRunType {
     if (lit instanceof RegExp) {
       rt = regexpRt;
       rt.src = this.src;
-      if (noLiterals) this.src.kind = type.ReflectionKind.regexp;
+      if (noLiterals)
+        this.src.kind = type.ReflectionKind.regexp;
       return rt;
     }
     switch (typeof lit) {
       case "string":
         rt = stringRt;
-        if (noLiterals) this.src.kind = type.ReflectionKind.string;
+        if (noLiterals)
+          this.src.kind = type.ReflectionKind.string;
         break;
       case "number":
         rt = numberRt;
-        if (noLiterals) this.src.kind = type.ReflectionKind.number;
+        if (noLiterals)
+          this.src.kind = type.ReflectionKind.number;
         break;
       case "boolean":
         rt = booleanRt;
-        if (noLiterals) this.src.kind = type.ReflectionKind.boolean;
+        if (noLiterals)
+          this.src.kind = type.ReflectionKind.boolean;
         break;
       case "bigint":
         rt = bigIntRt;
-        if (noLiterals) this.src.kind = type.ReflectionKind.bigint;
+        if (noLiterals)
+          this.src.kind = type.ReflectionKind.bigint;
         break;
       case "symbol":
         rt = symbolRt;
-        if (noLiterals) this.src.kind = type.ReflectionKind.symbol;
+        if (noLiterals)
+          this.src.kind = type.ReflectionKind.symbol;
         break;
       default:
         throw new Error(`Unsupported literal type ${typeof lit}`);
@@ -3831,11 +3867,13 @@ class LiteralRunType extends AtomicRunType {
     return rt;
   }
   emitIsType(comp) {
-    if (comp.opts.noLiterals) return this.getRunTypeForLiteral(comp).emitIsType(comp);
+    if (comp.opts.noLiterals)
+      return this.getRunTypeForLiteral(comp).emitIsType(comp);
     return { code: compileIsLiteral(comp, this.src.literal), type: "E" };
   }
   emitTypeErrors(comp) {
-    if (comp.opts.noLiterals) return this.getRunTypeForLiteral(comp).emitTypeErrors(comp);
+    if (comp.opts.noLiterals)
+      return this.getRunTypeForLiteral(comp).emitTypeErrors(comp);
     return { code: compileTypeErrorsLiteral(comp, this.src.literal, this.getKindName()), type: "S" };
   }
   emitPrepareForJson(comp) {
@@ -3848,9 +3886,11 @@ class LiteralRunType extends AtomicRunType {
     return this.src.literal;
   }
 }
+__publicField(LiteralRunType, "__type", ["TypeLiteral", () => AtomicRunType, "JitFnCompiler", "comp", () => __ΩAnyLiteralRunType, "getRunTypeForLiteral", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "getLiteralValue", "LiteralRunType", `P"w!7"P"w#2$n%0&P"w#2$"w'0(P"w)2$"w'0*P"w#2$"w'0+P"w#2$"w'0,P"0-5"w!6"w.`]);
 function compileIsLiteral(comp, lit) {
   const literalType = typeof lit;
-  if (lit instanceof RegExp) return `${comp.vλl} instanceof RegExp && String(${comp.vλl}) === String(${lit})`;
+  if (lit instanceof RegExp)
+    return `${comp.vλl} instanceof RegExp && String(${comp.vλl}) === String(${lit})`;
   switch (literalType) {
     case "string":
       return `${comp.vλl} === ${toLiteral(lit)}`;
@@ -3866,6 +3906,7 @@ function compileIsLiteral(comp, lit) {
       throw new Error(`Unsupported literal type ${literalType}`);
   }
 }
+compileIsLiteral.__type = ["JitFnCompiler", "comp", "TypeLiteral", "literal", "lit", "compileIsLiteral", 'P"w!2""w#.$f2%&/&'];
 function compileTypeErrorsLiteral(comp, lit, name) {
   const literalType = typeof lit;
   if (lit instanceof RegExp)
@@ -3885,6 +3926,7 @@ function compileTypeErrorsLiteral(comp, lit, name) {
       throw new Error(`Unsupported literal type ${literalType}`);
   }
 }
+compileTypeErrorsLiteral.__type = ["JitErrorsFnCompiler", "comp", "TypeLiteral", "literal", "lit", () => __ΩAnyKindName, "name", "compileTypeErrorsLiteral", `P"w!2""w#.$f2%n&2'&/(`];
 class NeverRunType extends AtomicRunType {
   emitIsType() {
     return { code: "false", type: "E" };
@@ -3899,16 +3941,22 @@ class NeverRunType extends AtomicRunType {
     throw new Error("Never type cannot be decoded from JSON.");
   }
 }
+__publicField(NeverRunType, "__type", ["TypeNever", () => AtomicRunType, () => __ΩJitCode, "emitIsType", () => JitErrorsFnCompiler, "comp", () => __ΩJitCode, "emitTypeErrors", () => __ΩJitCode, "emitPrepareForJson", () => __ΩJitCode, "emitRestoreFromJson", "NeverRunType", `P"w!7"Pn#0$PP7%2&n'0(Pn)0*Pn+0,5"w!6"w-`]);
+function __assignType$f(fn, args) {
+  fn.__type = args;
+  return fn;
+}
 class EnumRunType extends AtomicRunType {
   emitIsType(comp) {
-    const items = this.src.values.map((v) => `${comp.vλl} === ${toLiteral(v)}`);
+    const items = this.src.values.map(__assignType$f((v) => `${comp.vλl} === ${toLiteral(v)}`, ["v", "", 'P"2!"/"']));
     return { code: `(${items.join(" || ")})`, type: "E" };
   }
   emitTypeErrors(comp) {
-    const items = this.src.values.map((v) => `${comp.vλl} === ${toLiteral(v)}`);
+    const items = this.src.values.map(__assignType$f((v) => `${comp.vλl} === ${toLiteral(v)}`, ["v", "", 'P"2!"/"']));
     return { code: `if (!(${items.join(" || ")})) ${comp.callJitErr(this)}`, type: "S" };
   }
 }
+__publicField(EnumRunType, "__type", [() => type.__ΩTypeEnum, () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", () => type.__ΩTypeEnum, "EnumRunType", `Pn!7"P"w#2$"w%0&P"w'2$"w%0(5n)6"w*`]);
 class EnumMemberRunType extends AtomicRunType {
   skipJit() {
     return true;
@@ -3926,102 +3974,124 @@ class EnumMemberRunType extends AtomicRunType {
     throw new Error("Enum member operations are not supported");
   }
 }
+__publicField(EnumMemberRunType, "__type", ["TypeEnum", () => AtomicRunType, "skipJit", () => __ΩJitCode, "emitIsType", () => __ΩJitCode, "emitTypeErrors", () => __ΩJitCode, "emitPrepareForJson", () => __ΩJitCode, "emitRestoreFromJson", "EnumMemberRunType", `P"w!7"P"0#Pn$0%Pn&0'Pn(0)Pn*0+5"w!6"w,`]);
+function __assignType$e(fn, args) {
+  fn.__type = args;
+  return fn;
+}
+const __ΩFlattenedProp = ["CollectionRunType", "unionItem", "unionIndex", "PropertyRunType", "prop", "typeID", "compiledName", "FlattenedProp", `P"w!4"P&'J4#"w$4%P&'J4&&4'Mw(y`];
+const __ΩSplitUnionResult = ["BaseRunType", "simpleItems", "CollectionRunType", "objectTypes", "anyItem", "SplitUnionResult", 'P"w!F4""w#F4$"w!4%8Mw&y'];
 function splitUnionItems(comp, urt, unionChildren) {
   const unionItems = unionChildren || urt.getJitChildren(comp);
   const objectTypes = [];
   const simpleItems = [];
   let anyItem;
-  unionItems.forEach((unionItem) => {
+  unionItems.forEach(__assignType$e((unionItem) => {
     if (isAnyRunType(unionItem) || isUnknownRunType(unionItem)) {
-      if (!anyItem) anyItem = unionItem;
+      if (!anyItem)
+        anyItem = unionItem;
       return;
     }
     const isObj = urt.isTypeWithProperties(unionItem);
-    if (!isObj) return simpleItems.push(unionItem);
+    if (!isObj)
+      return simpleItems.push(unionItem);
     return objectTypes.push(unionItem);
-  });
+  }, ["unionItem", "", 'P"2!"/"']));
   const sortedObjectTypes = sortUnreachableTypes(comp, objectTypes);
   return { simpleItems, objectTypes: sortedObjectTypes, anyItem };
 }
+splitUnionItems.__type = ["JitFnCompiler", "comp", "UnionRunType", "urt", "BaseRunType", "unionChildren", () => __ΩSplitUnionResult, "splitUnionItems", `P"w!2""w#2$"w%F2&8n'/(`];
 function sortUnreachableTypes(comp, objectTypes) {
-  if (objectTypes.length <= 1) return objectTypes;
-  const typePropsMap = /* @__PURE__ */ new Map();
-  objectTypes.forEach((objType) => {
+  if (objectTypes.length <= 1)
+    return objectTypes;
+  const typePropsMap = (Map.Ω = [["CollectionRunType", '"w!'], ["P&'JD"]], /* @__PURE__ */ new Map());
+  objectTypes.forEach(__assignType$e((objType) => {
     const props = objType.getJitChildren(comp);
-    const propTypeIDs = /* @__PURE__ */ new Set();
-    props.forEach((prop) => propTypeIDs.add(prop.getTypeID()));
+    const propTypeIDs = (Set.Ω = [["P&'J"]], /* @__PURE__ */ new Set());
+    props.forEach(__assignType$e((prop) => propTypeIDs.add(prop.getTypeID()), ["prop", "", 'P"2!"/"']));
     typePropsMap.set(objType, propTypeIDs);
-  });
-  const isSubsetOf = (smaller, larger) => {
+  }, ["objType", "", 'P"2!"/"']));
+  const isSubsetOf = __assignType$e((smaller, larger) => {
     const smallerProps = typePropsMap.get(smaller);
     const largerProps = typePropsMap.get(larger);
-    if (smallerProps.size >= largerProps.size) return false;
+    if (smallerProps.size >= largerProps.size)
+      return false;
     for (const typeID of smallerProps) {
-      if (!largerProps.has(typeID)) return false;
+      if (!largerProps.has(typeID))
+        return false;
     }
     return true;
-  };
-  const processed = /* @__PURE__ */ new Set();
+  }, ["CollectionRunType", "smaller", "larger", "", 'P"w!2""w!2#)/$']);
+  const processed = (Set.Ω = [["CollectionRunType", '"w!']], /* @__PURE__ */ new Set());
   const result = [];
   for (let i = 0; i < objectTypes.length; i++) {
     const current = objectTypes[i];
-    if (processed.has(current)) continue;
+    if (processed.has(current))
+      continue;
     const relatedGroup = [current];
     processed.add(current);
     for (let j = 0; j < objectTypes.length; j++) {
-      if (i === j) continue;
+      if (i === j)
+        continue;
       const other = objectTypes[j];
-      if (processed.has(other)) continue;
+      if (processed.has(other))
+        continue;
       if (isSubsetOf(current, other) || isSubsetOf(other, current)) {
         relatedGroup.push(other);
         processed.add(other);
       }
     }
     if (relatedGroup.length > 1) {
-      relatedGroup.sort((a, b) => {
+      relatedGroup.sort(__assignType$e((a, b) => {
         const aSize = typePropsMap.get(a).size;
         const bSize = typePropsMap.get(b).size;
         return bSize - aSize;
-      });
+      }, ["a", "b", "", 'P"2!"2""/#']));
     }
     result.push(...relatedGroup);
   }
   return result;
 }
+sortUnreachableTypes.__type = ["JitFnCompiler", "comp", "CollectionRunType", "objectTypes", "sortUnreachableTypes", 'P"w!2""w#F2$"w#F/%'];
 function markDiscriminators(comp, urt, unionItems) {
-  if (urt.hasDiscriminators !== void 0 && urt.hasObjectTypes !== void 0) return;
-  const objectTypes = unionItems.filter((item) => urt.isTypeWithProperties(item));
+  if (urt.hasDiscriminators !== void 0 && urt.hasObjectTypes !== void 0)
+    return;
+  const objectTypes = unionItems.filter(__assignType$e((item) => urt.isTypeWithProperties(item), ["item", "", 'P"2!"/"']));
   const namedDiscriminators = getDiscriminatorProperties(comp, urt, objectTypes, initGetCompiledName());
   const uniqueDiscriminators = getUniqueDiscriminatorProperties(comp, urt, objectTypes, initGetCompiledName());
   urt.hasObjectTypes = !!objectTypes.length;
   urt.hasDiscriminators = !!namedDiscriminators.length || !!uniqueDiscriminators.length;
 }
+markDiscriminators.__type = ["JitFnCompiler", "comp", "UnionRunType", "urt", "BaseRunType", "unionItems", "markDiscriminators", `P"w!2""w#2$"w%F2&"/'`];
+const __ΩPropUnionItemPair = ["PropertyRunType", "prop", "CollectionRunType", "unionItem", "PropUnionItemPair", 'P"w!4""w#4$Mw%y'];
 function getDiscriminatorProperties(comp, urt, unionTypes, getCompiledName) {
-  if (!unionTypes.length) return [];
-  const propByName = /* @__PURE__ */ new Map();
-  unionTypes.forEach((unionItem) => {
+  if (!unionTypes.length)
+    return [];
+  const propByName = (Map.Ω = [["P&'J"], [() => __ΩPropUnionItemPair, "n!F"]], /* @__PURE__ */ new Map());
+  unionTypes.forEach(__assignType$e((unionItem) => {
     const props = unionItem.getJitChildren(comp);
-    props.forEach((prop) => {
+    props.forEach(__assignType$e((prop) => {
       const name = prop.getChildVarName(comp);
       const existing = propByName.get(name) || [];
       propByName.set(name, [...existing, { prop, unionItem }]);
-    });
-  });
-  const propsOnAllTypes = Array.from(propByName.entries()).filter(([, props]) => props.length === unionTypes.length).map(([key, props]) => ({
+    }, ["prop", "", 'P"2!"/"']));
+  }, ["unionItem", "", 'P"2!"/"']));
+  const propsOnAllTypes = Array.from(propByName.entries()).filter(__assignType$e(([, props]) => props.length === unionTypes.length, ["param0", "", 'P"2!"/"'])).map(__assignType$e(([key, props]) => ({
     name: key,
     props,
-    complexity: props.reduce((acc, item) => acc + getTotalComplexity(comp, item.prop), 0),
-    isUniqueType: props.every((item) => {
+    complexity: props.reduce(__assignType$e((acc, item) => acc + getTotalComplexity(comp, item.prop), ["acc", "item", "", 'P"2!"2""/#']), 0),
+    isUniqueType: props.every(__assignType$e((item) => {
       const child = item;
       const typeID = child.prop.getTypeID();
-      const isDiff = props.every((otherItem) => child.prop === otherItem.prop || otherItem.prop.getTypeID() !== typeID);
+      const isDiff = props.every(__assignType$e((otherItem) => child.prop === otherItem.prop || otherItem.prop.getTypeID() !== typeID, ["otherItem", "", 'P"2!"/"']));
       return isDiff;
-    })
-  })).filter((item) => item.isUniqueType);
-  const lessComplexProps = propsOnAllTypes.toSorted((a, b) => a.complexity - b.complexity);
+    }, ["item", "", 'P"2!"/"']))
+  }), ["param0", "", 'P"2!"/"'])).filter(__assignType$e((item) => item.isUniqueType, ["item", "", 'P"2!"/"']));
+  const lessComplexProps = propsOnAllTypes.toSorted(__assignType$e((a, b) => a.complexity - b.complexity, ["a", "b", "", 'P"2!"2""/#']));
   const lessComplex = lessComplexProps[0];
-  if (!lessComplex) return [];
-  return lessComplex.props.map((item) => {
+  if (!lessComplex)
+    return [];
+  return lessComplex.props.map(__assignType$e((item) => {
     item.prop.isUnionDiscriminator = true;
     const unionIndex = urt.getUnionItemIndex(comp, item.unionItem);
     const typeID = item.prop.getTypeID();
@@ -4032,20 +4102,23 @@ function getDiscriminatorProperties(comp, urt, unionTypes, getCompiledName) {
       typeID,
       compiledName: getCompiledName(comp, urt, typeID)
     };
-  });
+  }, ["item", "", 'P"2!"/"']));
 }
+getDiscriminatorProperties.__type = ["JitFnCompiler", "comp", "UnionRunType", "urt", "CollectionRunType", "unionTypes", "propTypeID", "", "getCompiledName", () => __ΩFlattenedProp, "getDiscriminatorProperties", `P"w!2""w#2$"w%F2&P"w!2""w#2$P&'J2'&/(2)n*F/+`];
 function getUniqueDiscriminatorProperties(comp, urt, unionTypes, getCompiledName) {
-  if (!unionTypes.length) return [];
-  const uniquePropByUnionItem = /* @__PURE__ */ new Map();
-  unionTypes.forEach((unionItem) => {
+  if (!unionTypes.length)
+    return [];
+  const uniquePropByUnionItem = (Map.Ω = [["CollectionRunType", '"w!'], [() => __ΩPropUnionItemPair, "n!"]], /* @__PURE__ */ new Map());
+  unionTypes.forEach(__assignType$e((unionItem) => {
     const props = unionItem.getJitChildren(comp);
-    props.forEach((prop) => {
+    props.forEach(__assignType$e((prop) => {
       const typeID = prop.getTypeID();
-      const isUnique = unionTypes.every((otherUnionItem) => {
-        if (otherUnionItem === unionItem) return true;
+      const isUnique = unionTypes.every(__assignType$e((otherUnionItem) => {
+        if (otherUnionItem === unionItem)
+          return true;
         const otherProps = otherUnionItem.getJitChildren(comp);
-        return otherProps.every((otherProp) => otherProp.getTypeID() !== typeID);
-      });
+        return otherProps.every(__assignType$e((otherProp) => otherProp.getTypeID() !== typeID, ["otherProp", "", 'P"2!"/"']));
+      }, ["otherUnionItem", "", 'P"2!"/"']));
       if (isUnique) {
         const existing = uniquePropByUnionItem.get(unionItem);
         if (!existing) {
@@ -4056,14 +4129,15 @@ function getUniqueDiscriminatorProperties(comp, urt, unionTypes, getCompiledName
           return;
         }
         const newItem = { prop, unionItem };
-        const lessComplex = [newItem, existing].toSorted((a, b) => sortRunTypeByComplexity(comp, a.prop, b.prop))[0];
+        const lessComplex = [newItem, existing].toSorted(__assignType$e((a, b) => sortRunTypeByComplexity(comp, a.prop, b.prop), ["a", "b", "", 'P"2!"2""/#']))[0];
         uniquePropByUnionItem.set(unionItem, lessComplex);
       }
-    });
-  });
-  if (!uniquePropByUnionItem.size) return [];
+    }, ["prop", "", 'P"2!"/"']));
+  }, ["unionItem", "", 'P"2!"/"']));
+  if (!uniquePropByUnionItem.size)
+    return [];
   const uniqueProps = Array.from(uniquePropByUnionItem.values());
-  return uniqueProps.map((item) => {
+  return uniqueProps.map(__assignType$e((item) => {
     item.prop.isUnionDiscriminator = true;
     const unionIndex = urt.getUnionItemIndex(comp, item.unionItem);
     const typeID = item.prop.getTypeID();
@@ -4074,17 +4148,24 @@ function getUniqueDiscriminatorProperties(comp, urt, unionTypes, getCompiledName
       typeID,
       compiledName: getCompiledName(comp, urt, typeID)
     };
-  });
+  }, ["item", "", 'P"2!"/"']));
 }
+getUniqueDiscriminatorProperties.__type = ["JitFnCompiler", "comp", "UnionRunType", "urt", "CollectionRunType", "unionTypes", "propTypeID", "", "getCompiledName", () => __ΩFlattenedProp, "getUniqueDiscriminatorProperties", `P"w!2""w#2$"w%F2&P"w!2""w#2$P&'J2'&/(2)n*F/+`];
 function initGetCompiledName() {
-  const typeIDs = /* @__PURE__ */ new Map();
-  return function getCompiledName(comp, urt, typeID) {
+  const typeIDs = (Map.Ω = [["P&'J"], ["'"]], /* @__PURE__ */ new Map());
+  return __assignType$e(function getCompiledName(comp, urt, typeID) {
     const existingIndex = typeIDs.get(typeID);
-    if (existingIndex) return comp.getLocalVarName("prop", urt) + `_${existingIndex}`;
+    if (existingIndex)
+      return comp.getLocalVarName("prop", urt) + `_${existingIndex}`;
     const newIndex = typeIDs.size;
     typeIDs.set(typeID, newIndex);
     return comp.getLocalVarName("prop", urt) + `_${newIndex}`;
-  };
+  }, ["JitFnCompiler", "comp", "UnionRunType", "urt", "typeID", "getCompiledName", `P"w!2""w#2$P&'J2%&/&`]);
+}
+initGetCompiledName.__type = ["initGetCompiledName", 'P"/!'];
+function __assignType$d(fn, args) {
+  fn.__type = args;
+  return fn;
 }
 class UnionRunType extends CollectionRunType {
   constructor() {
@@ -4102,31 +4183,34 @@ class UnionRunType extends CollectionRunType {
   }
   getUnionItemIndex(comp, unionItem) {
     const children = this.getJitChildren(comp);
-    const index = children.findIndex((child) => child === unionItem);
-    if (index === -1) throw new Error(`Item ${unionItem.getTypeName()} not found in union ${this.getTypeName()}`);
+    const index = children.findIndex(__assignType$d((child) => child === unionItem, ["child", "", 'P"2!"/"']));
+    if (index === -1)
+      throw new Error(`Item ${unionItem.getTypeName()} not found in union ${this.getTypeName()}`);
     return index;
   }
   /**
    * Returns isType check for a union child with loose matching.
    * Uses first-match strategy: returns first matching type in declaration order.
    * For all-optional types (weak types), ensures at least one property matches or is empty object.
-   * Note: Use ESLint rules @mionkit/no-unreachable-union-types and @mionkit/no-mixed-union-properties
+   * Note: Use ESLint rules @mionjs/no-unreachable-union-types and @mionjs/no-mixed-union-properties
    * to detect overlapping union types at compile time.
    * @see union.spec.ts 'Union Obj' and 'Union Mixed' test suites for examples.
    */
   getChildIsTypeWithLooseCheck(rt, comp) {
     const isTypeCode = comp.compileIsType(rt, "E").code || "";
     const isTypeWithProperties = isInterfaceRunType(rt) || isClassRunType(rt) || isObjectLiteralRunType(rt) || isIntersectionRunType(rt);
-    if (!isTypeWithProperties || rt.getFamily() !== "C") return isTypeCode;
+    if (!isTypeWithProperties || rt.getFamily() !== "C")
+      return isTypeCode;
     const props = rt.getJitChildren(comp);
-    const hasIndexProperty = props.some((prop) => prop.src.kind === type.ReflectionKind.indexSignature);
-    if (hasIndexProperty) return isTypeCode;
+    const hasIndexProperty = props.some(__assignType$d((prop) => prop.src.kind === type.ReflectionKind.indexSignature, ["prop", "", 'P"2!"/"']));
+    if (hasIndexProperty)
+      return isTypeCode;
     const isAllOptional = rt.areAllChildrenOptional(props);
     if (isAllOptional && props.length > 0) {
-      const hasOwnPropCheck = props.map((p) => {
+      const hasOwnPropCheck = props.map(__assignType$d((p) => {
         const name = p.getPropertyName();
         return `(${toLiteral(name)} in ${comp.vλl})`;
-      });
+      }, ["p", "", 'P"2!"/"']));
       hasOwnPropCheck.push(`Object.keys(${comp.vλl}).length === 0`);
       const weakTypeCheck = `(${hasOwnPropCheck.join(" || ")})`;
       return `(${isTypeCode} && ${weakTypeCheck})`;
@@ -4141,8 +4225,8 @@ class UnionRunType extends CollectionRunType {
   emitIsType(comp) {
     this.checkAllowedChildren(comp);
     const { simpleItems, objectTypes, anyItem } = this.getUnionChildren(comp);
-    const simpleChecks = simpleItems.map((rt) => this.getChildIsTypeWithLooseCheck(rt, comp)).filter(Boolean);
-    const objChecks = objectTypes.map((rt) => this.getChildIsTypeWithLooseCheck(rt, comp)).filter(Boolean);
+    const simpleChecks = simpleItems.map(__assignType$d((rt) => this.getChildIsTypeWithLooseCheck(rt, comp), ["rt", "", 'P"2!"/"'])).filter(Boolean);
+    const objChecks = objectTypes.map(__assignType$d((rt) => this.getChildIsTypeWithLooseCheck(rt, comp), ["rt", "", 'P"2!"/"'])).filter(Boolean);
     const objCode = objChecks.length ? `(typeof ${comp.vλl} === 'object' && ${comp.vλl} !== null && (${objChecks.join(" || ")}))` : "";
     const anyCheck = anyItem ? this.getChildIsTypeWithLooseCheck(anyItem, comp) : "";
     const allChecks = [...simpleChecks, objCode, anyCheck].filter(Boolean);
@@ -4167,7 +4251,7 @@ class UnionRunType extends CollectionRunType {
     const fail = `throw new Error(${errName});`;
     comp.setContextItem(errName, `const ${errName} = "Can not json encode union: item does not belong to the union"`);
     const ifElse = createIfElseFn();
-    const getEncodeCode = (childRt) => {
+    const getEncodeCode = __assignType$d((childRt) => {
       const toJit = comp.compilePrepareForJson(childRt, "S");
       const fromJit = comp.compileRestoreFromJson(childRt, "S");
       const needsTupleEncoding = !!toJit.code || !!fromJit.code;
@@ -4176,15 +4260,15 @@ class UnionRunType extends CollectionRunType {
       const index = this.getUnionItemIndex(comp, childRt);
       const tupleEncode = needsTupleEncoding ? `${comp.vλl} = [${index}, ${comp.vλl}]` : "/*noop*/";
       return `${encodeCode} ${tupleEncode}`;
-    };
-    const simpleCode = simpleItems.map((rt) => {
+    }, [() => BaseRunType, "childRt", "", 'PP7!2""/#']);
+    const simpleCode = simpleItems.map(__assignType$d((rt) => {
       const isTypeCode = this.getChildIsTypeWithLooseCheck(rt, comp);
       return `${ifElse()} (${isTypeCode}) {${getEncodeCode(rt)}}`;
-    });
-    const objCode = objectTypes.length ? objectTypes.map((rt) => {
+    }, ["rt", "", 'P"2!"/"']));
+    const objCode = objectTypes.length ? objectTypes.map(__assignType$d((rt) => {
       const isTypeCode = this.getChildIsTypeWithLooseCheck(rt, comp);
       return `${ifElse()} (typeof ${comp.vλl} === 'object' && ${comp.vλl} !== null && ${isTypeCode}) {${getEncodeCode(rt)}}`;
-    }) : [];
+    }, ["rt", "", 'P"2!"/"'])) : [];
     const anyCode = anyItem ? `${ifElse(true)} {${getEncodeCode(anyItem)}}` : `${ifElse(true)} {${fail}}`;
     return { code: [...simpleCode, ...objCode, anyCode].join(""), type: "S" };
   }
@@ -4201,13 +4285,13 @@ class UnionRunType extends CollectionRunType {
     comp.setContextItem(errVarName, `const ${errVarName} = "Can not json decode union: invalid union index"`);
     const children = this.getJitChildren(comp);
     const ifElse = createIfElseFn();
-    const itemsCode = children.map((unionItem) => {
+    const itemsCode = children.map(__assignType$d((unionItem) => {
       const childJit = comp.compileRestoreFromJson(unionItem, "S");
       const isExpression = childIsExpression(childJit, unionItem);
       const code2 = isExpression && childJit.code && childJit.code !== comp.vλl ? `${comp.vλl} = ${childJit.code}` : childJit.code || "";
       const index = this.getUnionItemIndex(comp, unionItem);
       return `${ifElse()} (${decVar} === ${index}) {${code2 || "/*noop*/"}}`;
-    }).filter(Boolean);
+    }, ["unionItem", "", 'P"2!"/"'])).filter(Boolean);
     const childrenCode = itemsCode.join("");
     const failCode = childrenCode ? `else {throw new Error(${errVarName})}` : "";
     const code = `
@@ -4220,90 +4304,21 @@ class UnionRunType extends CollectionRunType {
     return { code, type: "S" };
   }
   getUnionTypeNames() {
-    return this.getChildRunTypes().map((rt) => rt.getTypeName()).join(" | ");
+    return this.getChildRunTypes().map(__assignType$d((rt) => rt.getTypeName(), ["rt", "", 'P"2!"/"'])).join(" | ");
   }
   checkAllowedChildren(comp) {
     const allChildren = this.getChildRunTypes();
-    const toSkip = allChildren.filter((rt) => rt.skipJit(comp));
+    const toSkip = allChildren.filter(__assignType$d((rt) => rt.skipJit(comp), ["rt", "", 'P"2!"/"']));
     if (toSkip.length)
       throw new Error(`Union can not have non serializable types, ie: Symbol, Function, etc. 
 Type: ${this.stringify()}`);
   }
 }
-class TupleRunType extends CollectionRunType {
-  constructor() {
-    super(...arguments);
-    __publicField(this, "getChildRunTypes", () => {
-      const childTypes = this.src.parameters || this.src.types || [];
-      return childTypes.map((t) => t._rt);
-    });
-  }
-  getParamRunTypes(comp) {
-    var _a, _b, _c, _d;
-    const start = (_b = (_a = comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
-    const end = (_d = (_c = comp.opts) == null ? void 0 : _c.paramsSlice) == null ? void 0 : _d.end;
-    const children = this.getChildRunTypes();
-    if (!start && !end) return children;
-    return children.slice(start, end);
-  }
-  hasRestParameter(comp) {
-    return !!this.getParamRunTypes(comp).length && this.getParamRunTypes(comp)[this.getParamRunTypes(comp).length - 1].isRest();
-  }
-  totalRequiredParams(comp) {
-    return this.getParamRunTypes(comp).filter((p) => !p.isOptional() && !p.isRest()).length;
-  }
-  // ####### params #######
-  emitIsType(comp) {
-    const children = this.getParamRunTypes(comp);
-    if (children.length === 0 && comp.opts.noIsArrayCheck) return { code: void 0, type: "E" };
-    if (children.length === 0) return { code: `Array.isArray(${comp.vλl}) && ${comp.vλl}.length === 0`, type: "E" };
-    const lengthCode = this.hasRestParameter(comp) ? "" : `&& ${comp.vλl}.length <= ${this.getParamRunTypes(comp).length}`;
-    const paramsCode = children.map((p) => `(${comp.compileIsType(p, "E").code})`).join(" && ");
-    const checkIsArrayCode = comp.opts.noIsArrayCheck ? "" : `Array.isArray(${comp.vλl})${lengthCode} && `;
-    return { code: `(${checkIsArrayCode} ${paramsCode})`, type: "E" };
-  }
-  emitTypeErrors(comp) {
-    const children = this.getParamRunTypes(comp);
-    if (children.length === 0 && comp.opts.noIsArrayCheck) return { code: void 0, type: "S" };
-    if (children.length === 0)
-      return { code: `if (!Array.isArray(${comp.vλl}) || && ${comp.vλl}.length === 0) ${comp.callJitErr(this)}`, type: "S" };
-    const lengthCode = this.hasRestParameter(comp) ? "" : `|| ${comp.vλl}.length > ${this.getParamRunTypes(comp).length}`;
-    const paramsCode = children.map((p) => comp.compileTypeErrors(p, "S").code).join(";");
-    if (comp.opts.noIsArrayCheck) return { code: paramsCode, type: "S" };
-    return { code: `if (!Array.isArray(${comp.vλl})${lengthCode}) ${comp.callJitErr(this)}; else {${paramsCode}}`, type: "S" };
-  }
-  emitPrepareForJson(comp) {
-    const children = this.getParamRunTypes(comp);
-    if (!children.length) return { code: void 0, type: "S" };
-    const code = children.map((p) => comp.compilePrepareForJson(p, "S").code).filter(Boolean).join(";");
-    return { code, type: "S" };
-  }
-  emitRestoreFromJson(comp) {
-    const children = this.getParamRunTypes(comp);
-    if (!children.length) return { code: void 0, type: "S" };
-    const code = children.map((p) => comp.compileRestoreFromJson(p, "S").code).filter(Boolean).join(";");
-    return { code, type: "S" };
-  }
-}
-class FunctionParamsRunType extends TupleRunType {
-  emitIsType(comp) {
-    const children = this.getParamRunTypes(comp);
-    if (children.length === 0) return { code: `${comp.vλl}.length === 0`, type: "E" };
-    const lengthCode = this.hasRestParameter(comp) ? "" : `${comp.vλl}.length <= ${children.length}`;
-    const paramsCode = children.map((p) => comp.compileIsType(p, "E").code).filter(Boolean);
-    if (paramsCode.length === 0) return lengthCode ? { code: `(${lengthCode})`, type: "E" } : { code: void 0, type: "E" };
-    return lengthCode ? { code: `(${lengthCode} && ${paramsCode.join(" && ")})`, type: "E" } : { code: `(${paramsCode.join(" && ")})`, type: "E" };
-  }
-  emitTypeErrors(comp) {
-    const children = this.getParamRunTypes(comp);
-    if (children.length === 0) return { code: `if (${comp.vλl}.length !== 0) ${comp.callJitErr(this)}`, type: "S" };
-    const lengthCode = this.hasRestParameter(comp) ? "" : `${comp.vλl}.length > ${children.length}`;
-    const paramsCode = children.map((p) => comp.compileTypeErrors(p, "S").code).filter(Boolean);
-    if (paramsCode.length === 0)
-      return lengthCode ? { code: `if (${lengthCode}) ${comp.callJitErr(this)}`, type: "S" } : { code: void 0, type: "S" };
-    return lengthCode ? { code: `if (${lengthCode}) ${comp.callJitErr(this)}; else {${paramsCode.join(";")}}`, type: "S" } : { code: paramsCode.join(";"), type: "S" };
-  }
-}
+__publicField(UnionRunType, "__type", ["TypeUnion", () => CollectionRunType, "hasDiscriminators", function() {
+  return void 0;
+}, "hasObjectTypes", function() {
+  return void 0;
+}, () => BaseRunType, "rt", "isTypeWithProperties", "JitFnCompiler", "comp", () => __ΩSplitUnionResult, "getUnionChildren", () => BaseRunType, "unionItem", "getUnionItemIndex", () => BaseRunType, "getChildIsTypeWithLooseCheck", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "getUnionTypeNames", "checkAllowedChildren", "UnionRunType", `P"w!7"P)-J3#>$P)-J3%>&PP7'2("0)P"w*2+n,0-P"w*2+P7.2/'00PP712("w*2+&02P"w*2+"w304P"w52+"w306P"w*2+"w307P"w*2+"w308P&09P"w*2+"0:5"w!6"w;`]);
 class TupleMemberRunType extends MemberRunType {
   isOptional() {
     return !!this.src.optional || this.isRest() || this.hasDefaultValue();
@@ -4311,7 +4326,8 @@ class TupleMemberRunType extends MemberRunType {
   getChildIndex(comp) {
     var _a, _b;
     const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
-    if (start) return getParamIndex(this.src) - start;
+    if (start)
+      return getParamIndex(this.src) - start;
     return getParamIndex(this.src);
   }
   getChildVarName(comp) {
@@ -4342,9 +4358,12 @@ class TupleMemberRunType extends MemberRunType {
     const skipChild = child == null ? void 0 : child.skipJit(comp);
     const childJit = comp.compileIsType(child, "E");
     const isNonSerializable = skipChild || !(childJit == null ? void 0 : childJit.code) && !child;
-    if (isNonSerializable) return { code: `${comp.getChildVλl()} === undefined`, type: "E" };
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "E" };
-    if (this.isRest()) return childJit;
+    if (isNonSerializable)
+      return { code: `${comp.getChildVλl()} === undefined`, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "E" };
+    if (this.isRest())
+      return childJit;
     return this.isOptional() ? { code: `(${comp.getChildVλl()} === undefined || (${childJit.code}))`, type: "E" } : childJit;
   }
   emitTypeErrors(comp) {
@@ -4357,215 +4376,150 @@ class TupleMemberRunType extends MemberRunType {
         code: `if (${comp.getChildVλl()} !== undefined) ${comp.callJitErrWithPath("undefined", this.getChildIndex(comp))}`,
         type: "S"
       };
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
-    if (this.isRest()) return childJit;
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
+    if (this.isRest())
+      return childJit;
     return this.isOptional() ? { code: `if (${comp.getChildVλl()} !== undefined) {${childJit.code}}`, type: "S" } : childJit;
   }
   emitPrepareForJson(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compilePrepareForJson(child, "S");
     const optionalCode = `if (${comp.getChildVλl()} === undefined ) {if (${comp.vλl}.length > ${this.getChildIndex(comp)}) ${comp.getChildVλl()} = null}`;
-    if (!child || !(childJit == null ? void 0 : childJit.code)) return this.isOptional() ? { code: optionalCode, type: "S" } : { code: void 0, type: "S" };
+    if (!child || !(childJit == null ? void 0 : childJit.code))
+      return this.isOptional() ? { code: optionalCode, type: "S" } : { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
     return this.isOptional() ? { code: `${optionalCode} else {${code}}`, type: "S" } : { code, type: "S" };
   }
   emitRestoreFromJson(comp) {
-    if (!this.getJitChild(comp)) return { code: `${comp.getChildVλl()} = undefined;`, type: "S" };
+    if (!this.getJitChild(comp))
+      return { code: `${comp.getChildVλl()} = undefined;`, type: "S" };
     const child = this.getJitChild(comp);
     const childJit = comp.compileRestoreFromJson(child, "S");
     const optionalCOde = `if (${comp.getChildVλl()} === null ) {${comp.getChildVλl()} = undefined}`;
-    if (!child || !(childJit == null ? void 0 : childJit.code)) return this.isOptional() ? { code: optionalCOde, type: "S" } : { code: void 0, type: "S" };
+    if (!child || !(childJit == null ? void 0 : childJit.code))
+      return this.isOptional() ? { code: optionalCOde, type: "S" } : { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
     return this.isOptional() ? { code: `${optionalCOde} else if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" } : { code, type: "S" };
   }
 }
-class InterfaceRunType extends CollectionRunType {
+__publicField(TupleMemberRunType, "__type", [() => type.__ΩTypeTupleMember, "T", () => MemberRunType, "isOptional", "JitFnCompiler", "comp", "getChildIndex", "getChildVarName", "getChildLiteral", true, "useArrayAccessor", "isRest", "skipSettingAccessor", "hasDefaultValue", () => __ΩJitCode, "emitIsType", "JitErrorsFnCompiler", () => __ΩJitCode, "emitTypeErrors", () => __ΩJitCode, "emitPrepareForJson", () => __ΩJitCode, "emitRestoreFromJson", "TupleMemberRunType", `n!c"Pe"!7#P)0$P"w%2&'0'P"w%2&'0(P"w%2&'0)P.*0+P)0,P"0-P)0.P"w%2&n/00P"w12&n203P"w%2&n405P"w%2&n6075e!!6"w8`]);
+function __assignType$c(fn, args) {
+  fn.__type = args;
+  return fn;
+}
+class TupleRunType extends CollectionRunType {
   constructor() {
     super(...arguments);
-    __publicField(this, "getCallSignature", memorize(() => {
-      return this.getChildRunTypes().find((prop) => prop.src.kind === type.ReflectionKind.callSignature);
-    }));
+    __publicField(this, "getChildRunTypes", __assignType$c(() => {
+      const childTypes = this.src.parameters || this.src.types || [];
+      return childTypes.map(__assignType$c((t) => t._rt, ["t", "", 'P"2!"/"']));
+    }, ["", "P!F/!"]));
   }
-  getNamedChildren(comp) {
-    return this.getJitChildren(comp).filter((prop) => !!prop.src.name);
+  getParamRunTypes(comp) {
+    var _a, _b, _c, _d;
+    const start = (_b = (_a = comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
+    const end = (_d = (_c = comp.opts) == null ? void 0 : _c.paramsSlice) == null ? void 0 : _d.end;
+    const children = this.getChildRunTypes();
+    if (!start && !end)
+      return children;
+    return children.slice(start, end);
   }
-  isCallable() {
-    return this.getCallSignature() !== void 0;
+  hasRestParameter(comp) {
+    return !!this.getParamRunTypes(comp).length && this.getParamRunTypes(comp)[this.getParamRunTypes(comp).length - 1].isRest();
   }
-  getJitChildren(comp) {
-    const children = super.getJitChildren(comp);
-    return children.toSorted((a, b) => sortDiscriminatorsFirst(a, b));
+  totalRequiredParams(comp) {
+    return this.getParamRunTypes(comp).filter(__assignType$c((p) => !p.isOptional() && !p.isRest(), ["p", "", 'P"2!"/"'])).length;
   }
-  /** Split children in two groups: required and optional */
-  splitJitSplitChildren(comp) {
-    const children = super.getJitChildren(comp);
-    const required = children.filter((prop) => !prop.isOptional());
-    const optional = children.filter((prop) => prop.isOptional() && !isIndexSignatureRunType(prop));
-    const indexSignatures = children.filter((prop) => isIndexSignatureRunType(prop));
-    return { required, optional, indexSignatures };
-  }
-  isPartOfUnion() {
-    var _a;
-    return ((_a = this.getParent()) == null ? void 0 : _a.src.kind) === type.ReflectionKind.union;
-  }
-  hasIndexSignature(comp) {
-    return this.getJitChildren(comp).some((prop) => isIndexSignatureRunType(prop));
-  }
-  // #### collection's jit code ####
+  // ####### params #######
   emitIsType(comp) {
-    const varName = comp.vλl;
-    const children = this.getJitChildren(comp);
-    const childrenCode = children.map((prop) => comp.compileIsType(prop, "E").code).filter(Boolean).join(" && ");
-    if (this.isCallable())
-      return {
-        code: [this.getCallSignature().emitIsType(comp).code, childrenCode].filter(Boolean).join(" && "),
-        type: "E"
-      };
-    const objectCheck = this.isPartOfUnion() ? "" : `typeof ${varName} === 'object' && ${varName} !== null`;
-    const itemsCode = [objectCheck, this.allOptionalCode(comp), childrenCode].filter(Boolean).join(" && ");
-    return { code: `(${itemsCode})`, type: "E" };
+    const children = this.getParamRunTypes(comp);
+    if (children.length === 0 && comp.opts.noIsArrayCheck)
+      return { code: void 0, type: "E" };
+    if (children.length === 0)
+      return { code: `Array.isArray(${comp.vλl}) && ${comp.vλl}.length === 0`, type: "E" };
+    const lengthCode = this.hasRestParameter(comp) ? "" : `&& ${comp.vλl}.length <= ${this.getParamRunTypes(comp).length}`;
+    const paramsCode = children.map(__assignType$c((p) => `(${comp.compileIsType(p, "E").code})`, ["p", "", 'P"2!"/"'])).join(" && ");
+    const checkIsArrayCode = comp.opts.noIsArrayCheck ? "" : `Array.isArray(${comp.vλl})${lengthCode} && `;
+    return { code: `(${checkIsArrayCode} ${paramsCode})`, type: "E" };
   }
   emitTypeErrors(comp) {
-    const varName = comp.vλl;
-    const children = this.getJitChildren(comp);
-    const childrenCode = children.map((prop) => comp.compileTypeErrors(prop, "S").code).filter(Boolean).join(";");
-    if (this.isCallable()) {
-      return { code: `${this.getCallSignature().emitTypeErrors(comp).code} else {${childrenCode}}`, type: "S" };
-    }
-    const objectCheck = this.isPartOfUnion() ? "" : `typeof ${varName} === 'object' && ${varName} !== null`;
-    const isObjectCode = [objectCheck, this.allOptionalCode(comp)].filter(Boolean).join(" && ");
-    return {
-      code: `
-            if (!(${isObjectCode})) {
-                ${comp.callJitErr(this)};
-            } else {
-                ${childrenCode}
-            }
-        `,
-      type: "S"
-    };
+    const children = this.getParamRunTypes(comp);
+    if (children.length === 0 && comp.opts.noIsArrayCheck)
+      return { code: void 0, type: "S" };
+    if (children.length === 0)
+      return { code: `if (!Array.isArray(${comp.vλl}) || && ${comp.vλl}.length === 0) ${comp.callJitErr(this)}`, type: "S" };
+    const lengthCode = this.hasRestParameter(comp) ? "" : `|| ${comp.vλl}.length > ${this.getParamRunTypes(comp).length}`;
+    const paramsCode = children.map(__assignType$c((p) => comp.compileTypeErrors(p, "S").code, ["p", "", 'P"2!"/"'])).join(";");
+    if (comp.opts.noIsArrayCheck)
+      return { code: paramsCode, type: "S" };
+    return { code: `if (!Array.isArray(${comp.vλl})${lengthCode}) ${comp.callJitErr(this)}; else {${paramsCode}}`, type: "S" };
   }
   emitPrepareForJson(comp) {
-    if (this.isCallable()) return this.getCallSignature().emitPrepareForJson();
-    const children = this.getJitChildren(comp);
-    const childrenCode = children.map((prop) => comp.compilePrepareForJson(prop, "S").code).filter(Boolean).join(";");
-    return { code: childrenCode, type: "S" };
+    const children = this.getParamRunTypes(comp);
+    if (!children.length)
+      return { code: void 0, type: "S" };
+    const code = children.map(__assignType$c((p) => comp.compilePrepareForJson(p, "S").code, ["p", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    return { code, type: "S" };
   }
   emitRestoreFromJson(comp) {
-    if (this.isCallable()) return this.getCallSignature().emitRestoreFromJson();
-    const children = this.getJitChildren(comp);
-    const childrenCode = children.map((prop) => comp.compileRestoreFromJson(prop, "S").code).filter(Boolean).join(";");
-    return { code: childrenCode, type: "S" };
-  }
-  emitHasUnknownKeys(comp) {
-    const children = this.getJitChildren(comp);
-    const allChildren = this.getChildRunTypes().filter((prop) => !isIndexSignatureRunType(prop));
-    const hasIndexProp = children.some((prop) => isIndexSignatureRunType(prop));
-    const parentCode = hasIndexProp ? "" : callCheckUnknownProperties(this, comp, children, false, !this.isPartOfUnion(), allChildren);
-    const childrenCode = super.emitHasUnknownKeys(comp).code;
-    return { code: [parentCode, childrenCode].filter(Boolean).join(" || "), type: "E" };
-  }
-  emitUnknownKeyErrors(comp) {
-    const children = this.getJitChildren(comp);
-    const allChildren = this.getChildRunTypes().filter((prop) => !isIndexSignatureRunType(prop));
-    const hasIndexProp = children.some((prop) => isIndexSignatureRunType(prop));
-    const unknownVar = comp.getLocalVarName("unk", this);
-    const keyVar = comp.getLocalVarName("ky", this);
-    const unknownValue = hasIndexProp ? void 0 : callCheckUnknownProperties(this, comp, children, true, !this.isPartOfUnion(), allChildren);
-    const parentCode = `
-            const ${unknownVar} = ${unknownValue};
-            if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}) {${comp.callJitErrWithPath("never", keyVar)}}}
-        `;
-    const childrenCode = super.emitUnknownKeyErrors(comp).code;
-    return { code: [unknownValue ? parentCode : "", childrenCode].filter(Boolean).join("\n"), type: "S" };
-  }
-  emitStripUnknownKeys(comp) {
-    const children = this.getJitChildren(comp);
-    const unknownVar = comp.getLocalVarName("unk", this);
-    const keyVar = comp.getLocalVarName("ky", this);
-    const hasIndexProp = children.some((prop) => isIndexSignatureRunType(prop));
-    const unknownValue = hasIndexProp ? void 0 : callCheckUnknownProperties(this, comp, children, true, !this.isPartOfUnion());
-    const parentCode = `
-            const ${unknownVar} = ${unknownValue};
-            if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}){delete ${comp.vλl}[${keyVar}]}}
-        `;
-    const childrenCode = super.emitStripUnknownKeys(comp).code;
-    return { code: [unknownValue ? parentCode : "", childrenCode].filter(Boolean).join("\n"), type: "S" };
-  }
-  emitUnknownKeysToUndefined(comp) {
-    const children = this.getJitChildren(comp);
-    const unknownVar = comp.getLocalVarName("unk", this);
-    const keyVar = comp.getLocalVarName("ky", this);
-    const hasIndexProp = children.some((prop) => isIndexSignatureRunType(prop));
-    const unknownValue = hasIndexProp ? void 0 : callCheckUnknownProperties(this, comp, children, true, !this.isPartOfUnion());
-    const parentCode = `
-            const ${unknownVar} = ${unknownValue};
-            if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}){${comp.vλl}[${keyVar}] = undefined}}
-        `;
-    const childrenCode = super.emitUnknownKeysToUndefined(comp).code;
-    return { code: [unknownValue ? parentCode : "", childrenCode].filter(Boolean).join("\n"), type: "S" };
-  }
-  // In order to json stringify to work properly optional properties must come first
-  getJsonStringifySortedChildren(comp) {
-    return this.getJitChildren(comp).toSorted((a, b) => {
-      const aOptional = a instanceof MemberRunType && a.isOptional();
-      const bOptional = b instanceof MemberRunType && b.isOptional();
-      if (aOptional && !bOptional) return -1;
-      if (!aOptional && bOptional) return 1;
-      return 0;
-    });
-  }
-  // extra check to prevent empty array passing as object where all properties are optional
-  // when this check is disabled empty array will pass as object but fail when checking for properties
-  allOptionalCode(comp) {
-    const children = this.getJitChildren(comp);
-    if (children.length !== 0 && !this.areAllChildrenOptional(children)) return "";
-    const isNotArray = `!Array.isArray(${comp.vλl})`;
-    const ifNoNative = `Object.prototype.toString.call(${comp.vλl}) === '[object Object]'`;
-    return `(${isNotArray} && ${ifNoNative})`;
-  }
-  addObjectPropsToContext(comp, jitChildrenRunTypes, allChildrenRuntypes) {
-    const children = jitChildrenRunTypes || this.getJitChildren(comp);
-    const allChildren = allChildrenRuntypes || this.getChildRunTypes();
-    return addObjectPropsToContext(this, comp, children, allChildren);
+    const children = this.getParamRunTypes(comp);
+    if (!children.length)
+      return { code: void 0, type: "S" };
+    const code = children.map(__assignType$c((p) => comp.compileRestoreFromJson(p, "S").code, ["p", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    return { code, type: "S" };
   }
 }
-function addObjectPropsToContext(rt, comp, jitChildrenRunTypes, allChildrenRuntypes) {
-  const jitArrNames = jitChildrenRunTypes.filter((prop) => !!prop.src.name).map((prop) => prop.src.name);
-  const AllArrNames = allChildrenRuntypes == null ? void 0 : allChildrenRuntypes.filter((prop) => !!prop.src.name).map((prop) => prop.src.name);
-  const jitChildrenNames = Array.from(new Set(jitArrNames));
-  const allChildrenNames = Array.from(new Set(AllArrNames));
-  const isSameLength = jitChildrenNames.length === allChildrenNames.length;
-  const isSameSet = isSameLength && jitChildrenNames.every((v) => allChildrenNames.includes(v));
-  const hasNonJitChildren = !(isSameLength && isSameSet);
-  const keysName = `k_${rt.getJitHash(comp.opts)}`;
-  const allKeysName = `kA_${rt.getJitHash(comp.opts)}`;
-  comp.setContextItem(keysName, `const ${keysName} = ${arrayToLiteral(jitChildrenNames)}`);
-  if (hasNonJitChildren) comp.setContextItem(allKeysName, `const ${allKeysName} = ${arrayToLiteral(allChildrenNames)}`);
-  return {
-    keysName,
-    allKeysName,
-    hasNonJitChildren,
-    jitChildrenNames,
-    allChildrenNames
-  };
+__publicField(TupleRunType, "__type", ["TypeTuple", "ParamList", () => TupleMemberRunType, "ParamType", () => CollectionRunType, "getChildRunTypes", function() {
+  return __assignType$c(() => {
+    const childTypes = this.src.parameters || this.src.types || [];
+    return childTypes.map(__assignType$c((t) => t._rt, ["t", "", 'P"2!"/"']));
+  }, ["", "P!F/!"]);
+}, "JitFnCompiler", "comp", "getParamRunTypes", "hasRestParameter", "totalRequiredParams", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "TupleRunType", `"w!c"P7#c$Pe"!7%!3&>'P"w(2)e""F0*P"w(2))0+P"w(2)'0,P"w(2)"w-0.P"w/2)"w-00P"w(2)"w-01P"w(2)"w-025e!!6"w3`]);
+class ParameterRunType extends TupleMemberRunType {
+  getParamName() {
+    return this.src.name;
+  }
+  getChildVarName(comp) {
+    return this.getChildIndex(comp);
+  }
+  getChildLiteral(comp) {
+    return this.getChildIndex(comp);
+  }
 }
-function callCheckUnknownProperties(rt, comp, jitChildrenRunTypes, returnKeys, checkObject = true, allChildrenRuntypes) {
-  const result = addObjectPropsToContext(rt, comp, jitChildrenRunTypes, allChildrenRuntypes);
-  if (result.jitChildrenNames.length === 0 && result.allChildrenNames.length === 0) return "";
-  const objectCheckCode = checkObject ? [`typeof ${comp.vλl} === 'object'`, `${comp.vλl} !== null`] : [];
-  const checkPropName = JitFunctions$1.hasUnknownKeys.runTimeOptions.checkNonJitProps.keyName;
-  const optsVarName = getJitFnArgCallVarName(comp, rt, JitFunctions$1.hasUnknownKeys.id, "θpts");
-  const conditional = (allChildrenRuntypes == null ? void 0 : allChildrenRuntypes.length) && result.hasNonJitChildren ? `${optsVarName}.${checkPropName} ? ${result.allKeysName} : ${result.keysName}` : result.keysName;
-  const getUnknownKeysFn = comp.addPureFunction(cpf_getUnknownKeysFromArray);
-  const hasUnknownKeysFn = comp.addPureFunction(cpf_hasUnknownKeysFromArray);
-  if (returnKeys) return `${getUnknownKeysFn}(${comp.vλl}, ${conditional})`;
-  objectCheckCode.push(`${hasUnknownKeysFn}(${comp.vλl}, ${conditional})`);
-  const filtered = objectCheckCode.filter(Boolean);
-  if (filtered.length > 1) return `(${filtered.join(" && ")})`;
-  return filtered[0];
+__publicField(ParameterRunType, "__type", ["TypeParameter", "T", () => TupleMemberRunType, "getParamName", "JitFnCompiler", "comp", "getChildVarName", "getChildLiteral", "ParameterRunType", `"w!c"Pe"!7#P"0$P"w%2&'0'P"w%2&'0(5e!!6"w)`]);
+function __assignType$b(fn, args) {
+  fn.__type = args;
+  return fn;
+}
+class FunctionParamsRunType extends TupleRunType {
+  emitIsType(comp) {
+    const children = this.getParamRunTypes(comp);
+    if (children.length === 0)
+      return { code: `${comp.vλl}.length === 0`, type: "E" };
+    const lengthCode = this.hasRestParameter(comp) ? "" : `${comp.vλl}.length <= ${children.length}`;
+    const paramsCode = children.map(__assignType$b((p) => comp.compileIsType(p, "E").code, ["p", "", 'P"2!"/"'])).filter(Boolean);
+    if (paramsCode.length === 0)
+      return lengthCode ? { code: `(${lengthCode})`, type: "E" } : { code: void 0, type: "E" };
+    return lengthCode ? { code: `(${lengthCode} && ${paramsCode.join(" && ")})`, type: "E" } : { code: `(${paramsCode.join(" && ")})`, type: "E" };
+  }
+  emitTypeErrors(comp) {
+    const children = this.getParamRunTypes(comp);
+    if (children.length === 0)
+      return { code: `if (${comp.vλl}.length !== 0) ${comp.callJitErr(this)}`, type: "S" };
+    const lengthCode = this.hasRestParameter(comp) ? "" : `${comp.vλl}.length > ${children.length}`;
+    const paramsCode = children.map(__assignType$b((p) => comp.compileTypeErrors(p, "S").code, ["p", "", 'P"2!"/"'])).filter(Boolean);
+    if (paramsCode.length === 0)
+      return lengthCode ? { code: `if (${lengthCode}) ${comp.callJitErr(this)}`, type: "S" } : { code: void 0, type: "S" };
+    return lengthCode ? { code: `if (${lengthCode}) ${comp.callJitErr(this)}; else {${paramsCode.join(";")}}`, type: "S" } : { code: paramsCode.join(";"), type: "S" };
+  }
+}
+__publicField(FunctionParamsRunType, "__type", ["TypeFunction", "ParamList", () => ParameterRunType, () => TupleRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", () => ParameterRunType, "FunctionParamsRunType", `"w!c"Pe"!P7#7$P"w%2&"w'0(P"w)2&"w'0*5e!!P7+6#w,`]);
+function __assignType$a(fn, args) {
+  fn.__type = args;
+  return fn;
 }
 class PropertyRunType extends MemberRunType {
   constructor() {
@@ -4573,7 +4527,7 @@ class PropertyRunType extends MemberRunType {
     __publicField(this, "isUnionDiscriminator", false);
     /** this is set by the parent interface if prop is optional, when optional properties are sorted */
     __publicField(this, "optionalIndex", -1);
-    __publicField(this, "getJitChildIndex", (comp) => this.getParent().getJitChildren(comp).indexOf(this));
+    __publicField(this, "getJitChildIndex", __assignType$a((comp) => this.getParent().getJitChildren(comp).indexOf(this), ["JitFnCompiler", "comp", "", 'P"w!2""/#']));
     __publicField(this, "isOptional", () => !!this.src.optional);
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -4601,141 +4555,52 @@ class PropertyRunType extends MemberRunType {
   emitIsType(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compileIsType(child, "E");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "E" };
     return this.src.optional ? { code: `(${comp.getChildVλl()} === undefined || ${childJit.code})`, type: "E" } : childJit;
   }
   emitTypeErrors(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compileTypeErrors(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
     return this.src.optional ? { code: `if (${comp.getChildVλl()} !== undefined) {${childJit.code}}`, type: "S" } : childJit;
   }
   emitPrepareForJson(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compilePrepareForJson(child, "S");
-    if (!child || !(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
+    if (!child || !(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
-    if (this.src.optional) return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
+    if (this.src.optional)
+      return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
     return { code, type: "S" };
   }
   emitRestoreFromJson(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compileRestoreFromJson(child, "S");
-    if (!child || !(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
+    if (!child || !(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
-    if (this.src.optional) return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
+    if (this.src.optional)
+      return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
     return { code, type: "S" };
   }
 }
-class IndexSignatureRunType extends MemberRunType {
-  isOptional() {
-    return true;
-  }
-  getChildVarName(comp) {
-    return comp.getLocalVarName("p", this);
-  }
-  getChildLiteral(comp) {
-    return this.getChildVarName(comp);
-  }
-  useArrayAccessor() {
-    return true;
-  }
-  skipJit(comp) {
-    var _a;
-    const index = (_a = this.src.index) == null ? void 0 : _a.kind;
-    if (index === type.ReflectionKind.symbol) {
-      return (comp == null ? void 0 : comp.fnID) !== JitFunctions$1.toJSCode.id;
-    }
-    return false;
-  }
-  // #### jit code ####
-  emitIsType(comp) {
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileIsType(child, "E");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "E" };
-    return {
-      code: `for (const ${this.getChildVarName(comp)} in ${comp.vλl}){if (!(${childJit.code})) return false;} return true;`,
-      type: "RB"
-    };
-  }
-  emitTypeErrors(comp) {
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileTypeErrors(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
-    return { code: `for (const ${this.getChildVarName(comp)} in ${comp.vλl}) {${childJit.code}}`, type: "S" };
-  }
-  emitPrepareForJson(comp) {
-    const child = this.getJitChild(comp);
-    const childJit = comp.compilePrepareForJson(child, "S");
-    if (!child || !(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
-    const varName = comp.vλl;
-    const prop = this.getChildVarName(comp);
-    const skipCode = this.getSkipCode(comp, prop);
-    const isExpression = childIsExpression(childJit, child);
-    const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
-    return { code: `for (const ${prop} in ${varName}){${skipCode} ${code}}`, type: "S" };
-  }
-  emitRestoreFromJson(comp) {
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileRestoreFromJson(child, "S");
-    if (!child || !(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
-    const varName = comp.vλl;
-    const prop = this.getChildVarName(comp);
-    const skipCode = this.getSkipCode(comp, prop);
-    const isExpression = childIsExpression(childJit, child);
-    const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
-    return { code: `for (const ${prop} in ${varName}){${skipCode} ${code}}`, type: "S" };
-  }
-  emitHasUnknownKeys(comp) {
-    if (this.getMemberType().getFamily() === "A") return { code: void 0, type: "E" };
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileHasUnknownKeys(child, "E");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: "", type: "E" };
-    const varName = comp.vλl;
-    const prop = this.getChildVarName(comp);
-    const resultVal = comp.getLocalVarName("res", this);
-    return {
-      code: `for (const ${prop} in ${varName}) {const ${resultVal} = ${childJit.code};if (${resultVal}) return true;}return false;`,
-      type: "RB"
-    };
-  }
-  emitUnknownKeyErrors(comp) {
-    if (this.getMemberType().getFamily() === "A") return { code: void 0, type: "S" };
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileUnknownKeyErrors(child, "S");
-    return this.traverseCode(comp, childJit);
-  }
-  emitStripUnknownKeys(comp) {
-    if (this.getMemberType().getFamily() === "A") return { code: void 0, type: "S" };
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileStripUnknownKeys(child, "S");
-    return this.traverseCode(comp, childJit);
-  }
-  emitUnknownKeysToUndefined(comp) {
-    if (this.getMemberType().getFamily() === "A") return { code: void 0, type: "S" };
-    const child = this.getJitChild(comp);
-    const childJit = comp.compileUnknownKeysToUndefined(child, "S");
-    return this.traverseCode(comp, childJit);
-  }
-  traverseCode(comp, childJit) {
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
-    const prop = this.getChildVarName(comp);
-    return { code: `for (const ${prop} in ${comp.vλl}) {${childJit.code}}`, type: "S" };
-  }
-  /**
-   * if index property should be skipped then it output some code to skip it,
-   * this happen when an object/interface has an index property but also has named properties
-   * that might collide with the index property. ie {[key: string]: string, a: string}
-   * when executing the logic for the index property we need to skip the named properties.
-   */
-  getSkipCode(comp, prop) {
-    const parent = this.getParent();
-    const namedChildren = parent.getNamedChildren(comp);
-    const skipNames = namedChildren.length ? namedChildren.map((child) => `${child.getChildLiteral(comp)} === ${prop}`).join(" || ") : "";
-    return namedChildren.length ? `if (${skipNames}) continue;` : "";
-  }
+__publicField(PropertyRunType, "__type", ["TypePropertySignature", "TypeProperty", () => MemberRunType, "isUnionDiscriminator", function() {
+  return false;
+}, "optionalIndex", function() {
+  return -1;
+}, "getPropertyName", "JitFnCompiler", "comp", "getChildVarName", "getChildLiteral", "useArrayAccessor", "getJitChildIndex", function() {
+  return __assignType$a((comp) => this.getParent().getJitChildren(comp).indexOf(this), ["JitFnCompiler", "comp", "", 'P"w!2""/#']);
+}, "isOptional", function() {
+  return () => !!this.src.optional;
+}, "skipJit", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "PropertyRunType", `PP"w!"w"J7#)3$>%!3&>'P"0(P"w)2*"0+P"w)2*"0,P"0-!3.>/!30>1P"w)2*)02P"w)2*"w304P"w52*"w306P"w)2*"w307P"w)2*"w3085P"w!"w"J6"w9`]);
+function __assignType$9(fn, args) {
+  fn.__type = args;
+  return fn;
 }
 class FunctionRunType extends BaseRunType {
   constructor() {
@@ -4744,7 +4609,8 @@ class FunctionRunType extends BaseRunType {
     __publicField(this, "parameterRunTypes", new FunctionParamsRunType());
   }
   skipJit(comp) {
-    if (!comp) return true;
+    if (!comp)
+      return true;
     return comp.fnID !== JitFunctions$1.toJSCode.id;
   }
   onCreated(deepkitType) {
@@ -4759,8 +4625,10 @@ class FunctionRunType extends BaseRunType {
   }
   getFnName() {
     const name = this.src.name;
-    if (!name) return "";
-    if (typeof name === "symbol") return name.toString();
+    if (!name)
+      return "";
+    if (typeof name === "symbol")
+      return name.toString();
     return name;
   }
   createJitParamsFunction(jitFn, opts) {
@@ -4773,7 +4641,8 @@ class FunctionRunType extends BaseRunType {
     if (start && end) {
       if (start < 0 || end > this.parameterRunTypes.getChildRunTypes().length)
         throw new Error(`Invalid paramsSlice, start: ${start}, end: ${end}.`);
-      if (end <= start) throw new Error(`Invalid paramsSlice, start: ${start}, end: ${end}`);
+      if (end <= start)
+        throw new Error(`Invalid paramsSlice, start: ${start}, end: ${end}`);
     }
     return this.parameterRunTypes.createJitCompiledFunction(jitFn.id, void 0, opts);
   }
@@ -4849,9 +4718,9 @@ class FunctionRunType extends BaseRunType {
     const start = (_a = opts == null ? void 0 : opts.paramsSlice) == null ? void 0 : _a.start;
     const end = (_b = opts == null ? void 0 : opts.paramsSlice) == null ? void 0 : _b.end;
     if (start || end) {
-      return this.src.parameters.slice(start, end).map((p) => p.name);
+      return this.src.parameters.slice(start, end).map(__assignType$9((p) => p.name, ["p", "", 'P"2!"/"']));
     }
-    return this.src.parameters.map((p) => p.name);
+    return this.src.parameters.map(__assignType$9((p) => p.name, ["p", "", 'P"2!"/"']));
   }
   hasReturnData() {
     const returnKind = this.getReturnType().src.kind;
@@ -4873,15 +4742,23 @@ class FunctionRunType extends BaseRunType {
     return this.parameterRunTypes.mockType(ctx);
   }
 }
+__publicField(FunctionRunType, "__type", [() => type.__ΩTypeFunction, "CallType", () => BaseRunType, () => FunctionParamsRunType, "parameterRunTypes", function() {
+  return new FunctionParamsRunType();
+}, () => JitFnCompiler, "comp", "skipJit", "SrcType", "deepkitType", "onCreated", "F", "getFamily", "getFnName", "JitFn", "jitFn", "RunTypeOptions", "opts", "args", "", "createJitParamsFunction", () => mionRoutes.__ΩJitCompiledFn, "createJitCompiledParamsFunction", "createJitReturnFunction", () => mionRoutes.__ΩJitCompiledFn, "createJitCompiledReturnFunction", () => JitFnCompiler, "JitCode", "emitIsType", () => JitErrorsFnCompiler, "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "emitHasUnknownKeys", "emitUnknownKeyErrors", "emitStripUnknownKeys", "emitUnknownKeysToUndefined", () => BaseRunType, "getReturnType", () => FunctionParamsRunType, "getParameters", "getParameterNames", "hasReturnData", "isAsync", "returnIsPromise", "ctx", "mockReturn", "mockParams", "FunctionRunType", 'n!c"Pe"!7#P7$3%>&PP7\'2()0)P"w*2+$0,P.-0.PP&\'J0/P"w021"w2238P"@24"/506P"w021"w2238n708P"w021P"@24"/509P"w021"w2238n:0;PP7<2("w=0>PP7?2("w=0@P"w=0AP"w=0BP"w=0CP"w=0DP"w=0EP"w=0FPP7G0HPP7I0JP"w2238&F0KP)0LP)0MP)0NP"w22O8"`0PP"w22O8"F`0Q5e!!6"wR']);
+function __assignType$8(fn, args) {
+  fn.__type = args;
+  return fn;
+}
 class MethodSignatureRunType extends FunctionRunType {
   constructor() {
     super(...arguments);
-    __publicField(this, "getChildIndex", (comp) => {
+    __publicField(this, "getChildIndex", __assignType$8((comp) => {
       var _a, _b;
       const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
-      if (start) return getPropIndex(this.src) - start;
+      if (start)
+        return getPropIndex(this.src) - start;
       return getPropIndex(this.src);
-    });
+    }, ["JitFnCompiler", "comp", "", 'P"w!2""/#']));
     __publicField(this, "isOptional", () => !!this.src.optional);
     __publicField(this, "skipCommas", false);
   }
@@ -4896,21 +4773,425 @@ class MethodSignatureRunType extends FunctionRunType {
     return useArrayAccessorForProp(this.src.name);
   }
 }
+__publicField(MethodSignatureRunType, "__type", [() => type.__ΩTypeMethodSignature, () => FunctionRunType, "getChildIndex", function() {
+  return __assignType$8((comp) => {
+    var _a, _b;
+    const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
+    if (start)
+      return getPropIndex(this.src) - start;
+    return getPropIndex(this.src);
+  }, ["JitFnCompiler", "comp", "", 'P"w!2""/#']);
+}, "JitFnCompiler", "comp", "getChildVarName", "getChildLiteral", "useArrayAccessor", "isOptional", function() {
+  return () => !!this.src.optional;
+}, "skipCommas", function() {
+  return false;
+}, () => type.__ΩTypeMethodSignature, () => __ΩRunTypeChildAccessor, "MethodSignatureRunType", `Pn!7"!3#>$P"w%2&"0'P"w%2&"0(P"0)!3*>+)3,>-5n.6"n/x"w0`]);
+function __assignType$7(fn, args) {
+  fn.__type = args;
+  return fn;
+}
+class IndexSignatureRunType extends MemberRunType {
+  isOptional() {
+    return true;
+  }
+  getChildVarName(comp) {
+    return comp.getLocalVarName("p", this);
+  }
+  getChildLiteral(comp) {
+    return this.getChildVarName(comp);
+  }
+  useArrayAccessor() {
+    return true;
+  }
+  skipJit(comp) {
+    var _a;
+    const index = (_a = this.src.index) == null ? void 0 : _a.kind;
+    if (index === type.ReflectionKind.symbol) {
+      return (comp == null ? void 0 : comp.fnID) !== JitFunctions$1.toJSCode.id;
+    }
+    return false;
+  }
+  // #### jit code ####
+  emitIsType(comp) {
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileIsType(child, "E");
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "E" };
+    return {
+      code: `for (const ${this.getChildVarName(comp)} in ${comp.vλl}){if (!(${childJit.code})) return false;} return true;`,
+      type: "RB"
+    };
+  }
+  emitTypeErrors(comp) {
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileTypeErrors(child, "S");
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
+    return { code: `for (const ${this.getChildVarName(comp)} in ${comp.vλl}) {${childJit.code}}`, type: "S" };
+  }
+  emitPrepareForJson(comp) {
+    const child = this.getJitChild(comp);
+    const childJit = comp.compilePrepareForJson(child, "S");
+    if (!child || !(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
+    const varName = comp.vλl;
+    const prop = this.getChildVarName(comp);
+    const skipCode = this.getSkipCode(comp, prop);
+    const isExpression = childIsExpression(childJit, child);
+    const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
+    return { code: `for (const ${prop} in ${varName}){${skipCode} ${code}}`, type: "S" };
+  }
+  emitRestoreFromJson(comp) {
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileRestoreFromJson(child, "S");
+    if (!child || !(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
+    const varName = comp.vλl;
+    const prop = this.getChildVarName(comp);
+    const skipCode = this.getSkipCode(comp, prop);
+    const isExpression = childIsExpression(childJit, child);
+    const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
+    return { code: `for (const ${prop} in ${varName}){${skipCode} ${code}}`, type: "S" };
+  }
+  emitHasUnknownKeys(comp) {
+    if (this.getMemberType().getFamily() === "A")
+      return { code: void 0, type: "E" };
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileHasUnknownKeys(child, "E");
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: "", type: "E" };
+    const varName = comp.vλl;
+    const prop = this.getChildVarName(comp);
+    const resultVal = comp.getLocalVarName("res", this);
+    return {
+      code: `for (const ${prop} in ${varName}) {const ${resultVal} = ${childJit.code};if (${resultVal}) return true;}return false;`,
+      type: "RB"
+    };
+  }
+  emitUnknownKeyErrors(comp) {
+    if (this.getMemberType().getFamily() === "A")
+      return { code: void 0, type: "S" };
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileUnknownKeyErrors(child, "S");
+    return this.traverseCode(comp, childJit);
+  }
+  emitStripUnknownKeys(comp) {
+    if (this.getMemberType().getFamily() === "A")
+      return { code: void 0, type: "S" };
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileStripUnknownKeys(child, "S");
+    return this.traverseCode(comp, childJit);
+  }
+  emitUnknownKeysToUndefined(comp) {
+    if (this.getMemberType().getFamily() === "A")
+      return { code: void 0, type: "S" };
+    const child = this.getJitChild(comp);
+    const childJit = comp.compileUnknownKeysToUndefined(child, "S");
+    return this.traverseCode(comp, childJit);
+  }
+  traverseCode(comp, childJit) {
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
+    const prop = this.getChildVarName(comp);
+    return { code: `for (const ${prop} in ${comp.vλl}) {${childJit.code}}`, type: "S" };
+  }
+  /**
+   * if index property should be skipped then it output some code to skip it,
+   * this happen when an object/interface has an index property but also has named properties
+   * that might collide with the index property. ie {[key: string]: string, a: string}
+   * when executing the logic for the index property we need to skip the named properties.
+   */
+  getSkipCode(comp, prop) {
+    const parent = this.getParent();
+    const namedChildren = parent.getNamedChildren(comp);
+    const skipNames = namedChildren.length ? namedChildren.map(__assignType$7((child) => `${child.getChildLiteral(comp)} === ${prop}`, ["child", "", 'P"2!"/"'])).join(" || ") : "";
+    return namedChildren.length ? `if (${skipNames}) continue;` : "";
+  }
+}
+__publicField(IndexSignatureRunType, "__type", [() => type.__ΩTypeIndexSignature, () => MemberRunType, "isOptional", "JitFnCompiler", "comp", "getChildVarName", "getChildLiteral", true, "useArrayAccessor", "skipJit", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "emitHasUnknownKeys", "emitUnknownKeyErrors", "emitStripUnknownKeys", "emitUnknownKeysToUndefined", "childJit", "traverseCode", "prop", "getSkipCode", () => type.__ΩTypeIndexSignature, "IndexSignatureRunType", `Pn!7"P)0#P"w$2%&0&P"w$2%&0'P.(0)P"w$2%)0*P"w$2%"w+0,P"w-2%"w+0.P"w$2%"w+0/P"w$2%"w+00P"w$2%"w+01P"w-2%"w+02P"w$2%"w+03P"w$2%"w+04P"w$2%P"w+-J25"w+06P"w$2%&27&085n96"w:`]);
+function __assignType$6(fn, args) {
+  fn.__type = args;
+  return fn;
+}
+class MethodRunType extends FunctionRunType {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "getChildIndex", __assignType$6((comp) => {
+      var _a, _b;
+      const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
+      if (start)
+        return getPropIndex(this.src) - start;
+      return getPropIndex(this.src);
+    }, ["JitFnCompiler", "comp", "", 'P"w!2""/#']));
+    __publicField(this, "isOptional", () => !!this.src.optional);
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getChildVarName(comp) {
+    return getPropVarName(this.src.name);
+  }
+  getChildLiteral(comp) {
+    return getPropLiteral(this.getChildVarName(comp));
+  }
+  useArrayAccessor() {
+    return useArrayAccessorForProp(this.src.name);
+  }
+}
+__publicField(MethodRunType, "__type", [() => type.__ΩTypeMethod, () => FunctionRunType, "getChildIndex", function() {
+  return __assignType$6((comp) => {
+    var _a, _b;
+    const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
+    if (start)
+      return getPropIndex(this.src) - start;
+    return getPropIndex(this.src);
+  }, ["JitFnCompiler", "comp", "", 'P"w!2""/#']);
+}, "JitFnCompiler", "comp", "getChildVarName", "getChildLiteral", "useArrayAccessor", "isOptional", function() {
+  return () => !!this.src.optional;
+}, () => type.__ΩTypeMethod, () => __ΩRunTypeChildAccessor, "MethodRunType", `Pn!7"!3#>$P"w%2&"0'P"w%2&"0(P"0)!3*>+5n,6"n-x"w.`]);
+function __assignType$5(fn, args) {
+  fn.__type = args;
+  return fn;
+}
 class CallSignatureRunType extends FunctionRunType {
   constructor() {
     super(...arguments);
-    __publicField(this, "getChildIndex", (comp) => {
+    __publicField(this, "getChildIndex", __assignType$5((comp) => {
       var _a, _b;
       const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
-      if (start) return getPropIndex(this.src) - start;
+      if (start)
+        return getPropIndex(this.src) - start;
       return getPropIndex(this.src);
-    });
+    }, ["JitFnCompiler", "comp", "", 'P"w!2""/#']));
     __publicField(this, "getChildVarName", () => "");
     __publicField(this, "getChildLiteral", () => '""');
     __publicField(this, "useArrayAccessor", () => false);
     __publicField(this, "isOptional", () => false);
   }
 }
+__publicField(CallSignatureRunType, "__type", [() => type.__ΩTypeCallSignature, () => FunctionRunType, "getChildIndex", function() {
+  return __assignType$5((comp) => {
+    var _a, _b;
+    const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
+    if (start)
+      return getPropIndex(this.src) - start;
+    return getPropIndex(this.src);
+  }, ["JitFnCompiler", "comp", "", 'P"w!2""/#']);
+}, "getChildVarName", function() {
+  return () => "";
+}, "getChildLiteral", function() {
+  return () => '""';
+}, "useArrayAccessor", function() {
+  return () => false;
+}, "isOptional", function() {
+  return () => false;
+}, () => type.__ΩTypeCallSignature, () => __ΩRunTypeChildAccessor, "CallSignatureRunType", `Pn!7"!3#>$!3%>&!3'>(!3)>*!3+>,5n-6"n.x"w/`]);
+function __assignType$4(fn, args) {
+  fn.__type = args;
+  return fn;
+}
+const __ΩInterfaceMember = [() => PropertyRunType, () => MethodSignatureRunType, () => IndexSignatureRunType, () => MethodRunType, () => CallSignatureRunType, "InterfaceMember", 'PP7!P7"P7#P7$P7%Jw&y'];
+class InterfaceRunType extends CollectionRunType {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "getCallSignature", memorize(__assignType$4(() => {
+      return this.getChildRunTypes().find(__assignType$4((prop) => prop.src.kind === type.ReflectionKind.callSignature, ["prop", "", 'P"2!"/"']));
+    }, [() => CallSignatureRunType, "", 'PPP7!-J/"'])));
+  }
+  getNamedChildren(comp) {
+    return this.getJitChildren(comp).filter(__assignType$4((prop) => !!prop.src.name, ["prop", "", 'P"2!"/"']));
+  }
+  isCallable() {
+    return this.getCallSignature() !== void 0;
+  }
+  getJitChildren(comp) {
+    const children = super.getJitChildren(comp);
+    return children.toSorted(__assignType$4((a, b) => sortDiscriminatorsFirst(a, b), ["a", "b", "", 'P"2!"2""/#']));
+  }
+  /** Split children in two groups: required and optional */
+  splitJitSplitChildren(comp) {
+    const children = super.getJitChildren(comp);
+    const required = children.filter(__assignType$4((prop) => !prop.isOptional(), ["prop", "", 'P"2!"/"']));
+    const optional = children.filter(__assignType$4((prop) => prop.isOptional() && !isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const indexSignatures = children.filter(__assignType$4((prop) => isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    return { required, optional, indexSignatures };
+  }
+  isPartOfUnion() {
+    var _a;
+    return ((_a = this.getParent()) == null ? void 0 : _a.src.kind) === type.ReflectionKind.union;
+  }
+  hasIndexSignature(comp) {
+    return this.getJitChildren(comp).some(__assignType$4((prop) => isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+  }
+  // #### collection's jit code ####
+  emitIsType(comp) {
+    const varName = comp.vλl;
+    const children = this.getJitChildren(comp);
+    const childrenCode = children.map(__assignType$4((prop) => comp.compileIsType(prop, "E").code, ["prop", "", 'P"2!"/"'])).filter(Boolean).join(" && ");
+    if (this.isCallable())
+      return {
+        code: [this.getCallSignature().emitIsType(comp).code, childrenCode].filter(Boolean).join(" && "),
+        type: "E"
+      };
+    const objectCheck = this.isPartOfUnion() ? "" : `typeof ${varName} === 'object' && ${varName} !== null`;
+    const itemsCode = [objectCheck, this.allOptionalCode(comp), childrenCode].filter(Boolean).join(" && ");
+    return { code: `(${itemsCode})`, type: "E" };
+  }
+  emitTypeErrors(comp) {
+    const varName = comp.vλl;
+    const children = this.getJitChildren(comp);
+    const childrenCode = children.map(__assignType$4((prop) => comp.compileTypeErrors(prop, "S").code, ["prop", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    if (this.isCallable()) {
+      return { code: `${this.getCallSignature().emitTypeErrors(comp).code} else {${childrenCode}}`, type: "S" };
+    }
+    const objectCheck = this.isPartOfUnion() ? "" : `typeof ${varName} === 'object' && ${varName} !== null`;
+    const isObjectCode = [objectCheck, this.allOptionalCode(comp)].filter(Boolean).join(" && ");
+    return {
+      code: `
+            if (!(${isObjectCode})) {
+                ${comp.callJitErr(this)};
+            } else {
+                ${childrenCode}
+            }
+        `,
+      type: "S"
+    };
+  }
+  emitPrepareForJson(comp) {
+    if (this.isCallable())
+      return this.getCallSignature().emitPrepareForJson();
+    const children = this.getJitChildren(comp);
+    const childrenCode = children.map(__assignType$4((prop) => comp.compilePrepareForJson(prop, "S").code, ["prop", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    return { code: childrenCode, type: "S" };
+  }
+  emitRestoreFromJson(comp) {
+    if (this.isCallable())
+      return this.getCallSignature().emitRestoreFromJson();
+    const children = this.getJitChildren(comp);
+    const childrenCode = children.map(__assignType$4((prop) => comp.compileRestoreFromJson(prop, "S").code, ["prop", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    return { code: childrenCode, type: "S" };
+  }
+  emitHasUnknownKeys(comp) {
+    const children = this.getJitChildren(comp);
+    const allChildren = this.getChildRunTypes().filter(__assignType$4((prop) => !isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const hasIndexProp = children.some(__assignType$4((prop) => isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const parentCode = hasIndexProp ? "" : callCheckUnknownProperties(this, comp, children, false, !this.isPartOfUnion(), allChildren);
+    const childrenCode = super.emitHasUnknownKeys(comp).code;
+    return { code: [parentCode, childrenCode].filter(Boolean).join(" || "), type: "E" };
+  }
+  emitUnknownKeyErrors(comp) {
+    const children = this.getJitChildren(comp);
+    const allChildren = this.getChildRunTypes().filter(__assignType$4((prop) => !isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const hasIndexProp = children.some(__assignType$4((prop) => isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const unknownVar = comp.getLocalVarName("unk", this);
+    const keyVar = comp.getLocalVarName("ky", this);
+    const unknownValue = hasIndexProp ? void 0 : callCheckUnknownProperties(this, comp, children, true, !this.isPartOfUnion(), allChildren);
+    const parentCode = `
+            const ${unknownVar} = ${unknownValue};
+            if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}) {${comp.callJitErrWithPath("never", keyVar)}}}
+        `;
+    const childrenCode = super.emitUnknownKeyErrors(comp).code;
+    return { code: [unknownValue ? parentCode : "", childrenCode].filter(Boolean).join("\n"), type: "S" };
+  }
+  emitStripUnknownKeys(comp) {
+    const children = this.getJitChildren(comp);
+    const unknownVar = comp.getLocalVarName("unk", this);
+    const keyVar = comp.getLocalVarName("ky", this);
+    const hasIndexProp = children.some(__assignType$4((prop) => isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const unknownValue = hasIndexProp ? void 0 : callCheckUnknownProperties(this, comp, children, true, !this.isPartOfUnion());
+    const parentCode = `
+            const ${unknownVar} = ${unknownValue};
+            if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}){delete ${comp.vλl}[${keyVar}]}}
+        `;
+    const childrenCode = super.emitStripUnknownKeys(comp).code;
+    return { code: [unknownValue ? parentCode : "", childrenCode].filter(Boolean).join("\n"), type: "S" };
+  }
+  emitUnknownKeysToUndefined(comp) {
+    const children = this.getJitChildren(comp);
+    const unknownVar = comp.getLocalVarName("unk", this);
+    const keyVar = comp.getLocalVarName("ky", this);
+    const hasIndexProp = children.some(__assignType$4((prop) => isIndexSignatureRunType(prop), ["prop", "", 'P"2!"/"']));
+    const unknownValue = hasIndexProp ? void 0 : callCheckUnknownProperties(this, comp, children, true, !this.isPartOfUnion());
+    const parentCode = `
+            const ${unknownVar} = ${unknownValue};
+            if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}){${comp.vλl}[${keyVar}] = undefined}}
+        `;
+    const childrenCode = super.emitUnknownKeysToUndefined(comp).code;
+    return { code: [unknownValue ? parentCode : "", childrenCode].filter(Boolean).join("\n"), type: "S" };
+  }
+  // In order to json stringify to work properly optional properties must come first
+  getJsonStringifySortedChildren(comp) {
+    return this.getJitChildren(comp).toSorted(__assignType$4((a, b) => {
+      const aOptional = a instanceof MemberRunType && a.isOptional();
+      const bOptional = b instanceof MemberRunType && b.isOptional();
+      if (aOptional && !bOptional)
+        return -1;
+      if (!aOptional && bOptional)
+        return 1;
+      return 0;
+    }, ["a", "b", "", 'P"2!"2""/#']));
+  }
+  // extra check to prevent empty array passing as object where all properties are optional
+  // when this check is disabled empty array will pass as object but fail when checking for properties
+  allOptionalCode(comp) {
+    const children = this.getJitChildren(comp);
+    if (children.length !== 0 && !this.areAllChildrenOptional(children))
+      return "";
+    const isNotArray = `!Array.isArray(${comp.vλl})`;
+    const ifNoNative = `Object.prototype.toString.call(${comp.vλl}) === '[object Object]'`;
+    return `(${isNotArray} && ${ifNoNative})`;
+  }
+  addObjectPropsToContext(comp, jitChildrenRunTypes, allChildrenRuntypes) {
+    const children = jitChildrenRunTypes || this.getJitChildren(comp);
+    const allChildren = allChildrenRuntypes || this.getChildRunTypes();
+    return addObjectPropsToContext(this, comp, children, allChildren);
+  }
+}
+__publicField(InterfaceRunType, "__type", [() => type.__ΩTypeObjectLiteral, "T", () => CollectionRunType, "JitFnCompiler", "comp", () => __ΩInterfaceMember, "getNamedChildren", "isCallable", "getCallSignature", function() {
+  return memorize(__assignType$4(() => {
+    return this.getChildRunTypes().find(__assignType$4((prop) => prop.src.kind === type.ReflectionKind.callSignature, ["prop", "", 'P"2!"/"']));
+  }, [() => CallSignatureRunType, "", 'PPP7!-J/"']));
+}, () => __ΩInterfaceMember, "getJitChildren", () => PropertyRunType, "required", () => PropertyRunType, "optional", () => IndexSignatureRunType, "indexSignatures", "splitJitSplitChildren", "isPartOfUnion", "hasIndexSignature", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "emitHasUnknownKeys", "emitUnknownKeyErrors", "emitStripUnknownKeys", "emitUnknownKeysToUndefined", () => MemberRunType, "getJsonStringifySortedChildren", "allOptionalCode", () => BaseRunType, "jitChildrenRunTypes", () => BaseRunType, "allChildrenRuntypes", "addObjectPropsToContext", "InterfaceRunType", `n!c"Pe"!7#P"w$2%n&F0'P)0(!3)>*P"w$2%n+F0,P"w$2%PP7-F4.P7/F40P71F42M03P)04P"w$2%)05P"w$2%"w607P"w82%"w609P"w$2%"w60:P"w$2%"w60;P"w$2%"w60<P"w82%"w60=P"w$2%"w60>P"w$2%"w60?P"w$2%P"7@F0AP"w$2%&0BP"w$2%P7CF2D8P7EF2F8"0G5e!!6"wH`]);
+const __ΩObjectPropsContextResult = ["keysName", "allKeysName", "hasNonJitChildren", "jitChildrenNames", "allChildrenNames", "ObjectPropsContextResult", 'P&4!&4")4#&F4$&F4%Mw&y'];
+function addObjectPropsToContext(rt, comp, jitChildrenRunTypes, allChildrenRuntypes) {
+  const jitArrNames = jitChildrenRunTypes.filter(__assignType$4((prop) => !!prop.src.name, ["prop", "", 'P"2!"/"'])).map(__assignType$4((prop) => prop.src.name, ["prop", "", 'P"2!"/"']));
+  const AllArrNames = allChildrenRuntypes == null ? void 0 : allChildrenRuntypes.filter(__assignType$4((prop) => !!prop.src.name, ["prop", "", 'P"2!"/"'])).map(__assignType$4((prop) => prop.src.name, ["prop", "", 'P"2!"/"']));
+  const jitChildrenNames = Array.from(new Set(jitArrNames));
+  const allChildrenNames = Array.from(new Set(AllArrNames));
+  const isSameLength = jitChildrenNames.length === allChildrenNames.length;
+  const isSameSet = isSameLength && jitChildrenNames.every(__assignType$4((v) => allChildrenNames.includes(v), ["v", "", 'P"2!"/"']));
+  const hasNonJitChildren = !(isSameLength && isSameSet);
+  const keysName = `k_${rt.getJitHash(comp.opts)}`;
+  const allKeysName = `kA_${rt.getJitHash(comp.opts)}`;
+  comp.setContextItem(keysName, `const ${keysName} = ${arrayToLiteral(jitChildrenNames)}`);
+  if (hasNonJitChildren)
+    comp.setContextItem(allKeysName, `const ${allKeysName} = ${arrayToLiteral(allChildrenNames)}`);
+  return {
+    keysName,
+    allKeysName,
+    hasNonJitChildren,
+    jitChildrenNames,
+    allChildrenNames
+  };
+}
+addObjectPropsToContext.__type = [() => InterfaceRunType, "rt", "JitFnCompiler", "comp", () => BaseRunType, "jitChildrenRunTypes", () => BaseRunType, "allChildrenRuntypes", () => __ΩObjectPropsContextResult, "addObjectPropsToContext", `PP"7!2""w#2$P7%F2&P7'F2(8n)/*`];
+function callCheckUnknownProperties(rt, comp, jitChildrenRunTypes, returnKeys, checkObject = true, allChildrenRuntypes) {
+  const result = addObjectPropsToContext(rt, comp, jitChildrenRunTypes, allChildrenRuntypes);
+  if (result.jitChildrenNames.length === 0 && result.allChildrenNames.length === 0)
+    return "";
+  const objectCheckCode = checkObject ? [`typeof ${comp.vλl} === 'object'`, `${comp.vλl} !== null`] : [];
+  const checkPropName = JitFunctions$1.hasUnknownKeys.runTimeOptions.checkNonJitProps.keyName;
+  const optsVarName = getJitFnArgCallVarName(comp, rt, JitFunctions$1.hasUnknownKeys.id, "θpts");
+  const conditional = (allChildrenRuntypes == null ? void 0 : allChildrenRuntypes.length) && result.hasNonJitChildren ? `${optsVarName}.${checkPropName} ? ${result.allKeysName} : ${result.keysName}` : result.keysName;
+  const getUnknownKeysFn = comp.addPureFunction(cpf_getUnknownKeysFromArray);
+  const hasUnknownKeysFn = comp.addPureFunction(cpf_hasUnknownKeysFromArray);
+  if (returnKeys)
+    return `${getUnknownKeysFn}(${comp.vλl}, ${conditional})`;
+  objectCheckCode.push(`${hasUnknownKeysFn}(${comp.vλl}, ${conditional})`);
+  const filtered = objectCheckCode.filter(Boolean);
+  if (filtered.length > 1)
+    return `(${filtered.join(" && ")})`;
+  return filtered[0];
+}
+callCheckUnknownProperties.__type = [() => InterfaceRunType, "rt", "JitFnCompiler", "comp", () => BaseRunType, "jitChildrenRunTypes", "returnKeys", "checkObject", () => BaseRunType, "allChildrenRuntypes", "callCheckUnknownProperties", `PP"7!2""w#2$P7%F2&)2'"2(P7)F2*8&/+`];
 class PromiseRunType extends MemberRunType {
   skipJit(comp) {
     return (comp == null ? void 0 : comp.fnID) !== JitFunctions$1.toJSCode.id;
@@ -4942,6 +5223,7 @@ class PromiseRunType extends MemberRunType {
     return false;
   }
 }
+__publicField(PromiseRunType, "__type", ["TypePromise", () => MemberRunType, "JitFnCompiler", "comp", "skipJit", "JitCode", "emitIsType", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "isOptional", "getChildVarName", "getChildLiteral", "useArrayAccessor", "PromiseRunType", `P"w!7"P"w#2$)0%P"w&0'P"w&0(P"w&0)P"w&0*P)0+P"w#2$P&'J0,P"w#2$P&'J0-P)0.5"w!6"w/`]);
 class ObjectRunType extends AtomicRunType {
   emitIsType(comp) {
     return { code: `(typeof ${comp.vλl} === 'object' && ${comp.vλl} !== null)`, type: "E" };
@@ -4950,6 +5232,7 @@ class ObjectRunType extends AtomicRunType {
     return { code: `if (!(typeof ${comp.vλl} === 'object' && ${comp.vλl} !== null)) ${comp.callJitErr(this)}`, type: "S" };
   }
 }
+__publicField(ObjectRunType, "__type", ["TypeAny", "TypeUnknown", () => AtomicRunType, "JitFnCompiler", "comp", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "ObjectRunType", `PP"w!"w"J7#P"w$2%"w&0'P"w(2%"w&0)5P"w!"w"J6"w*`]);
 class IntersectionRunType extends InterfaceRunType {
   compileIsType() {
     throw new Error("Intersection validation not supported, should be resolve to other RunTypes");
@@ -4964,39 +5247,7 @@ class IntersectionRunType extends InterfaceRunType {
     throw new Error("Intersection serialization not supported, should be resolve to other RunTypes");
   }
 }
-class ParameterRunType extends TupleMemberRunType {
-  getParamName() {
-    return this.src.name;
-  }
-  getChildVarName(comp) {
-    return this.getChildIndex(comp);
-  }
-  getChildLiteral(comp) {
-    return this.getChildIndex(comp);
-  }
-}
-class MethodRunType extends FunctionRunType {
-  constructor() {
-    super(...arguments);
-    __publicField(this, "getChildIndex", (comp) => {
-      var _a, _b;
-      const start = (_b = (_a = comp == null ? void 0 : comp.opts) == null ? void 0 : _a.paramsSlice) == null ? void 0 : _b.start;
-      if (start) return getPropIndex(this.src) - start;
-      return getPropIndex(this.src);
-    });
-    __publicField(this, "isOptional", () => !!this.src.optional);
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getChildVarName(comp) {
-    return getPropVarName(this.src.name);
-  }
-  getChildLiteral(comp) {
-    return getPropLiteral(this.getChildVarName(comp));
-  }
-  useArrayAccessor() {
-    return useArrayAccessorForProp(this.src.name);
-  }
-}
+__publicField(IntersectionRunType, "__type", [() => type.__ΩTypeIntersection, () => InterfaceRunType, "JitCode", "compileIsType", "compileTypeErrors", "compilePrepareForJson", "compileRestoreFromJson", () => type.__ΩTypeIntersection, "IntersectionRunType", `Pn!7"P"w#0$P"w#0%P"w#0&P"w#0'5n(6"w)`]);
 class RestParamsRunType extends ArrayRunType {
   getChildIndex(comp) {
     const parent = this.getParent();
@@ -5006,13 +5257,18 @@ class RestParamsRunType extends ArrayRunType {
     return this.getChildIndex(comp);
   }
 }
+__publicField(RestParamsRunType, "__type", ["TypeRest", () => ArrayRunType, "JitFnCompiler", "comp", "getChildIndex", "startIndex", "RestParamsRunType", `P"w!7"P"w#2$'0%P"w#2$'0&5"w!6"w'`]);
+function __assignType$3(fn, args) {
+  fn.__type = args;
+  return fn;
+}
 class ClassRunType extends InterfaceRunType {
   getClassName() {
     return this.src.classType.name;
   }
   isClassWithEmptyConstructor() {
     const children = this.getChildRunTypes();
-    const isEmpty = children.every((prop) => !isConstructor(prop) || prop.getParameters().getChildRunTypes().length === 0);
+    const isEmpty = children.every(__assignType$3((prop) => !isConstructor(prop) || prop.getParameters().getChildRunTypes().length === 0, ["prop", "", 'P"2!"/"']));
     return isEmpty;
   }
   emitRestoreFromJson(comp) {
@@ -5028,6 +5284,7 @@ class ClassRunType extends InterfaceRunType {
     return { code, type: "S" };
   }
 }
+__publicField(ClassRunType, "__type", [() => type.__ΩTypeClass, () => InterfaceRunType, "getClassName", "isClassWithEmptyConstructor", () => JitFnCompiler, "comp", () => __ΩJitCode, "emitRestoreFromJson", () => type.__ΩTypeClass, "ClassRunType", `Pn!7"P&0#P)0$PP7%2&n'0(5n)6"w*`]);
 class GenericMemberRunType extends MemberRunType {
   constructor() {
     super(...arguments);
@@ -5052,42 +5309,57 @@ class GenericMemberRunType extends MemberRunType {
   emitIsType(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compileIsType(child, "E");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "E" };
-    if (this.isOptional()) return { code: `${comp.getChildVλl()} === undefined || (${childJit.code})`, type: "E" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "E" };
+    if (this.isOptional())
+      return { code: `${comp.getChildVλl()} === undefined || (${childJit.code})`, type: "E" };
     return childJit;
   }
   emitTypeErrors(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compileTypeErrors(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code)) return { code: void 0, type: "S" };
-    if (this.isOptional()) return { code: `if (${comp.getChildVλl()} !== undefined) {${childJit.code}}`, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code))
+      return { code: void 0, type: "S" };
+    if (this.isOptional())
+      return { code: `if (${comp.getChildVλl()} !== undefined) {${childJit.code}}`, type: "S" };
     return childJit;
   }
   emitPrepareForJson(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compilePrepareForJson(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code) || !child) return { code: void 0, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code) || !child)
+      return { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code}` : childJit.code || "";
-    if (this.isOptional()) return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
+    if (this.isOptional())
+      return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
     return { code, type: "S" };
   }
   emitRestoreFromJson(comp) {
     const child = this.getJitChild(comp);
     const childJit = comp.compileRestoreFromJson(child, "S");
-    if (!(childJit == null ? void 0 : childJit.code) || !child) return { code: void 0, type: "S" };
+    if (!(childJit == null ? void 0 : childJit.code) || !child)
+      return { code: void 0, type: "S" };
     const isExpression = childIsExpression(childJit, child);
     const code = isExpression ? `${comp.getChildVλl()} = ${childJit.code};` : childJit.code || "";
-    if (this.isOptional()) return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
+    if (this.isOptional())
+      return { code: `if (${comp.getChildVλl()} !== undefined) {${code}}`, type: "S" };
     return { code, type: "S" };
   }
+}
+__publicField(GenericMemberRunType, "__type", ["T", () => MemberRunType, "index", function() {
+  return 0;
+}, "getChildIndex", "JitFnCompiler", "comp", "getChildVarName", "getChildLiteral", "useArrayAccessor", "isOptional", "JitCode", "emitIsType", "JitErrorsFnCompiler", "emitTypeErrors", "emitPrepareForJson", "emitRestoreFromJson", "GenericMemberRunType", `b!Pe"!7"'3#>$P"0%P"w&2'P&'J0(P"w&2'"0)P"0*P"0+P"w&2'"w,0-P"w.2'"w,0/P"w&2'"w,00P"w&2'"w,015e!!6"w2`]);
+function __assignType$2(fn, args) {
+  fn.__type = args;
+  return fn;
 }
 class IterableRunType extends ClassRunType {
   constructor() {
     super(...arguments);
-    __publicField(this, "getChildRunTypes", () => {
+    __publicField(this, "getChildRunTypes", __assignType$2(() => {
       return this.children;
-    });
+    }, [() => BaseRunType, "", 'PP7!F/"']));
   }
   getIndexVarName(comp) {
     return comp.getLocalVarName("e", this);
@@ -5095,7 +5367,7 @@ class IterableRunType extends ClassRunType {
   emitIsType(comp) {
     var _a;
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
-    const childrenCode = this.getJitChildren(comp).map((c) => `if (!(${comp.compileIsType(c, "E").code})) return false`).join(";");
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((c) => `if (!(${comp.compileIsType(c, "E").code})) return false`, ["c", "", 'P"2!"/"'])).join(";");
     return {
       code: `
             if (!(${comp.vλl} instanceof ${this.constructorName})) return false;
@@ -5107,7 +5379,7 @@ class IterableRunType extends ClassRunType {
   emitTypeErrors(comp) {
     var _a;
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
-    const childrenCode = this.getJitChildren(comp).map((c) => comp.compileTypeErrors(c, "S").code).join(";");
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((c) => comp.compileTypeErrors(c, "S").code, ["c", "", 'P"2!"/"'])).join(";");
     const index = this.getIndexVarName(comp);
     return {
       code: `
@@ -5121,8 +5393,9 @@ class IterableRunType extends ClassRunType {
     var _a;
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
     const resName = comp.getLocalVarName("ml", this);
-    const childrenCode = this.getJitChildren(comp).map((c) => comp.compilePrepareForJson(c, "S").code).filter(Boolean).join(";");
-    if (!childrenCode) return { code: `${comp.vλl} = Array.from(${comp.vλl})`, type: "S" };
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((c) => comp.compilePrepareForJson(c, "S").code, ["c", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    if (!childrenCode)
+      return { code: `${comp.vλl} = Array.from(${comp.vλl})`, type: "S" };
     return {
       code: `
             const ${resName} = [];
@@ -5135,10 +5408,12 @@ class IterableRunType extends ClassRunType {
   emitRestoreFromJson(comp) {
     var _a;
     const children = this.getJitChildren(comp);
-    if (!children.length) return { code: `${comp.vλl} = new Map(${comp.vλl})`, type: "S" };
+    if (!children.length)
+      return { code: `${comp.vλl} = new Map(${comp.vλl})`, type: "S" };
     const index = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
-    const childrenCode = children.map((c) => comp.compileRestoreFromJson(c, "S").code).filter(Boolean).join(";");
-    if (!childrenCode) return { code: `${comp.vλl} = new ${this.constructorName}(${comp.vλl})`, type: "S" };
+    const childrenCode = children.map(__assignType$2((c) => comp.compileRestoreFromJson(c, "S").code, ["c", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    if (!childrenCode)
+      return { code: `${comp.vλl} = new ${this.constructorName}(${comp.vλl})`, type: "S" };
     return {
       code: `
             for (let ${index} = 0; ${index} < ${comp.vλl}.length; ${index}++) {${childrenCode}}
@@ -5150,11 +5425,12 @@ class IterableRunType extends ClassRunType {
   // TODO: Implement the following methods, should just call same compile method for children, look into to array run type
   emitHasUnknownKeys(comp) {
     var _a;
-    const childrenCode = this.getJitChildren(comp).map((child) => {
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((child) => {
       const itemJit = comp.compileHasUnknownKeys(child, "E");
       return (itemJit == null ? void 0 : itemJit.code) ? `if (${itemJit.code}) return true;` : "";
-    }).filter(Boolean).join("");
-    if (!childrenCode) return { code: "return false", type: "RB" };
+    }, ["child", "", 'P"2!"/"'])).filter(Boolean).join("");
+    if (!childrenCode)
+      return { code: "return false", type: "RB" };
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
     return {
       code: `
@@ -5166,8 +5442,9 @@ class IterableRunType extends ClassRunType {
   }
   emitUnknownKeyErrors(comp) {
     var _a;
-    const childrenCode = this.getJitChildren(comp).map((child) => comp.compileUnknownKeyErrors(child, "S").code).filter(Boolean).join(";");
-    if (!childrenCode) return { code: void 0, type: "S" };
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((child) => comp.compileUnknownKeyErrors(child, "S").code, ["child", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    if (!childrenCode)
+      return { code: void 0, type: "S" };
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
     const index = this.getIndexVarName(comp);
     return {
@@ -5180,8 +5457,9 @@ class IterableRunType extends ClassRunType {
   }
   emitStripUnknownKeys(comp) {
     var _a;
-    const childrenCode = this.getJitChildren(comp).map((child) => comp.compileStripUnknownKeys(child, "S").code).filter(Boolean).join(";");
-    if (!childrenCode) return { code: void 0, type: "S" };
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((child) => comp.compileStripUnknownKeys(child, "S").code, ["child", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    if (!childrenCode)
+      return { code: void 0, type: "S" };
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
     return {
       code: `
@@ -5193,8 +5471,9 @@ class IterableRunType extends ClassRunType {
   }
   emitUnknownKeysToUndefined(comp) {
     var _a;
-    const childrenCode = this.getJitChildren(comp).map((child) => comp.compileUnknownKeysToUndefined(child, "S").code).filter(Boolean).join(";");
-    if (!childrenCode) return { code: void 0, type: "S" };
+    const childrenCode = this.getJitChildren(comp).map(__assignType$2((child) => comp.compileUnknownKeysToUndefined(child, "S").code, ["child", "", 'P"2!"/"'])).filter(Boolean).join(";");
+    if (!childrenCode)
+      return { code: void 0, type: "S" };
     const entry = ((_a = this.getCustomVλl(comp)) == null ? void 0 : _a.vλl) || comp.vλl;
     return {
       code: `
@@ -5205,6 +5484,11 @@ class IterableRunType extends ClassRunType {
     };
   }
 }
+__publicField(IterableRunType, "__type", [() => ClassRunType, () => BaseRunType, "children", "constructorName", () => JitFnCompiler, "comp", "getIndexVarName", "getChildRunTypes", function() {
+  return __assignType$2(() => {
+    return this.children;
+  }, [() => BaseRunType, "", 'PP7!F/"']);
+}, () => JitFnCompiler, "JitCode", "emitIsType", () => JitErrorsFnCompiler, "emitTypeErrors", () => JitFnCompiler, "emitPrepareForJson", () => JitFnCompiler, "emitRestoreFromJson", () => JitFnCompiler, "emitHasUnknownKeys", () => JitErrorsFnCompiler, "emitUnknownKeyErrors", () => JitFnCompiler, "emitStripUnknownKeys", () => JitFnCompiler, "emitUnknownKeysToUndefined", "IterableRunType", `P7!P7"F3#=&3$=PP7%2&&0'!3(>)PP7*2&"w+0,PP7-2&"w+0.PP7/2&"w+00PP712&"w+02PP732&"w+04PP752&"w+06PP772&"w+08PP792&"w+0:5w;`]);
 class MapRunType extends IterableRunType {
   constructor() {
     super(...arguments);
@@ -5215,7 +5499,8 @@ class MapRunType extends IterableRunType {
   }
   onCreated(src) {
     const types = src.arguments;
-    if (!types || types.length !== 2) throw new Error(`Map expects 2 type arguments: ie: Map<string, number>`);
+    if (!types || types.length !== 2)
+      throw new Error(`Map expects 2 type arguments: ie: Map<string, number>`);
     super.onCreated(src);
     this.keyRT.onCreated({
       kind: type.ReflectionKind.parameter,
@@ -5242,6 +5527,15 @@ class MapRunType extends IterableRunType {
     return comp.getLocalVarName("mpV", this);
   }
 }
+__publicField(MapRunType, "__type", [() => IterableRunType, "keyRT", function() {
+  return new MapKeyRunType();
+}, "valueRT", function() {
+  return new MapValueRunType();
+}, "children", function() {
+  return [this.keyRT, this.valueRT];
+}, "constructorName", function() {
+  return "Map";
+}, "SrcType", "src", "onCreated", "JitFnCompiler", "comp", "getCustomVλl", "getMapKeyVλl", "getMapValueVλl", "MapRunType", `P7!!3">#!3$>%!3&>'&3(>)P"w*2+$0,P"w-2."0/P"w-2."00P"w-2."015w2`]);
 class MapKeyRunType extends GenericMemberRunType {
   constructor() {
     super(...arguments);
@@ -5263,6 +5557,9 @@ class MapKeyRunType extends GenericMemberRunType {
     return void 0;
   }
 }
+__publicField(MapKeyRunType, "__type", [() => GenericMemberRunType, "index", function() {
+  return 0;
+}, "JitFnCompiler", "comp", "getStaticPathLiteral", "getCustomVλl", "MapKeyRunType", `P"7!'3">#P"w$2%P&'J0&P"w$2%"0'5"6"w(`]);
 class MapValueRunType extends GenericMemberRunType {
   constructor() {
     super(...arguments);
@@ -5284,6 +5581,9 @@ class MapValueRunType extends GenericMemberRunType {
     return void 0;
   }
 }
+__publicField(MapValueRunType, "__type", [() => GenericMemberRunType, "index", function() {
+  return 1;
+}, "JitFnCompiler", "comp", "getStaticPathLiteral", "getCustomVλl", "MapValueRunType", `P"7!'3">#P"w$2%P&'J0&P"w$2%"0'5"6"w(`]);
 class SetRunType extends IterableRunType {
   constructor() {
     super(...arguments);
@@ -5293,7 +5593,8 @@ class SetRunType extends IterableRunType {
   }
   onCreated(src) {
     const types = src.arguments;
-    if (!types || types.length !== 1) throw new Error(`Set expects 1 type argument: ie: Set<number>`);
+    if (!types || types.length !== 1)
+      throw new Error(`Set expects 1 type argument: ie: Set<number>`);
     super.onCreated(src);
     this.keyRT.onCreated({
       kind: type.ReflectionKind.parameter,
@@ -5308,6 +5609,13 @@ class SetRunType extends IterableRunType {
     return { vλl: comp.getLocalVarName("it", this), isStandalone: true };
   }
 }
+__publicField(SetRunType, "__type", [() => IterableRunType, "keyRT", function() {
+  return new SetKeyRunType();
+}, "children", function() {
+  return [this.keyRT];
+}, "constructorName", function() {
+  return "Set";
+}, "SrcType", "src", "onCreated", "JitFnCompiler", "comp", "getCustomVλl", "SetRunType", `P7!!3">#!3$>%&3&>'P"w(2)$0*P"w+2,"0-5w.`]);
 class SetKeyRunType extends GenericMemberRunType {
   constructor() {
     super(...arguments);
@@ -5328,6 +5636,9 @@ class SetKeyRunType extends GenericMemberRunType {
     return void 0;
   }
 }
+__publicField(SetKeyRunType, "__type", [() => GenericMemberRunType, "index", function() {
+  return 0;
+}, "skipSettingAccessor", "JitFnCompiler", "comp", "getStaticPathLiteral", "getCustomVλl", "SetKeyRunType", `P"7!'3">#P"0$P"w%2&&0'P"w%2&"0(5"6"w)`]);
 class NonSerializableRunType extends InterfaceRunType {
   skipJit() {
     return false;
@@ -5357,6 +5668,7 @@ class NonSerializableRunType extends InterfaceRunType {
     throw new Error(`Jit compilation disabled for Non Serializable types.`);
   }
 }
+__publicField(NonSerializableRunType, "__type", ["TypeObjectLiteral", "TypeClass", () => InterfaceRunType, "skipJit", () => __ΩJitCode, "emitIsType", () => __ΩJitCode, "emitTypeErrors", () => __ΩJitCode, "emitPrepareForJson", () => __ΩJitCode, "emitRestoreFromJson", () => __ΩJitCode, "emitHasUnknownKeys", () => __ΩJitCode, "emitUnknownKeyErrors", () => __ΩJitCode, "emitStripUnknownKeys", () => __ΩJitCode, "emitUnknownKeysToUndefined", "NonSerializableRunType", `PP"w!"w"J7#P"0$Pn%0&Pn'0(Pn)0*Pn+0,Pn-0.Pn/00Pn102Pn3045P"w!"w"J6"w5`]);
 function __assignType$1(fn, args) {
   fn.__type = args;
   return fn;
@@ -5706,6 +6018,13 @@ exports.__ΩStrNumber = __ΩStrNumber;
 exports.__ΩSubKind = __ΩSubKind;
 exports.anyValuesList = anyValuesList;
 exports.computeDeepkitFormatID = computeDeepkitFormatID;
+exports.cpf_asJSONString = cpf_asJSONString;
+exports.cpf_formatErr = cpf_formatErr;
+exports.cpf_getUnknownKeysFromArray = cpf_getUnknownKeysFromArray;
+exports.cpf_hasUnknownKeysFromArray = cpf_hasUnknownKeysFromArray;
+exports.cpf_newRunTypeErr = cpf_newRunTypeErr;
+exports.cpf_safeIterableKey = cpf_safeIterableKey;
+exports.cpf_sanitizeCompiledFn = cpf_sanitizeCompiledFn;
 exports.createFromBinaryFn = createFromBinaryFn;
 exports.createIsTypeFn = createIsTypeFn;
 exports.createJitCompiler = createJitCompiler;
@@ -5820,4 +6139,4 @@ exports.registerJitFunctionCompiler = registerJitFunctionCompiler;
 exports.runType = runType;
 exports.stringCharSet = stringCharSet;
 exports.validPropertyNameRegExp = validPropertyNameRegExp;
-//# sourceMappingURL=createRunTypeFunctions-CYxYNttS.js.map
+//# sourceMappingURL=createRunTypeFunctions-DnGBXCfU.js.map

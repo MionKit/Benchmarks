@@ -6,14 +6,14 @@
  * ## Why This Script Exists (Bun Bug Workaround)
  *
  * There is a bug in Bun's CJS module resolution when using npm-linked (symlinked) packages.
- * When a symlinked package (e.g., @mionkit/router) requires another symlinked package
- * (e.g., @mionkit/core), Bun creates a SEPARATE empty module instance instead of sharing
+ * When a symlinked package (e.g., @mionjs/router) requires another symlinked package
+ * (e.g., @mionjs/core), Bun creates a SEPARATE empty module instance instead of sharing
  * the same module object.
  *
  * ### The Problem
  *
- * In `@mionkit/router/.dist/cjs/src/routes/client.routes.js`, line 3:
- *   const core = require("@mionkit/core");
+ * In `@mionjs/router/.dist/cjs/src/routes/client.routes.js`, line 3:
+ *   const core = require("@mionjs/core");
  *
  * The `core` object captured in this closure has 0 keys in Bun (but 205 keys in Node.js).
  * This causes lazy type references like `() => core.__ΩSerializableMethodsData` to return
@@ -61,11 +61,11 @@ const fs = require("fs");
 const path = require("path");
 
 const MION_PACKAGES = [
-  "bun",
+  "platform-bun",
   "client",
   "core",
   "devtools",
-  "node",
+  "platform-node",
   "quick-start",
   "router",
   "run-types",
@@ -82,7 +82,7 @@ const MION_PACKAGES_DIR = path.join(MION_ROOT, "packages");
 const NODE_MODULES_MIONKIT = path.join(
   PROJECT_ROOT,
   "node_modules",
-  "@mionkit",
+  "@mionjs",
 );
 
 function isSymlink(filePath) {
@@ -158,7 +158,7 @@ function main() {
   console.log(`Mion source: ${MION_PACKAGES_DIR}`);
   console.log(`Destination: ${NODE_MODULES_MIONKIT}`);
 
-  // Ensure @mionkit directory exists
+  // Ensure @mionjs directory exists
   if (!fs.existsSync(NODE_MODULES_MIONKIT)) {
     fs.mkdirSync(NODE_MODULES_MIONKIT, { recursive: true });
   }

@@ -5,14 +5,14 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { NodeHttpOptions, startNodeServer } from "@mionkit/node";
+import { NodeHttpOptions, startNodeServer } from "@mionjs/platform-node";
 import {
   type Routes,
   route,
   initMionRouter,
   RouterOptions,
-} from "@mionkit/router";
-import { getJitFnCaches } from "@mionkit/core";
+} from "@mionjs/router";
+import { getJitFnCaches } from "@mionjs/core";
 import { User } from "./models";
 
 // Diagnostic: track request count and memory

@@ -12,7 +12,7 @@
     "build": "rimraf ./_compiled-apps && vite build",
     "test": "standard | snazzy",
     "test-servers": "node ./scripts/test-mion-servers.js",
-    "mionlink": "bun pm cache rm && npm link @mionkit/bun @mionkit/client @mionkit/core @mionkit/node @mionkit/quick-start @mionkit/router @mionkit/run-types @mionkit/type-formats && node scripts/copy-mion-packages.js"
+    "mionlink": "bun pm cache rm && npm link @mionjs/platform-bun @mionjs/client @mionjs/core @mionjs/platform-node @mionjs/router @mionjs/run-types @mionjs/type-formats && node scripts/copy-mion-packages.js"
   },
   "bin": {
     "benchmark": "./benchmark.js"
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@deepkit/type-compiler": "1.0.19",
-    "@mionkit/devtools": "file:../mion/packages/devtools",
+    "@mionjs/devtools": "file:../mion/packages/devtools",
     "@types/bun": "^1.3.8",
     "@types/node": "^22.0.0",
     "pidusage": "^3.0.2",

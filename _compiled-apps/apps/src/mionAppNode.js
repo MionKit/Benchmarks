@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("../../mionRoutes-CtbFi3fe.js");
+const mionRoutes = require("../../mionRoutes-CaK3IXAt.js");
 require("path");
 const http = require("http");
 const https = require("https");
@@ -173,7 +173,7 @@ function httpRequestHandler(httpReq, httpResponse) {
   const urlQuery = queryIndex === -1 ? void 0 : nodeUrl.substring(queryIndex + 1);
   let size = 0;
   const bodyChunks = [];
-  httpResponse.setHeader("server", "@mionkit");
+  httpResponse.setHeader("server", "@mionjs");
   const reqHeaders = headersFromIncomingMessage(httpReq);
   const respHeaders = headersFromServerResponse(httpResponse, httpOptions.defaultResponseHeaders);
   httpReq.on("data", (data) => {

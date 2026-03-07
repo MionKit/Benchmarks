@@ -5,8 +5,8 @@
  * The software is provided "as is", without warranty of any kind.
  * ######## */
 
-import { BunHttpOptions, startBunServer } from "@mionkit/bun";
-import { initMionRouter, RouterOptions } from "@mionkit/router";
+import { BunHttpOptions, startBunServer } from "@mionjs/platform-bun";
+import { initMionRouter, RouterOptions } from "@mionjs/router";
 import { routes } from "./mionRoutes";
 
 export { routes };

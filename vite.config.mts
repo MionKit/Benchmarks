@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
-import { mionPlugin } from "@mionkit/devtools/vite-plugin";
+import { mionPlugin } from "@mionjs/devtools/vite-plugin";
 
 // When MION_COMPILE=true, this config is loaded by vite-node as a child process
 // for AOT cache generation. Skip aotCaches to prevent infinite recursion.
@@ -14,10 +14,10 @@ const entry: Record<string, string> = {
 };
 
 export default defineConfig({
-  // Tell vite-node (AOT child process) to process @mionkit packages through
+  // Tell vite-node (AOT child process) to process @mionjs packages through
   // the plugin pipeline so virtual:mion-server-pure-fns resolves correctly
   ssr: {
-    noExternal: [/@mionkit\//],
+    noExternal: [/@mionjs\//],
   },
   esbuild: {
     legalComments: "none",
@@ -70,11 +70,11 @@ export default defineConfig({
         dir: "_compiled-apps",
         entryFileNames: "[name].js",
       },
-      // Externalize all bare imports EXCEPT virtual: and @mionkit/* modules
-      // @mionkit packages are bundled so their internal virtual: imports get resolved
+      // Externalize all bare imports EXCEPT virtual: and @mionjs/* modules
+      // @mionjs packages are bundled so their internal virtual: imports get resolved
       external: (id) => {
         if (id.startsWith("virtual:")) return false;
-        if (id.startsWith("@mionkit/")) return false;
+        if (id.startsWith("@mionjs/")) return false;
         return /^[^./]/.test(id);
       },
     },

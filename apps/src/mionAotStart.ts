@@ -4,7 +4,7 @@
  * Must NOT start an HTTP server and must NOT import virtual:mion-aot/* modules.
  * ######## */
 
-import { initMionRouter } from "@mionkit/router";
+import { initMionRouter } from "@mionjs/router";
 import { routes } from "./mionRoutes";
 
 await initMionRouter(routes);

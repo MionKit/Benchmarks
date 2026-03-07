@@ -83,7 +83,7 @@ Look for classes that appear in Bun but not Node, or have significantly higher c
 
 - Bun internal classes
 - JavaScriptCore-specific objects
-- `@mionkit/bun` related objects
+- `@mionjs/bun` related objects
 
 ### 4. Profile GC Behavior
 
@@ -99,12 +99,12 @@ node --expose-gc --trace-gc benchmarks/mion.js
 bun --smol benchmarks/mion.bun.js  # Uses less memory
 ```
 
-### 5. Investigate `@mionkit/bun` Package
+### 5. Investigate `@mionjs/bun` Package
 
 Compare the HTTP server implementations:
 
-- [`@mionkit/node`](../node_modules/@mionkit/node) (Node)
-- [`@mionkit/bun`](../node_modules/@mionkit/bun) (Bun)
+- [`@mionjs/node`](../node_modules/@mionjs/node) (Node)
+- [`@mionjs/bun`](../node_modules/@mionjs/bun) (Bun)
 
 Look for:
 

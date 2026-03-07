@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-A systematic investigation of the memory leak in the mion Bun implementation has been completed. The initial hypothesis (JIT cache growth) was **ruled out**. The root cause appears to be in the **RunType instantiation layer** of `@mionkit/run-types`, where new type objects are being created per request instead of being reused from a cache.
+A systematic investigation of the memory leak in the mion Bun implementation has been completed. The initial hypothesis (JIT cache growth) was **ruled out**. The root cause appears to be in the **RunType instantiation layer** of `@mionjs/run-types`, where new type objects are being created per request instead of being reused from a cache.
 
 ---
 
@@ -15,12 +15,12 @@ A systematic investigation of the memory leak in the mion Bun implementation has
 
 ### Phase 1: Initial Hypothesis - JIT Cache Growth
 
-**Hypothesis:** The JIT function cache in `@mionkit/core` grows unboundedly, creating new compiled functions for each request.
+**Hypothesis:** The JIT function cache in `@mionjs/core` grows unboundedly, creating new compiled functions for each request.
 
 **Investigation Method:**
 
 - Added diagnostic logging to [`apps/src/mionAppBun.ts`](../apps/src/mionAppBun.ts) to track JIT cache size
-- Imported `getJitFnCaches` from `@mionkit/core` to monitor cache entries
+- Imported `getJitFnCaches` from `@mionjs/core` to monitor cache entries
 - Logged cache size every 1000 requests
 
 **Result:** ❌ **RULED OUT**
@@ -102,7 +102,7 @@ A direct comparison between mion.bun and mion.node reveals the issue is **Bun-sp
 
 1. **Same JIT cache size** - Both Node and Bun have exactly 162 JIT functions cached, proving the caching mechanism works identically.
 
-2. **Same code path** - Both use the same `@mionkit/run-types` package and identical route handlers.
+2. **Same code path** - Both use the same `@mionjs/run-types` package and identical route handlers.
 
 3. **Massive initial allocation in Bun** - mion.bun starts with **371MB heap** immediately after initialization, while mion.node starts with only ~15MB.
 
@@ -112,9 +112,9 @@ A direct comparison between mion.bun and mion.node reveals the issue is **Bun-sp
 
 ### Updated Hypothesis: Bun Runtime Memory Management Issue
 
-The evidence now points to a **Bun-specific issue**, not a problem with `@mionkit/run-types`:
+The evidence now points to a **Bun-specific issue**, not a problem with `@mionjs/run-types`:
 
-1. **Same code, different behavior** - Both mion.node and mion.bun use identical route handlers and the same `@mionkit/run-types` package.
+1. **Same code, different behavior** - Both mion.node and mion.bun use identical route handlers and the same `@mionjs/run-types` package.
 
 2. **Massive initial allocation in Bun** - mion.bun allocates 371MB heap at startup vs 15MB for Node.js.
 
@@ -128,7 +128,7 @@ The evidence now points to a **Bun-specific issue**, not a problem with `@mionki
 
 2. **Bun's memory allocator** - Bun uses a different memory allocator (mimalloc) which may have different retention behavior.
 
-3. **`@mionkit/bun` package** - The Bun-specific HTTP server implementation may have a leak.
+3. **`@mionjs/bun` package** - The Bun-specific HTTP server implementation may have a leak.
 
 4. **Bun's garbage collector** - Bun's GC may not be as aggressive as V8's GC in Node.js.
 
@@ -153,7 +153,7 @@ The evidence now points to a **Bun-specific issue**, not a problem with `@mionki
 
 ### Immediate Actions
 
-1. **Investigate RunType caching in `@mionkit/run-types`**
+1. **Investigate RunType caching in `@mionjs/run-types`**
    - Check if there's a cache for RunType instances keyed by type hash
    - Verify if the cache is being used correctly during request handling
 
@@ -169,7 +169,7 @@ The evidence now points to a **Bun-specific issue**, not a problem with `@mionki
 
 The fix will likely need to be in one of these areas:
 
-1. **`@mionkit/bun` package** - The Bun-specific HTTP server implementation may have a leak
+1. **`@mionjs/bun` package** - The Bun-specific HTTP server implementation may have a leak
 2. **Bun runtime interaction** - How mion interacts with Bun's APIs may cause memory retention
 3. **`@deepkit/type` in Bun** - Type reflection may behave differently in JavaScriptCore vs V8
 
@@ -218,7 +218,7 @@ The modified [`apps/src/mionAppBun.ts`](../apps/src/mionAppBun.ts) generates hea
 The memory leak in mion.bun is **Bun-specific** and is **not** caused by:
 
 - JIT cache growth (cache stays at 162 entries in both Node and Bun)
-- `@mionkit/run-types` package (same code works fine in Node.js)
+- `@mionjs/run-types` package (same code works fine in Node.js)
 
 The root cause is related to how Bun's runtime handles mion's code:
 
@@ -227,4 +227,4 @@ The root cause is related to how Bun's runtime handles mion's code:
 
 **Confidence Level:** High (based on direct comparison between Node.js and Bun with identical code)
 
-**Next Action Required:** Investigate the `@mionkit/bun` package and how it interacts with Bun's HTTP server and garbage collector.
+**Next Action Required:** Investigate the `@mionjs/bun` package and how it interacts with Bun's HTTP server and garbage collector.

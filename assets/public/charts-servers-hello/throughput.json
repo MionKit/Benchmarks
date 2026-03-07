@@ -1,1 +1,1 @@
-{"data":{"x":"x","columns":[["x","Throughput (Mb/s)"],["http-node","22.74"],["mion","21.98"],["hono","17.11"],["hapi","15.93"],["fastify","15.52"],["express","13.52"]],"type":"bar","labels":true},"axis":{"x":{"type":"category","labels":{"rotate":75}}},"transition":{"duration":0}}
+{"data":{"x":"x","columns":[["x","Throughput (Mb/s)"],["http-node","20.85"],["mion","20.00"],["hono","16.02"],["hapi","14.43"],["fastify","14.26"],["express","12.74"]],"type":"bar","labels":true},"axis":{"x":{"type":"category","labels":{"rotate":75}}},"transition":{"duration":0}}

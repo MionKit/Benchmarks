@@ -26,19 +26,19 @@ const __ΩPartial = ["T", "Partial", 'l+e#!e"!fRb!Pde"!gN#"w"y'];
 const __ΩPick$2 = ["T", "K", "Pick", 'l+e#!e"!fRb!b"Pde""N#!w#y'];
 const __ΩRemoteMethod = ["AnyHandler", "H", "MethodWithJitFns", "RemoteMethodOpts", "options", "handler", "args", "", "methodCaller", "RemoteMethod", `"w!c"P"w#"w$4%e"!4&P"@2'"/(4)8Mw*y`];
 const __ΩRouteMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.route, "type", "RouteOnlyOptions", "options", "RouteMethod", `"c!Pe"!o""i#4$"w%4&Mw'y`];
-const __ΩLinkedFnMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.linkedFn, "type", "LinkedFnMethod", '"c!Pe"!o""i#4$Mw%y'];
-const __ΩHeadersMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.headersLinkedFn, "type", "HeadersMethodWithJitFns", "headersParam", "HeadersMethod", `"c!Pe"!o""i#4$"w%4&Mw'y`];
-const __ΩRawMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.rawLinkedFn, "type", "RemoteMethodOpts", false, "validateParams", false, "validateReturn", "options", "RawMethod", `"c!Pe"!o""i#4$P"w%P.&4'.(4)8MK4*Mw+y`];
+const __ΩMiddleFnMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.middleFn, "type", "MiddleFnMethod", '"c!Pe"!o""i#4$Mw%y'];
+const __ΩHeadersMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.headersMiddleFn, "type", "HeadersMethodWithJitFns", "headersParam", "HeadersMethod", `"c!Pe"!o""i#4$"w%4&Mw'y`];
+const __ΩRawMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.rawMiddleFn, "type", "RemoteMethodOpts", false, "validateParams", false, "validateReturn", "options", "RawMethod", `"c!Pe"!o""i#4$P"w%P.&4'.(4)8MK4*Mw+y`];
 const __ΩRouteOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩRouteMethod, "options", "description", "validateParams", "validateReturn", "serializer", "RouteOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
-const __ΩLinkedFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩLinkedFnMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "LinkedFnOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
-const __ΩHeadersLinkedFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩHeadersMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "HeadersLinkedFnOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
-const __ΩRawLinkedFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩRawMethod, "options", "description", "runOnError", "RawLinkedFnOptions", `n#.$fP.%.&Jo"#o!"w'y`];
+const __ΩMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩMiddleFnMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "MiddleFnOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
+const __ΩHeadersMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩHeadersMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "HeadersMiddleFnOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
+const __ΩRawMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩRawMethod, "options", "description", "runOnError", "RawMiddleFnOptions", `n#.$fP.%.&Jo"#o!"w'y`];
 const __ΩMethodsExecutionChain = ["routeIndex", () => __ΩRemoteMethod, "methods", "SerializerCode", "serializer", "MethodsExecutionChain", `P'4!n"F4#"w$4%Mw&y`];
 const __ΩPick$1 = ["T", "K", "Pick", 'l+e#!e"!fRb!b"Pde""N#!w#y'];
 const __ΩRouteDef = ["H", () => __ΩPick$1, () => __ΩRouteMethod, "type", "handler", () => __ΩRouteOptions, "options", "RouteDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
-const __ΩLinkedFnDef = ["H", () => __ΩPick$1, () => __ΩLinkedFnMethod, "type", "handler", () => __ΩLinkedFnOptions, "options", "LinkedFnDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
-const __ΩHeadersLinkedFnDef = ["H", () => __ΩPick$1, () => __ΩHeadersMethod, "type", "handler", () => __ΩHeadersLinkedFnOptions, "options", "HeadersLinkedFnDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
-const __ΩRawLinkedFnDef = ["H", () => __ΩPick$1, () => __ΩRawMethod, "type", "handler", () => __ΩRawLinkedFnOptions, "options", "RawLinkedFnDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
+const __ΩMiddleFnDef = ["H", () => __ΩPick$1, () => __ΩMiddleFnMethod, "type", "handler", () => __ΩMiddleFnOptions, "options", "MiddleFnDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
+const __ΩHeadersMiddleFnDef = ["H", () => __ΩPick$1, () => __ΩHeadersMethod, "type", "handler", () => __ΩHeadersMiddleFnOptions, "options", "HeadersMiddleFnDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
+const __ΩRawMiddleFnDef = ["H", () => __ΩPick$1, () => __ΩRawMethod, "type", "handler", () => __ΩRawMiddleFnOptions, "options", "RawMiddleFnDef", `"c!Pe"!o#"P.$.%Jo"#Pn&4'8MKw(y`];
 const DEFAULT_CORE_OPTIONS = {
   /** automatically generate and uuid */
   autoGenerateErrorId: false
@@ -50,7 +50,7 @@ const MAX_STACK_DEPTH = 50;
 const MION_ROUTES = {
   /** get remote methods metadata by method id */
   methodsMetadataById: "mion@methodsMetadataById",
-  /** get remote methods metadata by route path, this include all linkedFns in the ExecutionChain of the route. */
+  /** get remote methods metadata by route path, this include all middleFns in the ExecutionChain of the route. */
   methodsMetadataByPath: "mion@methodsMetadataByPath",
   /** Platform or adapters errors that occur before reaching the router or outside the router and are platform/adapter related */
   platformError: "mion@platformError",
@@ -60,14 +60,14 @@ const MION_ROUTES = {
    * !IMPORTANT!!
    * This is technically not a route, but a special key used to store unexpected errors in the response body.
    * is declared as a route to reuse existing router serialization/deserialization logic.
-   * Errors thrown by routes/linkedFns, these are not strongly typed
+   * Errors thrown by routes/middleFns, these are not strongly typed
    * */
   thrownErrors: "@thrownErrors"
 };
 const StatusCodes = {
   /** Any error in the server that is not related to the application, ie: server not ready, etc... */
   SERVER_ERROR: 500,
-  /** Any expected and strongly typed error returned by a route/linkedFn. ie: entity not found, etc. */
+  /** Any expected and strongly typed error returned by a route/middleFn. ie: entity not found, etc. */
   APPLICATION_ERROR: 400,
   /**  Any thrown or unexpected error in the application, ie: validation error, not found, etc, database error, serialization error, etc...
    * These are are typically irrecoverable and can be handled globally, ie redirect to login page if auth fails
@@ -80,9 +80,9 @@ const StatusCodes = {
 };
 const HandlerType$1 = {
   route: 1,
-  linkedFn: 2,
-  headersLinkedFn: 3,
-  rawLinkedFn: 4
+  middleFn: 2,
+  headersMiddleFn: 3,
+  rawMiddleFn: 4
 };
 const JIT_FUNCTION_IDS = {
   isType: "is",
@@ -156,7 +156,7 @@ const __ΩStrictArrayBuffer = ["buffer", "StrictArrayBuffer", 'P_P-4!8MKw"y'];
 const __ΩDataViewSerializer = ["index", () => __ΩDataView, "view", "", "reset", () => __ΩStrictArrayBuffer, "getBuffer", "getBufferView", "markAsEnded", "getLength", "str", "serString", "n", "serFloat64", "serEnum", "bitMaskIndex", "bitIndex", "setBitMask", "DataViewSerializer", `P'4!n"4#P$/$4%Pn&/$4'PW/$4(P$/$4)P'1*P&2+$1,P'2-$1.PP'&J2-$1/P'20'21$12Mw3y`];
 const __ΩDataViewDeserializer = ["index", () => __ΩDataView, "view", "", "reset", () => __ΩStrictArrayBuffer, "buffer", "byteOffset", "byteLength", "setBuffer", "markAsEnded", "getLength", "desString", "desFloat64", "desEnum", "DataViewDeserializer", `P'4!n"4#P$/$4%Pn&2''2(8'2)8$/$4*P$/$4+P'1,P&1-P'1.PP'&J1/Mw0y`];
 const __ΩRecord$1 = ["K", "T", "Record", `l'e#"Rb!b"Pde"!N#!w#y`];
-const __ΩMethodMetadata = ["type", "id", "isAsync", "hasReturnData", "paramNames", "paramsJitHash", "returnJitHash", () => __ΩHeadersMetaData, "headersParam", () => __ΩHeadersMetaData, "headersReturn", "linkedFnIds", "pointer", "nestLevel", "MethodMetadata", `P'4!&4")4#)4$&F4%8&4&&4'n(4)8n*4+8&F4,8&F4-'4.Mw/y`];
+const __ΩMethodMetadata = ["type", "id", "isAsync", "hasReturnData", "paramNames", "paramsJitHash", "returnJitHash", () => __ΩHeadersMetaData, "headersParam", () => __ΩHeadersMetaData, "headersReturn", "middleFnIds", "pointer", "nestLevel", "MethodMetadata", `P'4!&4")4#)4$&F4%8&4&&4'n(4)8n*4+8&F4,8&F4-'4.Mw/y`];
 const __ΩRemoteMethodOpts = ["runOnError", "validateParams", "validateReturn", "description", () => __ΩSerializerMode, "serializer", "RemoteMethodOpts", `P)4!8)4"8)4#8&4$8n%4&8Mw'y`];
 const __ΩMethodWithOptions = [() => __ΩMethodMetadata, () => __ΩRemoteMethodOpts, "options", "MethodWithOptions", 'Pn!n"4#Mw$y'];
 const __ΩMethodsCache = [() => __ΩRecord$1, () => __ΩMethodWithOptions, "MethodsCache", '&n"o!#w#y'];
@@ -416,7 +416,7 @@ function restoreCompiledJitFn(jitCache, pureCache, fnHash, jUtil, visitedPure, v
 }
 function restoreCreateJitFn(fnData, jUtil) {
   const fnName = fnData.jitFnHash;
-  const fnWithContext = fnData.code;
+  const fnWithContext = `'use strict'; ${fnData.code}`;
   try {
     const wrapperWithContext = new Function("utl", fnWithContext);
     const fn = wrapperWithContext(jUtil);
@@ -433,7 +433,7 @@ function restoreCreateJitFn(fnData, jUtil) {
 }
 function restorePureFunction(pureFnData, jUtil) {
   const fnName = pureFnData.fnName;
-  const fnWithContext = pureFnData.code;
+  const fnWithContext = `'use strict'; ${pureFnData.code}`;
   try {
     const wrapperWithContext = new Function("utl", fnWithContext);
     const fn = wrapperWithContext(jUtil);
@@ -1083,25 +1083,25 @@ function createDependencyTrackingProxy() {
 }
 createDependencyTrackingProxy.__type = ["JITUtils", "proxy", "", "getDependencies", "createDependencyTrackingProxy", 'PP"w!4"P&D/#4$M/%'];
 const PURE_SERVER_FN_NAMESPACE = "pureServerFn";
-const __ΩRouterEntry = [() => __ΩRoutes, () => __ΩLinkedFnDef, () => __ΩRouteDef, () => __ΩRawLinkedFnDef, () => __ΩHeadersLinkedFnDef, "RouterEntry", 'Pn!n"n#n$n%Jw&y'];
+const __ΩRouterEntry = [() => __ΩRoutes, () => __ΩMiddleFnDef, () => __ΩRouteDef, () => __ΩRawMiddleFnDef, () => __ΩHeadersMiddleFnDef, "RouterEntry", 'Pn!n"n#n$n%Jw&y'];
 const __ΩRoutes = [() => __ΩRouterEntry, "Routes", 'P&n!LMw"y'];
 const __ΩRouterOptions = ["Req", "ContextData", () => __ΩCoreOptions, "prefix", "suffix", "request", "path", "", "pathTransform", () => __ΩContextDataFactory, "contextDataFactory", () => __ΩSerializerMode, "serializer", "RunTypeOptions", "runTypeOptions", "getPublicRoutesData", "autoGenerateErrorId", "skipClientRoutes", "aot", "maxContextPoolSize", "maxRoutesFlowsCacheSize", "RouterOptions", `"c!"c"Pn#&4$&4%Pe#!2&&2'&/(4)8e""o*"4+8n,4-"w.4/)40)41)42)43'44'45Mw6y`];
-function isLinkedFnDef(entry) {
-  return entry.type === HandlerType$1.linkedFn;
+function isMiddleFnDef(entry) {
+  return entry.type === HandlerType$1.middleFn;
 }
-isLinkedFnDef.__type = [() => __ΩRouterEntry, "entry", "isLinkedFnDef", 'Pn!2"!/#'];
-function isRawLinkedFnDef(entry) {
-  return entry.type === HandlerType$1.rawLinkedFn;
+isMiddleFnDef.__type = [() => __ΩRouterEntry, "entry", "isMiddleFnDef", 'Pn!2"!/#'];
+function isRawMiddleFnDef(entry) {
+  return entry.type === HandlerType$1.rawMiddleFn;
 }
-isRawLinkedFnDef.__type = [() => __ΩRouterEntry, "entry", "isRawLinkedFnDef", 'Pn!2"!/#'];
-function isHeadersLinkedFnDef(entry) {
-  return entry.type === HandlerType$1.headersLinkedFn;
+isRawMiddleFnDef.__type = [() => __ΩRouterEntry, "entry", "isRawMiddleFnDef", 'Pn!2"!/#'];
+function isHeadersMiddleFnDef(entry) {
+  return entry.type === HandlerType$1.headersMiddleFn;
 }
-isHeadersLinkedFnDef.__type = [() => __ΩRouterEntry, "entry", "isHeadersLinkedFnDef", 'Pn!2"!/#'];
-function isAnyLinkedFnDef(entry) {
-  return isLinkedFnDef(entry) || isRawLinkedFnDef(entry) || isHeadersLinkedFnDef(entry);
+isHeadersMiddleFnDef.__type = [() => __ΩRouterEntry, "entry", "isHeadersMiddleFnDef", 'Pn!2"!/#'];
+function isAnyMiddleFnDef(entry) {
+  return isMiddleFnDef(entry) || isRawMiddleFnDef(entry) || isHeadersMiddleFnDef(entry);
 }
-isAnyLinkedFnDef.__type = [() => __ΩRouterEntry, "entry", "isAnyLinkedFnDef", 'Pn!2"!/#'];
+isAnyMiddleFnDef.__type = [() => __ΩRouterEntry, "entry", "isAnyMiddleFnDef", 'Pn!2"!/#'];
 function isRoute(entry) {
   return entry.type === HandlerType$1.route;
 }
@@ -1133,7 +1133,7 @@ const DEFAULT_ROUTE_OPTIONS = {
   pathTransform: void 0,
   /** Default serializer mode - json as default native serializer, and minimum overhead to transform just required fields */
   serializer: "json",
-  /** Default run type compiling options for routes and linkedFns, can't be configured by the user as would break functionality  */
+  /** Default run type compiling options for routes and middleFns, can't be configured by the user as would break functionality  */
   runTypeOptions: {},
   /** set to true to generate router spec for clients.  */
   getPublicRoutesData: process.env.GENERATE_ROUTER_SPEC === "true",
@@ -1199,13 +1199,13 @@ function __assignType$4(fn, args) {
 const __ΩMethodReflect = [() => __ΩOmit, "MethodWithJitFns", "id", "type", "nestLevel", "pointer", "options", "MethodReflect", `"w"P.#.$.%.&.'Jo!#w(y`];
 class AOTCacheError extends Error {
   constructor(routeId, type = "route") {
-    const typeLabel = type === "rawLinkedFn" ? "Raw linkedFn" : type === "linkedFn" ? "LinkedFn" : "Route/linkedFn";
+    const typeLabel = type === "rawMiddleFn" ? "Raw middleFn" : type === "middleFn" ? "MiddleFn" : "Route/middleFn";
     super(`${typeLabel} "${routeId}" not found in AOT cache.
 Regenerate AOT caches using 'mion-build-aot' command.`);
     this.name = "AOTCacheError";
   }
 }
-__publicField(AOTCacheError, "__type", [() => Error, "routeId", "route", "linkedFn", "rawLinkedFn", "type", () => "route", "constructor", "AOTCacheError", `P7!P&2"P.#.$.%J2&>'"0(5w)`]);
+__publicField(AOTCacheError, "__type", [() => Error, "routeId", "route", "middleFn", "rawMiddleFn", "type", () => "route", "constructor", "AOTCacheError", `P7!P&2"P.#.$.%J2&>'"0(5w)`]);
 const __ΩRunTypesModule = ["RunTypesModule", "!w!y"];
 const __ΩRunTypesFunctions = [() => __ΩRunTypesModule, "JitFunctions", "JitFunctions", () => __ΩRunTypesModule, "reflectFunction", "reflectFunction", () => __ΩRunTypesModule, "isUnionRunType", "isUnionRunType", () => __ΩRunTypesModule, "isClassRunType", "isClassRunType", () => __ΩRunTypesModule, "isLiteralRunType", "isLiteralRunType", () => __ΩRunTypesModule, "isNeverRunType", "isNeverRunType", "RunTypesFunctions", `Pn!."f4#n$.%f4&n'.(f4)n*.+f4,n-..f4/n0.1f42Mw3y`];
 let runTypesModule = null;
@@ -1215,7 +1215,7 @@ async function loadRunTypesModule() {
     return runTypesModule;
   if (runTypesLoadPromise)
     return runTypesLoadPromise;
-  runTypesLoadPromise = Promise.resolve().then(() => require("./index-DWGFWJk5.js")).then(__assignType$4((module2) => {
+  runTypesLoadPromise = Promise.resolve().then(() => require("./index-S4fLLS6P.js")).then(__assignType$4((module2) => {
     runTypesModule = {
       JitFunctions: module2.JitFunctions,
       reflectFunction: module2.reflectFunction,
@@ -1229,10 +1229,10 @@ async function loadRunTypesModule() {
   return runTypesLoadPromise;
 }
 loadRunTypesModule.__type = [() => __ΩRunTypesFunctions, "loadRunTypesModule", 'Pn!`/"'];
-const rawLinkedFnReflectionCache = (Map.Ω = [["&"], [() => __ΩMethodReflect, "n!"]], /* @__PURE__ */ new Map());
-function createRawLinkedFnReflection(isAsync, hasReturnData = false, paramNames = []) {
+const rawMiddleFnReflectionCache = (Map.Ω = [["&"], [() => __ΩMethodReflect, "n!"]], /* @__PURE__ */ new Map());
+function createRawMiddleFnReflection(isAsync, hasReturnData = false, paramNames = []) {
   const cacheKey = `${isAsync}_${hasReturnData}_${paramNames.join(",")}`;
-  const cached = rawLinkedFnReflectionCache.get(cacheKey);
+  const cached = rawMiddleFnReflectionCache.get(cacheKey);
   if (cached)
     return cached;
   const reflection = {
@@ -1244,10 +1244,10 @@ function createRawLinkedFnReflection(isAsync, hasReturnData = false, paramNames 
     hasReturnData,
     isAsync
   };
-  rawLinkedFnReflectionCache.set(cacheKey, reflection);
+  rawMiddleFnReflectionCache.set(cacheKey, reflection);
   return reflection;
 }
-createRawLinkedFnReflection.__type = ["isAsync", "hasReturnData", () => false, "paramNames", () => [], () => __ΩMethodReflect, "createRawLinkedFnReflection", `P)2!)2">#&F2$>%n&/'`];
+createRawMiddleFnReflection.__type = ["isAsync", "hasReturnData", () => false, "paramNames", () => [], () => __ΩMethodReflect, "createRawMiddleFnReflection", `P)2!)2">#&F2$>%n&/'`];
 const __ΩCachedMethodMetadata = ["MethodMetadata", () => __ΩMethodReflect, "_cachedReflection", "CachedMethodMetadata", 'P"w!Pn"4#8MKw$y'];
 function extractReflectionFromCached(cached) {
   if (cached._cachedReflection)
@@ -1279,36 +1279,36 @@ function extractReflectionFromCached(cached) {
   return reflectionItems;
 }
 extractReflectionFromCached.__type = [() => __ΩCachedMethodMetadata, "cached", () => __ΩMethodReflect, "extractReflectionFromCached", 'Pn!2"n#/$'];
-async function getHandlerReflection(handler, routeId, routerOptions2, isHeadersLinkedFn = false) {
+async function getHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn = false) {
   const cached = getPersistedMethodMetadata(routeId);
   if (cached)
     return extractReflectionFromCached(cached);
   if (routerOptions2.aot)
-    throw new AOTCacheError(routeId, isHeadersLinkedFn ? "linkedFn" : "route");
+    throw new AOTCacheError(routeId, isHeadersMiddleFn ? "middleFn" : "route");
   const rt = await loadRunTypesModule();
-  return generateHandlerReflection(handler, routeId, routerOptions2, isHeadersLinkedFn, rt);
+  return generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn, rt);
 }
-getHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersLinkedFn", () => false, () => __ΩMethodReflect, "getHandlerReflection", "Pn!2\"&2#n$2%)2&>'n(`/)"];
+getHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersMiddleFn", () => false, () => __ΩMethodReflect, "getHandlerReflection", "Pn!2\"&2#n$2%)2&>'n(`/)"];
 async function getRawMethodReflection(handler, routeId, routerOptions2) {
   const cached = getPersistedMethodMetadata(routeId);
   if (cached)
-    return createRawLinkedFnReflection(cached.isAsync, cached.hasReturnData, cached.paramNames || []);
+    return createRawMiddleFnReflection(cached.isAsync, cached.hasReturnData, cached.paramNames || []);
   if (routerOptions2.aot)
-    return createRawLinkedFnReflection(true);
+    return createRawMiddleFnReflection(true);
   const rt = await loadRunTypesModule();
   return generateRawMethodReflection(handler, routeId, rt);
 }
 getRawMethodReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", () => __ΩMethodReflect, "getRawMethodReflection", "Pn!2\"&2#n$2%n&`/'"];
-function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersLinkedFn, rt) {
+function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn, rt) {
   const reflectionItems = {};
   let handlerRunType;
   const runTypeOptions = (routerOptions2 == null ? void 0 : routerOptions2.runTypeOptions) || DEFAULT_ROUTE_OPTIONS.runTypeOptions;
   try {
     handlerRunType = rt.reflectFunction(handler);
   } catch (error) {
-    throw new Error(`Can not get RunType of handler for route/linkedFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
+    throw new Error(`Can not get RunType of handler for route/middleFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
   }
-  const paramsSlice = isHeadersLinkedFn ? { start: HEADER_HOOK_DEFAULT_PARAMS.length } : { start: ROUTE_DEFAULT_PARAMS.length };
+  const paramsSlice = isHeadersMiddleFn ? { start: HEADER_HOOK_DEFAULT_PARAMS.length } : { start: ROUTE_DEFAULT_PARAMS.length };
   const paramsOpts = { ...runTypeOptions, paramsSlice };
   try {
     reflectionItems.paramNames = handlerRunType.getParameterNames(paramsOpts);
@@ -1320,9 +1320,9 @@ function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersLi
       reflectionItems.paramsJitHash = handlerRunType.getParameters().getJitHash(paramsOpts);
     }
   } catch (error) {
-    throw new Error(`Can not compile Jit Functions for Parameters of route/linkedFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
+    throw new Error(`Can not compile Jit Functions for Parameters of route/middleFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
   }
-  if (isHeadersLinkedFn) {
+  if (isHeadersMiddleFn) {
     const headersRunType = getParamsHeadersRunType(handlerRunType, routeId, routerOptions2, rt);
     const headerNames = getHeaderNames(headersRunType, routeId, rt);
     try {
@@ -1334,7 +1334,7 @@ function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersLi
       const jitHash = headersRunType.getJitHash(opts2);
       reflectionItems.headersParam = { headerNames, jitFns, jitHash };
     } catch (error) {
-      throw new Error(`Can not compile Jit Functions for Headers of Headers LinkedFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
+      throw new Error(`Can not compile Jit Functions for Headers of Headers MiddleFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
     }
   }
   const returnHeadersRunType = getReturnHeadersRunType(handlerRunType, rt);
@@ -1356,21 +1356,21 @@ function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersLi
       reflectionItems.returnJitHash = handlerRunType.getReturnType().getJitHash(returnOpts);
     }
   } catch (error) {
-    throw new Error(`Can not get Jit Functions for Return of route/linkedFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
+    throw new Error(`Can not get Jit Functions for Return of route/middleFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
   }
   reflectionItems.isAsync = handlerRunType.isAsync();
   return reflectionItems;
 }
-generateHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersLinkedFn", () => __ΩRunTypesFunctions, "rt", () => __ΩMethodReflect, "generateHandlerReflection", `Pn!2"&2#n$2%)2&n'2(n)/*`];
+generateHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersMiddleFn", () => __ΩRunTypesFunctions, "rt", () => __ΩMethodReflect, "generateHandlerReflection", `Pn!2"&2#n$2%)2&n'2(n)/*`];
 function generateRawMethodReflection(handler, routeId, rt) {
   let handlerRunType;
   try {
     handlerRunType = rt.reflectFunction(handler);
   } catch (error) {
-    throw new Error(`Can not get RunType of handler for route/linkedFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
+    throw new Error(`Can not get RunType of handler for route/middleFn "${routeId}." Error: ${error == null ? void 0 : error.message}`);
   }
   const isAsync = (handlerRunType == null ? void 0 : handlerRunType.isAsync()) || true;
-  return createRawLinkedFnReflection(isAsync);
+  return createRawMiddleFnReflection(isAsync);
 }
 generateRawMethodReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRunTypesFunctions, "rt", () => __ΩMethodReflect, "generateRawMethodReflection", `Pn!2"&2#n$2%n&/'`];
 function getParamsHeadersRunType(handlerRunType, routeId, routerOptions2, rt) {
@@ -1378,7 +1378,7 @@ function getParamsHeadersRunType(handlerRunType, routeId, routerOptions2, rt) {
   const paramRunTypes = handlerRunType.getParameters().getParamRunTypes(getFakeCompiler(routerOptions2));
   const headersSubset = (_b = (_a = paramRunTypes[1]) == null ? void 0 : _a.getMemberType) == null ? void 0 : _b.call(_a);
   if (!isHeaderSubSetRunType(headersSubset, rt)) {
-    throw new Error(`Headers LinkedFn '${routeId}' second parameter must be a HeadersSubset.`);
+    throw new Error(`Headers MiddleFn '${routeId}' second parameter must be a HeadersSubset.`);
   }
   return headersSubset;
 }
@@ -1405,7 +1405,7 @@ isHeaderSubSetRunType.__type = ["BaseRunType", "runType", () => __ΩRunTypesFunc
 function getHeaderNames(runType, routeId, rt) {
   const typeArguments = runType.src.typeArguments;
   if (!typeArguments || typeArguments.length === 0) {
-    throw new Error(`HeadersSubset must have type arguments in route/linkedFn ${routeId}`);
+    throw new Error(`HeadersSubset must have type arguments in route/middleFn ${routeId}`);
   }
   const headerNames = [];
   const requiredArg = typeArguments[0];
@@ -1421,7 +1421,7 @@ function getHeaderNames(runType, routeId, rt) {
     }
   }
   if (headerNames.length === 0)
-    throw new Error(`Header names array cannot be empty in route/linkedFn ${routeId}`);
+    throw new Error(`Header names array cannot be empty in route/middleFn ${routeId}`);
   return headerNames;
 }
 getHeaderNames.__type = ["BaseRunType", "runType", "routeId", () => __ΩRunTypesFunctions, "rt", "getHeaderNames", 'P"w!2"&2#n$2%&F/&'];
@@ -1495,9 +1495,9 @@ function route(handler, opts2) {
     options: opts2
   };
 }
-function rawLinkedFn(handler, opts2) {
+function rawMiddleFn(handler, opts2) {
   return {
-    type: HandlerType$1.rawLinkedFn,
+    type: HandlerType$1.rawMiddleFn,
     handler,
     options: opts2
   };
@@ -1708,9 +1708,9 @@ function prepareHandlerReturnValue(method, returnValue) {
   return method.returnJitFns.prepareForJson.fn(returnValue);
 }
 prepareHandlerReturnValue.__type = [() => __ΩRemoteMethod, "method", "returnValue", "prepareHandlerReturnValue", 'Pn!2""2#"/$'];
-const serializerLinkedFns = {
-  mionDeserializeRequest: rawLinkedFn(deserializeRequestBody, { runOnError: true }),
-  mionSerializeResponse: rawLinkedFn(serializeResponseBody, { runOnError: true })
+const serializerMiddleFns = {
+  mionDeserializeRequest: rawMiddleFn(deserializeRequestBody, { runOnError: true }),
+  mionSerializeResponse: rawMiddleFn(serializeResponseBody, { runOnError: true })
 };
 const mionInternalRoutes$1 = Object.values(MION_ROUTES);
 const publicMethods = /* @__PURE__ */ new Map();
@@ -1724,10 +1724,10 @@ function recursiveGetSerializableRoutes(routes2, currentPointer = [], publicData
     const id = getRouterItemId(itemPointer);
     if (isPrivateDefinition(item, id)) {
       publicData[key] = null;
-    } else if (isLinkedFnDef(item) || isHeadersLinkedFnDef(item) || isRoute(item)) {
-      const executable = getLinkedFnExecutable(id) || getRouteExecutable(id);
+    } else if (isMiddleFnDef(item) || isHeadersMiddleFnDef(item) || isRoute(item)) {
+      const executable = getMiddleFnExecutable(id) || getRouteExecutable(id);
       if (!executable)
-        throw new Error(`Route or LinkedFn ${id} not found. Please check you have called router.registerRoutes first.`);
+        throw new Error(`Route or MiddleFn ${id} not found. Please check you have called router.registerRoutes first.`);
       publicData[key] = getSerializableMethod(executable);
     } else {
       const subRoutes = routes2[key];
@@ -1756,9 +1756,9 @@ function getSerializableMethod(executable) {
   if (executable.type === HandlerType$1.route) {
     const path2 = getRoutePath(executable.pointer, getRouterOptions());
     const pathPointers = ((_a = getRouteExecutionChain(path2)) == null ? void 0 : _a.methods.filter((exec) => isPublicExecutable(exec)).map((exec) => exec.pointer)) || [];
-    newRemoteMethod.linkedFnIds = pathPointers.map((pointer) => getRouterItemId(pointer)).filter((id) => {
+    newRemoteMethod.middleFnIds = pathPointers.map((pointer) => getRouterItemId(pointer)).filter((id) => {
       if (mionInternalRoutes$1.includes(id)) return false;
-      const exec = getLinkedFnExecutable(id);
+      const exec = getMiddleFnExecutable(id);
       return exec && isPublicExecutable(exec);
     });
   }
@@ -1863,7 +1863,7 @@ function addRequiredRemoteMethodsToResponse(id, resp, errorData) {
     return;
   if (mionInternalRoutes.includes(id))
     return;
-  const executable = getLinkedFnExecutable(id) || getRouteExecutable(id);
+  const executable = getMiddleFnExecutable(id) || getRouteExecutable(id);
   if (!executable) {
     errorData[id] = `Remote Method ${id} not found`;
     return;
@@ -1872,7 +1872,7 @@ function addRequiredRemoteMethodsToResponse(id, resp, errorData) {
     return;
   const method = getSerializableMethod(executable);
   methods[id] = method;
-  (_a = method.linkedFnIds) == null ? void 0 : _a.forEach(__assignType$3((linkedFnId) => addRequiredRemoteMethodsToResponse(linkedFnId, resp, errorData), ["linkedFnId", "", 'P"2!"/"']));
+  (_a = method.middleFnIds) == null ? void 0 : _a.forEach(__assignType$3((middleFnId) => addRequiredRemoteMethodsToResponse(middleFnId, resp, errorData), ["middleFnId", "", 'P"2!"/"']));
   serializeMethodDeps(method, deps, purFnDeps);
 }
 addRequiredRemoteMethodsToResponse.__type = ["id", () => __ΩSerializableMethodsData, "resp", () => __ΩAnyObject, "errorData", "addRequiredRemoteMethodsToResponse", 'P&2!n"2#n$2%$/&'];
@@ -1995,8 +1995,8 @@ function buildMergedExecutionChain(routePaths, rawRequest, opts2, mappings) {
   let resolvedSerializer;
   let firstRouteIndex = -1;
   const defaultSerializerCode = SerializerModes[opts2.serializer];
-  const startLinkedFnIds = new Set(startLinkedFns.map(__assignType$1((m) => m.id, ["m", "", 'P"2!"/"'])));
-  const endLinkedFnIds = new Set(endLinkedFns.map(__assignType$1((m) => m.id, ["m", "", 'P"2!"/"'])));
+  const startMiddleFnIds = new Set(startMiddleFns.map(__assignType$1((m) => m.id, ["m", "", 'P"2!"/"'])));
+  const endMiddleFnIds = new Set(endMiddleFns.map(__assignType$1((m) => m.id, ["m", "", 'P"2!"/"'])));
   for (const routePath of routePaths) {
     const transformedPath = ((_a = opts2.pathTransform) == null ? void 0 : _a.call(opts2, rawRequest, routePath)) || routePath;
     const chain = getRouteExecutionChain(transformedPath);
@@ -2017,9 +2017,9 @@ function buildMergedExecutionChain(routePaths, rawRequest, opts2, mappings) {
     for (const method of chain.methods) {
       if (seenIds.has(method.id))
         continue;
-      if (startLinkedFnIds.has(method.id))
+      if (startMiddleFnIds.has(method.id))
         continue;
-      if (endLinkedFnIds.has(method.id))
+      if (endMiddleFnIds.has(method.id))
         continue;
       seenIds.add(method.id);
       middleMethods.push(method);
@@ -2028,7 +2028,7 @@ function buildMergedExecutionChain(routePaths, rawRequest, opts2, mappings) {
   if (mappings && mappings.length > 0) {
     insertMappingMethods(middleMethods, mappings);
   }
-  const mergedMethods = [...startLinkedFns, ...middleMethods, ...endLinkedFns];
+  const mergedMethods = [...startMiddleFns, ...middleMethods, ...endMiddleFns];
   return {
     // Use the first route's routeIndex since that's where the first route handler is
     routeIndex: firstRouteIndex,
@@ -2089,7 +2089,7 @@ function createMappingMethod(mapping) {
     return cached;
   const noopJitFns2 = getNoopJitFns();
   const method = {
-    type: HandlerType$1.rawLinkedFn,
+    type: HandlerType$1.rawMiddleFn,
     id,
     isAsync: false,
     hasReturnData: false,
@@ -2233,29 +2233,29 @@ function getExecutionChain(originalPath, transformedPath, urlQuery, rawRequest, 
   return { executionChain };
 }
 const flatRouter = /* @__PURE__ */ new Map();
-const linkedFnsById = /* @__PURE__ */ new Map();
+const middleFnsById = /* @__PURE__ */ new Map();
 const routesById = /* @__PURE__ */ new Map();
-const rawLinkedFnsById = /* @__PURE__ */ new Map();
-const linkedFnNames = /* @__PURE__ */ new Set();
+const rawMiddleFnsById = /* @__PURE__ */ new Map();
+const middleFnNames = /* @__PURE__ */ new Set();
 const routeNames = /* @__PURE__ */ new Set();
 let routerOptions = { ...DEFAULT_ROUTE_OPTIONS };
 let isRouterInitialized = false;
 let allExecutablesIds;
-const defaultStartLinkedFns = {
-  mionDeserializeRequest: serializerLinkedFns.mionDeserializeRequest
+const defaultStartMiddleFns = {
+  mionDeserializeRequest: serializerMiddleFns.mionDeserializeRequest
 };
-const defaultEndLinkedFns = {
-  mionSerializeResponse: serializerLinkedFns.mionSerializeResponse
+const defaultEndMiddleFns = {
+  mionSerializeResponse: serializerMiddleFns.mionSerializeResponse
 };
-let startLinkedFnsDef = { ...defaultStartLinkedFns };
-let endLinkedFnsDef = { ...defaultEndLinkedFns };
-let startLinkedFns = [];
-let endLinkedFns = [];
+let startMiddleFnsDef = { ...defaultStartMiddleFns };
+let endMiddleFnsDef = { ...defaultEndMiddleFns };
+let startMiddleFns = [];
+let endMiddleFns = [];
 const getRouteExecutionChain = (path2) => flatRouter.get(path2);
 const getRouteExecutable = (id) => routesById.get(id);
-const getLinkedFnExecutable = (id) => linkedFnsById.get(id);
+const getMiddleFnExecutable = (id) => middleFnsById.get(id);
 const getRouterOptions = () => routerOptions;
-const getAnyExecutable = (id) => routesById.get(id) || linkedFnsById.get(id) || rawLinkedFnsById.get(id);
+const getAnyExecutable = (id) => routesById.get(id) || middleFnsById.get(id) || rawMiddleFnsById.get(id);
 async function initMionRouter(routes2, opts2) {
   await initRouter(opts2);
   const publicApi = await registerRoutes(routes2);
@@ -2277,8 +2277,8 @@ async function initRouter(opts2) {
 }
 async function registerRoutes(routes2) {
   if (!isRouterInitialized) throw new Error("initRouter should be called first");
-  startLinkedFns = await getExecutablesFromLinkedFnsCollection(startLinkedFnsDef);
-  endLinkedFns = await getExecutablesFromLinkedFnsCollection(endLinkedFnsDef);
+  startMiddleFns = await getExecutablesFromMiddleFnsCollection(startMiddleFnsDef);
+  endMiddleFns = await getExecutablesFromMiddleFnsCollection(endMiddleFnsDef);
   await recursiveFlatRoutes(routes2);
   if (shouldFullGenerateSpec()) {
     return getPublicApi(routes2);
@@ -2287,11 +2287,11 @@ async function registerRoutes(routes2) {
 }
 function isPrivateDefinition(entry, id) {
   if (isRoute(entry)) return false;
-  if (isRawLinkedFnDef(entry)) return true;
+  if (isRawMiddleFnDef(entry)) return true;
   try {
-    const executable = getLinkedFnExecutable(id) || getRouteExecutable(id);
+    const executable = getMiddleFnExecutable(id) || getRouteExecutable(id);
     if (!executable)
-      throw new Error(`Route or LinkedFn ${id} not found. Please check you have called router.registerRoutes first.`);
+      throw new Error(`Route or MiddleFn ${id} not found. Please check you have called router.registerRoutes first.`);
     return isPrivateExecutable(executable);
   } catch {
     return false;
@@ -2299,18 +2299,18 @@ function isPrivateDefinition(entry, id) {
 }
 function isPrivateExecutable(executable) {
   var _a, _b, _c;
-  if (executable.type === HandlerType$1.rawLinkedFn) return true;
+  if (executable.type === HandlerType$1.rawMiddleFn) return true;
   if (executable.type === HandlerType$1.route) return false;
   const hasPublicParams = !!((_a = executable.paramNames) == null ? void 0 : _a.length);
   const hasHeaderParams = !!((_c = (_b = executable.headersParam) == null ? void 0 : _b.headerNames) == null ? void 0 : _c.length);
   return !hasPublicParams && !hasHeaderParams && !executable.hasReturnData;
 }
 function getTotalExecutables() {
-  return routesById.size + linkedFnsById.size + rawLinkedFnsById.size;
+  return routesById.size + middleFnsById.size + rawMiddleFnsById.size;
 }
 function getAllExecutablesIds() {
   if (allExecutablesIds) return allExecutablesIds;
-  allExecutablesIds = [...routesById.keys(), ...linkedFnsById.keys(), ...rawLinkedFnsById.keys()];
+  allExecutablesIds = [...routesById.keys(), ...middleFnsById.keys(), ...rawMiddleFnsById.keys()];
   return allExecutablesIds;
 }
 function shouldFullGenerateSpec() {
@@ -2324,15 +2324,15 @@ function getRouteExecutableFromPath(path2) {
   return executionChain.methods[executionChain.routeIndex];
 }
 async function loadAOTCaches() {
-  const loader = await Promise.resolve().then(() => require("./aotCacheLoader-HjZ02TKu.js"));
+  const loader = await Promise.resolve().then(() => require("./aotCacheLoader-BUikcBPa.js"));
   return loader.loadAOTCaches();
 }
 async function emitAOTCaches() {
   if (getENV("MION_COMPILE") !== "true") return;
-  const aotEmitter = await Promise.resolve().then(() => require("./aotEmitter-DRU1XNFj.js"));
+  const aotEmitter = await Promise.resolve().then(() => require("./aotEmitter-CI5bkii4.js"));
   return aotEmitter.emitAOTCaches();
 }
-async function recursiveFlatRoutes(routes2, currentPointer = [], preLinkedFns = [], postLinkedFns = [], nestLevel = 0) {
+async function recursiveFlatRoutes(routes2, currentPointer = [], preMiddleFns = [], postMiddleFns = [], nestLevel = 0) {
   if (nestLevel > MAX_ROUTE_NESTING)
     throw new Error("Too many nested routes, you can only nest routes ${MAX_ROUTE_NESTING} levels");
   const entries = Object.entries(routes2);
@@ -2348,13 +2348,13 @@ async function recursiveFlatRoutes(routes2, currentPointer = [], preLinkedFns = 
     if (key.includes(",")) throw new Error(`Invalid route: ${path.join(...newPointer)}. Route names cannot contain commas.`);
     if (key === WORKFLOW_KEY)
       throw new Error(`Invalid route: ${path.join(...newPointer)}. '${WORKFLOW_KEY}' is a reserved mion route name.`);
-    if (isAnyLinkedFnDef(item)) {
-      routeEntry = await getExecutableFromAnyLinkedFn(item, newPointer, nestLevel);
-      if (linkedFnNames.has(routeEntry.id))
+    if (isAnyMiddleFnDef(item)) {
+      routeEntry = await getExecutableFromAnyMiddleFn(item, newPointer, nestLevel);
+      if (middleFnNames.has(routeEntry.id))
         throw new Error(
-          `Invalid linkedFn: ${path.join(...newPointer)}. Naming collision, Naming collision, duplicated linkedFn.`
+          `Invalid middleFn: ${path.join(...newPointer)}. Naming collision, Naming collision, duplicated middleFn.`
         );
-      linkedFnNames.add(routeEntry.id);
+      middleFnNames.add(routeEntry.id);
     } else if (isRoute(item)) {
       routeEntry = await getExecutableFromRoute(item, newPointer, nestLevel);
       if (routeNames.has(routeEntry.id))
@@ -2372,8 +2372,8 @@ async function recursiveFlatRoutes(routes2, currentPointer = [], preLinkedFns = 
     minus1Props = await recursiveCreateExecutionChainAsync(
       routeEntry,
       newPointer,
-      preLinkedFns,
-      postLinkedFns,
+      preMiddleFns,
+      postMiddleFns,
       nestLevel,
       index,
       entries,
@@ -2381,21 +2381,21 @@ async function recursiveFlatRoutes(routes2, currentPointer = [], preLinkedFns = 
     );
   }
 }
-async function recursiveCreateExecutionChainAsync(routeEntry, currentPointer, preLinkedFns, postLinkedFns, nestLevel, index, routeKeyedEntries, minus1Props) {
+async function recursiveCreateExecutionChainAsync(routeEntry, currentPointer, preMiddleFns, postMiddleFns, nestLevel, index, routeKeyedEntries, minus1Props) {
   const minus1 = getEntry(index - 1, routeKeyedEntries);
   const plus1 = getEntry(index + 1, routeKeyedEntries);
   const props = getRouteEntryProperties(minus1, routeEntry, plus1);
   if (props.isBetweenRoutes && minus1Props) {
-    props.preLevelLinkedFns = minus1Props.preLevelLinkedFns;
-    props.postLevelLinkedFns = minus1Props.postLevelLinkedFns;
+    props.preLevelMiddleFns = minus1Props.preLevelMiddleFns;
+    props.postLevelMiddleFns = minus1Props.postLevelMiddleFns;
   } else {
     for (let i = 0; i < routeKeyedEntries.length; i++) {
       const [k, entry] = routeKeyedEntries[i];
-      if (!isAnyLinkedFnDef(entry)) continue;
+      if (!isAnyMiddleFnDef(entry)) continue;
       const newPointer = [...currentPointer.slice(0, -1), k];
-      const executable = await getExecutableFromAnyLinkedFn(entry, newPointer, nestLevel);
-      if (i < index) props.preLevelLinkedFns.push(executable);
-      if (i > index) props.postLevelLinkedFns.push(executable);
+      const executable = await getExecutableFromAnyMiddleFn(entry, newPointer, nestLevel);
+      if (i < index) props.preLevelMiddleFns.push(executable);
+      if (i > index) props.postLevelMiddleFns.push(executable);
     }
   }
   const isExec = isExecutable(routeEntry);
@@ -2403,15 +2403,15 @@ async function recursiveCreateExecutionChainAsync(routeEntry, currentPointer, pr
     const path2 = getRoutePath(routeEntry.pointer, routerOptions);
     const routeMethod = routeEntry;
     const levelMethods = [
-      ...preLinkedFns,
-      ...props.preLevelLinkedFns,
+      ...preMiddleFns,
+      ...props.preLevelMiddleFns,
       routeEntry,
-      ...props.postLevelLinkedFns,
-      ...postLinkedFns
+      ...props.postLevelMiddleFns,
+      ...postMiddleFns
     ];
-    const methods = [...startLinkedFns, ...levelMethods, ...endLinkedFns];
+    const methods = [...startMiddleFns, ...levelMethods, ...endMiddleFns];
     const executionChain = {
-      routeIndex: startLinkedFns.length + preLinkedFns.length + props.preLevelLinkedFns.length,
+      routeIndex: startMiddleFns.length + preMiddleFns.length + props.preLevelMiddleFns.length,
       methods,
       serializer: getSerializerCodeFromMode(routeMethod.options.serializer)
     };
@@ -2420,71 +2420,71 @@ async function recursiveCreateExecutionChainAsync(routeEntry, currentPointer, pr
     await recursiveFlatRoutes(
       routeEntry.routes,
       routeEntry.pathPointer,
-      [...preLinkedFns, ...props.preLevelLinkedFns],
-      [...props.postLevelLinkedFns, ...postLinkedFns],
+      [...preMiddleFns, ...props.preLevelMiddleFns],
+      [...props.postLevelMiddleFns, ...postMiddleFns],
       nestLevel + 1
     );
   }
   return props;
 }
-async function getExecutableFromAnyLinkedFn(linkedFn, linkedFnPointer, nestLevel) {
-  if (isRawLinkedFnDef(linkedFn)) return getExecutableFromRawLinkedFn(linkedFn, linkedFnPointer, nestLevel);
-  return getExecutableFromLinkedFn(linkedFn, linkedFnPointer, nestLevel);
+async function getExecutableFromAnyMiddleFn(middleFn, middleFnPointer, nestLevel) {
+  if (isRawMiddleFnDef(middleFn)) return getExecutableFromRawMiddleFn(middleFn, middleFnPointer, nestLevel);
+  return getExecutableFromMiddleFn(middleFn, middleFnPointer, nestLevel);
 }
-async function getExecutableFromLinkedFn(linkedFn, linkedFnPointer, nestLevel) {
+async function getExecutableFromMiddleFn(middleFn, middleFnPointer, nestLevel) {
   var _a, _b, _c, _d;
-  const isHeader = isHeadersLinkedFnDef(linkedFn);
-  const linkedFnId = getRouterItemId(linkedFnPointer);
-  const existing = linkedFnsById.get(linkedFnId);
+  const isHeader = isHeadersMiddleFnDef(middleFn);
+  const middleFnId = getRouterItemId(middleFnPointer);
+  const existing = middleFnsById.get(middleFnId);
   if (existing) return existing;
-  const compiledMethod = getPersistedMethod(linkedFnId, linkedFn.handler);
+  const compiledMethod = getPersistedMethod(middleFnId, middleFn.handler);
   let executable;
   if (compiledMethod) {
     executable = compiledMethod;
   } else {
-    const reflectionData = await getHandlerReflection(linkedFn.handler, linkedFnId, routerOptions, isHeader);
+    const reflectionData = await getHandlerReflection(middleFn.handler, middleFnId, routerOptions, isHeader);
     executable = {
-      id: linkedFnId,
-      type: isHeader ? HandlerType$1.headersLinkedFn : HandlerType$1.linkedFn,
+      id: middleFnId,
+      type: isHeader ? HandlerType$1.headersMiddleFn : HandlerType$1.middleFn,
       nestLevel,
-      handler: linkedFn.handler,
-      pointer: linkedFnPointer,
+      handler: middleFn.handler,
+      pointer: middleFnPointer,
       ...reflectionData,
       options: {
-        runOnError: !!((_a = linkedFn.options) == null ? void 0 : _a.runOnError),
-        validateParams: ((_b = linkedFn.options) == null ? void 0 : _b.validateParams) ?? true,
-        validateReturn: ((_c = linkedFn.options) == null ? void 0 : _c.validateReturn) ?? false,
-        description: (_d = linkedFn.options) == null ? void 0 : _d.description
+        runOnError: !!((_a = middleFn.options) == null ? void 0 : _a.runOnError),
+        validateParams: ((_b = middleFn.options) == null ? void 0 : _b.validateParams) ?? true,
+        validateReturn: ((_c = middleFn.options) == null ? void 0 : _c.validateReturn) ?? false,
+        description: (_d = middleFn.options) == null ? void 0 : _d.description
       }
     };
-    addToPersistedMethods(linkedFnId, executable);
+    addToPersistedMethods(middleFnId, executable);
   }
-  linkedFnsById.set(linkedFnId, executable);
-  routesCache.setMethodJitFns(linkedFnId, executable);
+  middleFnsById.set(middleFnId, executable);
+  routesCache.setMethodJitFns(middleFnId, executable);
   return executable;
 }
-async function getExecutableFromRawLinkedFn(linkedFn, linkedFnPointer, nestLevel) {
+async function getExecutableFromRawMiddleFn(middleFn, middleFnPointer, nestLevel) {
   var _a, _b;
-  const linkedFnId = getRouterItemId(linkedFnPointer);
-  const existing = rawLinkedFnsById.get(linkedFnId);
+  const middleFnId = getRouterItemId(middleFnPointer);
+  const existing = rawMiddleFnsById.get(middleFnId);
   if (existing) return existing;
-  const reflectionData = await getRawMethodReflection(linkedFn.handler, linkedFnId, routerOptions);
+  const reflectionData = await getRawMethodReflection(middleFn.handler, middleFnId, routerOptions);
   const executable = {
-    id: linkedFnId,
-    type: HandlerType$1.rawLinkedFn,
+    id: middleFnId,
+    type: HandlerType$1.rawMiddleFn,
     nestLevel,
-    handler: linkedFn.handler,
-    pointer: linkedFnPointer,
+    handler: middleFn.handler,
+    pointer: middleFnPointer,
     ...reflectionData,
     options: {
-      runOnError: !!((_a = linkedFn.options) == null ? void 0 : _a.runOnError),
+      runOnError: !!((_a = middleFn.options) == null ? void 0 : _a.runOnError),
       validateParams: false,
       validateReturn: false,
-      description: (_b = linkedFn.options) == null ? void 0 : _b.description
+      description: (_b = middleFn.options) == null ? void 0 : _b.description
     }
   };
-  rawLinkedFnsById.set(linkedFnId, executable);
-  routesCache.setMethodJitFns(linkedFnId, executable);
+  rawMiddleFnsById.set(middleFnId, executable);
+  routesCache.setMethodJitFns(middleFnId, executable);
   return executable;
 }
 async function getExecutableFromRoute(route2, routePointer, nestLevel) {
@@ -2532,19 +2532,19 @@ function getRouteEntryProperties(minus1, zero, plus1) {
     isBetweenRoutes: minus1IsRoute && zeroIsRoute && plus1IsRoute,
     isExecutable: isExec,
     isRoute: zeroIsRoute,
-    preLevelLinkedFns: [],
-    postLevelLinkedFns: []
+    preLevelMiddleFns: [],
+    postLevelMiddleFns: []
   };
 }
-async function getExecutablesFromLinkedFnsCollection(linkedFnsDef) {
+async function getExecutablesFromMiddleFnsCollection(middleFnsDef) {
   const results = [];
-  for (const [key, linkedFn] of Object.entries(linkedFnsDef)) {
-    if (isRawLinkedFnDef(linkedFn)) {
-      results.push(await getExecutableFromRawLinkedFn(linkedFn, [key], 0));
-    } else if (isHeadersLinkedFnDef(linkedFn) || isLinkedFnDef(linkedFn)) {
-      results.push(await getExecutableFromLinkedFn(linkedFn, [key], 0));
+  for (const [key, middleFn] of Object.entries(middleFnsDef)) {
+    if (isRawMiddleFnDef(middleFn)) {
+      results.push(await getExecutableFromRawMiddleFn(middleFn, [key], 0));
+    } else if (isHeadersMiddleFnDef(middleFn) || isMiddleFnDef(middleFn)) {
+      results.push(await getExecutableFromMiddleFn(middleFn, [key], 0));
     } else {
-      throw new Error(`Invalid linkedFn: ${key}. Invalid linkedFn definition`);
+      throw new Error(`Invalid middleFn: ${key}. Invalid middleFn definition`);
     }
   }
   return results;
@@ -2620,11 +2620,11 @@ async function runExecutionChain(context, rawRequest, rawResponse, opts2) {
   }
   return context.response;
 }
-async function runRawLinkedFn(context, executable, req, resp, opts2, rawRequest, rawResponse) {
+async function runRawMiddleFn(context, executable, req, resp, opts2, rawRequest, rawResponse) {
   const result = await executable.handler(context, rawRequest, rawResponse, opts2);
   return result;
 }
-async function runHeadersLinkedFn(context, executable, request) {
+async function runHeadersMiddleFn(context, executable, request) {
   const headerNames = executable.headersParam.headerNames;
   const params = deserializeBodyParamsOrThrow(request, executable);
   const headersMap = {};
@@ -2638,19 +2638,19 @@ async function runHeadersLinkedFn(context, executable, request) {
   const result = await executable.handler(context, headersSubset, ...params);
   return result;
 }
-async function runRouteOrLinkedFn(context, executable, request) {
+async function runRouteOrMiddleFn(context, executable, request) {
   const params = deserializeBodyParamsOrThrow(request, executable);
   if (executable.options.validateParams) validateParametersOrThrow(params, executable);
   const result = await executable.handler(context, ...params);
   return result;
 }
 function getMethodCaller(executable) {
-  if (executable.type === HandlerType$1.rawLinkedFn) {
-    executable.methodCaller = runRawLinkedFn;
-  } else if (executable.type === HandlerType$1.headersLinkedFn) {
-    executable.methodCaller = runHeadersLinkedFn;
+  if (executable.type === HandlerType$1.rawMiddleFn) {
+    executable.methodCaller = runRawMiddleFn;
+  } else if (executable.type === HandlerType$1.headersMiddleFn) {
+    executable.methodCaller = runHeadersMiddleFn;
   } else {
-    executable.methodCaller = runRouteOrLinkedFn;
+    executable.methodCaller = runRouteOrMiddleFn;
   }
   return executable.methodCaller;
 }
@@ -2731,6 +2731,7 @@ exports.RpcError = RpcError;
 exports.SerializerModes = SerializerModes;
 exports.__ΩFromBinaryFn = __ΩFromBinaryFn;
 exports.__ΩIsTypeFn = __ΩIsTypeFn;
+exports.__ΩJitCompiledFn = __ΩJitCompiledFn;
 exports.__ΩJitFunctionsCache = __ΩJitFunctionsCache;
 exports.__ΩJsonStringifyFn = __ΩJsonStringifyFn;
 exports.__ΩMethodsCache = __ΩMethodsCache;
@@ -2755,4 +2756,4 @@ exports.loadCompiledMethods = loadCompiledMethods;
 exports.registerErrorDeserializers = registerErrorDeserializers;
 exports.registerPureFnFactory = registerPureFnFactory;
 exports.routes = routes;
-//# sourceMappingURL=mionRoutes-CtbFi3fe.js.map
+//# sourceMappingURL=mionRoutes-CaK3IXAt.js.map
