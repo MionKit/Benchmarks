@@ -75,6 +75,11 @@ const MION_PACKAGES = [
 // Files/folders to remove after copying (TypeScript sources that Bun might pick up)
 const FILES_TO_REMOVE = ["index.ts", "src"];
 
+// Files to preserve even when removing src/ (needed by vite plugin's resolveId logic)
+const FILES_TO_PRESERVE = [
+  path.join("src", "aot"), // vite plugin resolves @mionjs/core/aot-caches to src/aot/aotCaches.ts
+];
+
 // Paths
 const PROJECT_ROOT = path.join(__dirname, "..");
 const MION_ROOT = path.join(PROJECT_ROOT, "..", "mion");
@@ -219,12 +224,27 @@ function main() {
 
     // Remove TypeScript source files to prevent Bun from using them
     // Safe to remove since we just copied them (not original files)
+    // But first, preserve files needed by the vite plugin's resolveId logic
     let removedCount = 0;
+    const tmpPreserveDir = path.join(destPath, "__preserve_tmp__");
+    for (const preservePath of FILES_TO_PRESERVE) {
+      const fullPath = path.join(destPath, preservePath);
+      if (fs.existsSync(fullPath)) {
+        const tmpPath = path.join(tmpPreserveDir, preservePath);
+        fs.mkdirSync(path.dirname(tmpPath), { recursive: true });
+        fs.renameSync(fullPath, tmpPath);
+      }
+    }
     for (const fileToRemove of FILES_TO_REMOVE) {
       const filePath = path.join(destPath, fileToRemove);
       if (removeIfExists(filePath)) {
         removedCount++;
       }
+    }
+    // Restore preserved files
+    if (fs.existsSync(tmpPreserveDir)) {
+      copyDirRecursive(tmpPreserveDir, destPath);
+      fs.rmSync(tmpPreserveDir, { recursive: true, force: true });
     }
 
     if (removedCount > 0) {

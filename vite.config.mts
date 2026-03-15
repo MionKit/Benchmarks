@@ -3,14 +3,16 @@ import { resolve } from "path";
 import dts from "vite-plugin-dts";
 import { mionPlugin } from "@mionjs/devtools/vite-plugin";
 
-// When MION_COMPILE=true, this config is loaded by vite-node as a child process
-// for AOT cache generation. Skip aotCaches to prevent infinite recursion.
-const isAotChildProcess = process.env.MION_COMPILE === "true";
-
 // Only mion apps are built with vite (other frameworks use their own build)
 const entry: Record<string, string> = {
-  "apps/src/mionAppNode": resolve(import.meta.dirname!, "apps/src/mionAppNode.ts"),
-  "apps/src/mionAppBun": resolve(import.meta.dirname!, "apps/src/mionAppBun.ts"),
+  "apps/src/mionAppNode": resolve(
+    import.meta.dirname!,
+    "apps/src/mionAppNode.ts",
+  ),
+  "apps/src/mionAppBun": resolve(
+    import.meta.dirname!,
+    "apps/src/mionAppBun.ts",
+  ),
 };
 
 export default defineConfig({
@@ -33,20 +35,15 @@ export default defineConfig({
           sourceMap: true,
         },
       },
-      ...(isAotChildProcess
-        ? {}
-        : {
-            aotCaches: {
-              startServerScript: resolve(
-                import.meta.dirname!,
-                "apps/src/mionAotStart.ts",
-              ),
-              serverViteConfig: resolve(
-                import.meta.dirname!,
-                "vite.config.mts",
-              ),
-            },
-          }),
+      aotCaches: true,
+      server: {
+        startServerScript: resolve(
+          import.meta.dirname!,
+          "apps/src/mionAotStart.ts",
+        ),
+        serverViteConfig: resolve(import.meta.dirname!, "vite.config.mts"),
+        mode: "onlyAOT",
+      },
     }) as any,
     dts({
       outDir: "_compiled-apps",

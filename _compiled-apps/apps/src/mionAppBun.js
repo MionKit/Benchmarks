@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("../../mionRoutes-CaK3IXAt.js");
-require("path");
+const mionRoutes = require("../../mionRoutes-wDZ_9Gb6.js");
 const DEFAULT_BUN_HTTP_OPTIONS = {
   port: 80,
   options: {},
@@ -25,7 +24,7 @@ function setBunHttpOpts(options) {
 }
 async function startBunServer(options) {
   const isTest = mionRoutes.getENV("NODE_ENV") === "test";
-  const isCompiling = mionRoutes.getENV("MION_COMPILE") === "true";
+  const isCompiling = mionRoutes.isMionCompileMode();
   if (options) setBunHttpOpts(options);
   if (isCompiling) {
     console.log("Compiling routes metadata and skipping mion server initialization...", {
@@ -49,8 +48,13 @@ async function startBunServer(options) {
       const urlQuery = queryStart === -1 ? void 0 : reqUrl.slice(queryStart + 1);
       const contentType = req.headers.get("content-type") || "";
       const isBinary = contentType.startsWith("application/octet-stream");
-      const rawBody = req.body ? isBinary ? await req.arrayBuffer() : await req.json() : {};
-      const reqBodyType = isBinary ? mionRoutes.SerializerModes.binary : mionRoutes.SerializerModes.json;
+      let rawBody = req.body ? isBinary ? await req.arrayBuffer() : await req.json() : void 0;
+      let reqBodyType = isBinary ? mionRoutes.SerializerModes.binary : mionRoutes.SerializerModes.json;
+      const queryBody = mionRoutes.decodeQueryBody(urlQuery, rawBody);
+      if (queryBody) {
+        rawBody = queryBody.rawBody;
+        reqBodyType = queryBody.bodyType;
+      }
       const responseHeaders = new Headers(defaultHeaders);
       try {
         const platformResp = await mionRoutes.dispatchRoute(

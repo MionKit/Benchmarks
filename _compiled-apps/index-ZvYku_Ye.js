@@ -3,10 +3,13 @@ var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const createRunTypeFunctions = require("./createRunTypeFunctions-DnGBXCfU.js");
+const createRunTypeFunctions = require("./createRunTypeFunctions-C5JvjKA_.js");
+const core = require("@deepkit/core");
+const mionRoutes = require("./mionRoutes-wDZ_9Gb6.js");
 const type = require("@deepkit/type");
-const mionRoutes = require("./mionRoutes-CaK3IXAt.js");
-const mockType = require("./mockType-wJdL7Xqb.js");
+const mockType = require("./mockType-Dbb-8-Uc.js");
+const __ΩBrand = ["BaseType", "Name", "brand", "Brand", 'b!b"Pe"!Pe#"4#MKw$y'];
+const __ΩTypeFormat = ["BaseType", "Name", "P", "BrandName", () => core.__ΩTypeAnnotation, () => __ΩBrand, () => core.__ΩTypeAnnotation, "brand", "TypeFormat", `lPPe$!e$"e$#o%#KRPe$!e$$o&#e$"Pe%#Pe&$4(MKo'#KRb!b"b#!c$PPe#$GP!Gqk#2Qw)y`];
 function getRunTypeAnnotations(rt) {
   const annotations = type.typeAnnotation.getAnnotations(rt.src);
   return annotations.map((a) => {
@@ -402,9 +405,10 @@ exports.mockType = mockType.mockType;
 exports.random = mockType.random;
 exports.randomItem = mockType.randomItem;
 exports.BaseRunTypeFormat = BaseRunTypeFormat;
+exports.__ΩTypeFormat = __ΩTypeFormat;
 exports.getMockCompiler = getMockCompiler;
 exports.getParsedAnnotationOptions = getParsedAnnotationOptions;
 exports.getRunTypeAnnotations = getRunTypeAnnotations;
 exports.getTypeToObject = getTypeToObject;
 exports.setMockCompiler = setMockCompiler;
-//# sourceMappingURL=index-S4fLLS6P.js.map
+//# sourceMappingURL=index-ZvYku_Ye.js.map

@@ -2,7 +2,7 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-const mionRoutes = require("./mionRoutes-CaK3IXAt.js");
+const mionRoutes = require("./mionRoutes-wDZ_9Gb6.js");
 const type = require("@deepkit/type");
 const hashes = /* @__PURE__ */ new Map();
 const literalHashes = /* @__PURE__ */ new Map();
@@ -64,7 +64,7 @@ const __ΩSrcMember = ["Type", "type", "SrcMember", 'P"w!P"w!4"MKw#y'];
 const __ΩJitCompilerOpts = ["fnID", () => __ΩStrNumber, "typeID", "jitFnHash", () => __ΩRunTypeOptions, "opts", "JitCompilerOpts", `P&4!9n"4#9&4$9n%4&9Mw'y`];
 const __ΩRunTypeChildAccessor = [() => __ΩRunType, "JitFnCompiler", "comp", "getChildIndex", () => __ΩStrNumber, "getChildVarName", () => __ΩStrNumber, "getChildLiteral", "useArrayAccessor", "isOptional", "skipSettingAccessor", "skipCommas", "RunTypeChildAccessor", `Pn!P"w"2#'1$P"w"2#n%1&P"w"2#n'1(P)1)P)1*P)1+8)4,8Mw-y`];
 const __ΩCustomVλl = ["vλl", "isStandalone", "useArrayAccessor", "CustomVλl", 'P&4!)4"8)4#8Mw$y'];
-const __ΩRunTypeOptions = ["start", "end", "paramsSlice", () => __ΩMockOptions, "mock", "noLiterals", "noIsArrayCheck", "isJitFnCode", "isPureFnCode", "RunTypeOptions", `PP'4!8'4"8M4#8n$4%8)4&8)4'8)4(8)4)8Mw*y`];
+const __ΩRunTypeOptions = ["start", "end", "paramsSlice", () => __ΩMockOptions, "mock", "noLiterals", "noIsArrayCheck", "RunTypeOptions", `PP'4!8'4"8M4#8n$4%8)4&8)4'8Mw(y`];
 const __ΩPartialRunTypeOptions = [() => __ΩDeepPartial, () => __ΩRunTypeOptions, "PartialRunTypeOptions", 'n"o!"w#y'];
 const __ΩJitFn = [() => JitFunctions, () => JitFunctions, "JitFn", 'i!i"gfw#y'];
 const __ΩJitFnID = [() => __ΩJitFn, "id", "JitFnID", 'n!."fw#y'];
@@ -222,7 +222,7 @@ const JitFunctions$1 = {
   mock: {
     id: mionRoutes.JIT_FUNCTION_IDS.mock,
     name: "mockType",
-    import: () => Promise.resolve().then(() => require("./mockType-wJdL7Xqb.js")).then((n) => n.mockType$1).then(__assignType$h((m) => m.mockType, ["m", "", 'P"2!"/"'])),
+    import: () => Promise.resolve().then(() => require("./mockType-Dbb-8-Uc.js")).then((n) => n.mockType$1).then(__assignType$h((m) => m.mockType, ["m", "", 'P"2!"/"'])),
     jitArgs,
     jitDefaultArgs,
     returnName: jitArgs.vλl
@@ -2124,6 +2124,14 @@ function emitFromBinaryAs(rt, comp, kind) {
   rt.src.kind = originalKind;
   return result;
 }
+function getParentSiblingNames(srcMS) {
+  let parent = srcMS.parent;
+  if ((parent == null ? void 0 : parent.kind) === type.ReflectionKind.propertySignature) parent = parent.parent;
+  if ((parent == null ? void 0 : parent.kind) !== type.ReflectionKind.objectLiteral) return void 0;
+  const types = parent.types;
+  if (!types) return void 0;
+  return new Set(types.map((t) => t.name).filter((n) => n !== void 0));
+}
 function createToCodeCompiler() {
   const fnID2 = JitFunctions$1.toJSCode.id;
   const visitJsonStringify = createStringifyCompiler(fnID2);
@@ -2146,12 +2154,14 @@ function createToCodeCompiler() {
         const isSafe = isSafePropName(accessor);
         const safeName = isSafe ? name : JSON.stringify(name);
         const sep = rt.skipCommas ? "" : '+","';
-        if (isCompilingJitFn(rt, comp)) {
+        if (isCompilingFnProp(rt, comp)) {
           return { code: `'undefined'`, type: "E" };
-        } else if (isCompilingClosureJitFn(rt, comp)) {
-          const fnName = comp.opts.isPureFnCode ? `${comp.vλl}.fnName` : `${comp.vλl}.jitFnHash`;
+        } else if (isCompilingClosureFn(rt, comp)) {
+          const isPureFn = rt.getChildVarName(comp) === "createPureFn";
+          const fnName = isPureFn ? `${comp.vλl}.fnName` : `${comp.vλl}.jitFnHash`;
           const fnCode = `${comp.vλl}.code`;
-          const closureCode = `'function get_'+${fnName}+'(utl){'+${fnCode}+'}'`;
+          const paramList = isPureFn ? `${comp.vλl}.paramNames.join(',')` : `'utl'`;
+          const closureCode = `'function get_'+${fnName}+'('+${paramList}+'){'+${fnCode}+'}'`;
           return { code: `'${safeName}:'+${closureCode}${sep}`, type: "E" };
         } else if (rt.src.subKind === ReflectionSubKind$1.params) {
           const paramsCode = visitJsonStringify(rt, comp);
@@ -2204,15 +2214,20 @@ function createToCodeCompiler() {
         return visitJsonStringify(runType2, comp);
     }
   }
-  function isCompilingClosureJitFn(runType2, comp) {
-    if (!comp.opts.isJitFnCode && !comp.opts.isPureFnCode) return false;
+  function isCompilingClosureFn(runType2, comp) {
     const childName = runType2.getChildVarName(comp);
-    return childName === "createJitFn" || childName === "createPureFn";
+    if (childName !== "createJitFn" && childName !== "createPureFn") return false;
+    const siblings = getParentSiblingNames(runType2.src);
+    if (!siblings) return false;
+    if (!siblings.has("code")) return false;
+    if (childName === "createJitFn") return siblings.has("jitFnHash");
+    return siblings.has("bodyHash");
   }
-  function isCompilingJitFn(runType2, comp) {
-    if (!comp.opts.isJitFnCode && !comp.opts.isPureFnCode) return false;
-    const isFn = runType2.getChildVarName(comp) === "fn";
-    return isFn;
+  function isCompilingFnProp(runType2, comp) {
+    if (runType2.getChildVarName(comp) !== "fn") return false;
+    const siblings = getParentSiblingNames(runType2.src);
+    if (!siblings) return false;
+    return siblings.has("code") && (siblings.has("createJitFn") || siblings.has("createPureFn"));
   }
   return compileToCode;
 }
@@ -6139,4 +6154,4 @@ exports.registerJitFunctionCompiler = registerJitFunctionCompiler;
 exports.runType = runType;
 exports.stringCharSet = stringCharSet;
 exports.validPropertyNameRegExp = validPropertyNameRegExp;
-//# sourceMappingURL=createRunTypeFunctions-DnGBXCfU.js.map
+//# sourceMappingURL=createRunTypeFunctions-C5JvjKA_.js.map

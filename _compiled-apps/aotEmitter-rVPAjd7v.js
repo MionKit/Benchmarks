@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("./mionRoutes-CaK3IXAt.js");
-const createRunTypeFunctions = require("./createRunTypeFunctions-DnGBXCfU.js");
+const mionRoutes = require("./mionRoutes-wDZ_9Gb6.js");
+const createRunTypeFunctions = require("./createRunTypeFunctions-C5JvjKA_.js");
+require("@deepkit/core");
 require("@deepkit/type");
 function __assignType(fn, args) {
   fn.__type = args;
@@ -11,8 +12,16 @@ const __ΩAOTCacheMessage = ["mion-aot-caches", "type", "jitFnsCode", "pureFnsCo
 const __ΩSerializedCaches = ["jitFnsCode", "pureFnsCode", "routerCacheCode", "SerializedCaches", 'P&4!&4"&4#Mw$y'];
 const EXCLUDED_JIT_FN_IDS = [mionRoutes.JIT_FUNCTION_IDS.toJSCode];
 const EXCLUDED_PURE_FN_NAMES = ["sanitizeCompiledFn"];
+async function getSerializedCaches() {
+  const { jitFnsCache, pureFnsCache } = mionRoutes.getJitFnCaches();
+  const routerCache = mionRoutes.getPersistedMethods();
+  return serializeCachesToCode(jitFnsCache, pureFnsCache, routerCache);
+}
+getSerializedCaches.__type = [() => __ΩSerializedCaches, "getSerializedCaches", 'Pn!`/"'];
 async function emitAOTCaches() {
-  if (mionRoutes.getENV("MION_COMPILE") !== "true")
+  if (!mionRoutes.isMionAOTEmitMode())
+    return;
+  if (mionRoutes.getENV("MION_COMPILE") === "viteSSR")
     return;
   if (typeof process.send !== "function")
     return;
@@ -27,8 +36,8 @@ async function emitAOTCaches() {
 }
 emitAOTCaches.__type = ["emitAOTCaches", "P$`/!"];
 async function serializeCachesToCode(jitFnsCache, pureFnsCache, routerCache) {
-  const jitToJSCode = (createRunTypeFunctions.createToJavascriptFn.Ω = [[() => mionRoutes.__ΩSrcCodeJITCompiledFnsCache, "n!"]], createRunTypeFunctions.createToJavascriptFn({ isJitFnCode: true }));
-  const pureToJSCode = (createRunTypeFunctions.createToJavascriptFn.Ω = [[() => mionRoutes.__ΩSrcCodePureFunctionsCache, "n!"]], createRunTypeFunctions.createToJavascriptFn({ isPureFnCode: true }));
+  const jitToJSCode = (createRunTypeFunctions.createToJavascriptFn.Ω = [[() => mionRoutes.__ΩSrcCodeJITCompiledFnsCache, "n!"]], createRunTypeFunctions.createToJavascriptFn());
+  const pureToJSCode = (createRunTypeFunctions.createToJavascriptFn.Ω = [[() => mionRoutes.__ΩSrcCodePureFunctionsCache, "n!"]], createRunTypeFunctions.createToJavascriptFn());
   const routerToJSCode = (createRunTypeFunctions.createToJavascriptFn.Ω = [[() => mionRoutes.__ΩMethodsCache, "n!"]], createRunTypeFunctions.createToJavascriptFn());
   const finalJitFns = filterExcludedJitFns(jitFnsCache, EXCLUDED_JIT_FN_IDS);
   const finalPureFns = filterExcludedPureFns(pureFnsCache, EXCLUDED_PURE_FN_NAMES);
@@ -57,5 +66,6 @@ filterExcludedPureFns.__type = [() => mionRoutes.__ΩPureFunctionsCache, "pureFn
 exports.__ΩAOTCacheMessage = __ΩAOTCacheMessage;
 exports.__ΩSerializedCaches = __ΩSerializedCaches;
 exports.emitAOTCaches = emitAOTCaches;
+exports.getSerializedCaches = getSerializedCaches;
 exports.serializeCachesToCode = serializeCachesToCode;
-//# sourceMappingURL=aotEmitter-CI5bkii4.js.map
+//# sourceMappingURL=aotEmitter-rVPAjd7v.js.map

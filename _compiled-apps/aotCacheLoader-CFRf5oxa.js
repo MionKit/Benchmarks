@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("./mionRoutes-CaK3IXAt.js");
+const mionRoutes = require("./mionRoutes-wDZ_9Gb6.js");
 const pureFnsCache = { "mion": { "asJSONString": { namespace: "mion", paramNames: [], code: `if (typeof Bun !== "undefined") return JSON.stringify;
   const STR_ESCAPE = /[\\u0000-\\u001f\\u0022\\u005c\\ud800-\\udfff]/;
   const MAX_SCAPE_TEST_LENGTH = 1e3;
@@ -3991,13 +3991,21 @@ if (Des.view.getUint8(tbimI0, 1) & (1 << (0))) {ret[0] = fBi_H5fd3n.fn(undefined
   };
 }, fn: void 0 } };
 const routerCache = { "@thrownErrors": { paramNames: [], type: 1, id: "@thrownErrors", isAsync: false, hasReturnData: true, paramsJitHash: "", returnJitHash: "cm6MsK", pointer: ["@thrownErrors"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "json" } }, "mion@notFound": { paramNames: [], type: 1, id: "mion@notFound", isAsync: false, hasReturnData: true, paramsJitHash: "", returnJitHash: "a8UQwC", pointer: ["mion@notFound"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "json" } }, "mion@platformError": { paramNames: [], type: 1, id: "mion@platformError", isAsync: false, hasReturnData: true, paramsJitHash: "", returnJitHash: "zxRrbt", pointer: ["mion@platformError"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "json" } }, "mion@methodsMetadataById": { paramNames: ["methodsIds", "getAllRemoteMethods"], type: 1, id: "mion@methodsMetadataById", isAsync: false, hasReturnData: true, paramsJitHash: "JtnVhp", returnJitHash: "eeS8mQ", pointer: ["mion@methodsMetadataById"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "stringifyJson" } }, "mion@methodsMetadataByPath": { paramNames: ["path", "getAllRemoteMethods"], type: 1, id: "mion@methodsMetadataByPath", isAsync: false, hasReturnData: true, paramsJitHash: "hZzD9z", returnJitHash: "eeS8mQ", pointer: ["mion@methodsMetadataByPath"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "stringifyJson" } }, "hello": { paramNames: [], type: 1, id: "hello", isAsync: false, hasReturnData: true, paramsJitHash: "", returnJitHash: "nDtnjh", pointer: ["hello"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "json" } }, "updateUser": { paramNames: ["user"], type: 1, id: "updateUser", isAsync: false, hasReturnData: true, paramsJitHash: "h19ZNf", returnJitHash: "KgA2s8", pointer: ["updateUser"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "json" } }, "updateSimpleUser": { paramNames: ["user"], type: 1, id: "updateSimpleUser", isAsync: false, hasReturnData: true, paramsJitHash: "bJLZ3X", returnJitHash: "wKsME6", pointer: ["updateSimpleUser"], nestLevel: 0, options: { runOnError: false, validateParams: true, validateReturn: false, serializer: "json" } } };
-mionRoutes.addAOTCaches(jitFnsCache, pureFnsCache);
-mionRoutes.addRoutesToCache(routerCache);
 function loadAOTCaches() {
   mionRoutes.addAOTCaches(jitFnsCache, pureFnsCache);
   mionRoutes.addRoutesToCache(routerCache);
-  mionRoutes.loadCompiledMethods(routerCache);
 }
-loadAOTCaches.__type = ["loadAOTCaches", "P$/!"];
-exports.loadAOTCaches = loadAOTCaches;
-//# sourceMappingURL=aotCacheLoader-BUikcBPa.js.map
+function getRawAOTCaches() {
+  return {
+    jitFnsCache,
+    pureFnsCache,
+    routerCache
+  };
+}
+function loadRouterAOTCaches() {
+  loadAOTCaches();
+  mionRoutes.loadCompiledMethods(getRawAOTCaches().routerCache);
+}
+loadRouterAOTCaches.__type = ["loadRouterAOTCaches", "P$/!"];
+exports.loadRouterAOTCaches = loadRouterAOTCaches;
+//# sourceMappingURL=aotCacheLoader-CFRf5oxa.js.map
