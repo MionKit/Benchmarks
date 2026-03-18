@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("./mionRoutes-wDZ_9Gb6.js");
-const createRunTypeFunctions = require("./createRunTypeFunctions-C5JvjKA_.js");
+const mionRoutes = require("./mionRoutes-D2bBEZx4.js");
+const createRunTypeFunctions = require("./createRunTypeFunctions-CA6dDdr7.js");
 require("@deepkit/core");
 require("@deepkit/type");
+const __ΩRecord = ["K", "T", "Record", `l'e#"Rb!b"Pde"!N#!w#y`];
 function __assignType(fn, args) {
   fn.__type = args;
   return fn;
 }
 const __ΩAOTCacheMessage = ["mion-aot-caches", "type", "jitFnsCode", "pureFnsCode", "routerCacheCode", "AOTCacheMessage", 'P.!4"&4#&4$&4%Mw&y'];
+const __ΩPlatformReadyMessage = ["mion-platform-ready", "type", () => __ΩRecord, "routerConfig", () => __ΩRecord, "platformConfig", "PlatformReadyMessage", `P.!4"&#o##4$&#o%#4&Mw'y`];
 const __ΩSerializedCaches = ["jitFnsCode", "pureFnsCode", "routerCacheCode", "SerializedCaches", 'P&4!&4"&4#Mw$y'];
 const EXCLUDED_JIT_FN_IDS = [mionRoutes.JIT_FUNCTION_IDS.toJSCode];
 const EXCLUDED_PURE_FN_NAMES = ["sanitizeCompiledFn"];
@@ -21,7 +23,7 @@ getSerializedCaches.__type = [() => __ΩSerializedCaches, "getSerializedCaches",
 async function emitAOTCaches() {
   if (!mionRoutes.isMionAOTEmitMode())
     return;
-  if (mionRoutes.getENV("MION_COMPILE") === "viteSSR")
+  if (mionRoutes.getENV("MION_COMPILE") === "middleware")
     return;
   if (typeof process.send !== "function")
     return;
@@ -64,8 +66,9 @@ function filterExcludedPureFns(pureFnsCache, excludedFnNames) {
 }
 filterExcludedPureFns.__type = [() => mionRoutes.__ΩPureFunctionsCache, "pureFnsCache", "excludedFnNames", () => mionRoutes.__ΩPureFunctionsCache, "filterExcludedPureFns", 'Pn!2"&F2#n$/%'];
 exports.__ΩAOTCacheMessage = __ΩAOTCacheMessage;
+exports.__ΩPlatformReadyMessage = __ΩPlatformReadyMessage;
 exports.__ΩSerializedCaches = __ΩSerializedCaches;
 exports.emitAOTCaches = emitAOTCaches;
 exports.getSerializedCaches = getSerializedCaches;
 exports.serializeCachesToCode = serializeCachesToCode;
-//# sourceMappingURL=aotEmitter-rVPAjd7v.js.map
+//# sourceMappingURL=aotEmitter-BwmSX1D0.js.map

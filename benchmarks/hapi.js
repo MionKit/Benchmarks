@@ -35,16 +35,25 @@ async function start() {
       state: { parse: false },
     },
     handler: function (request, h) {
-      const user = UserSchema.parse(request.payload); // Validates + deserializes dates
+      try {
+        const user = UserSchema.parse(request.payload); // Validates + deserializes dates
 
-      // Update timestamps
-      user.updatedAt = new Date();
-      user.lastLoginAt = new Date();
+        // Update timestamps
+        user.updatedAt = new Date();
+        user.lastLoginAt = new Date();
 
-      // Update profile modification
-      user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+        // Update profile modification
+        user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
-      return user;
+        return user;
+      } catch (err) {
+        return h
+          .response({
+            error:
+              err.name === "ZodError" ? "Validation failed" : "Invalid input",
+          })
+          .code(400);
+      }
     },
   });
 
@@ -59,9 +68,18 @@ async function start() {
       state: { parse: false },
     },
     handler: function (request, h) {
-      const user = SimpleUserSchema.parse(request.payload); // Validates + deserializes dates
-      user.lastUpdate = new Date();
-      return user;
+      try {
+        const user = SimpleUserSchema.parse(request.payload); // Validates + deserializes dates
+        user.lastUpdate = new Date();
+        return user;
+      } catch (err) {
+        return h
+          .response({
+            error:
+              err.name === "ZodError" ? "Validation failed" : "Invalid input",
+          })
+          .code(400);
+      }
     },
   });
 

@@ -90,22 +90,18 @@ npm run build       # required - generates runtime type metadata
 npm run report      # full benchmark suite
 ```
 
-## Linking Local Mion Packages
+## Using Local Mion Packages
 
-Two-step process when developing mion locally:
-
-Step 1 - In the mion repository:
-
-```bash
-cd ~/Projects/mion
-npm link --workspaces
-```
-
-Step 2 - In this benchmarks repository:
+When developing mion locally, you can use the local packages instead of the published ones:
 
 ```bash
 npm run mionlink
 ```
+
+This script will:
+1. Run the `pack-packages.sh` script in the mion repository to create tarballs.
+2. Copy the tarballs to the `mion-tarballs` directory in this repository.
+3. Run `npm install` to install the local tarballs.
 
 ## Metrics Collected
 

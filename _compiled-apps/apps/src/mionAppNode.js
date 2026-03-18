@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("../../mionRoutes-wDZ_9Gb6.js");
+const mionRoutes = require("../../mionRoutes-D2bBEZx4.js");
 const http = require("http");
 const https = require("https");
 class MionHeadersImpl {
@@ -152,6 +152,8 @@ async function startNodeServer(options) {
       reject(e);
     });
     server.listen(httpOptions.port, () => {
+      const { options: _nativeOpts, ...serializableConfig } = httpOptions;
+      mionRoutes.setPlatformConfig(serializableConfig);
       resolve(server);
     });
     const shutdownHandler = function() {

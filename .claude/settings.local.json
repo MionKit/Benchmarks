@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/majerez/Projects/mion/packages/**)",
+      "Bash(npm run:*)",
+      "Bash(node reports.js all --quick)",
+      "Read(//Users/majerez/Projects/mion/**)",
+      "Bash(grep -rl strictTypes node_modules/@mionjs/ --include=*.js --include=*.ts --include=*.cjs --include=*.d.ts)",
+      "Bash(grep -v node_modules/@mionjs/.*/node_modules)",
+      "Bash(find node_modules/@mionjs/router -name *.js -o -name *.ts -o -name *.cjs -o -name *.d.ts)"
+    ]
+  }
+}

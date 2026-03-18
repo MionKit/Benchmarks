@@ -7,4 +7,4 @@
 import { initMionRouter } from "@mionjs/router";
 import { routes } from "./mionRoutes";
 
-await initMionRouter(routes);
+await initMionRouter(routes, { strictTypes: true });

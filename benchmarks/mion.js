@@ -6,4 +6,4 @@ const { initHttp, routes } = require("../_compiled-apps/apps/src/mionAppNode");
 // mion needs to be compiled from typescript to be able to generate runtime types metadata
 // AOT caches are embedded in the compiled output via virtual:mion-aot/caches
 
-initHttp({ aot: true }, { port: 3000 });
+initHttp({ aot: true, strictTypes: true }, { port: 3000 });

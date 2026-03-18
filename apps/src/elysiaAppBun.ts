@@ -21,52 +21,74 @@ const OptionalDateString = t.Optional(
 );
 
 // ============ Nested Objects ============
-const AddressSchema = t.Object({
-  street: t.String(),
-  city: t.String(),
-  state: t.String(),
-  zipCode: t.String(),
-  country: t.String(),
-});
+const AddressSchema = t.Object(
+  {
+    street: t.String(),
+    city: t.String(),
+    state: t.String(),
+    zipCode: t.String(),
+    country: t.String(),
+  },
+  { additionalProperties: false },
+);
 
-const NotificationSettingsSchema = t.Object({
-  email: t.Boolean(),
-  sms: t.Boolean(),
-  push: t.Boolean(),
-  frequency: t.Union([
-    t.Literal("immediate"),
-    t.Literal("daily"),
-    t.Literal("weekly"),
-  ]),
-});
+const NotificationSettingsSchema = t.Object(
+  {
+    email: t.Boolean(),
+    sms: t.Boolean(),
+    push: t.Boolean(),
+    frequency: t.Union([
+      t.Literal("immediate"),
+      t.Literal("daily"),
+      t.Literal("weekly"),
+    ]),
+  },
+  { additionalProperties: false },
+);
 
-const UserPreferencesSchema = t.Object({
-  theme: t.Union([t.Literal("light"), t.Literal("dark"), t.Literal("system")]),
-  language: t.String(),
-  timezone: t.String(),
-  notifications: NotificationSettingsSchema,
-});
+const UserPreferencesSchema = t.Object(
+  {
+    theme: t.Union([
+      t.Literal("light"),
+      t.Literal("dark"),
+      t.Literal("system"),
+    ]),
+    language: t.String(),
+    timezone: t.String(),
+    notifications: NotificationSettingsSchema,
+  },
+  { additionalProperties: false },
+);
 
 // ============ Discriminated Union ============
-const CreditCardSchema = t.Object({
-  type: t.Literal("credit_card"),
-  lastFourDigits: t.String(),
-  expiryMonth: t.Number(),
-  expiryYear: t.Number(),
-  brand: t.String(),
-});
+const CreditCardSchema = t.Object(
+  {
+    type: t.Literal("credit_card"),
+    lastFourDigits: t.String(),
+    expiryMonth: t.Number(),
+    expiryYear: t.Number(),
+    brand: t.String(),
+  },
+  { additionalProperties: false },
+);
 
-const BankAccountSchema = t.Object({
-  type: t.Literal("bank_account"),
-  bankName: t.String(),
-  accountLastFour: t.String(),
-  routingNumber: t.String(),
-});
+const BankAccountSchema = t.Object(
+  {
+    type: t.Literal("bank_account"),
+    bankName: t.String(),
+    accountLastFour: t.String(),
+    routingNumber: t.String(),
+  },
+  { additionalProperties: false },
+);
 
-const PaypalSchema = t.Object({
-  type: t.Literal("paypal"),
-  email: t.String(),
-});
+const PaypalSchema = t.Object(
+  {
+    type: t.Literal("paypal"),
+    email: t.String(),
+  },
+  { additionalProperties: false },
+);
 
 const PaymentMethodSchema = t.Union([
   CreditCardSchema,
@@ -75,68 +97,77 @@ const PaymentMethodSchema = t.Union([
 ]);
 
 // ============ Profile Schema ============
-const ProfileSchema = t.Object({
-  firstName: t.String(),
-  lastName: t.String(),
-  displayName: t.String(),
-  bio: t.Optional(t.String()),
-  avatarUrl: t.Optional(t.String()),
-  dateOfBirth: DateString,
-});
+const ProfileSchema = t.Object(
+  {
+    firstName: t.String(),
+    lastName: t.String(),
+    displayName: t.String(),
+    bio: t.Optional(t.String()),
+    avatarUrl: t.Optional(t.String()),
+    dateOfBirth: DateString,
+  },
+  { additionalProperties: false },
+);
 
 // ============ User Schema ============
-const UserSchema = t.Object({
-  // Basic info
-  id: t.Number(),
-  username: t.String(),
-  email: t.String(),
+const UserSchema = t.Object(
+  {
+    // Basic info
+    id: t.Number(),
+    username: t.String(),
+    email: t.String(),
 
-  // Profile
-  profile: ProfileSchema,
+    // Profile
+    profile: ProfileSchema,
 
-  // Account metadata
-  role: t.Union([
-    t.Literal("admin"),
-    t.Literal("user"),
-    t.Literal("guest"),
-    t.Literal("moderator"),
-  ]),
-  status: t.Union([
-    t.Literal("active"),
-    t.Literal("suspended"),
-    t.Literal("pending_verification"),
-    t.Literal("deactivated"),
-  ]),
+    // Account metadata
+    role: t.Union([
+      t.Literal("admin"),
+      t.Literal("user"),
+      t.Literal("guest"),
+      t.Literal("moderator"),
+    ]),
+    status: t.Union([
+      t.Literal("active"),
+      t.Literal("suspended"),
+      t.Literal("pending_verification"),
+      t.Literal("deactivated"),
+    ]),
 
-  // Single address
-  address: AddressSchema,
+    // Single address
+    address: AddressSchema,
 
-  // Array of discriminated union
-  paymentMethods: t.Array(PaymentMethodSchema),
+    // Array of discriminated union
+    paymentMethods: t.Array(PaymentMethodSchema),
 
-  // Preferences
-  preferences: UserPreferencesSchema,
+    // Preferences
+    preferences: UserPreferencesSchema,
 
-  // Timestamps
-  createdAt: DateString,
-  updatedAt: DateString,
-  lastLoginAt: OptionalDateString,
+    // Timestamps
+    createdAt: DateString,
+    updatedAt: DateString,
+    lastLoginAt: OptionalDateString,
 
-  // Tags
-  tags: t.Array(t.String()),
-});
+    // Tags
+    tags: t.Array(t.String()),
+  },
+  { additionalProperties: false },
+);
 
 // ============ Simple User Schema (for simple-user benchmark) ============
-const SimpleUserSchema = t.Object({
-  id: t.Number(),
-  name: t.String(),
-  surname: t.String(),
-  lastUpdate: DateString,
-});
+const SimpleUserSchema = t.Object(
+  {
+    id: t.Number(),
+    name: t.String(),
+    surname: t.String(),
+    lastUpdate: DateString,
+  },
+  { additionalProperties: false },
+);
 
 // Create app without starting server
 const createApp = () => {
-  return new Elysia()
+  return new Elysia({ normalize: false })
     .get("/hello", () => ({ hello: "world" }))
     .post(
       "/updateUser",

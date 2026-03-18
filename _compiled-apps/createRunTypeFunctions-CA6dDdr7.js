@@ -2,7 +2,7 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-const mionRoutes = require("./mionRoutes-wDZ_9Gb6.js");
+const mionRoutes = require("./mionRoutes-D2bBEZx4.js");
 const type = require("@deepkit/type");
 const hashes = /* @__PURE__ */ new Map();
 const literalHashes = /* @__PURE__ */ new Map();
@@ -64,7 +64,7 @@ const __ΩSrcMember = ["Type", "type", "SrcMember", 'P"w!P"w!4"MKw#y'];
 const __ΩJitCompilerOpts = ["fnID", () => __ΩStrNumber, "typeID", "jitFnHash", () => __ΩRunTypeOptions, "opts", "JitCompilerOpts", `P&4!9n"4#9&4$9n%4&9Mw'y`];
 const __ΩRunTypeChildAccessor = [() => __ΩRunType, "JitFnCompiler", "comp", "getChildIndex", () => __ΩStrNumber, "getChildVarName", () => __ΩStrNumber, "getChildLiteral", "useArrayAccessor", "isOptional", "skipSettingAccessor", "skipCommas", "RunTypeChildAccessor", `Pn!P"w"2#'1$P"w"2#n%1&P"w"2#n'1(P)1)P)1*P)1+8)4,8Mw-y`];
 const __ΩCustomVλl = ["vλl", "isStandalone", "useArrayAccessor", "CustomVλl", 'P&4!)4"8)4#8Mw$y'];
-const __ΩRunTypeOptions = ["start", "end", "paramsSlice", () => __ΩMockOptions, "mock", "noLiterals", "noIsArrayCheck", "RunTypeOptions", `PP'4!8'4"8M4#8n$4%8)4&8)4'8Mw(y`];
+const __ΩRunTypeOptions = ["start", "end", "paramsSlice", () => __ΩMockOptions, "mock", "noLiterals", "noIsArrayCheck", "strictTypes", "RunTypeOptions", `PP'4!8'4"8M4#8n$4%8)4&8)4'8)4(8Mw)y`];
 const __ΩPartialRunTypeOptions = [() => __ΩDeepPartial, () => __ΩRunTypeOptions, "PartialRunTypeOptions", 'n"o!"w#y'];
 const __ΩJitFn = [() => JitFunctions, () => JitFunctions, "JitFn", 'i!i"gfw#y'];
 const __ΩJitFnID = [() => __ΩJitFn, "id", "JitFnID", 'n!."fw#y'];
@@ -222,7 +222,7 @@ const JitFunctions$1 = {
   mock: {
     id: mionRoutes.JIT_FUNCTION_IDS.mock,
     name: "mockType",
-    import: () => Promise.resolve().then(() => require("./mockType-Dbb-8-Uc.js")).then((n) => n.mockType$1).then(__assignType$h((m) => m.mockType, ["m", "", 'P"2!"/"'])),
+    import: () => Promise.resolve().then(() => require("./mockType-C0u56bJX.js")).then((n) => n.mockType$1).then(__assignType$h((m) => m.mockType, ["m", "", 'P"2!"/"'])),
     jitArgs,
     jitDefaultArgs,
     returnName: jitArgs.vλl
@@ -3380,22 +3380,6 @@ class CollectionRunType extends BaseRunType {
       const childTypes = this.src.types || [];
       return childTypes.map((t) => t._rt);
     });
-    __publicField(this, "getChildrenTypeID", memorize((stack = []) => {
-      if (stack.length > mionRoutes.MAX_STACK_DEPTH) throw new Error(maxStackErrorMessage);
-      const circularJitConf = this.checkIsCircularAndGetRefId(stack);
-      if (circularJitConf) return circularJitConf;
-      stack.push(this);
-      const childrenIds = [];
-      const children = this.getChildRunTypes();
-      for (const child of children) {
-        childrenIds.push(child.getTypeID());
-      }
-      const isArray = this.src.kind === type.ReflectionKind.tuple || this.src.kind === type.ReflectionKind.array;
-      const groupID = isArray ? `[${childrenIds.join(",")}]` : `{${childrenIds.join(",")}}`;
-      const kind = this.src.subKind || this.src.kind;
-      stack.pop();
-      return `${kind}${groupID}`;
-    }));
   }
   getFamily() {
     return "C";
@@ -3442,21 +3426,6 @@ class MemberRunType extends BaseRunType {
     __publicField(this, "skipCommas");
     /** used to compile json stringify */
     __publicField(this, "tempChildVλl");
-    __publicField(this, "getMemberTypeID", memorize((stack = []) => {
-      var _a, _b;
-      if (stack.length > mionRoutes.MAX_STACK_DEPTH) throw new Error(maxStackErrorMessage);
-      const optional = this.isOptional() ? "?" : "";
-      const kind = ((_a = this.src.name) == null ? void 0 : _a.toString()) || ((_b = this.src.index) == null ? void 0 : _b.kind) || this.src.subKind || this.src.kind;
-      const kindID = `${kind}${optional}`;
-      const circularJitConf = this.checkIsCircularAndGetRefId(stack);
-      if (circularJitConf) return `${kindID}:${circularJitConf}`;
-      stack.push(this);
-      const member = this.getMemberType();
-      const memberTypeID = member.getTypeID();
-      const typeID = `${kindID}:${memberTypeID}`;
-      stack.pop();
-      return typeID;
-    }));
   }
   getFamily() {
     return "M";
@@ -5046,8 +5015,14 @@ class InterfaceRunType extends CollectionRunType {
         code: [this.getCallSignature().emitIsType(comp).code, childrenCode].filter(Boolean).join(" && "),
         type: "E"
       };
+    let propsCode = "";
+    if (comp.opts.strictTypes && !this.hasIndexSignature(comp)) {
+      const unknownCheck = callCheckUnknownProperties(this, comp, children, false, false);
+      if (unknownCheck)
+        propsCode = `!${unknownCheck}`;
+    }
     const objectCheck = this.isPartOfUnion() ? "" : `typeof ${varName} === 'object' && ${varName} !== null`;
-    const itemsCode = [objectCheck, this.allOptionalCode(comp), childrenCode].filter(Boolean).join(" && ");
+    const itemsCode = [objectCheck, this.allOptionalCode(comp), childrenCode, propsCode].filter(Boolean).join(" && ");
     return { code: `(${itemsCode})`, type: "E" };
   }
   emitTypeErrors(comp) {
@@ -5057,6 +5032,18 @@ class InterfaceRunType extends CollectionRunType {
     if (this.isCallable()) {
       return { code: `${this.getCallSignature().emitTypeErrors(comp).code} else {${childrenCode}}`, type: "S" };
     }
+    let propsCode = "";
+    if (comp.opts.strictTypes && !this.hasIndexSignature(comp)) {
+      const unknownVar = comp.getLocalVarName("unk", this);
+      const keyVar = comp.getLocalVarName("ky", this);
+      const unknownValue = callCheckUnknownProperties(this, comp, children, true, false);
+      if (unknownValue) {
+        propsCode = `
+                    const ${unknownVar} = ${unknownValue};
+                    if (${unknownVar}) {for (const ${keyVar} of ${unknownVar}) {${comp.callJitErrWithPath("never", keyVar)}}}
+                `;
+      }
+    }
     const objectCheck = this.isPartOfUnion() ? "" : `typeof ${varName} === 'object' && ${varName} !== null`;
     const isObjectCode = [objectCheck, this.allOptionalCode(comp)].filter(Boolean).join(" && ");
     return {
@@ -5065,6 +5052,7 @@ class InterfaceRunType extends CollectionRunType {
                 ${comp.callJitErr(this)};
             } else {
                 ${childrenCode}
+                ${propsCode}
             }
         `,
       type: "S"
@@ -6154,4 +6142,4 @@ exports.registerJitFunctionCompiler = registerJitFunctionCompiler;
 exports.runType = runType;
 exports.stringCharSet = stringCharSet;
 exports.validPropertyNameRegExp = validPropertyNameRegExp;
-//# sourceMappingURL=createRunTypeFunctions-C5JvjKA_.js.map
+//# sourceMappingURL=createRunTypeFunctions-CA6dDdr7.js.map

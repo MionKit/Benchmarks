@@ -31,18 +31,13 @@ export default defineConfig({
     mionPlugin({
       runTypes: {
         tsConfig: resolve(import.meta.dirname!, "tsconfig.json"),
-        compilerOptions: {
-          sourceMap: true,
-        },
+        compilerOptions: { sourceMap: true },
       },
       aotCaches: true,
       server: {
-        startServerScript: resolve(
-          import.meta.dirname!,
-          "apps/src/mionAotStart.ts",
-        ),
-        serverViteConfig: resolve(import.meta.dirname!, "vite.config.mts"),
-        mode: "onlyAOT",
+        startScript: resolve(import.meta.dirname!, "apps/src/mionAotStart.ts"),
+        viteConfig: resolve(import.meta.dirname!, "vite.config.mts"),
+        runMode: "buildOnly",
       },
     }) as any,
     dts({

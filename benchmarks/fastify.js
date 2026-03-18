@@ -10,6 +10,11 @@ const fastify = require("fastify")({
   disableRequestLogging: true,
   requestIdHeader: false,
   requestIdLogLabel: false,
+  ajv: {
+    customOptions: {
+      removeAdditional: false, // Fail validation when additional properties are present
+    },
+  },
 });
 
 // ============ JSON Schema Definitions ============

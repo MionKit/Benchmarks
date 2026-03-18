@@ -28,9 +28,9 @@ const __ΩRouteMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.route, "
 const __ΩMiddleFnMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.middleFn, "type", "MiddleFnMethod", '"c!Pe"!o""i#4$Mw%y'];
 const __ΩHeadersMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.headersMiddleFn, "type", "HeadersMethodWithJitFns", "headersParam", "HeadersMethod", `"c!Pe"!o""i#4$"w%4&Mw'y`];
 const __ΩRawMethod = ["H", () => __ΩRemoteMethod, () => HandlerType.rawMiddleFn, "type", "RemoteMethodOpts", false, "validateParams", false, "validateReturn", "options", "RawMethod", `"c!Pe"!o""i#4$P"w%P.&4'.(4)8MK4*Mw+y`];
-const __ΩRouteOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩRouteMethod, "options", "description", "validateParams", "validateReturn", "serializer", "isMutation", "RouteOptions", `n#.$fP.%.&.'.(.)Jo"#o!"w*y`];
-const __ΩMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩMiddleFnMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "MiddleFnOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
-const __ΩHeadersMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩHeadersMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "HeadersMiddleFnOptions", `n#.$fP.%.&.'.(Jo"#o!"w)y`];
+const __ΩRouteOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩRouteMethod, "options", "description", "validateParams", "validateReturn", "serializer", "isMutation", "strictTypes", "RouteOptions", `n#.$fP.%.&.'.(.).*Jo"#o!"w+y`];
+const __ΩMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩMiddleFnMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "strictTypes", "MiddleFnOptions", `n#.$fP.%.&.'.(.)Jo"#o!"w*y`];
+const __ΩHeadersMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩHeadersMethod, "options", "description", "validateParams", "validateReturn", "runOnError", "strictTypes", "HeadersMiddleFnOptions", `n#.$fP.%.&.'.(.)Jo"#o!"w*y`];
 const __ΩRawMiddleFnOptions = [() => __ΩPartial, () => __ΩPick$2, () => __ΩRawMethod, "options", "description", "runOnError", "RawMiddleFnOptions", `n#.$fP.%.&Jo"#o!"w'y`];
 const __ΩMethodsExecutionChain = ["routeIndex", () => __ΩRemoteMethod, "methods", "SerializerCode", "serializer", "MethodsExecutionChain", `P'4!n"F4#"w$4%Mw&y`];
 const __ΩPick$1 = ["T", "K", "Pick", 'l+e#!e"!fRb!b"Pde""N#!w#y'];
@@ -156,7 +156,7 @@ const __ΩDataViewSerializer = ["index", () => __ΩDataView, "view", "", "reset"
 const __ΩDataViewDeserializer = ["index", () => __ΩDataView, "view", "", "reset", () => __ΩStrictArrayBuffer, "buffer", "byteOffset", "byteLength", "setBuffer", "markAsEnded", "getLength", "desString", "desFloat64", "desEnum", "DataViewDeserializer", `P'4!n"4#P$/$4%Pn&2''2(8'2)8$/$4*P$/$4+P'1,P&1-P'1.PP'&J1/Mw0y`];
 const __ΩRecord$1 = ["K", "T", "Record", `l'e#"Rb!b"Pde"!N#!w#y`];
 const __ΩMethodMetadata = ["type", "id", "isAsync", "hasReturnData", "paramNames", "paramsJitHash", "returnJitHash", () => __ΩHeadersMetaData, "headersParam", () => __ΩHeadersMetaData, "headersReturn", "middleFnIds", "pointer", "nestLevel", "MethodMetadata", `P'4!&4")4#)4$&F4%8&4&&4'n(4)8n*4+8&F4,8&F4-'4.Mw/y`];
-const __ΩRemoteMethodOpts = ["runOnError", "validateParams", "validateReturn", "description", () => __ΩSerializerMode, "serializer", "isMutation", "RemoteMethodOpts", `P)4!8)4"8)4#8&4$8n%4&8P)-J4'8Mw(y`];
+const __ΩRemoteMethodOpts = ["runOnError", "validateParams", "validateReturn", "description", () => __ΩSerializerMode, "serializer", "isMutation", "strictTypes", "RemoteMethodOpts", `P)4!8)4"8)4#8&4$8n%4&8P)-J4'8)4(8Mw)y`];
 const __ΩMethodWithOptions = [() => __ΩMethodMetadata, () => __ΩRemoteMethodOpts, "options", "MethodWithOptions", 'Pn!n"4#Mw$y'];
 const __ΩMethodsCache = [() => __ΩRecord$1, () => __ΩMethodWithOptions, "MethodsCache", '&n"o!#w#y'];
 const __ΩHeadersMetaData = ["headerNames", "jitHash", "HeadersMetaData", 'P&F4!&4"Mw#y'];
@@ -618,11 +618,11 @@ function fromBase64Url(encoded) {
 let isTest = void 0;
 function isMionCompileMode() {
   const val = getENV("MION_COMPILE");
-  return val === "onlyAOT" || val === "viteSSR";
+  return val === "buildOnly" || val === "middleware";
 }
 function isMionAOTEmitMode() {
   const val = getENV("MION_COMPILE");
-  return val === "onlyAOT" || val === "viteSSR" || val === "serve";
+  return val === "buildOnly" || val === "middleware" || val === "childProcess";
 }
 function isTestEnv() {
   if (isTest !== void 0) return isTest;
@@ -1094,7 +1094,7 @@ createDependencyTrackingProxy.__type = ["JITUtils", "proxy", "", "getDependencie
 const PURE_SERVER_FN_NAMESPACE = "pureServerFn";
 const __ΩRouterEntry = [() => __ΩRoutes, () => __ΩMiddleFnDef, () => __ΩRouteDef, () => __ΩRawMiddleFnDef, () => __ΩHeadersMiddleFnDef, "RouterEntry", 'Pn!n"n#n$n%Jw&y'];
 const __ΩRoutes = [() => __ΩRouterEntry, "Routes", 'P&n!LMw"y'];
-const __ΩRouterOptions = ["Req", "ContextData", () => __ΩCoreRouterOptions, "basePath", "suffix", "request", "path", "", "pathTransform", () => __ΩContextDataFactory, "contextDataFactory", () => __ΩSerializerMode, "serializer", "RunTypeOptions", "runTypeOptions", "getPublicRoutesData", "autoGenerateErrorId", "skipClientRoutes", "aot", "maxContextPoolSize", "maxRoutesFlowsCacheSize", "RouterOptions", `"c!"c"Pn#&4$&4%Pe#!2&&2'&/(4)8e""o*"4+8n,4-"w.4/)40)41)42)43'44'45Mw6y`];
+const __ΩRouterOptions = ["Req", "ContextData", () => __ΩCoreRouterOptions, "basePath", "suffix", "request", "path", "", "pathTransform", () => __ΩContextDataFactory, "contextDataFactory", () => __ΩSerializerMode, "serializer", "RunTypeOptions", "runTypeOptions", "strictTypes", "getPublicRoutesData", "autoGenerateErrorId", "skipClientRoutes", "aot", "maxContextPoolSize", "maxRoutesFlowsCacheSize", "RouterOptions", `"c!"c"Pn#&4$&4%Pe#!2&&2'&/(4)8e""o*"4+8n,4-"w.4/)408)41)42)43)44'45'46Mw7y`];
 function isMiddleFnDef(entry) {
   return entry.type === HandlerType$1.middleFn;
 }
@@ -1223,7 +1223,7 @@ async function loadRunTypesModule() {
     return runTypesModule;
   if (runTypesLoadPromise)
     return runTypesLoadPromise;
-  runTypesLoadPromise = Promise.resolve().then(() => require("./index-ZvYku_Ye.js")).then(__assignType$4((module2) => {
+  runTypesLoadPromise = Promise.resolve().then(() => require("./index-BIMYhOQF.js")).then(__assignType$4((module2) => {
     runTypesModule = {
       JitFunctions: module2.JitFunctions,
       reflectFunction: module2.reflectFunction,
@@ -1287,16 +1287,16 @@ function extractReflectionFromCached(cached) {
   return reflectionItems;
 }
 extractReflectionFromCached.__type = [() => __ΩCachedMethodMetadata, "cached", () => __ΩMethodReflect, "extractReflectionFromCached", 'Pn!2"n#/$'];
-async function getHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn = false) {
+async function getHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn = false, methodStrictTypes) {
   const cached = getPersistedMethodMetadata(routeId);
   if (cached)
     return extractReflectionFromCached(cached);
   if (routerOptions2.aot)
     throw new AOTCacheError(routeId, isHeadersMiddleFn ? "middleFn" : "route");
   const rt = await loadRunTypesModule();
-  return generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn, rt);
+  return generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn, rt, methodStrictTypes);
 }
-getHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersMiddleFn", () => false, () => __ΩMethodReflect, "getHandlerReflection", "Pn!2\"&2#n$2%)2&>'n(`/)"];
+getHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersMiddleFn", () => false, "methodStrictTypes", () => __ΩMethodReflect, "getHandlerReflection", "Pn!2\"&2#n$2%)2&>')2(8n)`/*"];
 async function getRawMethodReflection(handler, routeId, routerOptions2) {
   const cached = getPersistedMethodMetadata(routeId);
   if (cached)
@@ -1307,10 +1307,14 @@ async function getRawMethodReflection(handler, routeId, routerOptions2) {
   return generateRawMethodReflection(handler, routeId, rt);
 }
 getRawMethodReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", () => __ΩMethodReflect, "getRawMethodReflection", "Pn!2\"&2#n$2%n&`/'"];
-function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn, rt) {
+function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMiddleFn, rt, methodStrictTypes) {
   const reflectionItems = {};
   let handlerRunType;
-  const runTypeOptions = (routerOptions2 == null ? void 0 : routerOptions2.runTypeOptions) || DEFAULT_ROUTE_OPTIONS.runTypeOptions;
+  const effectiveStrictTypes = methodStrictTypes ?? routerOptions2.strictTypes;
+  const runTypeOptions = {
+    ...(routerOptions2 == null ? void 0 : routerOptions2.runTypeOptions) || DEFAULT_ROUTE_OPTIONS.runTypeOptions,
+    ...effectiveStrictTypes !== void 0 ? { strictTypes: effectiveStrictTypes } : {}
+  };
   try {
     handlerRunType = rt.reflectFunction(handler);
   } catch (error) {
@@ -1369,7 +1373,7 @@ function generateHandlerReflection(handler, routeId, routerOptions2, isHeadersMi
   reflectionItems.isAsync = handlerRunType.isAsync();
   return reflectionItems;
 }
-generateHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersMiddleFn", () => __ΩRunTypesFunctions, "rt", () => __ΩMethodReflect, "generateHandlerReflection", `Pn!2"&2#n$2%)2&n'2(n)/*`];
+generateHandlerReflection.__type = [() => __ΩHandler, "handler", "routeId", () => __ΩRouterOptions, "routerOptions", "isHeadersMiddleFn", () => __ΩRunTypesFunctions, "rt", "methodStrictTypes", () => __ΩMethodReflect, "generateHandlerReflection", `Pn!2"&2#n$2%)2&n'2()2)8n*/+`];
 function generateRawMethodReflection(handler, routeId, rt) {
   let handlerRunType;
   try {
@@ -2259,6 +2263,16 @@ const getRouteExecutable = (id) => routesById.get(id);
 const getMiddleFnExecutable = (id) => middleFnsById.get(id);
 const getRouterOptions = () => routerOptions;
 const getAnyExecutable = (id) => routesById.get(id) || middleFnsById.get(id) || rawMiddleFnsById.get(id);
+function setPlatformConfig(config) {
+  if (isMionAOTEmitMode() && typeof process.send === "function") {
+    const routerConfig = Object.fromEntries(Object.entries(routerOptions).filter(([, v]) => typeof v !== "function"));
+    try {
+      process.send({ type: "mion-platform-ready", routerConfig, platformConfig: config });
+    } catch (err) {
+      console.error("[mion] Failed to send platform-ready IPC:", err);
+    }
+  }
+}
 async function initMionRouter(routes2, opts2) {
   await initRouter(opts2);
   const publicApi = await registerRoutes(routes2);
@@ -2327,12 +2341,12 @@ function getRouteExecutableFromPath(path) {
   return executionChain.methods[executionChain.routeIndex];
 }
 async function loadAOTCaches() {
-  const loader = await Promise.resolve().then(() => require("./aotCacheLoader-CFRf5oxa.js"));
+  const loader = await Promise.resolve().then(() => require("./aotCacheLoader-B4Ht95Fd.js"));
   return loader.loadRouterAOTCaches();
 }
 async function emitAOTCaches() {
   if (!isMionAOTEmitMode()) return;
-  const aotEmitter = await Promise.resolve().then(() => require("./aotEmitter-rVPAjd7v.js"));
+  const aotEmitter = await Promise.resolve().then(() => require("./aotEmitter-BwmSX1D0.js"));
   return aotEmitter.emitAOTCaches();
 }
 async function recursiveFlatRoutes(routes2, currentPointer = [], preMiddleFns = [], postMiddleFns = [], nestLevel = 0) {
@@ -2439,7 +2453,7 @@ async function getExecutableFromAnyMiddleFn(middleFn, middleFnPointer, nestLevel
   return getExecutableFromMiddleFn(middleFn, middleFnPointer, nestLevel);
 }
 async function getExecutableFromMiddleFn(middleFn, middleFnPointer, nestLevel) {
-  var _a, _b, _c, _d;
+  var _a, _b, _c, _d, _e, _f;
   const isHeader = isHeadersMiddleFnDef(middleFn);
   const middleFnId = getRouterItemId(middleFnPointer);
   const existing = middleFnsById.get(middleFnId);
@@ -2449,7 +2463,13 @@ async function getExecutableFromMiddleFn(middleFn, middleFnPointer, nestLevel) {
   if (compiledMethod) {
     executable = compiledMethod;
   } else {
-    const reflectionData = await getHandlerReflection(middleFn.handler, middleFnId, routerOptions, isHeader);
+    const reflectionData = await getHandlerReflection(
+      middleFn.handler,
+      middleFnId,
+      routerOptions,
+      isHeader,
+      (_a = middleFn.options) == null ? void 0 : _a.strictTypes
+    );
     executable = {
       id: middleFnId,
       type: isHeader ? HandlerType$1.headersMiddleFn : HandlerType$1.middleFn,
@@ -2458,10 +2478,11 @@ async function getExecutableFromMiddleFn(middleFn, middleFnPointer, nestLevel) {
       pointer: middleFnPointer,
       ...reflectionData,
       options: {
-        runOnError: !!((_a = middleFn.options) == null ? void 0 : _a.runOnError),
-        validateParams: ((_b = middleFn.options) == null ? void 0 : _b.validateParams) ?? true,
-        validateReturn: ((_c = middleFn.options) == null ? void 0 : _c.validateReturn) ?? false,
-        description: (_d = middleFn.options) == null ? void 0 : _d.description
+        runOnError: !!((_b = middleFn.options) == null ? void 0 : _b.runOnError),
+        validateParams: ((_c = middleFn.options) == null ? void 0 : _c.validateParams) ?? true,
+        validateReturn: ((_d = middleFn.options) == null ? void 0 : _d.validateReturn) ?? false,
+        description: (_e = middleFn.options) == null ? void 0 : _e.description,
+        strictTypes: ((_f = middleFn.options) == null ? void 0 : _f.strictTypes) ?? routerOptions.strictTypes
       }
     };
     addToPersistedMethods(middleFnId, executable);
@@ -2495,7 +2516,7 @@ async function getExecutableFromRawMiddleFn(middleFn, middleFnPointer, nestLevel
   return executable;
 }
 async function getExecutableFromRoute(route2, routePointer, nestLevel) {
-  var _a, _b, _c, _d, _e;
+  var _a, _b, _c, _d, _e, _f, _g;
   const routeId = getRouterItemId(routePointer);
   const existing = routesById.get(routeId);
   if (existing) return existing;
@@ -2504,7 +2525,13 @@ async function getExecutableFromRoute(route2, routePointer, nestLevel) {
   if (compiledMethod) {
     executable = compiledMethod;
   } else {
-    const reflectionData = await getHandlerReflection(route2.handler, routeId, routerOptions);
+    const reflectionData = await getHandlerReflection(
+      route2.handler,
+      routeId,
+      routerOptions,
+      false,
+      (_a = route2.options) == null ? void 0 : _a.strictTypes
+    );
     executable = {
       id: routeId,
       type: HandlerType$1.route,
@@ -2514,11 +2541,12 @@ async function getExecutableFromRoute(route2, routePointer, nestLevel) {
       ...reflectionData,
       options: {
         runOnError: false,
-        validateParams: ((_a = route2.options) == null ? void 0 : _a.validateParams) ?? true,
-        validateReturn: ((_b = route2.options) == null ? void 0 : _b.validateReturn) ?? false,
-        description: (_c = route2.options) == null ? void 0 : _c.description,
-        serializer: ((_d = route2.options) == null ? void 0 : _d.serializer) ?? routerOptions.serializer,
-        isMutation: (_e = route2.options) == null ? void 0 : _e.isMutation
+        validateParams: ((_b = route2.options) == null ? void 0 : _b.validateParams) ?? true,
+        validateReturn: ((_c = route2.options) == null ? void 0 : _c.validateReturn) ?? false,
+        description: (_d = route2.options) == null ? void 0 : _d.description,
+        serializer: ((_e = route2.options) == null ? void 0 : _e.serializer) ?? routerOptions.serializer,
+        isMutation: (_f = route2.options) == null ? void 0 : _f.isMutation,
+        strictTypes: ((_g = route2.options) == null ? void 0 : _g.strictTypes) ?? routerOptions.strictTypes
       }
     };
     addToPersistedMethods(routeId, executable);
@@ -2806,4 +2834,5 @@ exports.loadCompiledMethods = loadCompiledMethods;
 exports.registerErrorDeserializers = registerErrorDeserializers;
 exports.registerPureFnFactory = registerPureFnFactory;
 exports.routes = routes;
-//# sourceMappingURL=mionRoutes-wDZ_9Gb6.js.map
+exports.setPlatformConfig = setPlatformConfig;
+//# sourceMappingURL=mionRoutes-D2bBEZx4.js.map

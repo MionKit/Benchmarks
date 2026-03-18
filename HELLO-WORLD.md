@@ -53,8 +53,8 @@ app.get("/hello", function (req, res) {
 
 * __Machine:__ darwin arm64 | 12 vCPUs | 16.0GB Mem
 * __Node:__ `v24.13.0`
-* __Run:__ Sat Mar 14 2026 01:03:34 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 4 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Wed Mar 18 2026 00:32:36 GMT+0000 (Greenwich Mean Time)
+* __Method:__ `autocannon -c 100 -d 20.01 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -88,9 +88,9 @@ app.get("/hello", function (req, res) {
 
 |           | Version   | Router | Req (R/s)    | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
 | :--       | --:       | --:    | :-:          | --:          | --:           | --:             | --:         | :-:        | :--                                                       |
-| http-node | 16.18.0   | ✗      | 117088.0     | 8.07         | 20.88         | 150             | 108         | ✓          | bare node http server with Zod validation                 |
-| **mion**  | **0.6.2** | **✓**  | **101216.0** | **9.38**     | **19.70**     | **154**         | **109**     | **✓**      | **Automatic validation and serialization out of the box** |
-| hono      | 3.12.6    | ✓      | 96160.0      | 9.90         | 15.77         | 126             | 109         | ✓          | hono node server with Zod validation                      |
-| hapi      | 21.4.4    | ✓      | 83840.0      | 11.42        | 14.95         | 235             | 112         | ✓          | Hapi with Zod validation                                  |
-| fastify   | 5.7.4     | ✓      | 80960.0      | 11.81        | 14.51         | 122             | 108         | ✓          | Fastify with native JSON Schema validation                |
-| express   | 5.2.1     | ✓      | 71856.0      | 13.39        | 12.82         | 130             | 109         | ✓          | Express with Zod validation                               |
+| http-node | 16.18.0   | ✗      | 127027.2     | 7.46         | 22.65         | 147             | 101         | ✓          | bare node http server with Zod validation                 |
+| fastify   | 5.7.4     | ✓      | 125302.4     | 7.50         | 22.46         | 156             | 108         | ✓          | Fastify with native JSON Schema validation                |
+| **mion**  | **0.6.2** | **✓**  | **110668.8** | **8.50**     | **21.53**     | **225**         | **108**     | **✓**      | **Automatic validation and serialization out of the box** |
+| hono      | 3.12.6    | ✓      | 103600.0     | 9.14         | 16.99         | 230             | 109         | ✓          | hono node server with Zod validation                      |
+| hapi      | 21.4.4    | ✓      | 87440.0      | 10.95        | 15.59         | 243             | 112         | ✓          | Hapi with Zod validation                                  |
+| express   | 5.2.1     | ✓      | 73577.6      | 13.07        | 13.12         | 234             | 110         | ✓          | Express with Zod validation                               |

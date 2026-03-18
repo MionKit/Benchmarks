@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-const mionRoutes = require("../../mionRoutes-wDZ_9Gb6.js");
+const mionRoutes = require("../../mionRoutes-D2bBEZx4.js");
 const DEFAULT_BUN_HTTP_OPTIONS = {
   port: 80,
   options: {},
@@ -97,6 +97,8 @@ async function startBunServer(options) {
   };
   process.on("SIGINT", shutdownHandler);
   process.on("SIGTERM", shutdownHandler);
+  const { options: _nativeOpts, ...serializableConfig } = httpOptions;
+  mionRoutes.setPlatformConfig(serializableConfig);
   if (typeof Bun !== "undefined" && Bun.gc) {
     Bun.gc(false);
   }

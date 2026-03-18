@@ -132,24 +132,42 @@ app.get("/hello", (c) => {
 });
 
 app.post("/updateUser", async (c) => {
-  const rawUser = await c.req.json();
-  const user = UserSchema.parse(rawUser); // Validates + deserializes dates
+  try {
+    const rawUser = await c.req.json();
+    const user = UserSchema.parse(rawUser); // Validates + deserializes dates
 
-  // Update timestamps
-  user.updatedAt = new Date();
-  user.lastLoginAt = new Date();
+    // Update timestamps
+    user.updatedAt = new Date();
+    user.lastLoginAt = new Date();
 
-  // Update profile modification
-  user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
+    // Update profile modification
+    user.profile.displayName = `${user.profile.firstName} ${user.profile.lastName.charAt(0)}.`;
 
-  return c.json(user);
+    return c.json(user);
+  } catch (err: any) {
+    return c.json(
+      {
+        error: err.name === "ZodError" ? "Validation failed" : "Invalid input",
+      },
+      400,
+    );
+  }
 });
 
 app.post("/updateSimpleUser", async (c) => {
-  const rawUser = await c.req.json();
-  const user = SimpleUserSchema.parse(rawUser); // Validates + deserializes dates
-  user.lastUpdate = new Date();
-  return c.json(user);
+  try {
+    const rawUser = await c.req.json();
+    const user = SimpleUserSchema.parse(rawUser); // Validates + deserializes dates
+    user.lastUpdate = new Date();
+    return c.json(user);
+  } catch (err: any) {
+    return c.json(
+      {
+        error: err.name === "ZodError" ? "Validation failed" : "Invalid input",
+      },
+      400,
+    );
+  }
 });
 
 export interface BunServerOptions {
