@@ -62,7 +62,8 @@ Available servers: http-node, mion, mion.bun, hono, hono.bun, elysia.bun, fastif
 - `npm run report-user` - run updateUser benchmark
 - `npm run report-hello` - run hello-world benchmark
 - `npm run build` - compiles TypeScript apps (required for runtime type metadata)
-- `npm run mionlink` - links local mion packages for development
+- `npm run mionlink` - switches to local mion packages (tarballs from sibling `../mion` repo)
+- `npm run mionupdate` - switches to published npm mion packages (latest or specific version)
 
 ## How Benchmarking Works
 
@@ -85,24 +86,16 @@ Note: mion wraps request body in array for RPC-style API.
 
 ```bash
 npm ci
-npm run mionlink    # if developing mion locally
+npm run mionupdate  # use published mion packages (latest)
 npm run build       # required - generates runtime type metadata
 npm run report      # full benchmark suite
 ```
 
-## Using Local Mion Packages
+## Switching Between Local and Published Mion Packages
 
-When developing mion locally, you can use the local packages instead of the published ones:
-
-```bash
-npm run mionlink
-```
-
-This script will:
-
-1. Run the `pack-packages.sh` script in the mion repository to create tarballs.
-2. Copy the tarballs to the `mion-tarballs` directory in this repository.
-3. Run `npm install` to install the local tarballs.
+- `npm run mionupdate` - switches all `@mionjs/*` deps to the latest published npm version and runs `npm install`
+- `npm run mionupdate -- 0.8.4` - same but pins to a specific version
+- `npm run mionlink` - switches all `@mionjs/*` deps to `file:` tarballs built from the sibling `../mion` repo and runs `npm install`
 
 ## Metrics Collected
 
