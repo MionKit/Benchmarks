@@ -53,8 +53,8 @@ app.get("/hello", function (req, res) {
 
 * __Machine:__ darwin arm64 | 12 vCPUs | 16.0GB Mem
 * __Node:__ `v24.13.0`
-* __Run:__ Sun Apr 12 2026 17:58:59 GMT+0100 (Irish Standard Time)
-* __Method:__ `autocannon -c 100 -d 20 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
+* __Run:__ Wed Apr 15 2026 21:04:05 GMT+0100 (Irish Standard Time)
+* __Method:__ `autocannon -c 100 -d 4.10023 -p 1 localhost:3000` (two rounds; one to warm-up, one to measure)
 
 #### Req (R/s) 
 
@@ -86,11 +86,14 @@ app.get("/hello", function (req, res) {
 
 
 
-|           | Version   | Router | Req (R/s)    | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                               |
-| :--       | --:       | --:    | :-:          | --:          | --:           | --:             | --:         | :-:        | :--                                                       |
-| http-node | 16.18.0   | ✗      | 127740.8     | 7.42         | 22.78         | 146             | 108         | ✓          | bare node http server with Zod validation                 |
-| **mion**  | **0.6.2** | **✓**  | **111401.6** | **8.40**     | **21.68**     | **225**         | **108**     | **✓**      | **Automatic validation and serialization out of the box** |
-| hono      | 3.12.6    | ✓      | 104038.4     | 9.10         | 17.07         | 230             | 108         | ✓          | hono node server with Zod validation                      |
-| hapi      | 21.4.4    | ✓      | 88982.4      | 10.77        | 15.87         | 256             | 112         | ✓          | Hapi with Zod validation                                  |
-| fastify   | 5.7.4     | ✓      | 86137.6      | 11.06        | 15.44         | 155             | 108         | ✓          | Fastify with native JSON Schema validation                |
-| express   | 5.2.1     | ✓      | 73875.2      | 13.02        | 13.17         | 235             | 108         | ✓          | Express with Zod validation                               |
+|              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                |
+| :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                        |
+| elysia.bun   | 1.0.0     | ✓      | 120208.9    | 0.80         | 14.33         | 55              | 111         | ✓          | Elysia framework with TypeBox validation                   |
+| hono.bun     | 3.12.6    | ✓      | 104675.3    | 0.92         | 12.48         | 62              | 101         | ✓          | hono bun server with Zod validation                        |
+| **mion.bun** | **0.6.2** | **✓**  | **97148.4** | **0.99**     | **14.55**     | **59**          | **110**     | **✓**      | **mion using bun, automatic validation and serialization** |
+| fastify      | 5.7.4     | ✓      | 80895.7     | 1.22         | 14.50         | 117             | 114         | ✓          | Fastify with native JSON Schema validation                 |
+| http-node    | 16.18.0   | ✗      | 80107.9     | 1.25         | 14.29         | 105             | 115         | ✓          | bare node http server with Zod validation                  |
+| **mion**     | **0.6.2** | **✓**  | **70935.8** | **1.43**     | **13.80**     | **109**         | **101**     | **✓**      | **Automatic validation and serialization out of the box**  |
+| hono         | 3.12.6    | ✓      | 68732.6     | 1.48         | 11.27         | 117             | 114         | ✓          | hono node server with Zod validation                       |
+| hapi         | 21.4.4    | ✓      | 56913.1     | 1.82         | 10.15         | 159             | 116         | ✓          | Hapi with Zod validation                                   |
+| express      | 5.2.1     | ✓      | 53092.7     | 1.93         | 9.47          | 120             | 114         | ✓          | Express with Zod validation                                |

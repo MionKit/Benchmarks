@@ -58,12 +58,16 @@ const QUICK_DURATION = 4;
 /**
  * Parse command line arguments and environment variables
  */
+const SUPPORTED_LOADERS = ["autocannon", "wrk"];
+const DEFAULT_LOADER = "autocannon";
+
 function parseArgs() {
   const args = process.argv.slice(2);
   const options = {
     type: null,
     quick: false,
     servers: null,
+    loader: null,
   };
 
   // Parse positional and flag arguments
@@ -76,6 +80,10 @@ function parseArgs() {
       options.servers = arg.split("=")[1];
     } else if ((arg === "--servers" || arg === "-s") && args[i + 1]) {
       options.servers = args[++i];
+    } else if (arg.startsWith("--loader=") || arg.startsWith("-l=")) {
+      options.loader = arg.split("=")[1];
+    } else if ((arg === "--loader" || arg === "-l") && args[i + 1]) {
+      options.loader = args[++i];
     } else if (arg === "--help" || arg === "-h") {
       printHelp();
       process.exit(0);
@@ -93,6 +101,12 @@ function parseArgs() {
   }
   if (!options.servers && process.env.BENCH_SERVERS) {
     options.servers = process.env.BENCH_SERVERS;
+  }
+  if (!options.loader && process.env.BENCH_LOADER) {
+    options.loader = process.env.BENCH_LOADER;
+  }
+  if (!options.loader) {
+    options.loader = DEFAULT_LOADER;
   }
 
   return options;
@@ -117,12 +131,14 @@ Types:
 Options:
   --quick, -q           Run quick benchmarks (4 seconds instead of 30)
   --servers, -s <list>  Comma-separated list of servers to benchmark
+  --loader, -l <name>   Load testing tool: autocannon (default) | wrk
   --help, -h            Show this help message
 
 Environment Variables:
   BENCH_TYPE      Benchmark type (user, hello-world, simple-user, all)
   BENCH_SERVERS   Comma-separated list of servers to benchmark
   BENCH_QUICK     Set to 'true' for quick benchmarks
+  BENCH_LOADER    Load testing tool (autocannon | wrk)
 
 Examples:
   node reports.js user
@@ -130,7 +146,9 @@ Examples:
   node reports.js simple-user --quick
   node reports.js all -q
   node reports.js user --servers=mion.bun,hono.bun
+  node reports.js user --loader=wrk
   BENCH_TYPE=user BENCH_QUICK=true node reports.js
+  BENCH_LOADER=wrk node reports.js all
 `);
 }
 
@@ -152,8 +170,9 @@ function getModules(options, benchmarkName) {
   }
 
   // Filter out Bun servers from hello world benchmarks
-  // Reason: autocannon (Node.js-based) is not fast enough to accurately benchmark Bun servers
-  if (benchmarkName === "servers-hello") {
+  // Reason: autocannon (Node.js-based) is not fast enough to accurately benchmark Bun servers.
+  // Skipped when the wrk loader is selected (wrk can keep up with Bun).
+  if (benchmarkName === "servers-hello" && options.loader !== "wrk") {
     const excludedModules = modules.filter(
       (m) => getBenchmarkInfo(m).excludeFromHelloWorld,
     );
@@ -199,6 +218,7 @@ async function runBenchmark(type, options) {
     pipelining: DEFAULT_PIPELINING,
     duration: duration,
     benchmark: config.name,
+    loader: options.loader,
   };
 
   // Run the benchmark
@@ -231,8 +251,15 @@ async function main() {
     process.exit(1);
   }
 
+  if (!SUPPORTED_LOADERS.includes(options.loader)) {
+    console.error(`Error: Invalid loader '${options.loader}'`);
+    console.error(`Valid loaders: ${SUPPORTED_LOADERS.join(", ")}`);
+    process.exit(1);
+  }
+
   console.log("\n🚀 Mion Benchmarks Runner");
   console.log(`Type: ${options.type}`);
+  console.log(`Loader: ${options.loader}`);
   console.log(`Quick mode: ${options.quick ? "yes" : "no"}`);
   if (options.servers) {
     console.log(`Servers filter: ${options.servers}`);
