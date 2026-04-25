@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
-import { mionPlugin } from "@mionjs/devtools/vite-plugin";
+import { mionVitePlugin } from "@mionjs/devtools/vite-plugin";
 
 // Only mion apps are built with vite (other frameworks use their own build)
 const entry: Record<string, string> = {
@@ -28,7 +28,7 @@ export default defineConfig({
     minifySyntax: false,
   },
   plugins: [
-    mionPlugin({
+    mionVitePlugin({
       runTypes: {
         tsConfig: resolve(import.meta.dirname!, "tsconfig.json"),
         compilerOptions: { sourceMap: true },
