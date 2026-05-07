@@ -9,4 +9,4 @@ const {
 // mion needs to be compiled from typescript to be able to generate runtime types metadata
 // AOT caches are embedded in the compiled output via virtual:mion-aot/caches
 
-initHttpBun({ aot: true, strictTypes: true }, { port: 3000 });
+initHttpBun({ strictTypes: true }, { port: 3000 });

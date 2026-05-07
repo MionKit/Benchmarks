@@ -13,6 +13,7 @@ import {
   RouterOptions,
 } from "@mionjs/router";
 import { getJitFnCaches } from "@mionjs/core";
+import { aotCaches } from "virtual:mion-aot/caches";
 import { User } from "./models";
 
 // Diagnostic: track request count and memory
@@ -63,7 +64,7 @@ export const initHttp = async (
   routerOpts?: Partial<RouterOptions>,
   httpOpts?: Partial<NodeHttpOptions>,
 ) => {
-  await initMionRouter(routes, routerOpts);
+  await initMionRouter(routes, { aotCaches, ...routerOpts });
 
   // Log initial JIT cache state
   const { jitFnsCache, pureFnsCache } = getJitFnCaches();

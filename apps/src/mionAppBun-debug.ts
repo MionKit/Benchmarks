@@ -13,6 +13,7 @@ import {
   RouterOptions,
 } from "@mionjs/router";
 import { getJitFnCaches } from "@mionjs/core";
+import { aotCaches } from "virtual:mion-aot/caches";
 import { User } from "./models";
 
 export const routes = {
@@ -95,7 +96,7 @@ export const initHttpBun = async (
   routerOpts?: Partial<RouterOptions>,
   options?: Partial<BunHttpOptions>,
 ) => {
-  await initMionRouter(routes, routerOpts);
+  await initMionRouter(routes, { aotCaches, ...routerOpts });
 
   // Start diagnostic logging
   console.log(

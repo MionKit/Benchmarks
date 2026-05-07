@@ -7,6 +7,7 @@
 
 import { NodeHttpOptions, startNodeServer } from "@mionjs/platform-node";
 import { initMionRouter, RouterOptions } from "@mionjs/router";
+import { aotCaches } from "virtual:mion-aot/caches";
 import { routes } from "./mionRoutes";
 
 export { routes };
@@ -15,6 +16,6 @@ export const initHttp = async (
   routerOpts?: Partial<RouterOptions>,
   httpOpts?: Partial<NodeHttpOptions>,
 ) => {
-  await initMionRouter(routes, routerOpts);
+  await initMionRouter(routes, { aotCaches, ...routerOpts });
   return startNodeServer(httpOpts);
 };

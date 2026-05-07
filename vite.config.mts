@@ -16,11 +16,6 @@ const entry: Record<string, string> = {
 };
 
 export default defineConfig({
-  // Tell vite-node (AOT child process) to process @mionjs packages through
-  // the plugin pipeline so virtual:mion-server-pure-fns resolves correctly
-  ssr: {
-    noExternal: [/@mionjs\//],
-  },
   esbuild: {
     legalComments: "none",
     minifyIdentifiers: false,
@@ -61,13 +56,6 @@ export default defineConfig({
         format: "cjs",
         dir: "_compiled-apps",
         entryFileNames: "[name].js",
-      },
-      // Externalize all bare imports EXCEPT virtual: and @mionjs/* modules
-      // @mionjs packages are bundled so their internal virtual: imports get resolved
-      external: (id) => {
-        if (id.startsWith("virtual:")) return false;
-        if (id.startsWith("@mionjs/")) return false;
-        return /^[^./]/.test(id);
       },
     },
   },
