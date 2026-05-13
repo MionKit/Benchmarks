@@ -11,12 +11,12 @@ jobs:
       contents: read
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Dependency review
-        uses: actions/dependency-review-action@v2
+        uses: actions/dependency-review-action@v4
 
   test:
     runs-on: ubuntu-latest
@@ -24,26 +24,30 @@ jobs:
     permissions:
       contents: read
 
-    strategy:
-      matrix:
-        node-version: [12, 14, 16]
-
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # Version is read from `packageManager` in package.json.
 
-      - name: Install dependencies
-        run: npm i --ignore-scripts
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: pnpm
+
+      - name: Install
+        # `--frozen-lockfile` refuses installs when pnpm-lock.yaml would change.
+        # Combined with pnpm-workspace.yaml settings (ignoreScripts,
+        # minimumReleaseAge, build allowlist) this hardens the install step.
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: npm test
+        run: pnpm test
 
   automerge:
     name: Automerge Dependabot PRs

@@ -4,6 +4,11 @@
   "private": true,
   "description": "Benchmarks for mion framework.",
   "main": "index.js",
+  "packageManager": "pnpm@11.1.1",
+  "engines": {
+    "node": ">= 24.0.0",
+    "pnpm": ">= 11.0.0"
+  },
   "scripts": {
     "report": "node reports.js all",
     "report-user": "node reports.js user",

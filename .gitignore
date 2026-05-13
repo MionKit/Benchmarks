@@ -135,9 +135,8 @@ dist
 # macOS files
 .DS_Store
 
-# lock files
+# lock files (pnpm-lock.yaml is committed — pnpm 11 supply-chain hardening)
 package-lock.json
-pnpm-lock.yaml
 yarn.lock
 
 # editor files
