@@ -30,11 +30,14 @@ minimumReleaseAgeExclude: []
 ignoreScripts: true
 sideEffectsCache: false
 
-# ── Non-registry sources ─────────────────────────────────
-# MUST be true so that `@mionjs/*` `file:` refs from mionlink resolve.
-# Enforcement that ONLY `@mionjs/*` may use non-registry protocols is
-# done by scripts/check-deps-source.js (runs preinstall + in CI).
-allowNonRegistryProtocols: true
+# ── Block exotic transitive sources ───────────────────────
+# pnpm 11 defaults this to true; setting explicitly for clarity. Direct
+# dependencies (including @mionjs/* installed from file:./mion-tarballs/*.tgz
+# via `pnpm run mionlink`) may use any source. All TRANSITIVE deps must
+# resolve from a trusted source: configured registry, workspace links, local
+# file paths, or the node/bun/deno mirrors. pnpm has no per-package
+# allowlist for direct-dep sources — PR review covers that surface.
+blockExoticSubdeps: true
 
 # ── Peer / hoisting ──────────────────────────────────────
 strictPeerDependencies: false

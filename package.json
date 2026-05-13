@@ -10,7 +10,6 @@
     "pnpm": ">= 11.0.0"
   },
   "scripts": {
-    "preinstall": "node scripts/check-deps-source.js",
     "report": "node reports.js all",
     "report-user": "node reports.js user",
     "report-hello": "node reports.js hello-world",
