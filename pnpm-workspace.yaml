@@ -1,0 +1,42 @@
+# Not a multi-package monorepo, but pnpm 11 reads all settings from this file.
+packages: []
+
+# ── Build-script allowlist ───────────────────────────────
+# pnpm 11 blocks every dependency install/postinstall script by default.
+# Only packages set to true here may run them. Re-evaluate when a new
+# dependency fails to build with `ignoreScripts: true`.
+allowBuilds:
+  esbuild: true                  # vite / vite-node binary
+  '@deepkit/type-compiler': true # compiles deepkit reflection at install
+  puppeteer: true                # downloads Chromium for metrics scripts
+
+# ── Lockfile / install integrity ─────────────────────────
+preferFrozenLockfile: true
+verifyStoreIntegrity: true
+
+# ── Version pinning (future adds) ────────────────────────
+# Empty savePrefix means `pnpm add x` pins exact. Existing caret ranges are
+# left as-is on purpose; the lockfile locks resolution anyway.
+savePrefix: ''
+resolutionMode: highest
+
+# ── Supply-chain protection: minimum release age (7 days) ─
+# Shorter than mion's 30-day gate so the benchmarks can run against newer
+# framework releases. Lockfile-frozen entries are not re-checked.
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude: []
+
+# ── Lifecycle scripts ────────────────────────────────────
+ignoreScripts: true
+sideEffectsCache: false
+
+# ── Non-registry sources ─────────────────────────────────
+# MUST be true so that `@mionjs/*` `file:` refs from mionlink resolve.
+# Enforcement that ONLY `@mionjs/*` may use non-registry protocols is
+# done by scripts/check-deps-source.js (runs preinstall + in CI).
+allowNonRegistryProtocols: true
+
+# ── Peer / hoisting ──────────────────────────────────────
+strictPeerDependencies: false
+autoInstallPeers: true
+nodeLinker: hoisted

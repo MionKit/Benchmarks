@@ -7,7 +7,6 @@ const {
   readPkgJson,
   writePkgJson,
   getMionEntries,
-  isFileRef,
   run
 } = require('./mion-utils')
 
@@ -75,8 +74,8 @@ async function main () {
   }
 
   // 4. Install dependencies
-  console.log('Running npm install...')
-  run('npm install', { cwd: REPO_ROOT })
+  console.log('Running pnpm install...')
+  run('pnpm install', { cwd: REPO_ROOT })
 
   console.log(`\nDone! mion packages updated to ${version}.`)
 }

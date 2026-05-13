@@ -72,7 +72,7 @@ for (const file of tarballs) {
 console.log(`Copied ${tarballs.length} tarballs.\n`)
 
 // 5. Install dependencies
-console.log('Running npm install...')
-run('npm install', { cwd: REPO_ROOT })
+console.log('Running pnpm install...')
+run('pnpm install', { cwd: REPO_ROOT })
 
 console.log('\nDone! mion packages linked from local tarballs.')
