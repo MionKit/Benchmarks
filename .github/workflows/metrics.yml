@@ -10,20 +10,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - uses: actions/checkout@v4
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: 14
+        node-version: 20
+        cache: pnpm
 
     - name: install dependencies
-      run: |
-        npm install
+      run: pnpm install --frozen-lockfile
 
     - name: run metrics
       run: |
-        npm run metrics:run
-        npm run metrics:summary
+        pnpm run metrics:run
+        pnpm run metrics:summary
 
     - name: commit and push updated results
       uses: github-actions-x/commit@v2.9

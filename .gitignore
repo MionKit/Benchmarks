@@ -136,8 +136,9 @@ dist
 .DS_Store
 
 # lock files
+# NOTE: pnpm-lock.yaml is intentionally COMMITTED (security: pinning +
+# verifyStoreIntegrity + minimumReleaseAge depend on it).
 package-lock.json
-pnpm-lock.yaml
 yarn.lock
 
 # editor files

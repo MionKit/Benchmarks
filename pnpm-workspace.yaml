@@ -1,0 +1,49 @@
+# Single-package repo: no `packages:` entry.
+# This file exists because pnpm 11 reads install/security settings ONLY
+# from pnpm-workspace.yaml — .npmrc is for auth/registry only.
+
+# ── Build-script allowlist ───────────────────────────────
+# pnpm 11 blocks every dependency install/postinstall script by default.
+# Only the packages listed here may run them.
+allowBuilds:
+  '@deepkit/type-compiler': false
+  esbuild: true
+  # puppeteer downloads a chromium binary in its postinstall — required
+  # for the metrics workflow (startup measurements).
+  puppeteer: true
+
+# ── Lockfile / install integrity ─────────────────────────
+preferFrozenLockfile: true
+verifyStoreIntegrity: true
+
+# ── Version pinning (no auto-bumps) ──────────────────────
+# Empty savePrefix means exact pinning (replaces legacy save-exact=true).
+savePrefix: ''
+saveWorkspaceProtocol: rolling
+resolutionMode: highest
+
+# ── Supply-chain protection: minimum release age ─────────
+# Refuse to install package versions younger than 30 days (43200 minutes).
+# Defeats fast-spreading malicious releases (TanStack-style).
+minimumReleaseAge: 43200
+# Applied to FUTURE bumps (lockfile-frozen entries are not re-checked).
+minimumReleaseAgeExclude: []
+
+# ── Block lifecycle scripts ──────────────────────────────
+# Hard-block ALL build scripts. Specific packages are re-enabled
+# via the `allowBuilds:` map above.
+ignoreScripts: true
+sideEffectsCache: false
+
+# ── Block non-registry sources ───────────────────────────
+# Refuse git/github/file/http specifiers from dependencies.
+allowNonRegistryProtocols: false
+
+# ── Strict peer / hoisting ───────────────────────────────
+strictPeerDependencies: true
+autoInstallPeers: false
+# Use npm-like flat hoisting so transitive deps remain accessible from
+# benchmark scripts that `require()` them. Security is enforced by
+# the lockfile + minimumReleaseAge + ignoreScripts settings above,
+# NOT by the linker layout.
+nodeLinker: hoisted
