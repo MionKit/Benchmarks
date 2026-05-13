@@ -26,8 +26,12 @@ resolutionMode: highest
 # Refuse to install package versions younger than 30 days (43200 minutes).
 # Defeats fast-spreading malicious releases (TanStack-style).
 minimumReleaseAge: 43200
-# Applied to FUTURE bumps (lockfile-frozen entries are not re-checked).
-minimumReleaseAgeExclude: []
+# Per-package exemptions are appended in a managed block at the end of this
+# file by scripts/mion-utils.js's ensurePnpmConfig(). The @mionjs/*
+# packages are exempted there so a freshly-cut mion release can be
+# benchmarked immediately without waiting for the quarantine window.
+# Do NOT redeclare minimumReleaseAgeExclude here — it would create a
+# duplicate YAML key when the script appends its block.
 
 # ── Block lifecycle scripts ──────────────────────────────
 # Hard-block ALL build scripts. Specific packages are re-enabled
@@ -35,12 +39,18 @@ minimumReleaseAgeExclude: []
 ignoreScripts: true
 sideEffectsCache: false
 
-# ── Block non-registry sources ───────────────────────────
-# Refuse dependencies from arbitrary sources. The following remain BLOCKED:
-#   git:, git+ssh://, git+https://, github:, http://, https://, link:.
-# Only `file:` is allowed, used exclusively by the mionlink workflow to
-# consume locally-packed tarballs of the mion monorepo (../mion). Lockfile
-# content hashes still pin tarball contents byte-for-byte.
+# ── Non-registry sources: narrow exception for mion ──────────
+# Default posture is to BLOCK every non-registry source. We carve out a
+# single explicit exception for `file:` because the mionlink workflow
+# consumes locally-packed tarballs of the mion monorepo (../mion). The
+# @mionjs/* file: refs in package.json depend on this entry to install.
+#
+# Still BLOCKED (no exception, will reject install): git:, git+ssh://,
+# git+https://, github:user/repo, http://, https://, link:.
+#
+# Lockfile content hashes still pin tarball contents byte-for-byte, so
+# this exception does not weaken integrity verification for the mion
+# packages themselves — it only relaxes the protocol gate.
 allowNonRegistryProtocols:
   - file
 
@@ -52,3 +62,7 @@ autoInstallPeers: false
 # the lockfile + minimumReleaseAge + ignoreScripts settings above,
 # NOT by the linker layout.
 nodeLinker: hoisted
+
+# (scripts/mion-utils.js appends an `@mionjs exemptions` block below on
+# first run of pnpm mionlink / pnpm mionupdate. The marker comment in
+# that block makes the append idempotent.)

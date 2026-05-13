@@ -1,13 +1,24 @@
 #!/usr/bin/env node
 'use strict'
 
+// SECURITY:
+//   - This script NEVER deletes pnpm-lock.yaml. It runs
+//     `pnpm install --no-frozen-lockfile`, which updates the lockfile in
+//     place — only the @mionjs/* entries we just rewrote change; the
+//     integrity hashes for every other registry dep stay locked.
+//   - ensurePnpmConfig() guarantees pnpm-workspace.yaml exempts @mionjs/*
+//     from the 30-day minimumReleaseAge quarantine before we install.
+//   - --config.minimum-release-age=0 is passed belt-and-suspenders.
+
 const https = require('https')
 const {
   REPO_ROOT,
   readPkgJson,
   writePkgJson,
   getMionEntries,
-  run
+  run,
+  ensurePnpmConfig,
+  reportLockfileState
 } = require('./mion-utils')
 
 function fetchLatestVersion () {
@@ -31,6 +42,10 @@ function fetchLatestVersion () {
 }
 
 async function main () {
+  // 0. Self-manage pnpm config + assert lockfile safety
+  ensurePnpmConfig()
+  reportLockfileState()
+
   // 1. Resolve target version
   let version = process.argv[2] || null
 
@@ -74,11 +89,12 @@ async function main () {
   }
 
   // 4. Install dependencies
-  // --no-frozen-lockfile because we just mutated package.json; pnpm needs
-  // to refresh the @mionjs/* entries in the lockfile. Registry-dep integrity
-  // (the rest of the lockfile) stays locked.
+  // --no-frozen-lockfile: we just mutated package.json; pnpm needs to refresh
+  //   only the @mionjs/* entries in the lockfile. Other entries stay locked.
+  // --config.minimum-release-age=0: bypass the 30-day quarantine for this
+  //   invocation; needed because a fresh @mionjs release will be < 30d old.
   console.log('Running pnpm install...')
-  run('pnpm install --no-frozen-lockfile', { cwd: REPO_ROOT })
+  run('pnpm install --no-frozen-lockfile --config.minimum-release-age=0', { cwd: REPO_ROOT })
 
   console.log(`\nDone! mion packages updated to ${version}.`)
 }
