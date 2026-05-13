@@ -22,7 +22,9 @@ jobs:
         cache: pnpm
 
     - name: install dependencies
-      run: pnpm install --frozen-lockfile
+      # mionupdate fetches the latest published @mionjs/* and installs it.
+      # See .github/workflows/ci.yml for the rationale.
+      run: pnpm mionupdate
 
     - name: run metrics
       run: |

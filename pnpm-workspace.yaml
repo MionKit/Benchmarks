@@ -36,8 +36,13 @@ ignoreScripts: true
 sideEffectsCache: false
 
 # ── Block non-registry sources ───────────────────────────
-# Refuse git/github/file/http specifiers from dependencies.
-allowNonRegistryProtocols: false
+# Refuse dependencies from arbitrary sources. The following remain BLOCKED:
+#   git:, git+ssh://, git+https://, github:, http://, https://, link:.
+# Only `file:` is allowed, used exclusively by the mionlink workflow to
+# consume locally-packed tarballs of the mion monorepo (../mion). Lockfile
+# content hashes still pin tarball contents byte-for-byte.
+allowNonRegistryProtocols:
+  - file
 
 # ── Strict peer / hoisting ───────────────────────────────
 strictPeerDependencies: true

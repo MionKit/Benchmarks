@@ -44,13 +44,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
 
-      - name: Install dependencies
-        # `--frozen-lockfile` refuses installs when pnpm-lock.yaml would change.
-        # Combined with pnpm-workspace.yaml settings (ignoreScripts,
-        # minimumReleaseAge, allowNonRegistryProtocols=false) this hardens
-        # the install step. Build scripts are blocked except for the explicit
-        # `allowBuilds:` entries in pnpm-workspace.yaml.
-        run: pnpm install --frozen-lockfile
+      - name: Install mion + dependencies
+        # The committed package.json carries file: refs for @mionjs/* (used
+        # by the local mionlink workflow). CI has no sibling ../mion clone,
+        # so we rewrite those entries to the latest published version with
+        # mionupdate, which then runs `pnpm install --no-frozen-lockfile`.
+        # Hardening from pnpm-workspace.yaml still applies: ignoreScripts,
+        # minimumReleaseAge, allowNonRegistryProtocols=[file].
+        run: pnpm mionupdate
 
       - name: Run tests
         run: pnpm test

@@ -29,7 +29,9 @@
     "servers-hello": "pnpm run bench-servers-hello && pnpm run print-servers-hello",
     "report": "pnpm run servers && pnpm run servers-hello && pnpm run metrics",
     "deepkit-install": "deepkit-type-install",
-    "mionlink": "pnpm link --global @mionkit/router @mionkit/core @mionkit/bun @mionkit/http"
+    "mionlink": "node scripts/mionlink.js",
+    "mionupdate": "node scripts/mionupdate.js",
+    "copy-mion-tarballs": "bash scripts/copy-mion-tarballs.sh"
   },
   "bin": {
     "benchmark": "./benchmark.js"
@@ -51,6 +53,13 @@
     "@deepkit/type": "1.0.1-alpha.119",
     "@hapi/hapi": "21.3.2",
     "@hono/node-server": "1.4.1",
+    "@mionjs/client": "file:./mion-tarballs/mionjs-client.tgz",
+    "@mionjs/core": "file:./mion-tarballs/mionjs-core.tgz",
+    "@mionjs/platform-bun": "file:./mion-tarballs/mionjs-platform-bun.tgz",
+    "@mionjs/platform-node": "file:./mion-tarballs/mionjs-platform-node.tgz",
+    "@mionjs/router": "file:./mion-tarballs/mionjs-router.tgz",
+    "@mionjs/run-types": "file:./mion-tarballs/mionjs-run-types.tgz",
+    "@mionjs/type-formats": "file:./mion-tarballs/mionjs-type-formats.tgz",
     "@trpc/server": "9.27.2",
     "autocannon": "7.0.1",
     "autocannon-compare": "0.4.0",
@@ -81,6 +90,7 @@
   "devDependencies": {
     "@deepkit/core": "1.0.1-alpha.114",
     "@deepkit/type-compiler": "1.0.1-alpha.117",
+    "@mionjs/devtools": "file:./mion-tarballs/mionjs-devtools.tgz",
     "@types/node": "16.11.6",
     "pidusage": "3.0.2",
     "puppeteer": "20.8.0",

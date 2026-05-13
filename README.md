@@ -27,16 +27,37 @@
 
 #### Running the benchmarks
 
-install packages & link mion packages
+This repo uses **pnpm 11** with pinned dependencies and supply-chain hardening
+(see `pnpm-workspace.yaml`). All `@mionjs/*` deps are pre-set to local
+`file:` tarballs so contributors can iterate against `../mion` quickly; CI
+uses `pnpm mionupdate` to fetch the published version instead.
+
+Pick one of three install flows:
+
+**1. Against the latest published mion** (typical):
 
 ```sh
-npm i
-npm link @mionkit/router @mionkit/core @mionkit/bun @mionkit/http
+pnpm mionupdate              # rewrites @mionjs/* to the latest npm version
+pnpm mionupdate 0.8.4        # ...or pin to a specific version
 ```
+
+**2. Against a local mion checkout** (sibling `../mion` repo):
+
+```sh
+pnpm mionlink                # packs ../mion, copies tarballs, installs
+```
+
+**3. Strict reproduction** (file: refs from package.json must already exist):
+
+```sh
+pnpm install --frozen-lockfile
+```
+
+Then run the report:
 
 ```sh
 # running all benchmarks and update all readmes
-npm run report
+pnpm run report
 ```
 
 #### Cold Starts
