@@ -20,11 +20,14 @@ verifyStoreIntegrity: true
 savePrefix: ""
 resolutionMode: highest
 
-# ── Supply-chain protection: minimum release age (7 days) ─
+# ── Supply-chain protection: minimum release age (8 days) ─
 # Shorter than mion's 30-day gate so the benchmarks can run against newer
 # framework releases. Lockfile-frozen entries are not re-checked.
-minimumReleaseAge: 10080
+# fullMetadata is required so pnpm can read the `time` field from the
+# registry (the default abbreviated metadata response omits it).
+minimumReleaseAge: 11520
 minimumReleaseAgeExclude: []
+fullMetadata: true
 
 # ── Lifecycle scripts ────────────────────────────────────
 ignoreScripts: true
