@@ -6,18 +6,18 @@ packages: []
 # Only packages set to true here may run them. Re-evaluate when a new
 # dependency fails to build with `ignoreScripts: true`.
 allowBuilds:
-  esbuild: true                  # vite / vite-node binary
-  '@deepkit/type-compiler': true # compiles deepkit reflection at install
-  puppeteer: true                # downloads Chromium for metrics scripts
+  esbuild: true # vite / vite-node binary
+  "@deepkit/type-compiler": true # compiles deepkit reflection at install
+  puppeteer: true # downloads Chromium for metrics scripts
 
 # ── Lockfile / install integrity ─────────────────────────
-preferFrozenLockfile: true
+frozenLockfile: true
 verifyStoreIntegrity: true
 
 # ── Version pinning (future adds) ────────────────────────
 # Empty savePrefix means `pnpm add x` pins exact. Existing caret ranges are
 # left as-is on purpose; the lockfile locks resolution anyway.
-savePrefix: ''
+savePrefix: ""
 resolutionMode: highest
 
 # ── Supply-chain protection: minimum release age (7 days) ─
