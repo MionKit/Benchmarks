@@ -7,130 +7,34 @@
 </p>
 
 <p align="center">
-  <strong>Benchmarks for  @mionkit/http 🚀</strong><br/>
+  <strong>Archived. The mion server benchmarks now live in the main mion repo.</strong><br/>
 </p>
 
-<p align=center>
-  <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square&maxAge=99999999" alt="npm"  style="max-width:100%;">
-  <img src="https://img.shields.io/badge/license-MIT-97ca00.svg?style=flat-square&maxAge=99999999" alt="npm"  style="max-width:100%;">
-</p>
+# mion HTTP Benchmarks (archived)
 
-# mion Http Benchmarks
+This repository is **archived and read-only**. It is kept for history only, and the
+numbers in it are outdated.
 
-- These benchmarks are based on the [fastify benchmarks](https://github.com/fastify/benchmarks) repo!
-- `@MionKit/http` is part of the mion Framework. It uses and RPC style router!
-- **This package shows how fast is mion comparatively to full featured frameworks like fastify and others.**
-- You can find a full list of many other small and faster servers in the original fastify benchmarks repo.
-- For cold-start metrics see [cold-starts.md](./COLD-STARTS.md)
+The mion HTTP server benchmarks were folded into the main repo, where they run in
+their own container image and are published straight to the docs site:
 
-📚 [Full mion framework documentation here!](https://github.com/MionKit/mion)
+- **Source:** [MionKit/mion → `container/mion-bench/`](https://github.com/MionKit/mion/tree/main/container/mion-bench)
+- **Published results:** [mion.pages.dev/benchmarks/hello-world](https://mion.pages.dev/benchmarks/hello-world)
 
-#### Running the benchmarks
+## Why it moved
 
-install packages & link mion packages
+Living in the main repo means the benchmarks are built from the current mion source
+on every run, so the published numbers always describe the code that is actually
+released. Each framework under test gets its own isolated dependency tree, and every
+lane has to answer correctly and reject an invalid payload before it is measured.
 
-```sh
-npm i
-npm link @mionkit/router @mionkit/core @mionkit/bun @mionkit/http
-```
+## Running them
 
 ```sh
-# running all benchmarks and update all readmes
-npm run report
+git clone https://github.com/MionKit/mion.git
+cd mion
+pnpm rtx bench servers
 ```
 
-#### Cold Starts
-
-- Cold start times: This is a metric we specially want to keep in check as fast cold start times are essential for serverless environments  
-  [COLD-STARTS.md](COLD-STARTS.md)
-
-## What's tested
-
-The test consist of an `updateUser` request where the fields of the user must be validated, the `lastUpdate` field is a date that must be transformed into a JS Date (deserialized), then add one month and send back in the response.
-
-> The benchmark involves both routing + validation of parameters!
-
-```ts
-export interface User {
-  id: number;
-  name: string;
-  surname: string;
-  lastUpdate: Date;
-}
-
-// ### mion ###
-// the received user by the route is already validated and deserialized
-// user.lastUpdate is already a js date instead and string (result of JSON.parse)
-export const routes: Routes = {
-  updateUser: (context, user: User): User => {
-    user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-    return user;
-  },
-};
-
-// ### Express ###
-// A plugin must be used to parse the json body
-// validation must be done manually and user.lastUpdate must be deserialized manually into a date
-// in this case developer would have to manually write `isUser` and `deserializeUser` functions. (check src code fo those functions)
-app.post("/updateUser", function (req, res) {
-  const rawUser = req.body?.updateUser;
-  if (!isUser(rawUser)) throw "app error, invalid parameter, not a user";
-  const user = deserializeUser(rawUser);
-  user.lastUpdate.setMonth(user.lastUpdate.getMonth() + 1);
-  res.json(user);
-});
-```
-
-#### Notes on current results:
-
-mion is focused on being lightweight and fast so it can be run in serverless environments. We run the benchmarks before every PR gets merged to ensure there is no performance regression. There are [PRs](https://github.com/MionKit/mion/pull/48) that has been rejected because due to performance regression.
-
-Our goal is to perform similar to fastify as it is the industry standard in terms of performance. Please always take benchmarks as general guidelines as you might obtain different results in your real world application. we just run the benchmarks to ensure there is no performance degradation when new features/fixes are added to mion.
-
-## Benchmark Results
-
-* __Machine:__ darwin x64 | 8 vCPUs | 16.0GB Mem
-* __Node:__ `v20.11.0`
-* __Run:__ Mon Jan 29 2024 22:19:00 GMT+0000 (Greenwich Mean Time)
-* __Method:__ `autocannon -c 100 -d 40.02 -p 10 localhost:3000` (two rounds; one to warm-up, one to measure)
-
-#### Req (R/s) 
-
-![benchmarks](assets/public/charts-servers/requests.png)
-
-
-
-#### Throughput (Mb/s) 
-
-![benchmarks](assets/public/charts-servers/throughput.png)
-
-
-
-#### Latency (ms) 
-
-![benchmarks](assets/public/charts-servers/latency.png)
-
-
-
-#### Max Memory (Mb) 
-
-![benchmarks](assets/public/charts-servers/maxMem.png)
-
-
-
-#### Memory Series (MB) 
-
-![benchmarks](assets/public/charts-servers/memSeries.png)
-
-
-
-|              | Version   | Router | Req (R/s)   | Latency (ms) | Output (Mb/s) | Max Memory (Mb) | Max Cpu (%) | Validation | Description                                                                         |
-| :--          | --:       | --:    | :-:         | --:          | --:           | --:             | --:         | :-:        | :--                                                                                 |
-| http-node    | 16.18.0   | ✗      | 18598.0     | 53.24        | 4.47          | 79              | 126         | ✗          | bare node http server, should be the theoretical upper limit in node.js performance |
-| **mion.bun** | **0.6.2** | **✓**  | **17023.2** | **58.22**    | **3.94**      | **111**         | **106**     | **✓**      | **mion using bun, automatic validation and serialization**                          |
-| fastify      | 4.10.2    | ✓      | 16961.8     | 58.41        | 4.09          | 87              | 122         | -          | Validation using schemas and ajv. schemas are generated manually                    |
-| **mion**     | **0.6.2** | **✓**  | **13936.0** | **71.21**    | **3.85**      | **136**         | **139**     | **✓**      | **Automatic validation and serialization out of the box**                           |
-| restify      | 11.1.0    | ✓      | 12776.6     | 77.70        | 3.28          | 130             | 125         | ✗          | manual validation or third party tools                                              |
-| hapi         | 21.3.2    | ✓      | 8870.8      | 112.09       | 2.13          | 103             | 134         | ✗          | validation using joi or third party tools                                           |
-| hono         | 3.12.6    | ✓      | 5763.7      | 172.66       | 1.39          | 123             | 134         | ✗          | hono node server, manual validation or third party tools                            |
-| express      | 4.18.2    | ✓      | 4596.6      | 213.24       | 1.10          | 122             | 126         | ✗          | manual validation or third party tools                                              |
+See [`container/mion-bench/README.md`](https://github.com/MionKit/mion/blob/main/container/mion-bench/README.md)
+for the full set of commands.
